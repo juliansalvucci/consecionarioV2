@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API_ROUTES } from 'src/routes/apiRoutes';
+import { environment as ENV } from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class PaisService
 
   consultarPaises():Observable<any>
   {
-    return this.http.get("http://localhost:8080/pais");
+    return this.http.get(API_ROUTES.PAIS.CONSULTARPAISES);
   }
 
   consultarPais(id:number):Observable<any>
