@@ -15,8 +15,8 @@ import { PaisComponent } from '../pais/pais.component';
 export class PaisListaComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
-    private paisService: PaisService,
-    private data: DataService,
+    private service: PaisService,
+    private dataService: DataService,
     public _MatPaginatorIntl: MatPaginatorIntl
   ) 
   {
@@ -32,7 +32,7 @@ export class PaisListaComponent implements OnInit {
   lista!: IPais[];
 
   consultar(): void {
-    this.paisService.consultarPaises().subscribe((r: IPais[]) => {
+    this.service.consulta().subscribe((r: IPais[]) => {
       console.log(r);
       this.lista = r;
       this.dataSource = new MatTableDataSource(this.lista);
@@ -40,23 +40,26 @@ export class PaisListaComponent implements OnInit {
     });
   }
 
-  modificar(id:number): void {
-    this.data.id = id;
+  abrirModal(id:number): void {
+    this.dataService.id = id;
     const dialogRef = this.dialog.open(PaisComponent, {
       width: '450px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.consultar;
+      this.lista.push(this.dataService.object);
+      this.dataSource = new MatTableDataSource(this.lista);
       this.cargando = false;
     });
   }
 
-
   eliminar(id: number) {
-    this.paisService.bajaPais(id).subscribe((r) => {
-      this.consultar();
+    this.service.baja(id).subscribe((r) => {
+      this.lista.splice(id) //Quito el elemento de la lista.
       this.cargando = false;
+    }, e => {
+      this.lista = this.lista.filter(element => element.id != id)
+      this.dataSource = new MatTableDataSource(this.lista);
     });
   }
 }

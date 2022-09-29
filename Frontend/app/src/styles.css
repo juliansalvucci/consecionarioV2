@@ -3,3 +3,27 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.bg-success{
+    color: white;
+}
+
+.bg-success:hover{
+    background-color: rgb(0, 220, 147) !important;
+}
+
+
+.bg-warning{
+    color: white;
+}
+
+.bg-warning:hover{
+    background-color: rgb(255, 237, 137) !important;
+}
+
+.bg-danger{
+    color: white;
+}
+
+.bg-danger:hover{
+    background-color: rgb(251, 134, 134) !important;
+}

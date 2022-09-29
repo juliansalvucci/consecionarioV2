@@ -14,25 +14,32 @@ export class PaisComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<IPais>,
     @Inject(MAT_DIALOG_DATA) public data:IPais,
-     private paisService: PaisService,
+     private service: PaisService,
      private fb: FormBuilder, 
      private dataService: DataService,
      public dialog: MatDialog) 
      {
-         this.autocompletar();
+         this.configurarFormulario();
      }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   registerForm = this.fb.group({
     id: [0],
     nombrePais: [""]
   });
 
+  configurarFormulario()
+  {
+    if(this.dataService.id != null)
+    {
+      this.autocompletar();
+    }
+  }
+
   autocompletar()
   {
-    this.paisService.consultarPais(this.dataService.id).subscribe((r) =>{
+    this.service.consultaPorId(this.dataService.id).subscribe((r) =>{
       console.log(r);
       this.registerForm.patchValue({
         id: r.id,
@@ -43,15 +50,17 @@ export class PaisComponent implements OnInit {
 
   register() 
   {
-    
     console.log('registrar');
 
     if (this.registerForm.valid)
     {
-      console.log('TROLO',this.registerForm.value);
-      this.paisService.modificacionPais(this.registerForm.value).subscribe(
+      console.log('Form',this.registerForm.value);
+      this.service.alta(this.registerForm.value).subscribe(
         (data) => {
+          let value:IPais = data;
           console.log(data);
+          console.log("VALUE",value);
+          this.dataService.object = value;
           console.log('Registro realizado con éxito');
           this.onNoClick();
         }
