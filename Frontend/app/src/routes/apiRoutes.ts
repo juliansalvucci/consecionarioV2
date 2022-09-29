@@ -8,10 +8,10 @@ export const API_ROUTES = {
 
     PAIS: {
         ALTAPAIS:`${ENV.apiUrl}`,
-        BAJAPAIS:`${ENV.apiUrl}`,
-        MODIFICACIONPAIS: `${ENV.apiUrl}`,
+        BAJAPAIS:`${ENV.apiUrl}pais/`,
+        MODIFICACIONPAIS: `${ENV.apiUrl}pais/`,
         CONSULTARPAISES:`${ENV.apiUrl}pais`,
-        CONSULTARPAIS:`${ENV.apiUrl}`,
+        CONSULTARPAIS:`${ENV.apiUrl}pais/`,
     }
 
     

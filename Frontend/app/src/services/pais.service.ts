@@ -28,10 +28,10 @@ export class PaisService
 
   modificacionPais(data:any):Observable<any>
   {
-    return this.http.put(API_ROUTES.PAIS.MODIFICACIONPAIS, data);
+    return this.http.post(API_ROUTES.PAIS.MODIFICACIONPAIS, data);
   }
 
-  bajaCliente(id:number):Observable<any>
+  bajaPais(id:number):Observable<any>
   {
     return this.http.delete(API_ROUTES.PAIS.BAJAPAIS + id);
   }

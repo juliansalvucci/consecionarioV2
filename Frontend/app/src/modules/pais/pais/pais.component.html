@@ -1,1 +1,12 @@
-<p>pais works!</p>
+<div>
+    <h1 class="d-flex justify-content-between" id="negrita">País</h1>
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <mat-form-field appearance="fill">
+            <mat-label id="negrita">Sector</mat-label>
+            <input matInput formControlName="nombrePais">
+        </mat-form-field>
+    </form>
+</div>
+<button mat-raised-button color="primary" id="primary" class="col-3 m-auto mb-4" (click)="register()"
+    [disabled]="registerForm.invalid">GUARDAR</button>
+
