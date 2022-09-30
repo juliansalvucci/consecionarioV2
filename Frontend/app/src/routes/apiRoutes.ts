@@ -7,11 +7,11 @@ export const API_ROUTES = {
     },
 
     PAIS: {
-        ALTAPAIS:`${ENV.apiUrl}pais`,
-        BAJAPAIS:`${ENV.apiUrl}pais/`,
-        MODIFICACIONPAIS: `${ENV.apiUrl}pais/`,
-        CONSULTARPAISES:`${ENV.apiUrl}pais`,
-        CONSULTARPAIS:`${ENV.apiUrl}pais/`,
+        ALTA:`${ENV.apiUrl}pais`,
+        BAJA:`${ENV.apiUrl}pais/`,
+        MODIFICACION: `${ENV.apiUrl}pais/`,
+        CONSULTA:`${ENV.apiUrl}pais`,
+        CONSULTAPORID:`${ENV.apiUrl}pais/`,
     }
 
     

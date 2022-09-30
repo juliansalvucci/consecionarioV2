@@ -50,17 +50,12 @@ export class PaisComponent implements OnInit {
 
   register() 
   {
-    console.log('registrar');
-
     if (this.registerForm.valid)
     {
-      console.log('Form',this.registerForm.value);
+      console.log(this.registerForm.value);
       this.service.alta(this.registerForm.value).subscribe(
         (data) => {
-          let value:IPais = data;
-          console.log(data);
-          console.log("VALUE",value);
-          this.dataService.object = value;
+          this.dataService.object = data;
           console.log('Registro realizado con éxito');
           this.onNoClick();
         }
@@ -74,10 +69,9 @@ export class PaisComponent implements OnInit {
     }
   }
 
+  
   onNoClick(): void 
   {
     this.dialogRef.close();
   }
-
-
 }

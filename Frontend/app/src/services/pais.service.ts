@@ -6,33 +6,36 @@ import { API_ROUTES } from 'src/routes/apiRoutes';
 @Injectable({
   providedIn: 'root'
 })
-export class PaisService
+
+export class PaisService 
 {
   constructor(private http: HttpClient) { }
 
+  URL = API_ROUTES.PAIS
+
   alta(data:any):Observable<any>
   {
-    return this.http.post(API_ROUTES.PAIS.ALTAPAIS, data);
+    return this.http.post(this.URL.ALTA, data);
   }
 
   baja(id:number):Observable<any>
   {
-    return this.http.delete(API_ROUTES.PAIS.BAJAPAIS + id);
+    return this.http.delete(this.URL.BAJA + id);
   }
 
   modificacion(data:any):Observable<any>
   {
-    return this.http.post(API_ROUTES.PAIS.MODIFICACIONPAIS, data);
+    return this.http.post(this.URL.MODIFICACION, data);
   }
 
   consulta():Observable<any>
   {
-    return this.http.get(API_ROUTES.PAIS.CONSULTARPAISES);
+    return this.http.get(this.URL.CONSULTA);
   }
 
   consultaPorId(id:number):Observable<any>
   {
-    return this.http.get(API_ROUTES.PAIS.CONSULTARPAIS + id);
+    return this.http.get(this.URL.CONSULTAPORID + id);
   }
   
 }

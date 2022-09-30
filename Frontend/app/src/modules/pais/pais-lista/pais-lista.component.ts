@@ -45,8 +45,8 @@ export class PaisListaComponent implements OnInit {
     const dialogRef = this.dialog.open(PaisComponent, {
       width: '450px',
     });
-
     dialogRef.afterClosed().subscribe(result => {
+      this.lista = this.lista.filter(element => element.id != id)
       this.lista.push(this.dataService.object);
       this.dataSource = new MatTableDataSource(this.lista);
       this.cargando = false;
@@ -55,7 +55,6 @@ export class PaisListaComponent implements OnInit {
 
   eliminar(id: number) {
     this.service.baja(id).subscribe((r) => {
-      this.lista.splice(id) //Quito el elemento de la lista.
       this.cargando = false;
     }, e => {
       this.lista = this.lista.filter(element => element.id != id)
