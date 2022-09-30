@@ -3,22 +3,19 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { IPais } from 'src/interfaces/IPais';
+import { IMarca } from 'src/interfaces/IMarca';
 import { DataService } from 'src/services/data.service';
-import { PaisService } from 'src/services/pais/pais.service';
-import { PaisComponent } from '../pais/pais.component';
-
+import { MarcaService } from 'src/services/marca/marca.service';
+import { MarcaComponent } from '../marca/marca.component';
 
 @Component({
-  selector: 'app-pais-lista',
-  templateUrl: './pais-lista.component.html',
-  styleUrls: ['./pais-lista.component.css'],
+  selector: 'app-marca-lista',
+  templateUrl: './marca-lista.component.html',
+  styleUrls: ['./marca-lista.component.css']
 })
+export class MarcaListaComponent implements OnInit {
 
-
-export class PaisListaComponent implements OnInit {
-
-  displayedColumns: string[] = ['nombrePais', 'acciones'];
+  displayedColumns: string[] = ['nombre', 'acciones'];
   dataSource!: MatTableDataSource<IGenerica>;
 
   cargando: boolean = false;
@@ -29,7 +26,7 @@ export class PaisListaComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private service: PaisService,
+    private service: MarcaService,
     private dataService: DataService,
     public _MatPaginatorIntl: MatPaginatorIntl
   ) {
@@ -65,7 +62,7 @@ export class PaisListaComponent implements OnInit {
 
   abrirModal(id: number): void {
     this.dataService.id = id;
-    const dialogRef = this.dialog.open(PaisComponent, {
+    const dialogRef = this.dialog.open(MarcaComponent, {
       width: '450px',
     });
     dialogRef.afterClosed().subscribe((result) => {
@@ -102,7 +99,7 @@ export class PaisListaComponent implements OnInit {
       this.listaFiltro = this.lista;
     } else {
       this.listaFiltro = this.lista?.filter((f) =>
-        f.nombrePais
+        f.nombreMarca
           ?.toLowerCase()
           .trim()
           .includes(this.filtro.toLocaleLowerCase())
@@ -111,7 +108,7 @@ export class PaisListaComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.listaFiltro);
     this.configTable();
   }
+
 }
 
-export interface IGenerica extends IPais{}
-
+export interface IGenerica extends IMarca{}

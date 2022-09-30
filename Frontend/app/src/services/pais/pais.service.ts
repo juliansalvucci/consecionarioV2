@@ -37,5 +37,4 @@ export class PaisService
   {
     return this.http.get(this.URL.CONSULTAPORID + id);
   }
-  
 }

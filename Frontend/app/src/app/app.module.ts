@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PaisModule } from 'src/modules/pais/pais.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { MarcaModule } from 'src/modules/marca/marca.module';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     BrowserModule,
     BrowserAnimationsModule,
     PaisModule,
+    MarcaModule,
     HttpClientModule
   ],
   providers: [],
