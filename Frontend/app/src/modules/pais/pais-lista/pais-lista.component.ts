@@ -8,11 +8,14 @@ import { DataService } from 'src/services/data.service';
 import { PaisService } from 'src/services/pais.service';
 import { PaisComponent } from '../pais/pais.component';
 
+
 @Component({
   selector: 'app-pais-lista',
   templateUrl: './pais-lista.component.html',
   styleUrls: ['./pais-lista.component.css'],
 })
+
+
 export class PaisListaComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
@@ -45,15 +48,14 @@ export class PaisListaComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-
   displayedColumns: string[] = ['nombrePais', 'acciones'];
-  dataSource!: MatTableDataSource<IPais>;
+  dataSource!: MatTableDataSource<IGenerica>;
 
   cargando: boolean = false;
   lista!: IPais[];
 
   consultar(): void {
-    this.service.consulta().subscribe((r: IPais[]) => {
+    this.service.consulta().subscribe((r: IGenerica[]) => {
       console.log(r);
       this.lista = r;
       this.dataSource = new MatTableDataSource(this.lista);
@@ -68,6 +70,7 @@ export class PaisListaComponent implements OnInit {
       width: '450px',
     });
     dialogRef.afterClosed().subscribe(result => {
+
       if (this.dataService.object != null)
       {
         this.lista = this.lista.filter((element) => element.id != id);
@@ -79,6 +82,7 @@ export class PaisListaComponent implements OnInit {
       this.cargando = false;
     });
   }
+
 
   eliminar(id: number) {
     this.service.baja(id).subscribe((r) => {
@@ -93,16 +97,26 @@ export class PaisListaComponent implements OnInit {
     });
   }
 
-  listaFiltro!: IPais[]
+  listaFiltro!: IGenerica[]
   filtro: string = ''
 
-  filtrar(){
-    if(this.filtro == ""){
+  filtrar()
+  {
+    if(this.filtro == "")
+    {
       this.listaFiltro = this.lista;
-    } else {
+    } 
+    else
+    {
       this.listaFiltro = this.lista?.filter(f => f.nombrePais?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase()));
     }
     this.dataSource = new MatTableDataSource(this.listaFiltro);
     this.configTable();
   }
 }
+
+export interface IGenerica extends IPais{}
+
+//Datos útiles
+
+//this.lista = this.lista.map(objeto => objeto.id === id ? this.dataService.object : objeto)  Actualiza la lista solo para elementos modificados, pero no para nuevos, por eso se descarta.
