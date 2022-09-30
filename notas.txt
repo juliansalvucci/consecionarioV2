@@ -1,0 +1,3 @@
+//Datos útiles
+
+//this.lista = this.lista.map(objeto => objeto.id === id ? this.dataService.object : objeto)  Actualiza la lista solo para elementos modificados, pero no para nuevos, por eso se descarta.
