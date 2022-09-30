@@ -14,7 +14,10 @@ import { PaisComponent } from '../pais/pais.component';
   templateUrl: './pais-lista.component.html',
   styleUrls: ['./pais-lista.component.css'],
 })
+
+
 export class PaisListaComponent implements OnInit {
+
   displayedColumns: string[] = ['nombrePais', 'acciones'];
   dataSource!: MatTableDataSource<IGenerica>;
 

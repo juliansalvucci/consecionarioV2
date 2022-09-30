@@ -17,7 +17,7 @@ import com.tppa.tppa.Models.Pais;
 import com.tppa.tppa.Services.PaisService;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200/")
 @RequestMapping("/pais")
 public class PaisController 
 {
