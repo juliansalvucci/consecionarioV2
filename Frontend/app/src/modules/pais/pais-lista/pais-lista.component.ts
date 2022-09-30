@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginatorIntl } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { IPais } from 'src/interfaces/IPais';
 import { DataService } from 'src/services/data.service';
@@ -23,7 +24,27 @@ export class PaisListaComponent implements OnInit {
     this.consultar();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void 
+  {
+    this._MatPaginatorIntl.itemsPerPageLabel = 'items por página';
+  }
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+
+  
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+  
+  
+  configTable() {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
 
   displayedColumns: string[] = ['nombrePais', 'acciones'];
   dataSource!: MatTableDataSource<IPais>;
@@ -36,6 +57,7 @@ export class PaisListaComponent implements OnInit {
       console.log(r);
       this.lista = r;
       this.dataSource = new MatTableDataSource(this.lista);
+      this.configTable();
       this.cargando = false;
     });
   }
@@ -46,19 +68,41 @@ export class PaisListaComponent implements OnInit {
       width: '450px',
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.lista = this.lista.filter(element => element.id != id)
-      this.lista.push(this.dataService.object);
-      this.dataSource = new MatTableDataSource(this.lista);
+      if (this.dataService.object != null)
+      {
+        this.lista = this.lista.filter((element) => element.id != id);
+        this.lista.push(this.dataService.object);
+        this.dataSource = new MatTableDataSource(this.lista);
+        this.configTable();
+        this.dataService.object = null
+      }
       this.cargando = false;
     });
   }
 
   eliminar(id: number) {
     this.service.baja(id).subscribe((r) => {
+      if(r){
+        this.lista = this.lista.filter(element => element.id != id)
+        this.dataSource = new MatTableDataSource(this.lista);
+        this.configTable();
+      }
       this.cargando = false;
     }, e => {
-      this.lista = this.lista.filter(element => element.id != id)
-      this.dataSource = new MatTableDataSource(this.lista);
+      console.log(e)
     });
+  }
+
+  listaFiltro!: IPais[]
+  filtro: string = ''
+
+  filtrar(){
+    if(this.filtro == ""){
+      this.listaFiltro = this.lista;
+    } else {
+      this.listaFiltro = this.lista?.filter(f => f.nombrePais?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase()));
+    }
+    this.dataSource = new MatTableDataSource(this.listaFiltro);
+    this.configTable();
   }
 }

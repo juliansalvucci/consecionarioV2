@@ -5,6 +5,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .bg-success{
     color: white;
+    width: 90px;
 }
 
 .bg-success:hover{
@@ -14,6 +15,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .bg-warning{
     color: white;
+    width: 90px;
 }
 
 .bg-warning:hover{
@@ -22,8 +24,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .bg-danger{
     color: white;
+    width: 90px;
 }
 
 .bg-danger:hover{
     background-color: rgb(251, 134, 134) !important;
+}
+
+mat-label,th,td{
+    font-weight:bolder
 }

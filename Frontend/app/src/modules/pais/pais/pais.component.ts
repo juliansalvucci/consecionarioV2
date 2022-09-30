@@ -31,7 +31,7 @@ export class PaisComponent implements OnInit {
 
   configurarFormulario()
   {
-    if(this.dataService.id != null)
+    if(this.dataService.id != 0)
     {
       this.autocompletar();
     }

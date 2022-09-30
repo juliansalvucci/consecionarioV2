@@ -43,18 +43,9 @@ public class PaisController
     }
 
     @DeleteMapping( path = "/{id}")
-    public String eliminarPorId(@PathVariable("id") Long id)
+    public Boolean eliminarPorId(@PathVariable("id") Long id)
     {
-        boolean ok = this.service.eliminar(id);
-        
-        if (ok)
-        {
-            return "Se eliminó el país con id " + id;
-        }
-        else
-        {
-            return "No pudo eliminar el país con id" + id;
-        }
+        return this.service.eliminar(id);    
     }
     
 }
