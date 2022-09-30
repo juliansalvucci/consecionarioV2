@@ -1,10 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import {MatDialog,MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { IPais } from 'src/interfaces/IPais';
 import { DataService } from 'src/services/data.service';
 import { PaisService } from 'src/services/pais.service';
@@ -67,7 +63,7 @@ export class PaisComponent implements OnInit {
     }
   }
 
-  
+
   onNoClick(): void {
     this.dialogRef.close();
   }
