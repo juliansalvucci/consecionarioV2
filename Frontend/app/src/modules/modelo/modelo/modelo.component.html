@@ -1,17 +1,17 @@
 <div>
-    <h1 class="d-flex justify-content-between">Marca</h1>
+    <h1 class="d-flex justify-content-between">Modelo</h1>
     <form [formGroup]="registerForm" (ngSubmit)="register()">
         <mat-form-field appearance="fill">
             <mat-label id="negrita">Nombre</mat-label>
-            <input matInput formControlName="nombreMarca">
+            <input matInput formControlName="nombreModelo">
         </mat-form-field>
         <mat-form-field appearance="fill">
-            <mat-label id="negrita">País</mat-label>
-            <input formControlName="idPais" matInput type="text" [matAutocomplete]="a1" [(ngModel)]="filtro" (ngModelChange)="filtrar()" (keyup)="filtrar()"
+            <mat-label id="negrita">Marca</mat-label>
+            <input formControlName="idMarca" matInput type="text" [matAutocomplete]="a1" [(ngModel)]="filtro" (ngModelChange)="filtrar()" (keyup)="filtrar()"
             (keyup.enter)="filtrar()"/>
-            <mat-autocomplete #a1="matAutocomplete" [displayWith]="displayPaises.bind(this)">
+            <mat-autocomplete #a1="matAutocomplete" [displayWith]="displayMarca.bind(this)">
                 <mat-option *ngFor="let item of filterItems" [value]="item.id">
-                    {{item.nombrePais}}
+                    {{item.nombreMarca}}
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>

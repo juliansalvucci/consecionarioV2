@@ -1,0 +1,110 @@
+mat-nav-list{
+    background-color: rgb(178, 0, 0);
+    color: white;
+    height: 100%;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: 20px;
+}
+html, 
+body { 
+    height: 100vh;
+}
+mat-drawer {
+    min-height: 100vh;
+    max-width: 80%;
+}
+
+
+
+mat-drawer-container {
+    height: 100vh; 
+}
+
+/*Hago invisibles los scrolls de todas las pantallas*/
+mat-drawer-content.mat-drawer-content{
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll; 
+}
+
+mat-drawer-content.mat-drawer-content::-webkit-scrollbar{
+    display: none;
+}
+
+
+a {
+    color: var(--color5) !important;
+}
+a:hover,
+a:active,
+a:focus{
+    background-color: red ;
+}
+
+mat-divider {
+    background-color:  red ;
+}
+
+.example-tree-invisible {
+    display: none;
+  }
+  
+  .example-tree ul,
+  .example-tree li {
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style-type: none;
+  }
+  
+  /*
+   * This padding sets alignment of the nested nodes.
+   */
+  .example-tree .mat-nested-tree-node div[role=group] {
+    padding-left: 1.25rem;
+  }
+  
+  /*
+   * Padding for leaf nodes.
+   * Leaf nodes need to have padding so as to align with other non-leaf nodes
+   * under the same parent.
+   */
+  .example-tree div[role=group] > .mat-tree-node {
+    padding-left: 1.25rem;
+}
+
+mat-nested-tree-node,mat-tree-node,mat-tree{
+    cursor: pointer;
+    background-color:  red ;
+    color: var(--color5) !important; 
+    overflow-x: hidden;
+}
+
+
+  /* CSS solución */
+#flecha {
+    -moz-transition: all 0.25s ease-out ;
+    -ms-transition: all 0.25s ease-out;
+    -o-transition: all 0.25s ease-out;
+    -webkit-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+}
+#boton:hover #flecha {
+    -moz-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    
+    transform: rotate(270deg);
+}
+
+#red{
+    font-weight:bolder;
+    color: #f1f1f1;
+}
+
+#red:hover{
+    background-color: rgb(223, 0, 0);
+    color: #f1f1f1;
+}

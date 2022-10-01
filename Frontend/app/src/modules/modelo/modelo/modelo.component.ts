@@ -2,17 +2,17 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IMarca } from 'src/interfaces/IMarca';
-import { IPais } from 'src/interfaces/IPais';
+import { IModelo } from 'src/interfaces/IModelo';
 import { DataService } from 'src/services/data.service';
 import { MarcaService } from 'src/services/marca/marca.service';
-import { PaisService } from 'src/services/pais/pais.service';
+import { ModeloService } from 'src/services/modelo/modelo.service';
 
 @Component({
-  selector: 'app-marca',
-  templateUrl: './marca.component.html',
-  styleUrls: ['./marca.component.css']
+  selector: 'app-modelo',
+  templateUrl: './modelo.component.html',
+  styleUrls: ['./modelo.component.css']
 })
-export class MarcaComponent implements OnInit {
+export class ModeloComponent implements OnInit {
 
   filterItems!:IGenerica[]
   lista!:IGenerica[]
@@ -22,13 +22,13 @@ export class MarcaComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<IGenerica>,
     @Inject(MAT_DIALOG_DATA) public data: IGenerica,
-    private service: MarcaService,
-    private service1: PaisService,
+    private service: ModeloService,
+    private service1: MarcaService,
     private fb: FormBuilder,
     private dataService: DataService,
     public dialog: MatDialog
   ) {
-    this.consultarPaises();
+    this.consultarMarcas();
     this.configurarFormulario();
   }
 
@@ -36,8 +36,8 @@ export class MarcaComponent implements OnInit {
 
   registerForm = this.fb.group({
     id: [0],
-    nombreMarca: [''],
-    idPais: []
+    nombreModelo: [''],
+    idMarca: []
   });
 
 
@@ -53,8 +53,8 @@ export class MarcaComponent implements OnInit {
       console.log(r);
       this.registerForm.patchValue({
         id: r.id,
-        nombreMarca: r.nombreMarca,
-        idPais: r.idPais
+        nombreModelo: r.nombreModelo,
+        idMarca: r.idMarca
       });
     });
   }
@@ -75,7 +75,7 @@ export class MarcaComponent implements OnInit {
     }
   }
 
-  consultarPaises(): void {
+  consultarMarcas(): void {
     try {
       this.service1.consulta().subscribe((r: IGenerica[]) => {
         console.log(r);
@@ -88,24 +88,23 @@ export class MarcaComponent implements OnInit {
   }
 
   filtrar() {
-    this.filterItems = this.lista?.filter((f) => f.nombrePais?.toLowerCase().trim().includes(this.filtro));
+    this.filterItems = this.lista?.filter((f) => f.nombreMarca?.toLowerCase().trim().includes(this.filtro));
   }
 
 
-  displayPaises(id: number) {
+  displayMarca(id: number) {
     console.log(id)
     if (!id) return '';
 
     let index = this.lista.findIndex((r) => r.id === id);
     console.log('index', index);
-    return this.lista[index].nombrePais;
+    return this.lista[index].nombreMarca;
   }
   
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 }
 
-export interface IGenerica extends IMarca, IPais{}
+export interface IGenerica extends IMarca, IModelo{}

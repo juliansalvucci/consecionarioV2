@@ -20,6 +20,14 @@ export const API_ROUTES = {
         MODIFICACION: `${ENV.apiUrl}marca/`,
         CONSULTA:`${ENV.apiUrl}marca`,
         CONSULTAPORID:`${ENV.apiUrl}marca/`,
+    },
+
+    MODELO: {
+        ALTA:`${ENV.apiUrl}modelo`,
+        BAJA:`${ENV.apiUrl}modelo/`,
+        MODIFICACION: `${ENV.apiUrl}modelo/`,
+        CONSULTA:`${ENV.apiUrl}modelo`,
+        CONSULTAPORID:`${ENV.apiUrl}modelo/`,
     }
     
 }

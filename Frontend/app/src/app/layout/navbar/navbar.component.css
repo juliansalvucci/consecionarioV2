@@ -1,0 +1,60 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.navigation-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+mat-toolbar{
+    background-color: rgb(178, 0, 0);
+    color: var(--color5);
+    padding: 0.5rem 1rem;
+}
+mat-toolbar-row{
+    padding: 0px 0px;
+}
+
+button{
+    color: var(--color5);
+}
+button:hover,
+button:focus,
+button:active{
+    color: rgba(255, 255, 255, 0.5);
+}
+
+
+
+
+
+.red{
+    background-color: rgb(85, 85, 255);
+    text-align: center;
+    color: rgb(255, 255, 255);
+}
+
+h4{
+    color: azure;
+}
+
+.red.dropdown-item{
+    text-align: justify;
+}
+
+.menuItem{
+    color: black;
+    width: 100%
+}
+
+.menuItem:hover{
+    color: black;
+    background-color: #c0c0c0;
+}
+
+::ng-deep.mat-menu-panel {
+    max-width: none !important;
+}
