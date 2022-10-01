@@ -12,4 +12,8 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+   public STR_PAIS = 'listaPaises'
+   public STR_MODELO = 'listaModelos'
+   public STR_MARCA = 'listaMarcas'
+
 }

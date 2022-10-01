@@ -4,19 +4,22 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PaisModule } from 'src/modules/pais/pais.module';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { MarcaModule } from 'src/modules/marca/marca.module';
 import { ModeloModule } from 'src/modules/modelo/modelo.module';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { SharedModule } from 'src/shared/shared/shared.module';
 import { NavbarComponent } from './layout/navbar/navbar.component';
+import { SkeletonComponent } from './layout/skeleton/skeleton.component';
+import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     SidebarComponent,
-    NavbarComponent
+    NavbarComponent,
+    SkeletonComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,8 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
     MarcaModule,
     ModeloModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
