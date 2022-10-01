@@ -23,8 +23,8 @@ export class MarcaComponent implements OnInit {
     private dataService: DataService,
     public dialog: MatDialog
   ) {
-    this.configurarFormulario();
     this.consultarPaises();
+    this.configurarFormulario();
   }
 
   ngOnInit(): void {}
@@ -32,7 +32,7 @@ export class MarcaComponent implements OnInit {
   registerForm = this.fb.group({
     id: [0],
     nombreMarca: [''],
-    idPais: [0]
+    idPais: []
   });
 
 
@@ -57,6 +57,7 @@ export class MarcaComponent implements OnInit {
 
   register() {
     try {
+      console.log(this.registerForm.value)
       this.service.alta(this.registerForm.value).subscribe((data) => {
         this.dataService.object = data;
         console.log('Registro realizado con éxito');
@@ -73,20 +74,34 @@ export class MarcaComponent implements OnInit {
     try {
       this.paisService.consulta().subscribe((r: IGenerica[]) => {
         console.log(r);
+        this.lista = r
+        this.filterItems = r
       });
     } catch (e) {
       console.log(e);
     }
   }
 
-  autoCompleteCmbPais() {
-    this.registerForm.get('idPais')?.valueChanges.subscribe((response) => {
-          console.log('data is ', response);
-          this.filterPaises(response);
-        });
+  filtrar() {
+    this.filterItems = this.lista?.filter((f) => f.nombrePais?.toLowerCase().trim().includes(this.filtro));
   }
 
-  filterPaises(enteredData:string){}
+
+  filterItems!:IGenerica[]
+  lista!:IGenerica[]
+
+  filtro: string = '';
+
+  displayPaises(id: number) {
+    console.log(id)
+    if (!id) return '';
+
+    let index = this.lista.findIndex((r) => r.id === id);
+    console.log('index', index);
+    return this.lista[index].nombrePais;
+  }
+  
+ 
 
 
   onNoClick(): void {
