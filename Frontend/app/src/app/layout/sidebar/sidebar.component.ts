@@ -15,5 +15,6 @@ export class SidebarComponent implements OnInit {
    public STR_PAIS = 'listaPaises'
    public STR_MODELO = 'listaModelos'
    public STR_MARCA = 'listaMarcas'
+   public STR_AUTO = 'listaAutos'
 
 }

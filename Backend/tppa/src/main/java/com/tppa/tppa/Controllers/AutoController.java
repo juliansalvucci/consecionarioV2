@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import com.tppa.tppa.Models.Auto;
 import com.tppa.tppa.Services.AutoService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200/")
 @RequestMapping("/auto")
 public class AutoController 
 {
@@ -41,18 +43,9 @@ public class AutoController
     }
 
     @DeleteMapping( path = "/{id}")
-    public String eliminarPorId(@PathVariable("id") Long id)
+    public Boolean eliminarPorId(@PathVariable("id") Long id)
     {
-        boolean ok = this.service.eliminar(id);
-        
-        if (ok)
-        {
-            return "Se eliminó el auto con id " + id;
-        }
-        else
-        {
-            return "No pudo eliminar el auto con id" + id;
-        }
+        return this.service.eliminar(id);    
     }
     
 }

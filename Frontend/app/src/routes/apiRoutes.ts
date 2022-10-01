@@ -28,6 +28,14 @@ export const API_ROUTES = {
         MODIFICACION: `${ENV.apiUrl}modelo/`,
         CONSULTA:`${ENV.apiUrl}modelo`,
         CONSULTAPORID:`${ENV.apiUrl}modelo/`,
+    },
+
+    AUTO: {
+        ALTA:`${ENV.apiUrl}auto`,
+        BAJA:`${ENV.apiUrl}auto/`,
+        MODIFICACION: `${ENV.apiUrl}auto/`,
+        CONSULTA:`${ENV.apiUrl}auto`,
+        CONSULTAPORID:`${ENV.apiUrl}auto/`,
     }
     
 }

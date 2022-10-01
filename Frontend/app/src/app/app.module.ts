@@ -12,6 +12,7 @@ import { SharedModule } from 'src/shared/shared/shared.module';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { SkeletonComponent } from './layout/skeleton/skeleton.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AutoModule } from 'src/modules/auto/auto.module';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { AppRoutingModule } from './app-routing.module';
     PaisModule,
     MarcaModule,
     ModeloModule,
+    AutoModule,
     HttpClientModule,
     SharedModule,
     AppRoutingModule

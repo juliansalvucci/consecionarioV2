@@ -1,0 +1,31 @@
+table {
+    width: 100%;
+}
+
+.bg-warning{
+    margin-right: 5px;
+}
+
+.bg-success{
+    margin-top: 15px;
+}
+
+.container{
+    margin-top: 15px;
+}
+
+.container-fluid{
+    max-width: 80%;
+}
+
+
+/*Estilo para centrar las columnas de mat tables*/
+:host ::ng-deep .mat-sort-header-container {
+    display: flex;
+    justify-content: center;
+}
+
+td.mat-cell, th.mat-header-cell {
+    text-align: center;
+    justify-content:center;
+}

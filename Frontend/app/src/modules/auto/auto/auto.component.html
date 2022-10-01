@@ -1,0 +1,31 @@
+<div>
+    <h1 class="d-flex justify-content-between">Auto</h1>
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <mat-form-field appearance="fill">
+            <mat-label id="negrita">Precio</mat-label>
+            <input matInput formControlName="precio">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label id="negrita">Modelo</mat-label>
+            <input formControlName="idModelo" matInput type="text" [matAutocomplete]="a1" [(ngModel)]="filtro" (ngModelChange)="filtrarModelos()" (keyup)="filtrarModelos()"
+            (keyup.enter)="filtrarModelos()"/>
+            <mat-autocomplete #a1="matAutocomplete" [displayWith]="displayModelos.bind(this)">
+                <mat-option *ngFor="let item of filterItems" [value]="item.id">
+                    {{item.nombreModelo}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label id="negrita">Marca</mat-label>
+            <input formControlName="idPais" matInput type="text" [matAutocomplete]="a2" [(ngModel)]="filtro" (ngModelChange)="filtrarMarcas()" (keyup)="filtrarMarcas()"
+            (keyup.enter)="filtrarModelos()"/>
+            <mat-autocomplete #a2="matAutocomplete" [displayWith]="displayMarcas.bind(this)">
+                <mat-option *ngFor="let item of filterItems1" [value]="item.id">
+                    {{item.nombreMarca}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+    </form>
+</div>
+<button mat-raised-button class="col-3 m-auto mb-4 bg-success" (click)="register()"
+    [disabled]="registerForm.invalid">Guardar</button>
