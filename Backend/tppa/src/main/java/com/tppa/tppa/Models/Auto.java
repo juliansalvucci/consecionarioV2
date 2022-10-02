@@ -3,6 +3,7 @@ package com.tppa.tppa.Models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,7 +16,18 @@ public class Auto
     private Long idModelo;
     private Long idMarca;
 
+    @OneToOne
+    private Modelo modelo;
+
     
+    public Modelo getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(Modelo modelo) {
+        this.modelo = modelo;
+    }
+
     public Double getPrecio()
     {
         return precio;
@@ -57,10 +69,11 @@ public class Auto
     /////////////////////////////////////////// 
     public Auto(){}
 
-    public Auto(Double precio, Long idModelo) 
+    public Auto(Double precio, Long idModelo, Modelo modelo) 
     {
         this.setPrecio(precio);
         this.setIdModelo(idModelo);
         this.setIdMarca(idModelo);
+        this.setModelo(modelo);
     }  
 }

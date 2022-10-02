@@ -4,8 +4,6 @@ import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { IAuto } from 'src/interfaces/IAuto';
-import { IMarca } from 'src/interfaces/IMarca';
-import { IModelo } from 'src/interfaces/IModelo';
 import { AutoService } from 'src/services/auto/auto.service';
 import { DataService } from 'src/services/data.service';
 import { MarcaService } from 'src/services/marca/marca.service';
@@ -19,7 +17,7 @@ import { AutoComponent } from '../auto/auto.component';
 })
 export class AutoListaComponent implements OnInit {
 
-  displayedColumns: string[] = ['nombre', 'acciones'];
+  displayedColumns: string[] = ['nombre','marca','modelo', 'acciones'];
   dataSource!: MatTableDataSource<IGenerica>;
 
   cargando: boolean = false;
@@ -98,6 +96,17 @@ export class AutoListaComponent implements OnInit {
       console.log(e);
       this.cargando = false;
     }
+  }
+
+  filtrar() {
+    if (this.filtro == '') {
+      this.listaFiltro = this.lista;
+    } else {
+      this.listaFiltro = this.lista?.filter((f) => f.modelo.marca.nombreMarca?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase())
+                                                || f.modelo.nombreModelo?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase()));
+    }
+    this.dataSource = new MatTableDataSource(this.listaFiltro);
+    this.configTable();
   }
 
   

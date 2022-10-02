@@ -16,7 +16,7 @@ import { ModeloComponent } from '../modelo/modelo.component';
   styleUrls: ['./modelo-lista.component.css']
 })
 export class ModeloListaComponent implements OnInit {
-  displayedColumns: string[] = ['nombre', 'acciones'];
+  displayedColumns: string[] = ['nombre','marca', 'acciones'];
   dataSource!: MatTableDataSource<IGenerica>;
 
   cargando: boolean = false;
@@ -28,7 +28,6 @@ export class ModeloListaComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private service: ModeloService,
-    private service1: MarcaService,
     private dataService: DataService,
     public _MatPaginatorIntl: MatPaginatorIntl
   ) {
@@ -100,12 +99,8 @@ export class ModeloListaComponent implements OnInit {
     if (this.filtro == '') {
       this.listaFiltro = this.lista;
     } else {
-      this.listaFiltro = this.lista?.filter((f) =>
-        f.nombreModelo
-          ?.toLowerCase()
-          .trim()
-          .includes(this.filtro.toLocaleLowerCase())
-      );
+      this.listaFiltro = this.lista?.filter((f) =>f.nombreModelo?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase())
+                                               || f.marca.nombreMarca.toLowerCase().trim().includes(this.filtro.toLowerCase()));
     }
     this.dataSource = new MatTableDataSource(this.listaFiltro);
     this.configTable();

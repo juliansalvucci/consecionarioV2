@@ -88,12 +88,12 @@ export class MarcaComponent implements OnInit {
     }
   }
 
-  consultarPaises(): void {
-    try {
+  consultarPaises(){
+    try  {
       this.service1.consulta().subscribe((r: IGenerica[]) => {
-        console.log(r);
+        console.log('Países',r);
         this.lista = r
-        this.filterItems = r
+        this.filterItems = this.lista
       });
     } catch (e) {
       console.log(e);
@@ -105,13 +105,16 @@ export class MarcaComponent implements OnInit {
   }
 
   displayPaises(id: number) {
-    console.log(id)
+    console.log('DIPLAY',id)
     if (!id) return '';
 
     let index = this.lista.findIndex((r) => r.id === id);
     console.log('index', index);
+  
     this.nombre = this.lista[index].nombrePais;
     console.log('NOMBRE',this.nombre)
+      
+    
     return this.nombre
   }
   

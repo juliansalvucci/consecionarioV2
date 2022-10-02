@@ -25,6 +25,8 @@ export class AutoComponent implements OnInit {
   filtro: string = '';
   filtro1: string = '';
 
+  idModelo!: number;
+
   constructor(
     public dialogRef: MatDialogRef<IGenerica>,
     @Inject(MAT_DIALOG_DATA) public data: IGenerica,
@@ -42,11 +44,24 @@ export class AutoComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  displayModelos(id: number) {
+    console.log(id)
+    this.idModelo = id;
+    if (!id) return '';
+
+    let index = this.lista.findIndex((r) => r.id === id);
+    console.log('index', index);
+    return this.lista[index].nombreModelo;
+  }
+
   registerForm = this.fb.group({
     id: [0],
     precio: [''],
     idModelo: [],
-    idMarca: []
+    idMarca: [],
+    modelo: this.fb.group({
+      id: [39]
+    })
   });
 
 
@@ -64,7 +79,10 @@ export class AutoComponent implements OnInit {
         id: r.id,
         precio: r.precio,
         idModelo: r.idModelo,
-        idMarca: r.idMarca
+        idMarca: r.idMarca,
+        modelo: ({
+           id: r.id
+        })
       });
     });
   }
@@ -112,14 +130,7 @@ export class AutoComponent implements OnInit {
     console.log(this.filterItems)
   }
 
-  displayModelos(id: number) {
-    console.log(id)
-    if (!id) return '';
-
-    let index = this.lista.findIndex((r) => r.id === id);
-    console.log('index', index);
-    return this.lista[index].nombreModelo;
-  }
+  
   
   consultarMarcas(): void {
     try {

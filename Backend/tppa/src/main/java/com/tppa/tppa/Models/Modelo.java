@@ -3,6 +3,7 @@ package com.tppa.tppa.Models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,7 +15,18 @@ public class Modelo
     private long id;       
     private String nombreModelo;
     private Long idMarca;
+
+    @OneToOne
+    private Marca marca;
     
+    public Marca getMarca() {
+        return marca;
+    }
+
+    public void setMarca(Marca marca) {
+        this.marca = marca;
+    }
+
     public String getNombreModelo()
     {
         return nombreModelo;
@@ -47,9 +59,10 @@ public class Modelo
     ///////////////////////////////////////////
     public Modelo(){}
 
-    public Modelo(String nombreModelo, Long idMarca) 
+    public Modelo(String nombreModelo, Long idMarca, Marca marca) 
     {
         this.setNombreModelo(nombreModelo);
         this.setIdMarca(idMarca);
+        this.setMarca(marca);
     }  
 }

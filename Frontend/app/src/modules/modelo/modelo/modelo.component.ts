@@ -37,7 +37,10 @@ export class ModeloComponent implements OnInit {
   registerForm = this.fb.group({
     id: [0],
     nombreModelo: [''],
-    idMarca: []
+    marca: this.fb.group({
+       id: []
+    })
+    
   });
 
 
@@ -54,7 +57,10 @@ export class ModeloComponent implements OnInit {
       this.registerForm.patchValue({
         id: r.id,
         nombreModelo: r.nombreModelo,
-        idMarca: r.idMarca
+        idMarca: r.idMarca,
+        marca: ({
+          id: r.id
+        }) 
       });
     });
   }

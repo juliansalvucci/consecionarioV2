@@ -24,7 +24,7 @@
             </ng-container>+
 
             <ng-container matColumnDef="pais">
-                <th mat-header-cell mat-sort-header *matHeaderCellDef> Nombre de marca </th>
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> País</th>
                 <td mat-cell *matCellDef="let element" class="columna"> {{element.pais.nombrePais}} </td>
             </ng-container>
     
@@ -39,7 +39,7 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="2">No hay registros</td>
+            <td class="mat-cell" colspan="3">No hay registros</td>
         </tr>
         </table>
       
