@@ -17,7 +17,7 @@ import { AutoComponent } from '../auto/auto.component';
 })
 export class AutoListaComponent implements OnInit {
 
-  displayedColumns: string[] = ['nombre','marca','modelo', 'acciones'];
+  displayedColumns: string[] = ['nombre','modelo','marca','pais','acciones'];
   dataSource!: MatTableDataSource<IGenerica>;
 
   cargando: boolean = false;
@@ -70,8 +70,7 @@ export class AutoListaComponent implements OnInit {
       width: '450px',
     });
     dialogRef.afterClosed().subscribe((result) => {
-      this.consultar();
-      /*
+      
       if (this.dataService.object != null) {
         this.lista = this.lista.filter((element) => element.id != id);
         this.lista.push(this.dataService.object);
@@ -79,7 +78,7 @@ export class AutoListaComponent implements OnInit {
         this.configTable();
         this.dataService.object = null;
       }
-      */
+      
       this.cargando = false;
     });
   }
@@ -106,7 +105,8 @@ export class AutoListaComponent implements OnInit {
       this.listaFiltro = this.lista;
     } else {
       this.listaFiltro = this.lista?.filter((f) => f.modelo.marca.nombreMarca?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase())
-                                                || f.modelo.nombreModelo?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase()));
+                                                || f.modelo.nombreModelo?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase())
+                                                || f.modelo.marca.pais.nombrePais?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase()));
     }
     this.dataSource = new MatTableDataSource(this.listaFiltro);
     this.configTable();

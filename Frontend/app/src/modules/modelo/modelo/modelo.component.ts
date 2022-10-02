@@ -69,11 +69,13 @@ export class ModeloComponent implements OnInit {
 
   register() {
     try {
-      console.log(this.registerForm.value)
       this.service.alta(this.registerForm.value).subscribe((data) => {
-        this.dataService.object = data;
-        console.log('Registro realizado con éxito');
-        this.onNoClick();
+        this.service.consultaPorId(data.id).subscribe((data) => {
+          this.dataService.object = data;
+          console.log('DATA', data);
+          console.log('Registro realizado con éxito');
+          this.onNoClick();
+        });
       });
     } catch (e) {
       console.log(this.registerForm.value);

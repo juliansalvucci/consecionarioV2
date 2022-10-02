@@ -13,14 +13,13 @@ import { ModeloService } from 'src/services/modelo/modelo.service';
 @Component({
   selector: 'app-auto',
   templateUrl: './auto.component.html',
-  styleUrls: ['./auto.component.css']
+  styleUrls: ['./auto.component.css'],
 })
 export class AutoComponent implements OnInit {
-
-  filterItems!:IGenerica[]
-  filterItems1!:IGenerica[]
-  lista!:IGenerica[]
-  lista1!:IGenerica[]
+  filterItems!: IGenerica[];
+  filterItems1!: IGenerica[];
+  lista!: IGenerica[];
+  lista1!: IGenerica[];
 
   filtro: string = '';
   filtro1: string = '';
@@ -45,8 +44,8 @@ export class AutoComponent implements OnInit {
   ngOnInit(): void {}
 
   displayModelos(id: number) {
-    console.log(id)
-    this.registerForm.value.modelo.id = id //seteo el id del objeto modelo.
+    console.log(id);
+    this.registerForm.value.modelo.id = id; //seteo el id del objeto modelo.
     if (!id) return '';
 
     let index = this.lista.findIndex((r) => r.id === id);
@@ -60,17 +59,15 @@ export class AutoComponent implements OnInit {
     idModelo: [],
     idMarca: [],
     modelo: this.fb.group({
-      id: []
-    })
+      id: [],
+    }),
   });
-
 
   configurarFormulario() {
     if (this.dataService.id != 0) {
       this.autocompletar();
     }
   }
-
 
   autocompletar() {
     this.service.consultaPorId(this.dataService.id).subscribe((r) => {
@@ -80,23 +77,19 @@ export class AutoComponent implements OnInit {
         precio: r.precio,
         idModelo: r.idModelo,
         idMarca: r.idMarca,
-        modelo: ({
-           id: r.id
-        })
       });
-
-      console.log('values',this.registerForm.value)
     });
   }
 
-
   register() {
     try {
-      console.log('FORMVALUE',this.registerForm.value)
       this.service.alta(this.registerForm.value).subscribe((data) => {
-        this.dataService.object = data;
-        console.log('Registro realizado con éxito');
-        this.onNoClick();
+        this.service.consultaPorId(data.id).subscribe((data) => {
+          this.dataService.object = data;
+          console.log('DATA', data);
+          console.log('Registro realizado con éxito');
+          this.onNoClick();
+        });
       });
     } catch (e) {
       console.log(this.registerForm.value);
@@ -109,7 +102,7 @@ export class AutoComponent implements OnInit {
     try {
       this.service1.consulta().subscribe((r: IGenerica[]) => {
         console.log(r);
-        this.lista = r
+        this.lista = r;
       });
     } catch (e) {
       console.log(e);
@@ -117,29 +110,28 @@ export class AutoComponent implements OnInit {
   }
 
   filtrarModelos() {
-    this.filterItems = this.lista?.filter((f) => f.nombreModelo?.toLowerCase().trim().includes(this.filtro));
+    this.filterItems = this.lista?.filter((f) =>
+      f.nombreModelo?.toLowerCase().trim().includes(this.filtro)
+    );
   }
 
-  obtenerModelosPorMarca(id:number)
-  {
-    console.log(id,'trolo')
+  obtenerModelosPorMarca(id: number) {
+    console.log(id, 'trolo');
 
-    this.filterItems = this.lista
+    this.filterItems = this.lista;
 
-    if(id != null){
-      this.filterItems = this.filterItems.filter(f => f.idMarca === id)
+    if (id != null) {
+      this.filterItems = this.filterItems.filter((f) => f.idMarca === id);
     }
-    console.log(this.filterItems)
+    console.log(this.filterItems);
   }
 
-  
-  
   consultarMarcas(): void {
     try {
       this.service2.consulta().subscribe((r: IGenerica[]) => {
         console.log(r);
-        this.lista1 = r
-        this.filterItems1 = r
+        this.lista1 = r;
+        this.filterItems1 = r;
       });
     } catch (e) {
       console.log(e);
@@ -147,7 +139,9 @@ export class AutoComponent implements OnInit {
   }
 
   filtrarMarcas() {
-    this.filterItems1 = this.lista1?.filter((f) => f.nombreMarca?.toLowerCase().trim().includes(this.filtro1));
+    this.filterItems1 = this.lista1?.filter((f) =>
+      f.nombreMarca?.toLowerCase().trim().includes(this.filtro1)
+    );
   }
 
   onNoClick(): void {
@@ -155,7 +149,7 @@ export class AutoComponent implements OnInit {
   }
 
   displayMarcas(id: number) {
-    console.log(id)
+    console.log(id);
     if (!id) return '';
 
     this.obtenerModelosPorMarca(id);
@@ -163,7 +157,6 @@ export class AutoComponent implements OnInit {
     console.log('index', index);
     return this.lista1[index].nombreMarca;
   }
-
 }
 
 export interface IGenerica extends IMarca, IModelo, IAuto{}
