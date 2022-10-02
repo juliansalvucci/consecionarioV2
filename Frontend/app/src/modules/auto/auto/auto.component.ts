@@ -25,7 +25,7 @@ export class AutoComponent implements OnInit {
   filtro: string = '';
   filtro1: string = '';
 
-  idModelo!: number;
+  idModelo: number = 0;
 
   constructor(
     public dialogRef: MatDialogRef<IGenerica>,
@@ -46,7 +46,7 @@ export class AutoComponent implements OnInit {
 
   displayModelos(id: number) {
     console.log(id)
-    this.idModelo = id;
+    this.registerForm.value.modelo.id = id //seteo el id del objeto modelo.
     if (!id) return '';
 
     let index = this.lista.findIndex((r) => r.id === id);
@@ -60,7 +60,7 @@ export class AutoComponent implements OnInit {
     idModelo: [],
     idMarca: [],
     modelo: this.fb.group({
-      id: [39]
+      id: []
     })
   });
 
@@ -84,13 +84,15 @@ export class AutoComponent implements OnInit {
            id: r.id
         })
       });
+
+      console.log('values',this.registerForm.value)
     });
   }
 
 
   register() {
     try {
-      console.log(this.registerForm.value)
+      console.log('FORMVALUE',this.registerForm.value)
       this.service.alta(this.registerForm.value).subscribe((data) => {
         this.dataService.object = data;
         console.log('Registro realizado con éxito');

@@ -106,6 +106,7 @@ export class MarcaComponent implements OnInit {
 
   displayPaises(id: number) {
     console.log('DIPLAY',id)
+    this.registerForm.value.pais.id = id;
     if (!id) return '';
 
     let index = this.lista.findIndex((r) => r.id === id);

@@ -37,6 +37,7 @@ export class ModeloComponent implements OnInit {
   registerForm = this.fb.group({
     id: [0],
     nombreModelo: [''],
+    idMarca: [],
     marca: this.fb.group({
        id: []
     })
@@ -100,6 +101,7 @@ export class ModeloComponent implements OnInit {
 
   displayMarca(id: number) {
     console.log(id)
+    this.registerForm.value.marca.id = id;
     if (!id) return '';
 
     let index = this.lista.findIndex((r) => r.id === id);

@@ -70,6 +70,8 @@ export class AutoListaComponent implements OnInit {
       width: '450px',
     });
     dialogRef.afterClosed().subscribe((result) => {
+      this.consultar();
+      /*
       if (this.dataService.object != null) {
         this.lista = this.lista.filter((element) => element.id != id);
         this.lista.push(this.dataService.object);
@@ -77,6 +79,7 @@ export class AutoListaComponent implements OnInit {
         this.configTable();
         this.dataService.object = null;
       }
+      */
       this.cargando = false;
     });
   }
