@@ -13,6 +13,7 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { SkeletonComponent } from './layout/skeleton/skeleton.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AutoModule } from 'src/modules/auto/auto.module';
+import { ClienteModule } from 'src/modules/cliente/cliente.module';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { AutoModule } from 'src/modules/auto/auto.module';
     MarcaModule,
     ModeloModule,
     AutoModule,
+    ClienteModule,
     HttpClientModule,
     SharedModule,
     AppRoutingModule

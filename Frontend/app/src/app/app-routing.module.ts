@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AutoListaComponent } from "src/modules/auto/auto-lista/auto-lista.component";
+import { ClienteListaComponent } from "src/modules/cliente/cliente-lista/cliente-lista.component";
 import { MarcaListaComponent } from "src/modules/marca/marca-lista/marca-lista.component";
 import { ModeloListaComponent } from "src/modules/modelo/modelo-lista/modelo-lista.component";
 import { PaisListaComponent } from "src/modules/pais/pais-lista/pais-lista.component";
@@ -22,6 +23,10 @@ const routes: Routes = [
     {
       path: 'listaAutos',
       component: AutoListaComponent
+    },
+    {
+      path: 'listaClientes',
+      component: ClienteListaComponent
     },
     
     

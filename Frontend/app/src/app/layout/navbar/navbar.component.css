@@ -10,7 +10,7 @@
 }
 
 mat-toolbar{
-    background-color: rgb(178, 0, 0);
+    background-color: rgb(170, 0, 0);
     color: var(--color5);
     padding: 0.5rem 1rem;
 }
