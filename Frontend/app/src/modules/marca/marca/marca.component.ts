@@ -19,7 +19,7 @@ export class MarcaComponent implements OnInit {
 
   filtro: string = '';
 
-  nombre!: string
+  nombre!: string;
 
   constructor(
     public dialogRef: MatDialogRef<IGenerica>,
@@ -42,7 +42,7 @@ export class MarcaComponent implements OnInit {
     idPais: [],
     pais:  this.fb.group({
       id:            [0],
-      nombrePais:   [this.nombre],
+      nombrePais:   [],
     }),
   });
 
@@ -72,10 +72,12 @@ export class MarcaComponent implements OnInit {
 
   register() {
     try {
+      console.log('LA RE PUTA MADRE',this.nombre)
       console.log(this.registerForm.value)
       this.service.alta(this.registerForm.value).subscribe((data) => {
         console.log('DATA',data)
-        this.dataService.object = this.registerForm.value;
+        data.pais.nombrePais = this.nombre
+        this.dataService.object = data;
         console.log('Registro realizado con éxito');
         this.onNoClick();
       });
@@ -109,6 +111,7 @@ export class MarcaComponent implements OnInit {
     let index = this.lista.findIndex((r) => r.id === id);
     console.log('index', index);
     this.nombre = this.lista[index].nombrePais;
+    console.log('NOMBRE',this.nombre)
     return this.nombre
   }
   
