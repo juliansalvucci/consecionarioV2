@@ -102,6 +102,8 @@ mat-nested-tree-node,mat-tree-node,mat-tree{
 #red{
     font-weight:bolder;
     color: #f1f1f1;
+    width: 120px;
+    text-align: center;
 }
 
 #red:hover{

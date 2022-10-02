@@ -21,6 +21,11 @@
             <ng-container matColumnDef="nombre">
                 <th mat-header-cell mat-sort-header *matHeaderCellDef> Nombre de marca </th>
                 <td mat-cell *matCellDef="let element" class="columna"> {{element.nombreMarca}} </td>
+            </ng-container>+
+
+            <ng-container matColumnDef="pais">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> Nombre de marca </th>
+                <td mat-cell *matCellDef="let element" class="columna"> {{element.pais.nombrePais}} </td>
             </ng-container>
     
             <ng-container matColumnDef="acciones">

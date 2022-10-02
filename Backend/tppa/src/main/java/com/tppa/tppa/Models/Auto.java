@@ -13,6 +13,7 @@ public class Auto
     private long id; 
     private Double precio;
     private Long idModelo;
+    private Long idMarca;
 
     
     public Double getPrecio()
@@ -43,6 +44,15 @@ public class Auto
     {
         this.idModelo = idModelo;
     }
+
+    public Long getIdMarca() {
+        return idMarca;
+    }
+
+    public void setIdMarca(Long idMarca) 
+    {
+        this.idMarca = idMarca;
+    }
     
     /////////////////////////////////////////// 
     public Auto(){}
@@ -51,5 +61,6 @@ public class Auto
     {
         this.setPrecio(precio);
         this.setIdModelo(idModelo);
+        this.setIdMarca(idModelo);
     }  
 }

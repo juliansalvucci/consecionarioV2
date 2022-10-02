@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { isEmpty } from 'rxjs';
 import { IAuto } from 'src/interfaces/IAuto';
 import { IMarca } from 'src/interfaces/IMarca';
 import { IModelo } from 'src/interfaces/IModelo';
@@ -22,6 +23,7 @@ export class AutoComponent implements OnInit {
   lista1!:IGenerica[]
 
   filtro: string = '';
+  filtro1: string = '';
 
   constructor(
     public dialogRef: MatDialogRef<IGenerica>,
@@ -43,7 +45,8 @@ export class AutoComponent implements OnInit {
   registerForm = this.fb.group({
     id: [0],
     precio: [''],
-    idModelo: []
+    idModelo: [],
+    idMarca: []
   });
 
 
@@ -60,7 +63,8 @@ export class AutoComponent implements OnInit {
       this.registerForm.patchValue({
         id: r.id,
         precio: r.precio,
-        idModelo: r.idModelo
+        idModelo: r.idModelo,
+        idMarca: r.idMarca
       });
     });
   }
@@ -86,7 +90,6 @@ export class AutoComponent implements OnInit {
       this.service1.consulta().subscribe((r: IGenerica[]) => {
         console.log(r);
         this.lista = r
-        this.filterItems = r
       });
     } catch (e) {
       console.log(e);
@@ -95,6 +98,18 @@ export class AutoComponent implements OnInit {
 
   filtrarModelos() {
     this.filterItems = this.lista?.filter((f) => f.nombreModelo?.toLowerCase().trim().includes(this.filtro));
+  }
+
+  obtenerModelosPorMarca(id:number)
+  {
+    console.log(id,'trolo')
+
+    this.filterItems = this.lista
+
+    if(id != null){
+      this.filterItems = this.filterItems.filter(f => f.idMarca === id)
+    }
+    console.log(this.filterItems)
   }
 
   displayModelos(id: number) {
@@ -119,7 +134,7 @@ export class AutoComponent implements OnInit {
   }
 
   filtrarMarcas() {
-    this.filterItems1 = this.lista1?.filter((f) => f.nombreMarca?.toLowerCase().trim().includes(this.filtro));
+    this.filterItems1 = this.lista1?.filter((f) => f.nombreMarca?.toLowerCase().trim().includes(this.filtro1));
   }
 
   onNoClick(): void {
@@ -130,6 +145,7 @@ export class AutoComponent implements OnInit {
     console.log(id)
     if (!id) return '';
 
+    this.obtenerModelosPorMarca(id);
     let index = this.lista1.findIndex((r) => r.id === id);
     console.log('index', index);
     return this.lista1[index].nombreMarca;

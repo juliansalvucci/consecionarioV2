@@ -19,6 +19,8 @@ export class MarcaComponent implements OnInit {
 
   filtro: string = '';
 
+  nombre!: string
+
   constructor(
     public dialogRef: MatDialogRef<IGenerica>,
     @Inject(MAT_DIALOG_DATA) public data: IGenerica,
@@ -37,7 +39,11 @@ export class MarcaComponent implements OnInit {
   registerForm = this.fb.group({
     id: [0],
     nombreMarca: [''],
-    idPais: []
+    idPais: [],
+    pais:  this.fb.group({
+      id:            [0],
+      nombrePais:   [this.nombre],
+    }),
   });
 
 
@@ -54,7 +60,11 @@ export class MarcaComponent implements OnInit {
       this.registerForm.patchValue({
         id: r.id,
         nombreMarca: r.nombreMarca,
-        idPais: r.idPais
+        idPais: r.idPais,
+        pais: ({
+          id: r.id,
+          nombrePais: r.nombrePais
+        })
       });
     });
   }
@@ -64,7 +74,8 @@ export class MarcaComponent implements OnInit {
     try {
       console.log(this.registerForm.value)
       this.service.alta(this.registerForm.value).subscribe((data) => {
-        this.dataService.object = data;
+        console.log('DATA',data)
+        this.dataService.object = this.registerForm.value;
         console.log('Registro realizado con éxito');
         this.onNoClick();
       });
@@ -91,14 +102,14 @@ export class MarcaComponent implements OnInit {
     this.filterItems = this.lista?.filter((f) => f.nombrePais?.toLowerCase().trim().includes(this.filtro));
   }
 
-
   displayPaises(id: number) {
     console.log(id)
     if (!id) return '';
 
     let index = this.lista.findIndex((r) => r.id === id);
     console.log('index', index);
-    return this.lista[index].nombrePais;
+    this.nombre = this.lista[index].nombrePais;
+    return this.nombre
   }
   
 
