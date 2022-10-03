@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   login(){
 
-    this.router.navigateByUrl('listaAutos')
+    this.router.navigateByUrl('system')
     console.log('test')
   }
 

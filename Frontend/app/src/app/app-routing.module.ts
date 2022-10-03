@@ -13,25 +13,40 @@ import { SkeletonComponent } from "./layout/skeleton/skeleton.component";
 const routes: Routes = [
 
   {
-    path: 'listaPaises',
-    component: PaisListaComponent,
+    path: '',
+    component: LoginComponent
   },
+
   {
-    path: 'listaModelos',
-    component: ModeloListaComponent,
+    path: 'system', 
+    component: SkeletonComponent,
+    children : [
+      {
+        path: 'listaPaises',
+        component: PaisListaComponent,
+      },
+      {
+        path: 'listaModelos',
+        component: ModeloListaComponent,
+      },
+      {
+        path: 'listaMarcas',
+        component: MarcaListaComponent,
+      },
+      {
+        path: 'listaAutos',
+        component: AutoListaComponent,
+      },
+      {
+        path: 'listaClientes',
+        component: ClienteListaComponent,
+      },
+
+    ]
   },
-  {
-    path: 'listaMarcas',
-    component: MarcaListaComponent,
-  },
-  {
-    path: 'listaAutos',
-    component: AutoListaComponent,
-  },
-  {
-    path: 'listaClientes',
-    component: ClienteListaComponent,
-  },
+
+
+  
  
   
 
