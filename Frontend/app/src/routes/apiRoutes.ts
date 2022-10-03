@@ -1,5 +1,7 @@
 import { environment as ENV } from "../environments/environment";
 
+
+
 export const API_ROUTES = {
     AUTH: {
         LOGIN:`${ENV.apiUrl}`,
@@ -36,6 +38,14 @@ export const API_ROUTES = {
         MODIFICACION: `${ENV.apiUrl}auto/`,
         CONSULTA:`${ENV.apiUrl}auto`,
         CONSULTAPORID:`${ENV.apiUrl}auto/`,
+    },
+
+    CLIENTE: {
+        ALTA: `${ENV.apiUrl}cliente`,
+        BAJA:`${ENV.apiUrl}cliente/`,
+        MODIFICACION: `${ENV.apiUrl}cliente/`,
+        CONSULTA:`${ENV.apiUrl}cliente`,
+        CONSULTAPORID:`${ENV.apiUrl}cliente/`,
     }
     
 }

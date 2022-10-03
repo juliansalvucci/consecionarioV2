@@ -1,0 +1,26 @@
+<main class="container-fluid bg-general p-0 min-vh-100">
+    <section class="row w-100 min-vh-100 d-flex justify-content-center align-items-center">
+        <div class="col-5 text-center">
+            
+            <img src="../../../../assets/imagenes/logo1.png" alt="Logo" class="logo">
+            
+            <div class="card card-body">
+                
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label id="negrita">Email</mat-label>
+                    <input matInput  placeholder="Email">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label id="negrita">Contraseña</mat-label>
+                    <input matInput  placeholder="Email" type="password">
+                </mat-form-field>
+
+                <br>
+
+                <a mat-raised-button color="primary" class="btnIngresar" [routerLink]="STR_SYSTEM" [routerLinkActive]="['active']">Ingresar</a>
+                <br>
+            </div>
+        </div>
+    </section>
+</main>

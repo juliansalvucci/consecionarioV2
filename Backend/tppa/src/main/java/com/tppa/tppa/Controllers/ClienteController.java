@@ -18,7 +18,7 @@ import com.tppa.tppa.Services.ClienteService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200/")
-@RequestMapping("/Cliente")
+@RequestMapping("/cliente")
 public class ClienteController 
 {
     @Autowired

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PaisModule } from 'src/modules/pais/pais.module';
@@ -14,6 +13,7 @@ import { SkeletonComponent } from './layout/skeleton/skeleton.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AutoModule } from 'src/modules/auto/auto.module';
 import { ClienteModule } from 'src/modules/cliente/cliente.module';
+import { LoginComponent } from './layout/login/login.component';
 
 
 @NgModule({
@@ -21,7 +21,8 @@ import { ClienteModule } from 'src/modules/cliente/cliente.module';
     AppComponent,
     SidebarComponent,
     NavbarComponent,
-    SkeletonComponent
+    SkeletonComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
