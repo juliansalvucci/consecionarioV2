@@ -9,7 +9,7 @@ mat-nav-list{
 }
 html, 
 body { 
-    height: 100vh;
+    height: 80vh;
 }
 mat-drawer {
     min-height: 100vh;

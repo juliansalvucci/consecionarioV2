@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IMarca } from 'src/interfaces/IMarca';
 import { IModelo } from 'src/interfaces/IModelo';
@@ -36,8 +36,8 @@ export class ModeloComponent implements OnInit {
 
   registerForm = this.fb.group({
     id: [0],
-    nombreModelo: [''],
-    idMarca: [],
+    nombreModelo: ['',Validators.required],
+    idMarca: ['',Validators.required],
     marca: this.fb.group({
        id: []
     })
@@ -72,7 +72,6 @@ export class ModeloComponent implements OnInit {
       this.service.alta(this.registerForm.value).subscribe((data) => {
         this.service.consultaPorId(data.id).subscribe((data) => {
           this.dataService.object = data;
-          console.log('DATA', data);
           console.log('Registro realizado con éxito');
           this.onNoClick();
         });

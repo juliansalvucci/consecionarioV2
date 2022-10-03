@@ -1,10 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import {MatDialog,MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { IPais } from 'src/interfaces/IPais';
 import { ClienteService } from 'src/services/cliente/cliente.service';
 import { DataService } from 'src/services/data.service';
-import { PaisService } from 'src/services/pais/pais.service';
 
 @Component({
   selector: 'app-cliente',
@@ -29,7 +28,7 @@ export class ClienteComponent implements OnInit {
 
   registerForm = this.fb.group({
     id: [0],
-    nombreCliente: [''],
+    nombreCliente: ['',Validators.required],
   });
 
 

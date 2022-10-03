@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { isEmpty } from 'rxjs';
 import { IAuto } from 'src/interfaces/IAuto';
@@ -55,9 +55,9 @@ export class AutoComponent implements OnInit {
 
   registerForm = this.fb.group({
     id: [0],
-    precio: [''],
-    idModelo: [],
-    idMarca: [],
+    precio: ['',Validators.required],
+    idModelo: [,Validators.required],
+    idMarca: [,Validators.required],
     modelo: this.fb.group({
       id: [],
     }),
@@ -86,7 +86,6 @@ export class AutoComponent implements OnInit {
       this.service.alta(this.registerForm.value).subscribe((data) => {
         this.service.consultaPorId(data.id).subscribe((data) => {
           this.dataService.object = data;
-          console.log('DATA', data);
           console.log('Registro realizado con éxito');
           this.onNoClick();
         });

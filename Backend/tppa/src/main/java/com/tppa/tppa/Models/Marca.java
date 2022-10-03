@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table (name="marca") 
@@ -13,7 +14,9 @@ public class Marca
 {
     @Id @GeneratedValue(strategy=javax.persistence.GenerationType.AUTO)
     private long id;
+    @NotNull
     private String nombreMarca;
+    @NotNull
     private Long idPais;
 
     @OneToOne

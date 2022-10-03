@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AutoModule } from 'src/modules/auto/auto.module';
 import { ClienteModule } from 'src/modules/cliente/cliente.module';
 import { LoginComponent } from './layout/login/login.component';
+import { FooterComponent } from './layout/footer/footer.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { LoginComponent } from './layout/login/login.component';
     SidebarComponent,
     NavbarComponent,
     SkeletonComponent,
-    LoginComponent
+    LoginComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

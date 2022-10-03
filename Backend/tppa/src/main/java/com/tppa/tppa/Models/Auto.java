@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table (name="auto") 
@@ -12,8 +13,11 @@ public class Auto
 {
     @Id @GeneratedValue(strategy=javax.persistence.GenerationType.AUTO)
     private long id; 
+    @NotNull
     private Double precio;
+    @NotNull
     private Long idModelo;
+    @NotNull
     private Long idMarca;
 
     @OneToOne

@@ -5,6 +5,11 @@
             <mat-label id="negrita">Nombre</mat-label>
             <input matInput formControlName="nombrePais">
         </mat-form-field>
+
+        <mat-error class="text-danger"
+          *ngIf="registerForm.get('nombrePais')?.invalid && registerForm.get('nombrePais')?.touched">
+          El <strong>campo</strong> es requerido
+        </mat-error>
     </form>
 </div>
 <button mat-raised-button class="col-3 m-auto mb-4 bg-success" (click)="register()"

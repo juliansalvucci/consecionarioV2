@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import {MatDialog,MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { IPais } from 'src/interfaces/IPais';
 import { DataService } from 'src/services/data.service';
@@ -27,7 +27,7 @@ export class PaisComponent implements OnInit {
 
   registerForm = this.fb.group({
     id: [0],
-    nombrePais: [''],
+    nombrePais: ['', Validators.required],
   });
 
 

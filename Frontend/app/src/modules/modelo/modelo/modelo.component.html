@@ -5,6 +5,10 @@
             <mat-label id="negrita">Nombre</mat-label>
             <input matInput formControlName="nombreModelo">
         </mat-form-field>
+        <mat-error class="text-danger"
+          *ngIf="registerForm.get('nombreModelo')?.invalid && registerForm.get('nombreModelo')?.touched">
+          El <strong>campo</strong> es requerido
+        </mat-error>
         <mat-form-field appearance="fill">
             <mat-label id="negrita">Marca</mat-label>
             <input formControlName="idMarca" matInput type="text" [matAutocomplete]="a1" [(ngModel)]="filtro" (ngModelChange)="filtrar()" (keyup)="filtrar()"
@@ -15,6 +19,10 @@
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
+        <mat-error class="text-danger"
+          *ngIf="registerForm.get('idMarca')?.invalid && registerForm.get('idMarca')?.touched">
+          El <strong>campo</strong> es requerido
+        </mat-error>
     </form>
 </div>
 <button mat-raised-button class="col-3 m-auto mb-4 bg-success" (click)="register()"

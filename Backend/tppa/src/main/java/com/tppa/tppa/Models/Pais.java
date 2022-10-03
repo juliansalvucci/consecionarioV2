@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table (name="pais") 
@@ -11,7 +12,8 @@ import javax.persistence.Table;
 public class Pais 
 {
     @Id @GeneratedValue(strategy=javax.persistence.GenerationType.AUTO)
-    private long id;       
+    private long id;     
+    @NotNull  
     private String nombrePais;
             
     public String getNombrePais()

@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IMarca } from 'src/interfaces/IMarca';
 import { IPais } from 'src/interfaces/IPais';
@@ -38,8 +38,8 @@ export class MarcaComponent implements OnInit {
 
   registerForm = this.fb.group({
     id: [0],
-    nombreMarca: [''],
-    idPais: [],
+    nombreMarca: ['',Validators.required],
+    idPais: [,Validators.required],
     pais:  this.fb.group({
       id:            [0],
       nombrePais:   [],
@@ -72,10 +72,8 @@ export class MarcaComponent implements OnInit {
 
   register() {
     try {
-      console.log('LA RE PUTA MADRE',this.nombre)
       console.log(this.registerForm.value)
       this.service.alta(this.registerForm.value).subscribe((data) => {
-        console.log('DATA',data)
         data.pais.nombrePais = this.nombre
         this.dataService.object = data;
         console.log('Registro realizado con éxito');
@@ -105,7 +103,6 @@ export class MarcaComponent implements OnInit {
   }
 
   displayPaises(id: number) {
-    console.log('DIPLAY',id)
     this.registerForm.value.pais.id = id;
     if (!id) return '';
 
@@ -113,9 +110,6 @@ export class MarcaComponent implements OnInit {
     console.log('index', index);
   
     this.nombre = this.lista[index].nombrePais;
-    console.log('NOMBRE',this.nombre)
-      
-    
     return this.nombre
   }
   

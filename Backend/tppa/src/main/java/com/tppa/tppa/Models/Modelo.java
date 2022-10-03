@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table (name="modelo") 
@@ -12,8 +13,10 @@ import javax.persistence.Table;
 public class Modelo 
 {
     @Id @GeneratedValue(strategy=javax.persistence.GenerationType.AUTO)
-    private long id;       
+    private long id;    
+    @NotNull   
     private String nombreModelo;
+    @NotNull
     private Long idMarca;
 
     @OneToOne
