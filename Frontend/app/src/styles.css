@@ -29,6 +29,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .bg-danger:hover{
     background-color: rgb(251, 134, 134) !important;
+    color: white;
 }
 
 mat-label,th,td{

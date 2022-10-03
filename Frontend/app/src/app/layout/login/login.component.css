@@ -6,3 +6,7 @@ main {
 .card{
     margin-top: 0%;
 }
+
+.bg-danger{
+    width: 100%;
+}
