@@ -7,14 +7,11 @@ import { ModeloListaComponent } from "src/modules/modelo/modelo-lista/modelo-lis
 import { PaisListaComponent } from "src/modules/pais/pais-lista/pais-lista.component";
 import { LoginComponent } from "./layout/login/login.component";
 import { SidebarComponent } from "./layout/sidebar/sidebar.component";
+import { SkeletonComponent } from "./layout/skeleton/skeleton.component";
 
 
 const routes: Routes = [
 
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
   {
     path: 'listaPaises',
     component: PaisListaComponent,
@@ -36,6 +33,7 @@ const routes: Routes = [
     component: ClienteListaComponent,
   },
  
+  
 
 
 
