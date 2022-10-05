@@ -15,11 +15,7 @@ public class Auto
     private long id; 
     @NotNull
     private Double precio;
-    @NotNull
-    private Long idModelo;
-    @NotNull
-    private Long idMarca;
-
+   
     @OneToOne
     private Modelo modelo;
 
@@ -52,23 +48,6 @@ public class Auto
         this.id = id;
     }
 
-    public Long getIdModelo() {
-        return idModelo;
-    }
-
-    public void setIdModelo(Long idModelo) 
-    {
-        this.idModelo = idModelo;
-    }
-
-    public Long getIdMarca() {
-        return idMarca;
-    }
-
-    public void setIdMarca(Long idMarca) 
-    {
-        this.idMarca = idMarca;
-    }
     
     /////////////////////////////////////////// 
     public Auto(){}
@@ -76,8 +55,6 @@ public class Auto
     public Auto(Double precio, Long idModelo, Modelo modelo) 
     {
         this.setPrecio(precio);
-        this.setIdModelo(idModelo);
-        this.setIdMarca(idModelo);
         this.setModelo(modelo);
     }  
 }

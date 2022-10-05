@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { isEmpty } from 'rxjs';
 import { IAuto } from 'src/interfaces/IAuto';
 import { IMarca } from 'src/interfaces/IMarca';
 import { IModelo } from 'src/interfaces/IModelo';
@@ -75,8 +74,8 @@ export class AutoComponent implements OnInit {
       this.registerForm.patchValue({
         id: r.id,
         precio: r.precio,
-        idModelo: r.idModelo,
-        idMarca: r.idMarca,
+        idModelo: r.modelo.id,
+        idMarca: r.modelo.marca.id,
       });
     });
   }
