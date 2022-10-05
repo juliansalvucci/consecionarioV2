@@ -6,7 +6,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { IMarca } from 'src/interfaces/IMarca';
 import { IModelo } from 'src/interfaces/IModelo';
 import { DataService } from 'src/services/data.service';
-import { MarcaService } from 'src/services/marca/marca.service';
 import { ModeloService } from 'src/services/modelo/modelo.service';
 import { ModeloComponent } from '../modelo/modelo.component';
 

@@ -58,7 +58,7 @@ export class ModeloComponent implements OnInit {
       this.registerForm.patchValue({
         id: r.id,
         nombreModelo: r.nombreModelo,
-        idMarca: r.idMarca,
+        idMarca: r.marca.id,
         marca: ({
           id: r.id
         }) 

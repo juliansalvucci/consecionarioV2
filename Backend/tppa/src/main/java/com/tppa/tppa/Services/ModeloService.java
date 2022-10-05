@@ -29,10 +29,6 @@ public class ModeloService {
         return repository.findById(id);
     }
 
-    public ArrayList<Modelo> obtenerPorMarca(Long idMarca) {
-        return repository.findByIdMarca(idMarca);
-    }
-
     public boolean eliminar(Long id) 
     {
         try

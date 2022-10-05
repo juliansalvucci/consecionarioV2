@@ -16,8 +16,6 @@ public class Marca
     private long id;
     @NotNull
     private String nombreMarca;
-    @NotNull
-    private Long idPais;
 
     @OneToOne
     private Pais pais;
@@ -50,14 +48,7 @@ public class Marca
         this.id = id;
     }
     
-    
-    public Long getIdPais() {
-        return idPais;
-    }
 
-    public void setIdPais(Long idPais) {
-        this.idPais = idPais;
-    }
     
 
     ///////////////////////////////////////////
@@ -66,7 +57,6 @@ public class Marca
     public Marca(String nombreMarca, Long idPais, Pais pais) 
     {
         this.setNombreMarca(nombreMarca);
-        this.setIdPais(idPais);
         this.setPais(pais);
     }   
 }

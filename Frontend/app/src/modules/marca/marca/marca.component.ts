@@ -60,7 +60,7 @@ export class MarcaComponent implements OnInit {
       this.registerForm.patchValue({
         id: r.id,
         nombreMarca: r.nombreMarca,
-        idPais: r.idPais,
+        idPais: r.pais.id,
         pais: ({
           id: r.id,
           nombrePais: r.nombrePais

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tppa.tppa.Models.Modelo;
@@ -26,7 +25,8 @@ public class ModeloController
     ModeloService service;
 
     @Autowired // add here
-    public ModeloController(ModeloService modeloService) {
+    public ModeloController(ModeloService modeloService)
+    {
        this.service = modeloService;
     }
 
@@ -47,12 +47,6 @@ public class ModeloController
     public Optional<Modelo> obtenerPorId(@PathVariable("id") Long id)
     {
         return this.service.obtenerPorId(id);
-    }
-
-    
-    @GetMapping("/query")
-    public ArrayList<Modelo> obtenerPorMarca(@RequestParam("idMarca") Long idMarca){
-        return this.service.obtenerPorMarca(idMarca);
     }
     
 

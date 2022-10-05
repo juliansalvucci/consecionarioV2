@@ -16,17 +16,17 @@ public class Modelo
     private long id;    
     @NotNull   
     private String nombreModelo;
-    @NotNull
-    private Long idMarca;
-
+  
     @OneToOne
     private Marca marca;
     
-    public Marca getMarca() {
+    public Marca getMarca()
+    {
         return marca;
     }
 
-    public void setMarca(Marca marca) {
+    public void setMarca(Marca marca) 
+    {
         this.marca = marca;
     }
 
@@ -50,22 +50,13 @@ public class Modelo
         this.id = id;
     }
 
-    public Long getIdMarca() {
-        return idMarca;
-    }
-
-    public void setIdMarca(Long idMarca) 
-    {
-        this.idMarca = idMarca;
-    }
 
     ///////////////////////////////////////////
     public Modelo(){}
 
-    public Modelo(String nombreModelo, Long idMarca, Marca marca) 
+    public Modelo(String nombreModelo, Marca marca) 
     {
         this.setNombreModelo(nombreModelo);
-        this.setIdMarca(idMarca);
         this.setMarca(marca);
     }  
 }
