@@ -36,3 +36,24 @@ mat-label,th,td,h3{
     font-weight:bolder
 }
 
+table {
+    width: 100%;
+}
+
+.bg-warning{
+    margin-right: 5px;
+}
+
+.bg-success{
+    margin-top: 15px;
+}
+
+.container{
+    margin-top: 5px;
+}
+
+.container-fluid{
+    max-width: 80%;
+}
+
+

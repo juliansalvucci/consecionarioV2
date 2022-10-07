@@ -18,7 +18,7 @@ import { PaisComponent } from '../pais/pais.component';
 
 export class PaisListaComponent implements OnInit {
 
-  displayedColumns: string[] = ['nombrePais', 'acciones'];
+  displayedColumns: string[] = ['nombre', 'acciones'];
   dataSource!: MatTableDataSource<IGenerica>;
 
   cargando: boolean = false;

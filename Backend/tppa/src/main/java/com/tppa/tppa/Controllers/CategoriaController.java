@@ -18,7 +18,7 @@ import com.tppa.tppa.Services.CategoriaService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200/")
-@RequestMapping("/Categoria")
+@RequestMapping("/categoria")
 public class CategoriaController 
 {
     @Autowired

@@ -48,11 +48,11 @@ export const API_ROUTES = {
     },
     
     CATEGORIA: {
-        ALTA: `${ENV.apiUrl}`,
-        BAJA:`${ENV.apiUrl}cliente/`,
-        MODIFICACION: `${ENV.apiUrl}cliente/`,
-        CONSULTA:`${ENV.apiUrl}cliente`,
-        CONSULTAPORID:`${ENV.apiUrl}cliente/`,
+        ALTA: `${ENV.apiUrl}categoria`,
+        BAJA:`${ENV.apiUrl}categoria/`,
+        MODIFICACION: `${ENV.apiUrl}categoria/`,
+        CONSULTA:`${ENV.apiUrl}categoria`,
+        CONSULTAPORID:`${ENV.apiUrl}categoria/`,
     }
 }
 

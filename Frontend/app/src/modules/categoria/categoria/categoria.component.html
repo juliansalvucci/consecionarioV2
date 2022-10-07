@@ -1,1 +1,21 @@
-<p>categoria works!</p>
+<div>
+    <h1 class="d-flex justify-content-between">Categorías</h1>
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <mat-form-field appearance="fill">
+            <mat-label id="negrita">Nombre</mat-label>
+            <input matInput formControlName="nombreCategoria">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label id="negrita">Porcentaje</mat-label>
+            <input matInput formControlName="porcentaje">
+        </mat-form-field>
+
+        <mat-error class="text-danger"
+          *ngIf="registerForm.get('nombrePais')?.invalid && registerForm.get('nombrePais')?.touched">
+          El <strong>campo</strong> es requerido
+        </mat-error>
+    </form>
+</div>
+<button mat-raised-button class="col-3 m-auto mb-4 bg-success" (click)="register()"
+    [disabled]="registerForm.invalid">Guardar</button>

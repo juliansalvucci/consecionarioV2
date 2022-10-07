@@ -1,24 +1,3 @@
-table {
-    width: 100%;
-}
-
-.bg-warning{
-    margin-right: 5px;
-}
-
-.bg-success{
-    margin-top: 15px;
-}
-
-.container{
-    margin-top: 5px;
-}
-
-.container-fluid{
-    max-width: 80%;
-}
-
-
 /*Estilo para centrar las columnas de mat tables*/
 :host ::ng-deep .mat-sort-header-container {
     display: flex;
