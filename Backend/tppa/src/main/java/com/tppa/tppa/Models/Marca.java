@@ -14,11 +14,9 @@ public class Marca
 {
     @Id @GeneratedValue(strategy=javax.persistence.GenerationType.AUTO)
     private long id;
-    @NotNull
-    private String nombreMarca;
+    @NotNull private String nombreMarca;
 
-    @OneToOne
-    private Pais pais;
+    @OneToOne private Pais pais;
   
     public Pais getPais() {
         return pais;

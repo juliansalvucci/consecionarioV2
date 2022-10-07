@@ -13,9 +13,19 @@ public class Categoria
 {
     @Id @GeneratedValue(strategy=javax.persistence.GenerationType.AUTO)
     private long id;     
-    @NotNull  
-    private String nombreCategoria;
+    @NotNull private String nombreCategoria;
+    @NotNull private int porcentaje;
             
+    public int getPorcentaje()
+    {
+        return porcentaje;
+    }
+
+    public void setPorcentaje(int porcentaje) 
+    {
+        this.porcentaje = porcentaje;
+    }
+
     public String getNombreCategoria()
     {
         return nombreCategoria;
@@ -39,8 +49,9 @@ public class Categoria
     ///////////////////////////////////////////
     public Categoria(){}
 
-    public Categoria(String nombreCategoria) 
+    public Categoria(String nombreCategoria,int porcentaje) 
     {
         this.setNombreCategoria(nombreCategoria);
+        this.setPorcentaje(porcentaje);
     } 
 }

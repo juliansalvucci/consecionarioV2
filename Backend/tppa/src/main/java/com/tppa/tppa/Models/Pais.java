@@ -14,10 +14,9 @@ public class Pais
 {
     @Id @GeneratedValue(strategy=javax.persistence.GenerationType.AUTO)
     private long id;     
-    @NotNull  
-    private String nombrePais;
-    @OneToOne
-    private Categoria categoria;
+    @NotNull private String nombrePais;
+    
+    @OneToOne private Categoria categoria;
             
     public Categoria getCategoria()
     {

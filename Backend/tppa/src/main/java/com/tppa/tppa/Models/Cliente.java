@@ -13,8 +13,7 @@ public class Cliente
 {
     @Id @GeneratedValue(strategy=javax.persistence.GenerationType.AUTO)
     private long id;
-    @NotNull       
-    private String nombreCliente;
+    @NotNull private String nombreCliente;
             
     public String getNombreCliente()
     {

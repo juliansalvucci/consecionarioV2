@@ -14,14 +14,11 @@ public class Venta
 {
     @Id @GeneratedValue(strategy=javax.persistence.GenerationType.AUTO)
     private long id;
-    @NotNull
-    private String fechaVenta;
-    @NotNull
-    private Double costo;
-    @OneToOne
-    private Auto auto;
-    @OneToOne
-    private Cliente cliente;
+    @NotNull private String fechaVenta;
+    @NotNull private Double costo;
+
+    @OneToOne private Auto auto;
+    @OneToOne private Cliente cliente;
 
     public Cliente getCliente()
     {
