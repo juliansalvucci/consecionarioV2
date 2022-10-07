@@ -15,6 +15,7 @@ import { AutoModule } from 'src/modules/auto/auto.module';
 import { ClienteModule } from 'src/modules/cliente/cliente.module';
 import { LoginComponent } from './layout/login/login.component';
 import { FooterComponent } from './layout/footer/footer.component';
+import { CategoriaModule } from 'src/modules/categoria/categoria.module';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { FooterComponent } from './layout/footer/footer.component';
     ModeloModule,
     AutoModule,
     ClienteModule,
+    CategoriaModule,
     HttpClientModule,
     SharedModule,
     AppRoutingModule
