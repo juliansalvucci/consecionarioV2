@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,37 +13,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tppa.tppa.Models.Venta;
-import com.tppa.tppa.Services.VentaService;
-import com.tppa.tppa.strategies.costoStrategies.EstrategiaCostoAmericaExtranjero;
+import com.tppa.tppa.Models.Categoria;
+import com.tppa.tppa.Services.CategoriaService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200/")
-@RequestMapping("/Venta")
-public class VentaController  
+@RequestMapping("/Categoria")
+public class CategoriaController 
 {
     @Autowired
-    VentaService service;
+    CategoriaService service;
 
     @GetMapping()
-    public ArrayList<Venta> obtener()
+    public ArrayList<Categoria> obtener()
     {
         return service.obtener();
     }
 
     @PostMapping()
-    public Venta guardar(@RequestBody Venta venta)
+    public Categoria guardar(@RequestBody Categoria categoria)
     {
-        EstrategiaCostoAmericaExtranjero ecn = new EstrategiaCostoAmericaExtranjero();
-        venta = ecn.calcularCosto(venta);
-
-        return this.service.guardar(venta);
+        return this.service.guardar(categoria);
     }
 
     @GetMapping( path = "/{id}")
-    public Optional<Venta> obtenerPorId(@PathVariable("id") Long id)
+    public Optional<Categoria> obtenerPorId(@PathVariable("id") Long id)
     {
         return this.service.obtenerPorId(id);
-    }   
-}
+    }
 
+    @DeleteMapping( path = "/{id}")
+    public Boolean eliminarPorId(@PathVariable("id") Long id)
+    {
+        return this.service.eliminar(id);    
+    }
+    
+}
