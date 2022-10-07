@@ -3,6 +3,7 @@ package com.tppa.tppa.Models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -15,7 +16,19 @@ public class Pais
     private long id;     
     @NotNull  
     private String nombrePais;
+    @OneToOne
+    private Categoria categoria;
             
+    public Categoria getCategoria()
+    {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) 
+    {
+        this.categoria = categoria;
+    }
+
     public String getNombrePais()
     {
         return nombrePais;

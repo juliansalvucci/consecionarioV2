@@ -29,7 +29,6 @@ public class MarcaService {
         return repository.findById(id);
     }
 
-
     public boolean eliminar(Long id) 
     {
         try

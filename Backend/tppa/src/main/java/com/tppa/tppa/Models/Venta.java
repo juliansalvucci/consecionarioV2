@@ -23,7 +23,6 @@ public class Venta
     @OneToOne
     private Cliente cliente;
 
-
     public Cliente getCliente()
     {
         return cliente;
