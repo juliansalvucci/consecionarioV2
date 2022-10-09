@@ -1,7 +1,7 @@
 package com.tppa.tppa.strategies.costoStrategies;
 
-import com.tppa.tppa.Models.Venta;
+import com.tppa.tppa.Models.Auto;
 
 public interface IEstrategiaCosto {
-    public default Venta calcularCosto(Venta venta){ return venta; }
+    public default Auto calcularCosto(Auto auto){ return auto; }
 }

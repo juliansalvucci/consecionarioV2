@@ -15,7 +15,6 @@ public class Venta
     @Id @GeneratedValue(strategy=javax.persistence.GenerationType.AUTO)
     private long id;
     @NotNull private String fechaVenta;
-    @NotNull private Double costo;
 
     @OneToOne private Auto auto;
     @OneToOne private Cliente cliente;
@@ -60,16 +59,6 @@ public class Venta
         this.fechaVenta = fechaVenta;
     }
 
-    public Double getCosto() 
-    {
-        return costo;
-    }
-
-    public void setCosto(Double costo)
-    {
-        this.costo = costo;
-    }
-
     ///////////////////////////////////////////
     public Venta(){}
 
@@ -79,6 +68,5 @@ public class Venta
         setFechaVenta(fechaVenta);
         setAuto(auto);
         setCliente(cliente);
-        setCosto(costo);
     }  
 }

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tppa.tppa.Models.Venta;
 import com.tppa.tppa.Services.VentaService;
-import com.tppa.tppa.strategies.costoStrategies.EstrategiaCostoAmericaExtranjero;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200/")
@@ -33,9 +32,6 @@ public class VentaController
     @PostMapping()
     public Venta guardar(@RequestBody Venta venta)
     {
-        EstrategiaCostoAmericaExtranjero ecn = new EstrategiaCostoAmericaExtranjero();
-        venta = ecn.calcularCosto(venta);
-
         return this.service.guardar(venta);
     }
 

@@ -14,9 +14,9 @@ public class Auto
     @Id @GeneratedValue(strategy=javax.persistence.GenerationType.AUTO)
     private long id; 
     @NotNull private Double precio;
+    @NotNull private Double costo;
    
     @OneToOne private Modelo modelo;
-
     
     public Modelo getModelo() {
         return modelo;
@@ -44,6 +44,16 @@ public class Auto
     public void setId(long id) 
     {
         this.id = id;
+    }
+
+    public Double getCosto()
+    {
+        return costo;
+    }
+
+    public void setCosto(Double costo) 
+    {
+        this.costo = costo;
     }
 
     

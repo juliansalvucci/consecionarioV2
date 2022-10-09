@@ -1,20 +1,21 @@
 package com.tppa.tppa.strategies.costoStrategies;
 
-import com.tppa.tppa.Models.Venta;
+import com.tppa.tppa.Models.Auto;
 
 public class EstrategiaCostoAmericaExtranjero implements IEstrategiaCosto{
 
     @Override
-    public Venta calcularCosto(Venta venta) {
-        Double precio = venta.getAuto().getPrecio();
+    public Auto calcularCosto(Auto auto) {
 
-        int porcentaje = venta.getAuto().getModelo().getMarca().getPais().getCategoria().getPorcentaje();
+        Double precio = auto.getPrecio();
+
+        int porcentaje = auto.getModelo().getMarca().getPais().getCategoria().getPorcentaje();
 
         Double costo = precio + ((precio * porcentaje) / 100);
 
-        venta.setCosto(costo);
+        auto.setCosto(costo);
 
-        return venta;
+        return auto;
     }
     
 }

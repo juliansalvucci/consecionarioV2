@@ -8,8 +8,6 @@ import com.tppa.tppa.Models.Venta;
 
 @Repository
 public interface VentaRepository extends CrudRepository<Venta, Long> 
-{
-    public default void listar(){}
-       
+{       
     
 }

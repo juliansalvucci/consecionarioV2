@@ -10,6 +10,22 @@
           *ngIf="registerForm.get('nombrePais')?.invalid && registerForm.get('nombrePais')?.touched">
           El <strong>campo</strong> es requerido
         </mat-error>
+
+        <mat-form-field appearance="fill">
+            <mat-label id="negrita">Categoría</mat-label>
+            <input formControlName="idCategoria" matInput type="text" [matAutocomplete]="a1" [(ngModel)]="filtro" (ngModelChange)="filtrar()" (keyup)="filtrar()"
+            (keyup.enter)="filtrar()"/>
+            <mat-autocomplete #a1="matAutocomplete" [displayWith]="displayCategoria.bind(this)">
+                <mat-option *ngFor="let item of filterItems" [value]="item.id">
+                    {{item.nombreCategoria}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-error class="text-danger"
+          *ngIf="registerForm.get('idCategoria')?.invalid && registerForm.get('idCategoria')?.touched">
+          El <strong>campo</strong> es requerido
+        </mat-error>
     </form>
 </div>
 <button mat-raised-button class="col-3 m-auto mb-4 bg-success" (click)="register()"
