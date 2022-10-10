@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.tppa.tppa.Models.Auto;
 import com.tppa.tppa.Repositories.AutoRepository;
+import com.tppa.tppa.strategies.costoStrategies.EstrategiaCostoAmericaExtranjero;
 
 @Service
 public class AutoService {
@@ -27,6 +28,14 @@ public class AutoService {
     public Optional<Auto> obtenerPorId(Long id)
     {
         return repository.findById(id);
+    }
+
+    public Auto calcularCosto(Auto auto)
+    {
+        EstrategiaCostoAmericaExtranjero ecn = new EstrategiaCostoAmericaExtranjero();
+        auto = ecn.calcularCosto(auto);
+        this.guardar(auto);
+        return auto;
     }
 
 

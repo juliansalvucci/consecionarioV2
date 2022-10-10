@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tppa.tppa.Models.Auto;
 import com.tppa.tppa.Services.AutoService;
-import com.tppa.tppa.strategies.costoStrategies.EstrategiaCostoAmericaExtranjero;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200/")
@@ -33,11 +32,15 @@ public class AutoController
 
     @PostMapping()
     public Auto guardar(@RequestBody Auto auto)
-    {
-        EstrategiaCostoAmericaExtranjero ecn = new EstrategiaCostoAmericaExtranjero();
-        auto = ecn.calcularCosto(auto);
-        
+    {    
+        this.service.obtenerPorId(auto.getId());
         return this.service.guardar(auto);
+    }
+
+    @PostMapping(path = "/calcularCosto")
+    public Auto calcularCosto(@RequestBody Auto auto)
+    {    
+        return this.service.calcularCosto(auto);
     }
 
     @GetMapping( path = "/{id}")

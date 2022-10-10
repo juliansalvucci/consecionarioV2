@@ -36,4 +36,9 @@ export class AutoService {
   {
     return this.http.get(this.URL.CONSULTAPORID + id);
   }
+
+  calcularCosto(data:any):Observable<any>
+  {
+    return this.http.post(this.URL.CALCULARCOSTO, data);
+  }
 }

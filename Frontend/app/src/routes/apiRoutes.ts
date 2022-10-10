@@ -37,6 +37,7 @@ export const API_ROUTES = {
         MODIFICACION: `${ENV.apiUrl}auto/`,
         CONSULTA:`${ENV.apiUrl}auto`,
         CONSULTAPORID:`${ENV.apiUrl}auto/`,
+        CALCULARCOSTO:`${ENV.apiUrl}auto/calcularCosto`
     },
 
     CLIENTE: {

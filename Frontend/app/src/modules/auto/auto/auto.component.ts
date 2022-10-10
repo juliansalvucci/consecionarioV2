@@ -54,9 +54,10 @@ export class AutoComponent implements OnInit {
 
   registerForm = this.fb.group({
     id: [0],
-    precio: ['',Validators.required],
-    idModelo: [,Validators.required],
-    idMarca: [,Validators.required],
+    precio: ['', Validators.required],
+    costo: [0],
+    idModelo: [, Validators.required],
+    idMarca: [, Validators.required],
     modelo: this.fb.group({
       id: [],
     }),
@@ -80,13 +81,16 @@ export class AutoComponent implements OnInit {
     });
   }
 
-  register() {
+  async register() {
     try {
+      console.log(this.registerForm.value);
       this.service.alta(this.registerForm.value).subscribe((data) => {
         this.service.consultaPorId(data.id).subscribe((data) => {
-          this.dataService.object = data;
-          console.log('Registro realizado con éxito');
-          this.onNoClick();
+          this.service.calcularCosto(data).subscribe((data) => {
+            this.dataService.object = data;
+            console.log('Registro realizado con éxito');
+            this.onNoClick();
+          });
         });
       });
     } catch (e) {
