@@ -32,6 +32,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: white;
 }
 
+.bg-info:hover{
+    background-color: rgb(152, 221, 253)!important;
+}
+
 mat-label,th,td,h3{
     font-weight:bolder
 }

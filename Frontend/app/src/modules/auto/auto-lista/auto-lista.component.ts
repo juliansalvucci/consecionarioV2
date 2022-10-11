@@ -4,6 +4,7 @@ import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { IAuto } from 'src/interfaces/IAuto';
+import { VentaComponent } from 'src/modules/venta/venta/venta.component';
 import { AutoService } from 'src/services/auto/auto.service';
 import { DataService } from 'src/services/data.service';
 import { MarcaService } from 'src/services/marca/marca.service';
@@ -67,6 +68,25 @@ export class AutoListaComponent implements OnInit {
   abrirModal(id: number): void {
     this.dataService.id = id;
     const dialogRef = this.dialog.open(AutoComponent, {
+      width: '450px',
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      
+      if (this.dataService.object != null) {
+        this.lista = this.lista.filter((element) => element.id != id);
+        this.lista.push(this.dataService.object);
+        this.dataSource = new MatTableDataSource(this.lista);
+        this.configTable();
+        this.dataService.object = null;
+      }
+      
+      this.cargando = false;
+    });
+  }
+
+  abrirModal2(id: number): void {
+    this.dataService.id = id;
+    const dialogRef = this.dialog.open(VentaComponent, {
       width: '450px',
     });
     dialogRef.afterClosed().subscribe((result) => {
