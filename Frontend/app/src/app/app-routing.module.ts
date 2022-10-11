@@ -6,6 +6,7 @@ import { ClienteListaComponent } from "src/modules/cliente/cliente-lista/cliente
 import { MarcaListaComponent } from "src/modules/marca/marca-lista/marca-lista.component";
 import { ModeloListaComponent } from "src/modules/modelo/modelo-lista/modelo-lista.component";
 import { PaisListaComponent } from "src/modules/pais/pais-lista/pais-lista.component";
+import { VentaListaComponent } from "src/modules/venta/venta-lista/venta-lista.component";
 import { LoginComponent } from "./layout/login/login.component";
 import { SkeletonComponent } from "./layout/skeleton/skeleton.component";
 
@@ -44,6 +45,10 @@ const routes: Routes = [
       {
         path: 'listaCategorias',
         component: CategoriaListaComponent,
+      },
+      {
+        path: 'listaVentas',
+        component: VentaListaComponent,
       },
 
     ]

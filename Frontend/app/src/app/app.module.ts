@@ -16,6 +16,7 @@ import { ClienteModule } from 'src/modules/cliente/cliente.module';
 import { LoginComponent } from './layout/login/login.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { CategoriaModule } from 'src/modules/categoria/categoria.module';
+import { VentaModule } from 'src/modules/venta/venta.module';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { CategoriaModule } from 'src/modules/categoria/categoria.module';
     AutoModule,
     ClienteModule,
     CategoriaModule,
+    VentaModule,
     HttpClientModule,
     SharedModule,
     AppRoutingModule
