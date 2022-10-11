@@ -15,14 +15,27 @@ public class Auto
     private long id; 
     @NotNull private Double precio;
     @NotNull private Double costo;
-   
+    @NotNull private Boolean vendido;
+
     @OneToOne private Modelo modelo;
+
+    public Boolean getVendido() 
+    {
+        return vendido;
+    }
+
+    public void setVendido(Boolean vendido) 
+    {
+        this.vendido = vendido;
+    }
     
-    public Modelo getModelo() {
+    public Modelo getModelo() 
+    {
         return modelo;
     }
 
-    public void setModelo(Modelo modelo) {
+    public void setModelo(Modelo modelo) 
+    {
         this.modelo = modelo;
     }
 

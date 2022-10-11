@@ -16,10 +16,10 @@ import { ModeloService } from 'src/services/modelo/modelo.service';
 })
 export class AutoComponent implements OnInit {
 
-  filterItems!: IGenerica[];
-  filterItems1!: IGenerica[];
-  lista!: IGenerica[];
-  lista1!: IGenerica[];
+  filterModelos!: IGenerica[];
+  filterMarcas!: IGenerica[];
+  listaModelos!: IGenerica[];
+  listaMarcas!: IGenerica[];
 
   filtro: string = '';
   filtro1: string = '';
@@ -48,9 +48,9 @@ export class AutoComponent implements OnInit {
     this.registerForm.value.modelo.id = id; //seteo el id del objeto modelo.
     if (!id) return '';
 
-    let index = this.lista.findIndex((r) => r.id === id);
+    let index = this.listaModelos.findIndex((r) => r.id === id);
     console.log('index', index);
-    return this.lista[index].nombreModelo;
+    return this.listaModelos[index].nombreModelo;
   }
 
   registerForm = this.fb.group({
@@ -105,34 +105,36 @@ export class AutoComponent implements OnInit {
     try {
       this.service1.consulta().subscribe((r: IGenerica[]) => {
         console.log(r);
-        this.lista = r;
+        this.listaModelos = r;
       });
     } catch (e) {
       console.log(e);
     }
   }
 
+  filterModelosAux!: IGenerica[]
+
   filtrarModelos() {
-    this.filterItems = this.lista?.filter((f) =>
-      f.nombreModelo?.toLowerCase().trim().includes(this.filtro)
-    );
+    if(this.filtro == ''){
+      this.filterModelos == this.listaModelos;
+    }else{
+      this.filterModelos = this.filterModelosAux?.filter((f) => f.nombreModelo?.toLowerCase().trim().includes(this.filtro));
+    }
   }
 
   obtenerModelosPorMarca(id: number) {
-    console.log(id, 'trolo');
-
     if (id != null) {
-      this.filterItems = this.lista.filter((f) => f.marca.id === id);
+      this.filterModelosAux = this.listaModelos.filter(f => f.marca.id == id);
     }
-    console.log(this.filterItems);
+    console.log(this.filterModelos);
   }
 
   consultarMarcas(): void {
     try {
       this.service2.consulta().subscribe((r: IGenerica[]) => {
         console.log(r);
-        this.lista1 = r;
-        this.filterItems1 = r;
+        this.listaMarcas = r;
+        this.filterMarcas = r;
       });
     } catch (e) {
       console.log(e);
@@ -140,9 +142,12 @@ export class AutoComponent implements OnInit {
   }
 
   filtrarMarcas() {
-    this.filterItems1 = this.lista1?.filter((f) =>
-      f.nombreMarca?.toLowerCase().trim().includes(this.filtro1)
-    );
+    if(this.filtro1 == ''){
+      this.registerForm.get('idModelo')?.reset(); //Si el campo idMarca esta vacio, también vaciar el campo idModelo.
+      this.filterMarcas = this.listaMarcas;
+    }else{
+      this.filterMarcas = this.listaMarcas?.filter((f) => f.nombreMarca?.toLowerCase().trim().includes(this.filtro1));
+    }
   }
 
   onNoClick(): void {
@@ -154,9 +159,9 @@ export class AutoComponent implements OnInit {
     if (!id) return '';
 
     this.obtenerModelosPorMarca(id);
-    let index = this.lista1.findIndex((r) => r.id === id);
+    let index = this.listaMarcas.findIndex((r) => r.id === id);
     console.log('index', index);
-    return this.lista1[index].nombreMarca;
+    return this.listaMarcas[index].nombreMarca;
   }
 }
 

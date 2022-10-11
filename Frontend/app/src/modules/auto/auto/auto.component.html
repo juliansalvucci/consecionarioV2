@@ -6,7 +6,7 @@
             <input formControlName="idMarca" matInput type="text" [matAutocomplete]="a2" [(ngModel)]="filtro1" (ngModelChange)="filtrarMarcas()" (keyup)="filtrarMarcas()"
             (keyup.enter)="filtrarModelos()"/>
             <mat-autocomplete #a2="matAutocomplete" [displayWith]="displayMarcas.bind(this)">
-                <mat-option *ngFor="let item of filterItems1" [value]="item.id">
+                <mat-option *ngFor="let item of filterMarcas" [value]="item.id">
                     {{item.nombreMarca}}
                 </mat-option>
             </mat-autocomplete>
@@ -22,7 +22,7 @@
             <input formControlName="idModelo" matInput type="text" [matAutocomplete]="a1" [(ngModel)]="filtro" (ngModelChange)="filtrarModelos()" (keyup)="filtrarModelos()"
             (keyup.enter)="filtrarModelos()"/>
             <mat-autocomplete #a1="matAutocomplete" [displayWith]="displayModelos.bind(this)">
-                <mat-option *ngFor="let item of filterItems" [value]="item.id">
+                <mat-option *ngFor="let item of filterModelos" [value]="item.id">
                     {{item.nombreModelo}}
                 </mat-option>
             </mat-autocomplete>
