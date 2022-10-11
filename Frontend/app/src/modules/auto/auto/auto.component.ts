@@ -15,6 +15,7 @@ import { ModeloService } from 'src/services/modelo/modelo.service';
   styleUrls: ['./auto.component.css'],
 })
 export class AutoComponent implements OnInit {
+
   filterItems!: IGenerica[];
   filterItems1!: IGenerica[];
   lista!: IGenerica[];
@@ -120,10 +121,8 @@ export class AutoComponent implements OnInit {
   obtenerModelosPorMarca(id: number) {
     console.log(id, 'trolo');
 
-    this.filterItems = this.lista;
-
     if (id != null) {
-      this.filterItems = this.filterItems.filter((f) => f.idMarca === id);
+      this.filterItems = this.lista.filter((f) => f.marca.id === id);
     }
     console.log(this.filterItems);
   }
