@@ -39,6 +39,8 @@ export class PaisComponent implements OnInit {
     idCategoria: ['', Validators.required],
     categoria: this.fb.group({
       id: [0],
+      nombreCategoria: [''],
+      porcentaje: [''],
     }),
   });
 
@@ -59,14 +61,20 @@ export class PaisComponent implements OnInit {
     });
   }
 
+  setFormValues() {
+    this.registerForm.value.categoria.id = this.categoria.id;
+    this.registerForm.value.categoria.nombreCategoria = this.categoria.nombreCategoria;
+  }
+
   register() {
     try {
+      
+      this.setFormValues();
+
       this.service.alta(this.registerForm.value).subscribe((data) => {
-        this.service.consultaPorId(data.id).subscribe((data) => {
-          this.dataService.object = data;
-          console.log('Registro realizado con éxito');
-          this.onNoClick();
-        });
+        this.dataService.object = data;
+        console.log('Registro realizado con éxito');
+        this.onNoClick();
       });
     } catch (e) {
       console.log(this.registerForm.value);
@@ -97,14 +105,20 @@ export class PaisComponent implements OnInit {
     );
   }
 
+  categoria!: ICategoria;
+
   displayCategoria(id: number) {
     console.log(id);
+
     this.registerForm.value.categoria.id = id; //Seteo el id en el formgroup
     if (!id) return '';
 
     let index = this.lista.findIndex((r) => r.id === id);
     console.log('index', index);
-    return this.lista[index].nombreCategoria;
+
+    this.categoria = this.lista[index];
+
+    return this.categoria.nombreCategoria;
   }
 }
 

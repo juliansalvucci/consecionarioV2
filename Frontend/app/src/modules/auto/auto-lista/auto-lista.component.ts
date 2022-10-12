@@ -52,7 +52,7 @@ export class AutoListaComponent implements OnInit {
     try {
       this.service.consulta().subscribe((r: IGenerica[]) => {
         console.log(r);
-        this.lista = r;
+        this.lista = r.filter((f)=> f.vendido == true)
         this.dataSource = new MatTableDataSource(this.lista);
         this.configTable();
         this.cargando = false;

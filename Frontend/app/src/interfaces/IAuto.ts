@@ -6,5 +6,6 @@ export interface IAuto {
     costo:    number;
     idModelo: number;
     idMarca:  number;
+    vendido:  boolean;
     modelo:   IModelo;
 }
