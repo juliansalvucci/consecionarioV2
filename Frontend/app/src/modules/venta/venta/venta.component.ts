@@ -10,6 +10,7 @@ import { ClienteService } from 'src/services/cliente/cliente.service';
 import { DataService } from 'src/services/data.service';
 import { MarcaService } from 'src/services/marca/marca.service';
 import { ModeloService } from 'src/services/modelo/modelo.service';
+import { VentaService } from 'src/services/venta/venta.service';
 
 @Component({
   selector: 'app-venta',
@@ -35,6 +36,7 @@ export class VentaComponent implements OnInit {
     private service1: ModeloService,
     private service2: MarcaService,
     private service3: ClienteService,
+    private service4: VentaService,
     private fb: FormBuilder,
     private dataService: DataService,
     public dialog: MatDialog
@@ -64,6 +66,7 @@ export class VentaComponent implements OnInit {
     idModelo: [, Validators.required],
     idMarca: [, Validators.required],
     idCliente: [, Validators.required],
+    fechaVenta: [Date.now()],
     auto: this.fb.group({
       id: [],
     }),
@@ -96,7 +99,7 @@ export class VentaComponent implements OnInit {
       this.registerForm.value.cliente.id = this.registerForm.value.idCliente;
 
       console.log(this.registerForm.value);
-      this.service3.alta(this.registerForm.value).subscribe((data) => {
+      this.service4.alta(this.registerForm.value).subscribe((data) => {
         this.dataService.object = data;
         console.log('Registro realizado con éxito');
         this.onNoClick();

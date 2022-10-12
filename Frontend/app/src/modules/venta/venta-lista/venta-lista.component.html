@@ -11,9 +11,11 @@
                   </mat-form-field>
             </div>
 
+            <!--
             <div class="col-2">
                 <button mat-raised-button class="bg-success" (click)="abrirModal()">Agregar</button>
             </div>
+            -->
         </div>
     </div>
 
@@ -21,23 +23,23 @@
         <table mat-table matSort [dataSource]="dataSource">
 
             <ng-container matColumnDef="fecha">
-                <th mat-header-cell mat-sort-header *matHeaderCellDef> Nombre de país </th>
-                <td mat-cell *matCellDef="let element" class="columna"> {{element.nombrePais}} </td>
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> Fecha de venta </th>
+                <td mat-cell *matCellDef="let element" class="columna"> {{element.fechaVenta}} </td>
             </ng-container>
 
             <ng-container matColumnDef="modelo">
-                <th mat-header-cell mat-sort-header *matHeaderCellDef> Nombre de país </th>
-                <td mat-cell *matCellDef="let element" class="columna"> {{element.categoria?.nombreCategoria}} </td>
+                <th mat-header-cell mat-sort-header *matHeaderCellDef>  Modelo </th>
+                <td mat-cell *matCellDef="let element" class="columna"> {{element.auto?.modelo?.nombreModelo}} </td>
             </ng-container>
 
             <ng-container matColumnDef="marca">
-                <th mat-header-cell mat-sort-header *matHeaderCellDef> Nombre de país </th>
-                <td mat-cell *matCellDef="let element" class="columna"> {{element.categoria?.nombreCategoria}} </td>
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> Marca </th>
+                <td mat-cell *matCellDef="let element" class="columna"> {{element.auto?.modelo?.marca?.nombreMarca}} </td>
             </ng-container>
 
             <ng-container matColumnDef="cliente">
-                <th mat-header-cell mat-sort-header *matHeaderCellDef> Nombre de país </th>
-                <td mat-cell *matCellDef="let element" class="columna"> {{element.categoria?.nombreCategoria}} </td>
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> Cliente </th>
+                <td mat-cell *matCellDef="let element" class="columna"> {{element.cliente?.nombreCliente}} </td>
             </ng-container>
 
 
