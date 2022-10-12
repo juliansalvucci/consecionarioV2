@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tppa.tppa.Models.Auto;
 import com.tppa.tppa.Models.Venta;
 import com.tppa.tppa.Repositories.VentaRepository;
 
@@ -23,14 +22,7 @@ public class VentaService
 
     public Venta guardar(Venta venta)
     {
-        Auto a = venta.getAuto();
-        a.setVendido(true);
-
-        venta.setAuto(a);
-
-        Venta v = venta;
-
-        return repository.save(v);
+        return repository.save(venta);
     }
 
     public Optional<Venta> obtenerPorId(Long id)

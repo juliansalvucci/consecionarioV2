@@ -33,7 +33,6 @@ public class AutoController
     @PostMapping()
     public Auto guardar(@RequestBody Auto auto)
     {    
-        this.service.obtenerPorId(auto.getId());
         return this.service.guardar(auto);
     }
 

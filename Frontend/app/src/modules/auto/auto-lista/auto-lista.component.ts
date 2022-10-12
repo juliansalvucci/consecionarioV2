@@ -30,8 +30,6 @@ export class AutoListaComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private service: AutoService,
-    private service1: MarcaService,
-    private service2: ModeloService,
     private dataService: DataService,
     public _MatPaginatorIntl: MatPaginatorIntl
   ) {
@@ -93,7 +91,6 @@ export class AutoListaComponent implements OnInit {
       
       if (this.dataService.object != null) {
         this.lista = this.lista.filter((element) => element.id != id);
-        this.lista.push(this.dataService.object);
         this.dataSource = new MatTableDataSource(this.lista);
         this.configTable();
         this.dataService.object = null;

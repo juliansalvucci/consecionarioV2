@@ -69,6 +69,7 @@ export class VentaComponent implements OnInit {
     porcentaje: [0],
     auto: this.fb.group({
       id: [],
+      vendido: [true]
     }),
     cliente: this.fb.group({
       id: [],
