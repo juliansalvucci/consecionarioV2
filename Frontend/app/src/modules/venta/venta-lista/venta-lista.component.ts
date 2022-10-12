@@ -15,7 +15,7 @@ import { VentaComponent } from '../venta/venta.component';
 })
 export class VentaListaComponent implements OnInit {
 
-  displayedColumns: string[] = ['fecha','modelo','marca','costo','cliente'];
+  displayedColumns: string[] = ['fecha','modelo','marca','costo','precio','porcentaje','cliente'];
   dataSource!: MatTableDataSource<IGenerica>;
 
   cargando: boolean = false;

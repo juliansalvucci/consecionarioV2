@@ -32,7 +32,6 @@ public class VentaController
     @PostMapping()
     public Venta guardar(@RequestBody Venta venta)
     {
-        venta.getAuto().setVendido(true); //Establezco el auto como vendido.
         return this.service.guardar(venta);
     }
 

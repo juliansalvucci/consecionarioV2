@@ -63,7 +63,7 @@ export class VentaComponent implements OnInit {
     idModelo: [, Validators.required],
     idMarca: [, Validators.required],
     idCliente: [, Validators.required],
-    fechaVenta: [Date.now()],
+    fechaVenta: [],
     precio: ['', Validators.required],
     costo: [0],
     porcentaje: [0],
@@ -86,17 +86,26 @@ export class VentaComponent implements OnInit {
       console.log(r);
       this.registerForm.patchValue({
         id: r.id,
-        precio: r.costo,
+        precio: r.precio,
+        costo: r.costo,
+        porcentaje: r.modelo.marca.pais.categoria.porcentaje,
         idModelo: r.modelo.id,
         idMarca: r.modelo.marca.id,
       });
     });
   }
 
+
+  setFormValues(){
+    this.registerForm.value.auto.id = this.dataService.id;
+    this.registerForm.value.cliente.id = this.registerForm.value.idCliente;
+    this.registerForm.value.fechaVenta = new Date();
+  }
+
   async register() {
     try {
-      this.registerForm.value.auto.id = this.dataService.id;
-      this.registerForm.value.cliente.id = this.registerForm.value.idCliente;
+     
+      this.setFormValues();
 
       console.log(this.registerForm.value);
       this.service4.alta(this.registerForm.value).subscribe((data) => {

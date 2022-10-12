@@ -35,11 +35,11 @@
 
         <mat-form-field appearance="fill">
             <mat-label id="negrita">Precio</mat-label>
-            <input matInput formControlName="precio" readonly="true">
+            <input matInput formControlName="costo" readonly="true">
         </mat-form-field>
 
         <mat-error class="text-danger"
-          *ngIf="registerForm.get('precio')?.invalid && registerForm.get('precio')?.touched">
+          *ngIf="registerForm.get('costo')?.invalid && registerForm.get('costo')?.touched">
           El <strong>campo</strong> es requerido
         </mat-error>
 
