@@ -51,7 +51,6 @@ export class VentaComponent implements OnInit {
 
   displayModelos(id: number) {
     console.log(id);
-    //this.registerForm.value.modelo.id = id; //seteo el id del objeto modelo.
     if (!id) return '';
 
     let index = this.listaModelos.findIndex((r) => r.id === id);
@@ -61,12 +60,13 @@ export class VentaComponent implements OnInit {
 
   registerForm = this.fb.group({
     id: [0],
-    precio: ['', Validators.required],
-    costo: [0],
     idModelo: [, Validators.required],
     idMarca: [, Validators.required],
     idCliente: [, Validators.required],
     fechaVenta: [Date.now()],
+    precio: ['', Validators.required],
+    costo: [0],
+    porcentaje: [0],
     auto: this.fb.group({
       id: [],
     }),

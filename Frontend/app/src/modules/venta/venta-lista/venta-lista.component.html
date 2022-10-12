@@ -37,6 +37,11 @@
                 <td mat-cell *matCellDef="let element" class="columna"> {{element.auto?.modelo?.marca?.nombreMarca}} </td>
             </ng-container>
 
+            <ng-container matColumnDef="costo">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> Pago </th>
+                <td mat-cell *matCellDef="let element" class="columna"> {{element.costo}} </td>
+            </ng-container>
+
             <ng-container matColumnDef="cliente">
                 <th mat-header-cell mat-sort-header *matHeaderCellDef> Cliente </th>
                 <td mat-cell *matCellDef="let element" class="columna"> {{element.cliente?.nombreCliente}} </td>
