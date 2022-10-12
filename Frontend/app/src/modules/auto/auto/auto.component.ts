@@ -15,7 +15,6 @@ import { ModeloService } from 'src/services/modelo/modelo.service';
   styleUrls: ['./auto.component.css'],
 })
 export class AutoComponent implements OnInit {
-
   filterModelos!: IGenerica[];
   filterMarcas!: IGenerica[];
   listaModelos!: IGenerica[];
@@ -43,6 +42,8 @@ export class AutoComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  modelo!: IModelo;
+
   displayModelos(id: number) {
     console.log(id);
     this.registerForm.value.modelo.id = id; //seteo el id del objeto modelo.
@@ -50,17 +51,35 @@ export class AutoComponent implements OnInit {
 
     let index = this.listaModelos.findIndex((r) => r.id === id);
     console.log('index', index);
-    return this.listaModelos[index].nombreModelo;
+
+    this.modelo = this.listaModelos[index];
+
+    return this.modelo.nombreModelo;
   }
 
   registerForm = this.fb.group({
     id: [0],
     precio: ['', Validators.required],
     costo: [0],
+    vendido: [false],
     idModelo: [, Validators.required],
     idMarca: [, Validators.required],
     modelo: this.fb.group({
-      id: [],
+      id: [0],
+      nombreModelo: [''],
+      marca: this.fb.group({
+        id: [0],
+        nombreMarca: [''],
+        pais: this.fb.group({
+          id: [0],
+          nombrePais: [''],
+          categoria: this.fb.group({
+            id: [0],
+            nombreCategoria: [''],
+            porcentaje: [''],
+          }),
+        }),
+      }),
     }),
   });
 
@@ -82,16 +101,33 @@ export class AutoComponent implements OnInit {
     });
   }
 
+  setFormValues() {
+    this.registerForm.value.modelo.id = this.modelo.id;
+    this.registerForm.value.modelo.nombreModelo = this.modelo.nombreModelo;
+    this.registerForm.value.modelo.marca.id = this.modelo.marca.id;
+    this.registerForm.value.modelo.marca.nombreMarca =
+      this.modelo.marca.nombreMarca;
+    this.registerForm.value.modelo.marca.pais.id = this.modelo.marca.pais.id;
+    this.registerForm.value.modelo.marca.pais.nombrePais =
+      this.modelo.marca.pais.nombrePais;
+    this.registerForm.value.modelo.marca.pais.categoria.id =
+      this.modelo.marca.pais.categoria.id;
+    this.registerForm.value.modelo.marca.pais.categoria.nombreCategoria =
+      this.modelo.marca.pais.categoria.nombreCategoria;
+    this.registerForm.value.modelo.marca.pais.categoria.porcentaje =
+      this.modelo.marca.pais.categoria.porcentaje;
+  }
+
   async register() {
     try {
+      this.setFormValues();
+
       console.log(this.registerForm.value);
       this.service.alta(this.registerForm.value).subscribe((data) => {
-        this.service.consultaPorId(data.id).subscribe((data) => {
-          this.service.calcularCosto(data).subscribe((data) => {
-            this.dataService.object = data;
-            console.log('Registro realizado con éxito');
-            this.onNoClick();
-          });
+        this.service.calcularCosto(data).subscribe((data) => {
+          this.dataService.object = data;
+          console.log('Registro realizado con éxito');
+          this.onNoClick();
         });
       });
     } catch (e) {
@@ -112,19 +148,21 @@ export class AutoComponent implements OnInit {
     }
   }
 
-  filterModelosAux!: IGenerica[]
+  filterModelosAux!: IGenerica[];
 
   filtrarModelos() {
-    if(this.filtro == ''){
+    if (this.filtro == '') {
       this.filterModelos == this.listaModelos;
-    }else{
-      this.filterModelos = this.filterModelosAux?.filter((f) => f.nombreModelo?.toLowerCase().trim().includes(this.filtro));
+    } else {
+      this.filterModelos = this.filterModelosAux?.filter((f) =>
+        f.nombreModelo?.toLowerCase().trim().includes(this.filtro)
+      );
     }
   }
 
   obtenerModelosPorMarca(id: number) {
     if (id != null) {
-      this.filterModelosAux = this.listaModelos.filter(f => f.marca.id == id);
+      this.filterModelosAux = this.listaModelos.filter((f) => f.marca.id == id);
     }
     console.log(this.filterModelos);
   }
@@ -142,17 +180,21 @@ export class AutoComponent implements OnInit {
   }
 
   filtrarMarcas() {
-    if(this.filtro1 == ''){
+    if (this.filtro1 == '') {
       this.registerForm.get('idModelo')?.reset(); //Si el campo idMarca esta vacio, también vaciar el campo idModelo.
       this.filterMarcas = this.listaMarcas;
-    }else{
-      this.filterMarcas = this.listaMarcas?.filter((f) => f.nombreMarca?.toLowerCase().trim().includes(this.filtro1));
+    } else {
+      this.filterMarcas = this.listaMarcas?.filter((f) =>
+        f.nombreMarca?.toLowerCase().trim().includes(this.filtro1)
+      );
     }
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
+
+  marca!: IMarca;
 
   displayMarcas(id: number) {
     console.log(id);
@@ -161,7 +203,10 @@ export class AutoComponent implements OnInit {
     this.obtenerModelosPorMarca(id);
     let index = this.listaMarcas.findIndex((r) => r.id === id);
     console.log('index', index);
-    return this.listaMarcas[index].nombreMarca;
+
+    this.marca = this.listaMarcas[index];
+
+    return this.marca.nombreMarca;
   }
 }
 

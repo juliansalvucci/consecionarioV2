@@ -49,13 +49,20 @@ export class VentaComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  modelo!: IModelo;
+
   displayModelos(id: number) {
     console.log(id);
     if (!id) return '';
 
     let index = this.listaModelos.findIndex((r) => r.id === id);
     console.log('index', index);
-    return this.listaModelos[index].nombreModelo;
+
+    this.modelo = this.listaModelos[index];
+
+    console.log('PUTAZOOOOO',this.modelo)
+
+    return this.modelo.nombreModelo;
   }
 
   registerForm = this.fb.group({
@@ -68,13 +75,34 @@ export class VentaComponent implements OnInit {
     costo: [0],
     porcentaje: [0],
     auto: this.fb.group({
-      id: [],
-      vendido: [true]
+      id: [0],
+      precio: [''],
+      costo: [0],
+      vendido: [true],
+      modelo: this.fb.group({
+        id: [0],
+        nombreModelo: [''],
+        marca: this.fb.group({
+          id: [0],
+          nombreMarca: [''],
+          pais: this.fb.group({
+            id: [0],
+            nombrePais: [''],
+            categoria: this.fb.group({
+              id: [0],
+              nombreCategoria: [''],
+              porcentaje: [''],
+            }),
+          }),
+        }),
+      }),
     }),
     cliente: this.fb.group({
       id: [],
     }),
   });
+
+
 
   configurarFormulario() {
     if (this.dataService.id != 0) {
@@ -96,16 +124,25 @@ export class VentaComponent implements OnInit {
     });
   }
 
-
-  setFormValues(){
+  setFormValues() {
     this.registerForm.value.auto.id = this.dataService.id;
+    this.registerForm.value.auto.modelo.id = this.modelo.id;
+    this.registerForm.value.auto.modelo.nombreModelo = this.modelo.nombreModelo;
+    this.registerForm.value.auto.modelo.marca.id = this.modelo.marca.id;
+    this.registerForm.value.auto.modelo.marca.nombreMarca = this.modelo.marca.nombreMarca;
+    this.registerForm.value.auto.modelo.marca.pais.id = this.modelo.marca.pais.id;
+    this.registerForm.value.auto.modelo.marca.pais.nombrePais = this.modelo.marca.pais.nombrePais;
+    this.registerForm.value.auto.modelo.marca.pais.categoria.id = this.modelo.marca.pais.categoria.id;
+    this.registerForm.value.auto.modelo.marca.pais.categoria.nombreCategoria = this.modelo.marca.pais.categoria.nombreCategoria;
+    this.registerForm.value.auto.modelo.marca.pais.categoria.porcentaje = this.modelo.marca.pais.categoria.porcentaje;
+
     this.registerForm.value.cliente.id = this.registerForm.value.idCliente;
     this.registerForm.value.fechaVenta = new Date();
   }
 
   async register() {
     try {
-     
+
       this.setFormValues();
 
       console.log(this.registerForm.value);
