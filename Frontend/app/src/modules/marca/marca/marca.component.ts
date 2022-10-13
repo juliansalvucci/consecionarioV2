@@ -69,12 +69,18 @@ export class MarcaComponent implements OnInit {
     });
   }
 
+  setFormValues(){
+    this.registerForm.value.pais.id = this.pais.id;
+    this.registerForm.value.pais.nombrePais = this.pais.nombrePais;
+  }
 
   register() {
     try {
+
+      this.setFormValues();
+
       console.log(this.registerForm.value)
       this.service.alta(this.registerForm.value).subscribe((data) => {
-        data.pais.nombrePais = this.nombre
         this.dataService.object = data;
         console.log('Registro realizado con éxito');
         this.onNoClick();
@@ -102,6 +108,8 @@ export class MarcaComponent implements OnInit {
     this.filterItems = this.lista?.filter((f) => f.nombrePais?.toLowerCase().trim().includes(this.filtro));
   }
 
+  pais!: IPais
+
   displayPaises(id: number) {
     this.registerForm.value.pais.id = id;
     if (!id) return '';
@@ -109,8 +117,9 @@ export class MarcaComponent implements OnInit {
     let index = this.lista.findIndex((r) => r.id === id);
     console.log('index', index);
   
-    this.nombre = this.lista[index].nombrePais;
-    return this.nombre
+    this.pais = this.lista[index];
+
+    return this.pais.nombrePais
   }
   
 

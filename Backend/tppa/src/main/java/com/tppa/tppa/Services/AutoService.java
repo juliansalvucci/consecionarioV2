@@ -22,7 +22,8 @@ public class AutoService {
 
     public Auto guardar(Auto auto)
     {
-         return repository.save(auto);
+         Auto a = this.calcularCosto(auto);
+         return repository.save(a);
     }
 
     public Optional<Auto> obtenerPorId(Long id)
@@ -34,7 +35,6 @@ public class AutoService {
     {
         EstrategiaCostoAmericaExtranjero ecn = new EstrategiaCostoAmericaExtranjero();
         auto = ecn.calcularCosto(auto);
-        this.guardar(auto);
         return auto;
     }
 

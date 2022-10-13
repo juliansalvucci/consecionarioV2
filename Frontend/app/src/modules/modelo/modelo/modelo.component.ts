@@ -10,12 +10,11 @@ import { ModeloService } from 'src/services/modelo/modelo.service';
 @Component({
   selector: 'app-modelo',
   templateUrl: './modelo.component.html',
-  styleUrls: ['./modelo.component.css']
+  styleUrls: ['./modelo.component.css'],
 })
 export class ModeloComponent implements OnInit {
-
-  filterItems!:IGenerica[]
-  lista!:IGenerica[]
+  filterItems!: IGenerica[];
+  lista!: IGenerica[];
 
   filtro: string = '';
 
@@ -36,21 +35,23 @@ export class ModeloComponent implements OnInit {
 
   registerForm = this.fb.group({
     id: [0],
-    nombreModelo: ['',Validators.required],
-    idMarca: ['',Validators.required],
+    nombreModelo: ['', Validators.required],
+    idMarca: ['', Validators.required],
     marca: this.fb.group({
-       id: []
-    })
-    
+      id: [0],
+      nombreMarca: [''],
+      pais: this.fb.group({
+        id: [0],
+        nombrePais: [],
+      }),
+    }),
   });
-
 
   configurarFormulario() {
     if (this.dataService.id != 0) {
       this.autocompletar();
     }
   }
-
 
   autocompletar() {
     this.service.consultaPorId(this.dataService.id).subscribe((r) => {
@@ -59,22 +60,25 @@ export class ModeloComponent implements OnInit {
         id: r.id,
         nombreModelo: r.nombreModelo,
         idMarca: r.marca.id,
-        marca: ({
-          id: r.id
-        }) 
       });
     });
   }
 
+  setFormValues() {
+    this.registerForm.value.marca.id = this.marca.id;
+    this.registerForm.value.marca.nombreMarca = this.marca.nombreMarca;
+    this.registerForm.value.marca.pais.id = this.marca.pais.id;
+    this.registerForm.value.marca.pais.nombrePais = this.marca.pais.nombrePais;
+  }
 
   register() {
     try {
+      this.setFormValues();
+
       this.service.alta(this.registerForm.value).subscribe((data) => {
-        this.service.consultaPorId(data.id).subscribe((data) => {
-          this.dataService.object = data;
-          console.log('Registro realizado con éxito');
-          this.onNoClick();
-        });
+        this.dataService.object = data;
+        console.log('Registro realizado con éxito');
+        this.onNoClick();
       });
     } catch (e) {
       console.log(this.registerForm.value);
@@ -87,8 +91,8 @@ export class ModeloComponent implements OnInit {
     try {
       this.service1.consulta().subscribe((r: IGenerica[]) => {
         console.log(r);
-        this.lista = r
-        this.filterItems = r
+        this.lista = r;
+        this.filterItems = r;
       });
     } catch (e) {
       console.log(e);
@@ -96,20 +100,25 @@ export class ModeloComponent implements OnInit {
   }
 
   filtrar() {
-    this.filterItems = this.lista?.filter((f) => f.nombreMarca?.toLowerCase().trim().includes(this.filtro));
+    this.filterItems = this.lista?.filter((f) =>
+      f.nombreMarca?.toLowerCase().trim().includes(this.filtro)
+    );
   }
 
+  marca!: IMarca;
 
   displayMarca(id: number) {
-    console.log(id)
+    console.log(id);
     this.registerForm.value.marca.id = id;
     if (!id) return '';
 
     let index = this.lista.findIndex((r) => r.id === id);
     console.log('index', index);
-    return this.lista[index].nombreMarca;
+
+    this.marca = this.lista[index];
+
+    return this.marca.nombreMarca;
   }
-  
 
   onNoClick(): void {
     this.dialogRef.close();

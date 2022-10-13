@@ -124,12 +124,10 @@ export class AutoComponent implements OnInit {
 
       console.log(this.registerForm.value);
       this.service.alta(this.registerForm.value).subscribe((data) => {
-        this.service.calcularCosto(data).subscribe((data) => {
           this.dataService.object = data;
           console.log('Registro realizado con éxito');
           this.onNoClick();
         });
-      });
     } catch (e) {
       console.log(this.registerForm.value);
       console.log('modelo invalido');

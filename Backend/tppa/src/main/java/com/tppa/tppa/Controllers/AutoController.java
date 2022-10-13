@@ -36,12 +36,6 @@ public class AutoController
         return this.service.guardar(auto);
     }
 
-    @PostMapping(path = "/calcularCosto")
-    public Auto calcularCosto(@RequestBody Auto auto)
-    {    
-        return this.service.calcularCosto(auto);
-    }
-
     @GetMapping( path = "/{id}")
     public Optional<Auto> obtenerPorId(@PathVariable("id") Long id)
     {
@@ -52,6 +46,5 @@ public class AutoController
     public Boolean eliminarPorId(@PathVariable("id") Long id)
     {
         return this.service.eliminar(id);    
-    }
-    
+    } 
 }

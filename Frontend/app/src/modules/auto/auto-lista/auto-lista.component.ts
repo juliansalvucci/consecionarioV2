@@ -7,8 +7,6 @@ import { IAuto } from 'src/interfaces/IAuto';
 import { VentaComponent } from 'src/modules/venta/venta/venta.component';
 import { AutoService } from 'src/services/auto/auto.service';
 import { DataService } from 'src/services/data.service';
-import { MarcaService } from 'src/services/marca/marca.service';
-import { ModeloService } from 'src/services/modelo/modelo.service';
 import { AutoComponent } from '../auto/auto.component';
 
 @Component({
