@@ -8,3 +8,11 @@ td.mat-cell, th.mat-header-cell {
     text-align: center;
     justify-content:center;
 }
+
+.bg-danger{
+    margin-left: 5px;
+}
+
+.bg-warning{
+    margin-left: 5px;
+}

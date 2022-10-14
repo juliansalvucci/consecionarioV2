@@ -32,8 +32,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: white;
 }
 
-.bg-info:hover{
-    background-color: rgb(152, 221, 253)!important;
+.bg-secondary{
+    color: white;
+    width: 90px;
+}
+
+.bg-secondary:hover{
+    background-color: rgb(179, 179, 179)!important;
 }
 
 mat-label,th,td,h3{
@@ -44,14 +49,6 @@ table {
     width: 100%;
 }
 
-.bg-warning{
-    margin-right: 5px;
-}
-
-.bg-success{
-    margin-top: 15px;
-}
-
 .container{
     margin-top: 5px;
 }
@@ -59,5 +56,7 @@ table {
 .container-fluid{
     max-width: 80%;
 }
+
+
 
 
