@@ -73,9 +73,10 @@ public class Auto
     /////////////////////////////////////////// 
     public Auto(){}
 
-    public Auto(Double precio, Long idModelo, Modelo modelo, Boolean vendido) 
+    public Auto(Double precio,Double costo, Modelo modelo, Boolean vendido) 
     {
         this.setPrecio(precio);
+        this.setCosto(costo);
         this.setModelo(modelo);
         this.setVendido(vendido);
     }  

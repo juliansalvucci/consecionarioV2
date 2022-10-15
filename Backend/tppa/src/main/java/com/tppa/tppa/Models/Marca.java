@@ -46,9 +46,6 @@ public class Marca
         this.id = id;
     }
     
-
-    
-
     ///////////////////////////////////////////
     public Marca(){}
 

@@ -161,11 +161,8 @@ export class VentaComponent implements OnInit {
   //Función provisoria para setear el estado vendido del auto.
   async registerAuto() {
     try {
-      this.setFormValues();
-
       console.log(this.registerForm.value);
       this.service.alta(this.registerForm.value.auto).subscribe((data) => {
-          this.dataService.object = data;
           console.log('Registro realizado con éxito');
           this.onNoClick();
         });

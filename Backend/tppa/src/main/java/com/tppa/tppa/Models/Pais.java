@@ -51,8 +51,9 @@ public class Pais
     ///////////////////////////////////////////
     public Pais(){}
 
-    public Pais(String nombrePais) 
+    public Pais(String nombrePais, Categoria categoria) 
     {
         this.setNombrePais(nombrePais);
+        this.setCategoria(categoria);
     } 
 }
