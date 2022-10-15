@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tppa.tppa.Models.Auto;
 import com.tppa.tppa.Models.Venta;
 import com.tppa.tppa.Services.VentaService;
 
@@ -32,6 +33,9 @@ public class VentaController
     @PostMapping()
     public Venta guardar(@RequestBody Venta venta)
     {        
+        Auto a = venta.getAuto();
+        a.setVendido(true);
+        venta.setAuto(a);
         return this.service.guardar(venta);
     }
  

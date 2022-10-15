@@ -60,8 +60,6 @@ export class VentaComponent implements OnInit {
 
     this.modelo = this.listaModelos[index];
 
-    console.log('PUTAZOOOOO',this.modelo)
-
     return this.modelo.nombreModelo;
   }
 
@@ -148,10 +146,29 @@ export class VentaComponent implements OnInit {
 
       console.log(this.registerForm.value);
       this.service4.alta(this.registerForm.value).subscribe((data) => {
+        this.registerAuto();
         this.dataService.object = data;
         console.log('Registro realizado con éxito');
         this.onNoClick();
       });
+    } catch (e) {
+      console.log(this.registerForm.value);
+      console.log('modelo invalido');
+      this.onNoClick();
+    }
+  }
+
+  //Función provisoria para setear el estado vendido del auto.
+  async registerAuto() {
+    try {
+      this.setFormValues();
+
+      console.log(this.registerForm.value);
+      this.service.alta(this.registerForm.value.auto).subscribe((data) => {
+          this.dataService.object = data;
+          console.log('Registro realizado con éxito');
+          this.onNoClick();
+        });
     } catch (e) {
       console.log(this.registerForm.value);
       console.log('modelo invalido');
