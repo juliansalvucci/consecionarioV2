@@ -31,9 +31,10 @@ public class VentaController
 
     @PostMapping()
     public Venta guardar(@RequestBody Venta venta)
-    {
+    {        
         return this.service.guardar(venta);
     }
+ 
 
     @GetMapping( path = "/{id}")
     public Optional<Venta> obtenerPorId(@PathVariable("id") Long id)

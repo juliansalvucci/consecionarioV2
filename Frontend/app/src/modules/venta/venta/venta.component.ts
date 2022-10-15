@@ -76,9 +76,9 @@ export class VentaComponent implements OnInit {
     porcentaje: [0],
     auto: this.fb.group({
       id: [0],
-      precio: [''],
+      precio: [0],
       costo: [0],
-      vendido: [true],
+      vendido: [],
       modelo: this.fb.group({
         id: [0],
         nombreModelo: [''],
@@ -126,6 +126,7 @@ export class VentaComponent implements OnInit {
 
   setFormValues() {
     this.registerForm.value.auto.id = this.dataService.id;
+    this.registerForm.value.auto.vendido = true;
     this.registerForm.value.auto.modelo.id = this.modelo.id;
     this.registerForm.value.auto.modelo.nombreModelo = this.modelo.nombreModelo;
     this.registerForm.value.auto.modelo.marca.id = this.modelo.marca.id;

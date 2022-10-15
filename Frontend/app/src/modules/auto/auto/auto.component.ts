@@ -61,7 +61,7 @@ export class AutoComponent implements OnInit {
     id: [0],
     precio: ['', Validators.required],
     costo: [0],
-    vendido: [false],
+    vendido: [],
     idModelo: [, Validators.required],
     idMarca: [, Validators.required],
     modelo: this.fb.group({
@@ -102,6 +102,7 @@ export class AutoComponent implements OnInit {
   }
 
   setFormValues() {
+    this.registerForm.value.vendido = false;
     this.registerForm.value.modelo.id = this.modelo.id;
     this.registerForm.value.modelo.nombreModelo = this.modelo.nombreModelo;
     this.registerForm.value.modelo.marca.id = this.modelo.marca.id;
