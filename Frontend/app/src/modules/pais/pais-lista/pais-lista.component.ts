@@ -48,9 +48,9 @@ export class PaisListaComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  consultar(): void {
+ consultar() {
     try {
-      this.service.consulta().subscribe((r: IGenerica[]) => {
+     this.service.consulta().subscribe((r: IGenerica[]) => {
         console.log(r);
         this.lista = r;
         this.dataSource = new MatTableDataSource(this.lista);

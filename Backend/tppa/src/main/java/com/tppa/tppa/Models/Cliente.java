@@ -3,11 +3,14 @@ package com.tppa.tppa.Models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table (name="Cliente") 
+@Table (name="Cliente", indexes = {
+    @Index(columnList = "id",name = "idx"),
+}) 
 
 public class Cliente 
 {

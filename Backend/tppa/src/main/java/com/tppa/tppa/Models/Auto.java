@@ -1,14 +1,19 @@
 package com.tppa.tppa.Models;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table (name="auto") 
+@Table (name="auto", indexes = {
+    @Index(columnList = "id",name = "idx"),
+})
+
 public class Auto 
 {
     @Id @GeneratedValue(strategy=javax.persistence.GenerationType.AUTO)
@@ -17,7 +22,7 @@ public class Auto
     @NotNull private Double costo;
     @NotNull private Boolean vendido;
 
-    @OneToOne private Modelo modelo;
+    @OneToOne(fetch=FetchType.EAGER) private Modelo modelo;
 
     public Boolean getVendido() 
     {

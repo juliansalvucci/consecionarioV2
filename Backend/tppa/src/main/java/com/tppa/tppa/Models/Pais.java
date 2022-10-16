@@ -1,14 +1,18 @@
 package com.tppa.tppa.Models;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table (name="pais") 
+@Table (name="pais", indexes = {
+    @Index(columnList = "id",name = "idx"),
+})
 
 public class Pais 
 {
@@ -16,7 +20,7 @@ public class Pais
     private long id;     
     @NotNull private String nombrePais;
     
-    @OneToOne private Categoria categoria;
+    @OneToOne(fetch=FetchType.EAGER) private Categoria categoria;
             
     public Categoria getCategoria()
     {
