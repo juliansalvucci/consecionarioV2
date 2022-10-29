@@ -23,6 +23,17 @@ public class Auto
     @NotNull private Boolean vendido;
 
     @OneToOne(fetch=FetchType.EAGER) private Modelo modelo;
+    @OneToOne(fetch=FetchType.EAGER) private Pais pais;
+
+    public Pais getPais() 
+    {
+        return pais;
+    }
+
+    public void setPais(Pais pais) 
+    {
+        this.pais = pais;
+    }
 
     public Boolean getVendido() 
     {

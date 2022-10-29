@@ -9,7 +9,7 @@ public class EstrategiaCostoAmericaExtranjero implements IEstrategiaCosto{
 
         Double precio = auto.getPrecio();
 
-        int porcentaje = auto.getModelo().getMarca().getPais().getCategoria().getPorcentaje();
+        int porcentaje = auto.getPais().getCategoria().getPorcentaje();
 
         Double costo = precio + ((precio * porcentaje) / 100);
 

@@ -1,11 +1,9 @@
 package com.tppa.tppa.Models;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Index;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -19,17 +17,7 @@ public class Marca
     @Id @GeneratedValue(strategy=javax.persistence.GenerationType.AUTO)
     private long id;
     @NotNull private String nombreMarca;
-
-    @OneToOne(fetch=FetchType.EAGER) private Pais pais;
   
-    public Pais getPais() {
-        return pais;
-    }
-
-    public void setPais(Pais pais) {
-        this.pais = pais;
-    }
-
     public String getNombreMarca()
     {
         return nombreMarca;
@@ -56,7 +44,6 @@ public class Marca
     public Marca(String nombreMarca, Long idPais, Pais pais) 
     {
         this.setNombreMarca(nombreMarca);
-        this.setPais(pais);
     }   
 }
 
