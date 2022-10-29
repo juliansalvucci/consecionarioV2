@@ -1,5 +1,6 @@
 package com.tppa.tppa.Models.Fathers;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
@@ -18,7 +19,7 @@ public class Persona implements java.io.Serializable{
     @Id @GeneratedValue(strategy=javax.persistence.GenerationType.AUTO)
     private long id;
     @NotNull private String nombre;
-    @NotNull private String documento;
+    @Column(unique=true) @NotNull private String documento;
 
     public String getDocumento() 
     {

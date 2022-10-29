@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IMarca } from 'src/interfaces/IMarca';
 import { IModelo } from 'src/interfaces/IModelo';
+import { MarcaComponent } from 'src/modules/marca/marca/marca.component';
 import { DataService } from 'src/services/data.service';
 import { MarcaService } from 'src/services/marca/marca.service';
 import { ModeloService } from 'src/services/modelo/modelo.service';
@@ -112,6 +113,20 @@ export class ModeloComponent implements OnInit {
     this.marca = this.lista[index];
 
     return this.marca.nombreMarca;
+  }
+
+  abrirModal(id: number): void {
+    this.dataService.id = id;
+    const dialogRef = this.dialog.open(MarcaComponent, {
+      width: '450px',
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (this.dataService.object != null) {
+        this.lista = this.lista.filter((element) => element.id != id);
+        this.lista.push(this.dataService.object);
+        this.dataService.object = null;
+      }
+    });
   }
 
   onNoClick(): void {

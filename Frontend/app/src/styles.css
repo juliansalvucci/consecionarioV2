@@ -57,6 +57,9 @@ table {
     max-width: 80%;
 }
 
-
+mat-icon-button{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 
 

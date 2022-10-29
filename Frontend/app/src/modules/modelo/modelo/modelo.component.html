@@ -1,32 +1,35 @@
 <div>
     <h1 class="d-flex justify-content-between">Modelo</h1>
-    <form [formGroup]="registerForm" (ngSubmit)="register()">
+    <div [formGroup]="registerForm" (ngSubmit)="register()">
         <mat-form-field appearance="fill">
             <mat-label id="negrita">Nombre</mat-label>
             <input matInput formControlName="nombreModelo">
         </mat-form-field>
         <mat-error class="text-danger"
-          *ngIf="registerForm.get('nombreModelo')?.invalid && registerForm.get('nombreModelo')?.touched">
-          El <strong>campo</strong> es requerido
+            *ngIf="registerForm.get('nombreModelo')?.invalid && registerForm.get('nombreModelo')?.touched">
+            El <strong>campo</strong> es requerido
         </mat-error>
-        <mat-form-field appearance="fill">
-            <mat-label id="negrita">Marca</mat-label>
-            <input formControlName="idMarca" matInput type="text" [matAutocomplete]="a1" [(ngModel)]="filtro" (ngModelChange)="filtrar()" (keyup)="filtrar()"
-            (keyup.enter)="filtrar()"/>
-            <mat-autocomplete #a1="matAutocomplete" [displayWith]="displayMarca.bind(this)">
-                <mat-option *ngFor="let item of filterItems" [value]="item.id">
-                    {{item.nombreMarca}}
-                </mat-option>
-            </mat-autocomplete>
-        </mat-form-field>
+        <div class="addContainer">
+            <mat-form-field appearance="fill" class="addField">
+                <mat-label id="negrita">Marca</mat-label>
+                <input formControlName="idMarca" matInput type="text" [matAutocomplete]="a1" [(ngModel)]="filtro"
+                    (ngModelChange)="filtrar()" (keyup)="filtrar()" (keyup.enter)="filtrar()" />
+                <mat-autocomplete #a1="matAutocomplete" [displayWith]="displayMarca.bind(this)">
+                    <mat-option *ngFor="let item of filterItems" [value]="item.id">
+                        {{item.nombreMarca}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+            <button mat-button (click)="abrirModal(0)" class="addButton">
+                <img src="../../../assets/iconos/add.svg" height="30px">
+            </button>
+        </div>
         <mat-error class="text-danger"
-          *ngIf="registerForm.get('idMarca')?.invalid && registerForm.get('idMarca')?.touched">
-          El <strong>campo</strong> es requerido
+            *ngIf="registerForm.get('idMarca')?.invalid && registerForm.get('idMarca')?.touched">
+            El <strong>campo</strong> es requerido
         </mat-error>
-        <button mat-icon-button>
-            <img src="../../../assets/iconos/add.svg">
-        </button>
-    </form>
+
+    </div>
 </div>
 <button mat-raised-button class="col-3 m-auto mb-4 bg-success" (click)="register()"
     [disabled]="registerForm.invalid">Guardar</button>
