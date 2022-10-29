@@ -40,10 +40,6 @@ export class ModeloComponent implements OnInit {
     marca: this.fb.group({
       id: [0],
       nombreMarca: [''],
-      pais: this.fb.group({
-        id: [0],
-        nombrePais: [],
-      }),
     }),
   });
 
@@ -67,8 +63,6 @@ export class ModeloComponent implements OnInit {
   setFormValues() {
     this.registerForm.value.marca.id = this.marca.id;
     this.registerForm.value.marca.nombreMarca = this.marca.nombreMarca;
-    this.registerForm.value.marca.pais.id = this.marca.pais.id;
-    this.registerForm.value.marca.pais.nombrePais = this.marca.pais.nombrePais;
   }
 
   register() {

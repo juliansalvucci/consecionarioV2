@@ -39,11 +39,6 @@ export class MarcaComponent implements OnInit {
   registerForm = this.fb.group({
     id: [0],
     nombreMarca: ['',Validators.required],
-    idPais: [,Validators.required],
-    pais:  this.fb.group({
-      id:            [0],
-      nombrePais:   [],
-    }),
   });
 
 
@@ -69,16 +64,11 @@ export class MarcaComponent implements OnInit {
     });
   }
 
-  setFormValues(){
-    this.registerForm.value.pais.id = this.pais.id;
-    this.registerForm.value.pais.nombrePais = this.pais.nombrePais;
-  }
+
+
 
   register() {
     try {
-
-      this.setFormValues();
-
       console.log(this.registerForm.value)
       this.service.alta(this.registerForm.value).subscribe((data) => {
         this.dataService.object = data;

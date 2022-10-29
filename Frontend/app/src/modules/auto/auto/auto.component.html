@@ -34,6 +34,22 @@
         </mat-error>
 
         <mat-form-field appearance="fill">
+            <mat-label id="negrita">País</mat-label>
+            <input formControlName="idPais" matInput type="text" [matAutocomplete]="a3" [(ngModel)]="filtro" (ngModelChange)="filtrar()" (keyup)="filtrar()"
+            (keyup.enter)="filtrarModelos()"/>
+            <mat-autocomplete #a3="matAutocomplete" [displayWith]="displayPaises.bind(this)">
+                <mat-option *ngFor="let item of filterPaises" [value]="item.id">
+                    {{item.nombrePais}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-error class="text-danger"
+          *ngIf="registerForm.get('idPais')?.invalid && registerForm.get('idPais')?.touched">
+          El <strong>campo</strong> es requerido
+        </mat-error>
+
+        <mat-form-field appearance="fill">
             <mat-label id="negrita">Precio</mat-label>
             <input matInput formControlName="precio">
         </mat-form-field>

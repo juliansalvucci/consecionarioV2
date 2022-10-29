@@ -4,10 +4,12 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { IAuto } from 'src/interfaces/IAuto';
 import { IMarca } from 'src/interfaces/IMarca';
 import { IModelo } from 'src/interfaces/IModelo';
+import { IPais } from 'src/interfaces/IPais';
 import { AutoService } from 'src/services/auto/auto.service';
 import { DataService } from 'src/services/data.service';
 import { MarcaService } from 'src/services/marca/marca.service';
 import { ModeloService } from 'src/services/modelo/modelo.service';
+import { PaisService } from 'src/services/pais/pais.service';
 
 @Component({
   selector: 'app-auto',
@@ -31,6 +33,7 @@ export class AutoComponent implements OnInit {
     private service: AutoService,
     private service1: ModeloService,
     private service2: MarcaService,
+    private paisService: PaisService,
     private fb: FormBuilder,
     private dataService: DataService,
     public dialog: MatDialog
@@ -64,21 +67,22 @@ export class AutoComponent implements OnInit {
     vendido: [],
     idModelo: [, Validators.required],
     idMarca: [, Validators.required],
+    idPais:[, Validators.required],
     modelo: this.fb.group({
       id: [0],
       nombreModelo: [''],
       marca: this.fb.group({
         id: [0],
         nombreMarca: [''],
-        pais: this.fb.group({
-          id: [0],
-          nombrePais: [''],
-          categoria: this.fb.group({
-            id: [0],
-            nombreCategoria: [''],
-            porcentaje: [''],
-          }),
-        }),
+      }),
+    }),
+    pais: this.fb.group({
+      id: [0],
+      nombrePais: [''],
+      categoria: this.fb.group({
+        id: [0],
+        nombreCategoria: [''],
+        porcentaje: [''],
       }),
     }),
   });
@@ -106,17 +110,12 @@ export class AutoComponent implements OnInit {
     this.registerForm.value.modelo.id = this.modelo.id;
     this.registerForm.value.modelo.nombreModelo = this.modelo.nombreModelo;
     this.registerForm.value.modelo.marca.id = this.modelo.marca.id;
-    this.registerForm.value.modelo.marca.nombreMarca =
-      this.modelo.marca.nombreMarca;
-    this.registerForm.value.modelo.marca.pais.id = this.modelo.marca.pais.id;
-    this.registerForm.value.modelo.marca.pais.nombrePais =
-      this.modelo.marca.pais.nombrePais;
-    this.registerForm.value.modelo.marca.pais.categoria.id =
-      this.modelo.marca.pais.categoria.id;
-    this.registerForm.value.modelo.marca.pais.categoria.nombreCategoria =
-      this.modelo.marca.pais.categoria.nombreCategoria;
-    this.registerForm.value.modelo.marca.pais.categoria.porcentaje =
-      this.modelo.marca.pais.categoria.porcentaje;
+    this.registerForm.value.modelo.marca.nombreMarca = this.modelo.marca.nombreMarca;
+    this.registerForm.value.pais.id = this.pais.id;
+    this.registerForm.value.pais.nombrePais = this.pais.nombrePais;
+    this.registerForm.value.pais.categoria.id = this.pais.categoria.id;
+    this.registerForm.value.pais.categoria.nombreCategoria = this.pais.categoria.nombreCategoria;
+    this.registerForm.value.pais.categoria.porcentaje = this.pais.categoria.porcentaje;
   }
 
   async register() {
@@ -207,6 +206,42 @@ export class AutoComponent implements OnInit {
 
     return this.marca.nombreMarca;
   }
+
+
+  listaPaises!: IPais[];
+  filterPaises!: IPais[];
+
+  consultarPaises(){
+    try  {
+      this.paisService.consulta().subscribe((r: IGenerica[]) => {
+        console.log('Países',r);
+        this.listaPaises = r
+        this.filterPaises = this.listaPaises
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  
+  filtrar() {
+    this.filterPaises = this.listaPaises?.filter((f) => f.nombrePais?.toLowerCase().trim().includes(this.filtro));
+  }
+  
+  pais!: IPais
+  
+  displayPaises(id: number) {
+    this.registerForm.value.pais.id = id;
+    if (!id) return '';
+  
+    let index = this.listaPaises.findIndex((r) => r.id === id);
+    console.log('index', index);
+  
+    this.pais = this.listaPaises[index];
+  
+    return this.pais.nombrePais
+  }
+
 }
 
-export interface IGenerica extends IMarca, IModelo, IAuto{}
+
+export interface IGenerica extends IMarca, IModelo, IAuto, IPais{}

@@ -15,7 +15,7 @@ import { MarcaComponent } from '../marca/marca.component';
 })
 export class MarcaListaComponent implements OnInit {
 
-  displayedColumns: string[] = ['nombre','pais', 'acciones'];
+  displayedColumns: string[] = ['nombre', 'acciones'];
   dataSource!: MatTableDataSource<IGenerica>;
 
   cargando: boolean = false;
