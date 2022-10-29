@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { IPais } from 'src/interfaces/IPais';
 import { DataService } from 'src/services/data.service';
 import { PaisService } from 'src/services/pais/pais.service';
+import { sweetalert } from 'src/utils/utils';
 import { PaisComponent } from '../pais/pais.component';
 
 
@@ -81,6 +82,8 @@ export class PaisListaComponent implements OnInit {
   }
 
   eliminar(id: number) {
+    sweetalert.Toast.fire()
+    sweetalert.Alert("TE ROMPO EL CULO","CON MI PIJA")
     try {
       this.service.baja(id).subscribe((r) => {
         if (r) {

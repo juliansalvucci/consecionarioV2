@@ -1,5 +1,5 @@
 import { FormControl, FormGroup } from "@angular/forms";
-import Swal, { SweetAlertIcon, SweetAlertResult } from "sweetalert2";
+import Swal, { SweetAlertCustomClass, SweetAlertIcon, SweetAlertOptions, SweetAlertResult } from "sweetalert2";
 import swal from 'sweetalert2';
 
 export const pattern = {
@@ -26,7 +26,7 @@ export interface IInputResponse{
 }
 
 export const sweetalert = {
-    Toast : Swal.mixin({ //Declaro el mixin de sweet alert 2
+    Toast: Swal.mixin({ //Declaro el mixin de sweet alert 2
         toast: true,
         position: 'top-end',
         showConfirmButton: false,

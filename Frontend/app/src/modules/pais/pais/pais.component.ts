@@ -6,6 +6,7 @@ import { IPais } from 'src/interfaces/IPais';
 import { CategoriaService } from 'src/services/categoria/categoria.service';
 import { DataService } from 'src/services/data.service';
 import { PaisService } from 'src/services/pais/pais.service';
+import { sweetalert } from 'src/utils/utils';
 
 @Component({
   selector: 'app-pais',
@@ -68,12 +69,12 @@ export class PaisComponent implements OnInit {
 
   register() {
     try {
-      
       this.setFormValues();
 
       this.service.alta(this.registerForm.value).subscribe((data) => {
         this.dataService.object = data;
         console.log('Registro realizado con éxito');
+        sweetalert.success()
         this.onNoClick();
       });
     } catch (e) {
