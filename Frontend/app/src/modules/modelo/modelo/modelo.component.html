@@ -23,6 +23,9 @@
           *ngIf="registerForm.get('idMarca')?.invalid && registerForm.get('idMarca')?.touched">
           El <strong>campo</strong> es requerido
         </mat-error>
+        <button mat-icon-button>
+            <img src="../../../assets/iconos/add.svg">
+        </button>
     </form>
 </div>
 <button mat-raised-button class="col-3 m-auto mb-4 bg-success" (click)="register()"

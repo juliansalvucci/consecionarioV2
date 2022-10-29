@@ -30,7 +30,6 @@ export class MarcaComponent implements OnInit {
     private dataService: DataService,
     public dialog: MatDialog
   ) {
-    this.consultarPaises();
     this.configurarFormulario();
   }
 
@@ -64,9 +63,6 @@ export class MarcaComponent implements OnInit {
     });
   }
 
-
-
-
   register() {
     try {
       console.log(this.registerForm.value)
@@ -81,37 +77,6 @@ export class MarcaComponent implements OnInit {
       this.onNoClick();
     }
   }
-
-  consultarPaises(){
-    try  {
-      this.service1.consulta().subscribe((r: IGenerica[]) => {
-        console.log('Países',r);
-        this.lista = r
-        this.filterItems = this.lista
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  filtrar() {
-    this.filterItems = this.lista?.filter((f) => f.nombrePais?.toLowerCase().trim().includes(this.filtro));
-  }
-
-  pais!: IPais
-
-  displayPaises(id: number) {
-    this.registerForm.value.pais.id = id;
-    if (!id) return '';
-
-    let index = this.lista.findIndex((r) => r.id === id);
-    console.log('index', index);
-  
-    this.pais = this.lista[index];
-
-    return this.pais.nombrePais
-  }
-  
 
   onNoClick(): void {
     this.dialogRef.close();

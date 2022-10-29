@@ -35,7 +35,7 @@
 
         <mat-form-field appearance="fill">
             <mat-label id="negrita">País</mat-label>
-            <input formControlName="idPais" matInput type="text" [matAutocomplete]="a3" [(ngModel)]="filtro" (ngModelChange)="filtrar()" (keyup)="filtrar()"
+            <input formControlName="idPais" matInput type="text" [matAutocomplete]="a3" [(ngModel)]="filtro" (ngModelChange)="filtrarPaises()" (keyup)="filtrarPaises()"
             (keyup.enter)="filtrarModelos()"/>
             <mat-autocomplete #a3="matAutocomplete" [displayWith]="displayPaises.bind(this)">
                 <mat-option *ngFor="let item of filterPaises" [value]="item.id">

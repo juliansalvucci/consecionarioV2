@@ -223,7 +223,7 @@ export class AutoComponent implements OnInit {
     }
   }
   
-  filtrar() {
+  filtrarPaises() {
     this.filterPaises = this.listaPaises?.filter((f) => f.nombrePais?.toLowerCase().trim().includes(this.filtro));
   }
   
