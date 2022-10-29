@@ -43,6 +43,10 @@
           El <strong>campo</strong> es requerido
         </mat-error>
 
+        <mat-error *ngIf="registerForm.get('precio')?.hasError('pattern')">
+            <p><strong>Campo numérico</strong></p>
+        </mat-error>
+
     </form>
 </div>
 <button mat-raised-button class="col-3 m-auto mb-4 bg-success" (click)="register()"

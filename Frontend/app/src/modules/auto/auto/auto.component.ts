@@ -59,8 +59,8 @@ export class AutoComponent implements OnInit {
 
   registerForm = this.fb.group({
     id: [0],
-    precio: ['', Validators.required],
-    costo: [0],
+    precio: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/) ]],
+    costo: [0,[Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
     vendido: [],
     idModelo: [, Validators.required],
     idMarca: [, Validators.required],

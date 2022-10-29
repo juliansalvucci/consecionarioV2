@@ -1,48 +1,20 @@
 package com.tppa.tppa.Models;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Index;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+
+import com.tppa.tppa.Models.Fathers.Persona;
 
 @Entity
-@Table (name="Cliente", indexes = {
-    @Index(columnList = "id",name = "idx"),
-}) 
-
-public class Cliente 
+@DiscriminatorValue(value = "cliente")
+public class Cliente extends Persona
 {
-    @Id @GeneratedValue(strategy=javax.persistence.GenerationType.AUTO)
-    private long id;
-    @NotNull private String nombreCliente;
-            
-    public String getNombreCliente()
-    {
-        return nombreCliente;
-    }
-
-    public void setNombreCliente(String nombreCliente) 
-    {
-        this.nombreCliente = nombreCliente;
-    }
-
-    public long getId() 
-    {
-        return id;
-    }
-
-    public void setId(long id) 
-    {
-        this.id = id;
-    }
-
     ///////////////////////////////////////////
     public Cliente(){}
 
-    public Cliente(String nombreCliente) 
+    public Cliente(String nombre, String documento) 
     {
-        this.setNombreCliente(nombreCliente);
+        this.setNombre(nombre);
+        this.setDocumento(documento);
     } 
 }
