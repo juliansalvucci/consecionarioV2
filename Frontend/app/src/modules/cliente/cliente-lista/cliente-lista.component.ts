@@ -15,7 +15,7 @@ import { ClienteComponent } from '../cliente/cliente.component';
 })
 export class ClienteListaComponent implements OnInit {
 
-  displayedColumns: string[] = ['nombre', 'acciones'];
+  displayedColumns: string[] = ['apellido','nombre','documento','acciones'];
   dataSource!: MatTableDataSource<IGenerica>;
 
   cargando: boolean = false;
@@ -99,7 +99,7 @@ export class ClienteListaComponent implements OnInit {
       this.listaFiltro = this.lista;
     } else {
       this.listaFiltro = this.lista?.filter((f) =>
-        f.nombreCliente
+        f.nombre
           ?.toLowerCase()
           .trim()
           .includes(this.filtro.toLocaleLowerCase())

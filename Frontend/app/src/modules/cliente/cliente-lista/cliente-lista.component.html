@@ -19,10 +19,20 @@
 
     <div class="mat-elevation-z8">
         <table mat-table matSort [dataSource]="dataSource">
+
+            <ng-container matColumnDef="apellido">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> Apellido </th>
+                <td mat-cell *matCellDef="let element" class="columna"> {{element.apellido}} </td>
+            </ng-container>
       
             <ng-container matColumnDef="nombre">
-                <th mat-header-cell mat-sort-header *matHeaderCellDef> Nombre de cliente </th>
-                <td mat-cell *matCellDef="let element" class="columna"> {{element.nombreCliente}} </td>
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> Nombre </th>
+                <td mat-cell *matCellDef="let element" class="columna"> {{element.nombre}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="documento">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> Documento </th>
+                <td mat-cell *matCellDef="let element" class="columna"> {{element.documento}} </td>
             </ng-container>
     
             <ng-container matColumnDef="acciones">

@@ -80,7 +80,7 @@ export class VentaListaComponent implements OnInit {
     if (this.filtro == '') {
       this.listaFiltro = this.lista;
     } else {
-      this.listaFiltro = this.lista?.filter((f) => f.cliente.nombreCliente?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase())
+      this.listaFiltro = this.lista?.filter((f) => f.cliente.nombre?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase())
                                                 || f.auto?.modelo?.nombreModelo?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase())
                                                 || f.auto?.modelo?.marca?.nombreMarca?.toLowerCase().trim().includes(this.filtro.toLowerCase()));
     }

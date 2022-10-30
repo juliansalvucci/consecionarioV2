@@ -19,7 +19,17 @@ public class Persona implements java.io.Serializable{
     @Id @GeneratedValue(strategy=javax.persistence.GenerationType.AUTO)
     private long id;
     @NotNull private String nombre;
+    @NotNull private String apellido;
     @Column(unique=true) @NotNull private String documento;
+
+    public String getApellido()
+    {
+        return apellido;
+    }
+    public void setApellido(String apellido)
+    {
+        this.apellido = apellido;
+    }
 
     public String getDocumento() 
     {

@@ -1,4 +1,5 @@
 export interface ICliente {
-    id:            number;
-    nombreCliente: string;
+    id:        number;
+    nombre:    string;
+    documento: string;
 }

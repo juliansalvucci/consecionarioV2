@@ -28,6 +28,7 @@ export class VentaComponent implements OnInit {
   filtro: string = '';
   filtro1: string = '';
   filtro3: string = '';
+  filtro4: string = '';
 
   idModelo: number = 0;
 
@@ -47,6 +48,7 @@ export class VentaComponent implements OnInit {
     this.consultarClientes();
     this.consultarMarcas();
     this.consultarModelos();
+    this.consultarPaises();
     this.configurarFormulario();
   }
 
@@ -70,6 +72,7 @@ export class VentaComponent implements OnInit {
     id: [0],
     idModelo: [, Validators.required],
     idMarca: [, Validators.required],
+    idPais: [, Validators.required],
     idCliente: [, Validators.required],
     fechaVenta: [],
     precio: ['', Validators.required],
@@ -80,9 +83,6 @@ export class VentaComponent implements OnInit {
       precio: [0,[Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       costo: [0, [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       vendido: [],
-      idModelo: [, Validators.required],
-      idMarca: [, Validators.required],
-      idPais: [, Validators.required],
       modelo: this.fb.group({
         id: [0],
         nombreModelo: [''],
@@ -103,6 +103,9 @@ export class VentaComponent implements OnInit {
     }),
     cliente: this.fb.group({
       id: [],
+      nombre: [],
+      apellido: [],
+      documento:[]
     }),
   });
 
@@ -119,9 +122,10 @@ export class VentaComponent implements OnInit {
         id: r.id,
         precio: r.precio,
         costo: r.costo,
-        porcentaje: r.modelo.marca.pais.categoria.porcentaje,
+        porcentaje: r.pais.categoria.porcentaje,
         idModelo: r.modelo.id,
         idMarca: r.modelo.marca.id,
+        idPais: r.pais.id
       });
     });
   }
@@ -262,7 +266,7 @@ export class VentaComponent implements OnInit {
       this.filterClientes = this.listaClientes;
     } else {
       this.filterClientes = this.listaClientes?.filter((f) =>
-        f.nombreCliente?.toLowerCase().trim().includes(this.filtro3)
+        f.nombre?.toLowerCase().trim().includes(this.filtro3)
       );
     }
   }
@@ -274,7 +278,7 @@ export class VentaComponent implements OnInit {
     this.obtenerModelosPorMarca(id);
     let index = this.listaClientes.findIndex((r) => r.id === id);
     console.log('index', index);
-    return this.listaClientes[index].nombreCliente;
+    return this.listaClientes[index].nombre;
   }
 
   listaPaises!: IPais[];
@@ -293,7 +297,7 @@ export class VentaComponent implements OnInit {
   }
   
   filtrarPaises() {
-    this.filterPaises = this.listaPaises?.filter((f) => f.nombrePais?.toLowerCase().trim().includes(this.filtro3));
+    this.filterPaises = this.listaPaises?.filter((f) => f.nombrePais?.toLowerCase().trim().includes(this.filtro4));
   }
   
   pais!: IPais

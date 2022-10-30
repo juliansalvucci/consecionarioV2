@@ -3,11 +3,31 @@
     <form [formGroup]="registerForm" (ngSubmit)="register()">
         <mat-form-field appearance="fill">
             <mat-label id="negrita">Nombre</mat-label>
-            <input matInput formControlName="nombreCliente">
+            <input matInput formControlName="nombre">
         </mat-form-field>
 
         <mat-error class="text-danger"
-          *ngIf="registerForm.get('nombreCliente')?.invalid && registerForm.get('nombreCliente')?.touched">
+          *ngIf="registerForm.get('nombre')?.invalid && registerForm.get('nombre')?.touched">
+          El <strong>campo</strong> es requerido
+        </mat-error>
+
+        <mat-form-field appearance="fill">
+            <mat-label id="negrita">Apellido</mat-label>
+            <input matInput formControlName="apellido">
+        </mat-form-field>
+
+        <mat-error class="text-danger"
+          *ngIf="registerForm.get('apellido')?.invalid && registerForm.get('apellido')?.touched">
+          El <strong>campo</strong> es requerido
+        </mat-error>
+
+        <mat-form-field appearance="fill">
+            <mat-label id="negrita">Documento</mat-label>
+            <input matInput formControlName="documento">
+        </mat-form-field>
+
+        <mat-error class="text-danger"
+          *ngIf="registerForm.get('documento')?.invalid && registerForm.get('documento')?.touched">
           El <strong>campo</strong> es requerido
         </mat-error>
     </form>

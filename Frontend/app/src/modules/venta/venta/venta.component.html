@@ -4,7 +4,7 @@
         <mat-form-field appearance="fill">
             <mat-label id="negrita">Marca</mat-label>
             <input formControlName="idMarca" matInput type="text" [matAutocomplete]="a2" [(ngModel)]="filtro1" (ngModelChange)="filtrarMarcas()" (keyup)="filtrarMarcas()"
-            (keyup.enter)="filtrarModelos()" readonly="true"/>
+            (keyup.enter)="filtrarMarcas()" readonly="true"/>
             <mat-autocomplete #a2="matAutocomplete" [displayWith]="displayMarcas.bind(this)">
                 <mat-option *ngFor="let item of filterMarcas" [value]="item.id">
                     {{item.nombreMarca}}
@@ -34,6 +34,22 @@
         </mat-error>
 
         <mat-form-field appearance="fill">
+            <mat-label id="negrita">País</mat-label>
+            <input formControlName="idPais" matInput type="text" [matAutocomplete]="a3" [(ngModel)]="filtro3" (ngModelChange)="filtrarPaises()" (keyup)="filtrarPaises()"
+            (keyup.enter)="filtrarPaises()" readonly="true"/>
+            <mat-autocomplete #a3="matAutocomplete" [displayWith]="displayPaises.bind(this)">
+                <mat-option *ngFor="let item of filterPaises" [value]="item.id">
+                    {{item.nombrePais}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-error class="text-danger"
+          *ngIf="registerForm.get('idPais')?.invalid && registerForm.get('idPais')?.touched">
+          El <strong>campo</strong> es requerido
+        </mat-error>
+
+        <mat-form-field appearance="fill">
             <mat-label id="negrita">Precio</mat-label>
             <input matInput formControlName="costo" readonly="true">
         </mat-form-field>
@@ -45,11 +61,11 @@
 
         <mat-form-field appearance="fill">
             <mat-label id="negrita">Cliente</mat-label>
-            <input formControlName="idCliente" matInput type="text" [matAutocomplete]="a3" [(ngModel)]="filtro3" (ngModelChange)="filtrarClientes()" (keyup)="filtrarClientes()"
+            <input formControlName="idCliente" matInput type="text" [matAutocomplete]="a4" [(ngModel)]="filtro4" (ngModelChange)="filtrarClientes()" (keyup)="filtrarClientes()"
             (keyup.enter)="filtrarClientes()"/>
-            <mat-autocomplete #a3="matAutocomplete" [displayWith]="displayClientes.bind(this)">
+            <mat-autocomplete #a4="matAutocomplete" [displayWith]="displayClientes.bind(this)">
                 <mat-option *ngFor="let item of filterClientes" [value]="item.id">
-                    {{item.nombreCliente}}
+                    {{item.nombre}}
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
@@ -58,6 +74,24 @@
           *ngIf="registerForm.get('idCliente')?.invalid && registerForm.get('idCliente')?.touched">
           El <strong>campo</strong> es requerido
         </mat-error>
+
+        <!--
+        <mat-form-field appearance="fill">
+            <mat-label id="negrita">Cliente</mat-label>
+            <input formControlName="documento" matInput type="text" [matAutocomplete]="a4" [(ngModel)]="filtro4" (ngModelChange)="filtrarClientes()" (keyup)="filtrarClientes()"
+            (keyup.enter)="filtrarClientes()"/>
+            <mat-autocomplete #a4="matAutocomplete" [displayWith]="displayClientes.bind(this)">
+                <mat-option *ngFor="let item of filterClientes" [value]="item.id">
+                    {{item.nombre}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-error class="text-danger"
+          *ngIf="registerForm.get('documento')?.invalid && registerForm.get('documento')?.touched">
+          El <strong>campo</strong> es requerido
+        </mat-error>
+        -->
 
     </form>
 </div>

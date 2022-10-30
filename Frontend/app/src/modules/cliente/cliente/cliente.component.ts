@@ -28,7 +28,9 @@ export class ClienteComponent implements OnInit {
 
   registerForm = this.fb.group({
     id: [0],
-    nombreCliente: ['',Validators.required],
+    nombre: ['',Validators.required],
+    apellido: ['',Validators.required],
+    documento: ['',Validators.required],
   });
 
 
@@ -44,7 +46,9 @@ export class ClienteComponent implements OnInit {
       console.log(r);
       this.registerForm.patchValue({
         id: r.id,
-        nombreCliente: r.nombreCliente,
+        nombre: r.nombre,
+        apellido: r.apellido,
+        documento: r.documento
       });
     });
   }
