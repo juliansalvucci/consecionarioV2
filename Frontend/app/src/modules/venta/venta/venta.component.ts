@@ -5,11 +5,13 @@ import { IAuto } from 'src/interfaces/IAuto';
 import { ICliente } from 'src/interfaces/ICliente';
 import { IMarca } from 'src/interfaces/IMarca';
 import { IModelo } from 'src/interfaces/IModelo';
+import { IPais } from 'src/interfaces/IPais';
 import { AutoService } from 'src/services/auto/auto.service';
 import { ClienteService } from 'src/services/cliente/cliente.service';
 import { DataService } from 'src/services/data.service';
 import { MarcaService } from 'src/services/marca/marca.service';
 import { ModeloService } from 'src/services/modelo/modelo.service';
+import { PaisService } from 'src/services/pais/pais.service';
 import { VentaService } from 'src/services/venta/venta.service';
 
 @Component({
@@ -39,6 +41,7 @@ export class VentaComponent implements OnInit {
     private service4: VentaService,
     private fb: FormBuilder,
     private dataService: DataService,
+    private paisService: PaisService,
     public dialog: MatDialog
   ) {
     this.consultarClientes();
@@ -74,24 +77,27 @@ export class VentaComponent implements OnInit {
     porcentaje: [0],
     auto: this.fb.group({
       id: [0],
-      precio: [0],
-      costo: [0],
+      precio: [0,[Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      costo: [0, [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       vendido: [],
+      idModelo: [, Validators.required],
+      idMarca: [, Validators.required],
+      idPais: [, Validators.required],
       modelo: this.fb.group({
         id: [0],
         nombreModelo: [''],
         marca: this.fb.group({
           id: [0],
           nombreMarca: [''],
-          pais: this.fb.group({
-            id: [0],
-            nombrePais: [''],
-            categoria: this.fb.group({
-              id: [0],
-              nombreCategoria: [''],
-              porcentaje: [''],
-            }),
-          }),
+        }),
+      }),
+      pais: this.fb.group({
+        id: [0],
+        nombrePais: [''],
+        categoria: this.fb.group({
+          id: [0],
+          nombreCategoria: [''],
+          porcentaje: [''],
         }),
       }),
     }),
@@ -99,8 +105,6 @@ export class VentaComponent implements OnInit {
       id: [],
     }),
   });
-
-
 
   configurarFormulario() {
     if (this.dataService.id != 0) {
@@ -129,11 +133,11 @@ export class VentaComponent implements OnInit {
     this.registerForm.value.auto.modelo.nombreModelo = this.modelo.nombreModelo;
     this.registerForm.value.auto.modelo.marca.id = this.modelo.marca.id;
     this.registerForm.value.auto.modelo.marca.nombreMarca = this.modelo.marca.nombreMarca;
-    //this.registerForm.value.pais.id = this.pais.id;
-    //this.registerForm.value.auto.modelo.marca.pais.nombrePais = this.modelo.marca.pais.nombrePais;
-    //this.registerForm.value.auto.modelo.marca.pais.categoria.id = this.modelo.marca.pais.categoria.id;
-    //this.registerForm.value.auto.modelo.marca.pais.categoria.nombreCategoria = this.modelo.marca.pais.categoria.nombreCategoria;
-    //this.registerForm.value.auto.modelo.marca.pais.categoria.porcentaje = this.modelo.marca.pais.categoria.porcentaje;
+    this.registerForm.value.auto.pais.id = this.pais.id;
+    this.registerForm.value.auto.pais.nombrePais = this.pais.nombrePais;
+    this.registerForm.value.auto.pais.categoria.id = this.pais.categoria.id;
+    this.registerForm.value.auto.pais.categoria.nombreCategoria = this.pais.categoria.nombreCategoria;
+    this.registerForm.value.auto.pais.categoria.porcentaje = this.pais.categoria.porcentaje;
 
     this.registerForm.value.cliente.id = this.registerForm.value.idCliente;
     this.registerForm.value.fechaVenta = new Date();
@@ -141,7 +145,6 @@ export class VentaComponent implements OnInit {
 
   async register() {
     try {
-
       this.setFormValues();
 
       console.log(this.registerForm.value);
@@ -163,9 +166,9 @@ export class VentaComponent implements OnInit {
     try {
       console.log(this.registerForm.value);
       this.service.alta(this.registerForm.value.auto).subscribe((data) => {
-          console.log('Registro realizado con éxito');
-          this.onNoClick();
-        });
+        console.log('Registro realizado con éxito');
+        this.onNoClick();
+      });
     } catch (e) {
       console.log(this.registerForm.value);
       console.log('modelo invalido');
@@ -273,6 +276,38 @@ export class VentaComponent implements OnInit {
     console.log('index', index);
     return this.listaClientes[index].nombreCliente;
   }
+
+  listaPaises!: IPais[];
+  filterPaises!: IPais[];
+
+  consultarPaises(){
+    try  {
+      this.paisService.consulta().subscribe((r: IGenerica[]) => {
+        console.log('Países',r);
+        this.listaPaises = r
+        this.filterPaises = this.listaPaises
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  
+  filtrarPaises() {
+    this.filterPaises = this.listaPaises?.filter((f) => f.nombrePais?.toLowerCase().trim().includes(this.filtro3));
+  }
+  
+  pais!: IPais
+  
+  displayPaises(id: number) {
+    if (!id) return '';
+  
+    let index = this.listaPaises.findIndex((r) => r.id === id);
+    console.log('index', index);
+  
+    this.pais = this.listaPaises[index];
+  
+    return this.pais.nombrePais
+  }
 }
 
-export interface IGenerica extends IMarca, IModelo, IAuto,ICliente{}
+export interface IGenerica extends IMarca, IModelo, IAuto,ICliente, IPais{}
