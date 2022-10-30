@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import {MatDialog,MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ICategoria } from 'src/interfaces/ICategoria';
 import { IPais } from 'src/interfaces/IPais';
+import { CategoriaComponent } from 'src/modules/categoria/categoria/categoria.component';
 import { CategoriaService } from 'src/services/categoria/categoria.service';
 import { DataService } from 'src/services/data.service';
 import { PaisService } from 'src/services/pais/pais.service';
@@ -120,6 +121,20 @@ export class PaisComponent implements OnInit {
     this.categoria = this.lista[index];
 
     return this.categoria.nombreCategoria;
+  }
+
+  abrirModal(id: number): void {
+    this.dataService.id = id;
+    const dialogRef = this.dialog.open(CategoriaComponent, {
+      width: '450px',
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (this.dataService.object != null) {
+        this.lista = this.lista.filter((element) => element.id != id);
+        this.lista.push(this.dataService.object);
+        this.dataService.object = null;
+      }
+    });
   }
 }
 

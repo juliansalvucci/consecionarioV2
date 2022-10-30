@@ -9,8 +9,7 @@
             *ngIf="registerForm.get('nombreModelo')?.invalid && registerForm.get('nombreModelo')?.touched">
             El <strong>campo</strong> es requerido
         </mat-error>
-        <div class="addContainer">
-            <mat-form-field appearance="fill" class="addField">
+            <mat-form-field appearance="fill">
                 <mat-label id="negrita">Marca</mat-label>
                 <input formControlName="idMarca" matInput type="text" [matAutocomplete]="a1" [(ngModel)]="filtro"
                     (ngModelChange)="filtrar()" (keyup)="filtrar()" (keyup.enter)="filtrar()" />
@@ -19,10 +18,8 @@
                         {{item.nombreMarca}}
                     </mat-option>
                 </mat-autocomplete>
+                <mat-icon matSuffix (click)="abrirModal(0)"><img src="../../../assets/iconos/add.svg" height="30px" style="margin-bottom: 15px;"></mat-icon>
             </mat-form-field>
-            <button mat-button (click)="abrirModal(0)" class="addButton">
-                <img src="../../../assets/iconos/add.svg" height="30px">
-            </button>
         </div>
         <mat-error class="text-danger"
             *ngIf="registerForm.get('idMarca')?.invalid && registerForm.get('idMarca')?.touched">
@@ -30,6 +27,5 @@
         </mat-error>
 
     </div>
-</div>
 <button mat-raised-button class="col-3 m-auto mb-4 bg-success" (click)="register()"
     [disabled]="registerForm.invalid">Guardar</button>

@@ -3,15 +3,3 @@ mat-form-field,button{
 }
 
 
-.addContainer{
-    display: flex;
-}
-
-.addButton{
-    width: 10%;
-    height: 57px;
-}
-
-.addField{
-    width: 90%;
-}

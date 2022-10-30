@@ -25,7 +25,6 @@ export class MarcaComponent implements OnInit {
     public dialogRef: MatDialogRef<IGenerica>,
     @Inject(MAT_DIALOG_DATA) public data: IGenerica,
     private service: MarcaService,
-    private service1: PaisService,
     private fb: FormBuilder,
     private dataService: DataService,
     public dialog: MatDialog
@@ -54,11 +53,6 @@ export class MarcaComponent implements OnInit {
       this.registerForm.patchValue({
         id: r.id,
         nombreMarca: r.nombreMarca,
-        idPais: r.pais.id,
-        pais: ({
-          id: r.id,
-          nombrePais: r.nombrePais
-        })
       });
     });
   }
