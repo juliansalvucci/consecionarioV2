@@ -21,8 +21,13 @@
     <div class="mat-elevation-z8">
         <table mat-table matSort [dataSource]="dataSource">
       
-            <ng-container matColumnDef="nombre">
+            <ng-container matColumnDef="precio">
                 <th mat-header-cell mat-sort-header *matHeaderCellDef> Precio </th>
+                <td mat-cell *matCellDef="let element" class="columna"> ${{element.precio}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="costo">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> Costo </th>
                 <td mat-cell *matCellDef="let element" class="columna"> ${{element.costo}} </td>
             </ng-container>
 
@@ -38,7 +43,7 @@
 
             <ng-container matColumnDef="pais">
                 <th mat-header-cell mat-sort-header *matHeaderCellDef> País </th>
-                <td mat-cell *matCellDef="let element" class="columna"> {{element.modelo?.marca?.pais?.nombrePais}} </td>
+                <td mat-cell *matCellDef="let element" class="columna"> {{element.pais?.nombrePais}} </td>
             </ng-container>
     
             <ng-container matColumnDef="acciones">

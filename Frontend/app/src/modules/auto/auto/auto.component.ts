@@ -102,6 +102,7 @@ export class AutoComponent implements OnInit {
         precio: r.precio,
         idModelo: r.modelo.id,
         idMarca: r.modelo.marca.id,
+        idPais: r.pais.id
       });
     });
   }

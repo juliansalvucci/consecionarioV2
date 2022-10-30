@@ -16,7 +16,7 @@ import { AutoComponent } from '../auto/auto.component';
 })
 export class AutoListaComponent implements OnInit {
 
-  displayedColumns: string[] = ['nombre','modelo','marca','pais','acciones'];
+  displayedColumns: string[] = ['precio','costo','modelo','marca','pais','acciones'];
   dataSource!: MatTableDataSource<IGenerica>;
 
   cargando: boolean = false;
