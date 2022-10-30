@@ -129,11 +129,11 @@ export class VentaComponent implements OnInit {
     this.registerForm.value.auto.modelo.nombreModelo = this.modelo.nombreModelo;
     this.registerForm.value.auto.modelo.marca.id = this.modelo.marca.id;
     this.registerForm.value.auto.modelo.marca.nombreMarca = this.modelo.marca.nombreMarca;
-    this.registerForm.value.auto.modelo.marca.pais.id = this.modelo.marca.pais.id;
-    this.registerForm.value.auto.modelo.marca.pais.nombrePais = this.modelo.marca.pais.nombrePais;
-    this.registerForm.value.auto.modelo.marca.pais.categoria.id = this.modelo.marca.pais.categoria.id;
-    this.registerForm.value.auto.modelo.marca.pais.categoria.nombreCategoria = this.modelo.marca.pais.categoria.nombreCategoria;
-    this.registerForm.value.auto.modelo.marca.pais.categoria.porcentaje = this.modelo.marca.pais.categoria.porcentaje;
+    //this.registerForm.value.pais.id = this.pais.id;
+    //this.registerForm.value.auto.modelo.marca.pais.nombrePais = this.modelo.marca.pais.nombrePais;
+    //this.registerForm.value.auto.modelo.marca.pais.categoria.id = this.modelo.marca.pais.categoria.id;
+    //this.registerForm.value.auto.modelo.marca.pais.categoria.nombreCategoria = this.modelo.marca.pais.categoria.nombreCategoria;
+    //this.registerForm.value.auto.modelo.marca.pais.categoria.porcentaje = this.modelo.marca.pais.categoria.porcentaje;
 
     this.registerForm.value.cliente.id = this.registerForm.value.idCliente;
     this.registerForm.value.fechaVenta = new Date();

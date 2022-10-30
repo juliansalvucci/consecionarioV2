@@ -22,8 +22,9 @@ export class AutoComponent implements OnInit {
   listaModelos!: IGenerica[];
   listaMarcas!: IGenerica[];
 
-  filtro: string = '';
   filtro1: string = '';
+  filtro2: string = '';
+  filtro3: string = '';
 
   idModelo: number = 0;
 
@@ -40,6 +41,7 @@ export class AutoComponent implements OnInit {
   ) {
     this.consultarMarcas();
     this.consultarModelos();
+    this.consultarPaises();
     this.configurarFormulario();
   }
 
@@ -49,7 +51,6 @@ export class AutoComponent implements OnInit {
 
   displayModelos(id: number) {
     console.log(id);
-    this.registerForm.value.modelo.id = id; //seteo el id del objeto modelo.
     if (!id) return '';
 
     let index = this.listaModelos.findIndex((r) => r.id === id);
@@ -62,7 +63,7 @@ export class AutoComponent implements OnInit {
 
   registerForm = this.fb.group({
     id: [0],
-    precio: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/) ]],
+    precio: [0, [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/) ]],
     costo: [0,[Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
     vendido: [],
     idModelo: [, Validators.required],
@@ -149,11 +150,11 @@ export class AutoComponent implements OnInit {
   filterModelosAux!: IGenerica[];
 
   filtrarModelos() {
-    if (this.filtro == '') {
+    if (this.filtro2 == '') {
       this.filterModelos == this.listaModelos;
     } else {
       this.filterModelos = this.filterModelosAux?.filter((f) =>
-        f.nombreModelo?.toLowerCase().trim().includes(this.filtro)
+        f.nombreModelo?.toLowerCase().trim().includes(this.filtro2)
       );
     }
   }
@@ -224,13 +225,12 @@ export class AutoComponent implements OnInit {
   }
   
   filtrarPaises() {
-    this.filterPaises = this.listaPaises?.filter((f) => f.nombrePais?.toLowerCase().trim().includes(this.filtro));
+    this.filterPaises = this.listaPaises?.filter((f) => f.nombrePais?.toLowerCase().trim().includes(this.filtro3));
   }
   
   pais!: IPais
   
   displayPaises(id: number) {
-    this.registerForm.value.pais.id = id;
     if (!id) return '';
   
     let index = this.listaPaises.findIndex((r) => r.id === id);

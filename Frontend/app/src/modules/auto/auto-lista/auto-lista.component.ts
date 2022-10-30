@@ -120,8 +120,7 @@ export class AutoListaComponent implements OnInit {
       this.listaFiltro = this.lista;
     } else {
       this.listaFiltro = this.lista?.filter((f) => f.modelo.marca.nombreMarca?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase())
-                                                || f.modelo.nombreModelo?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase())
-                                                || f.modelo.marca.pais.nombrePais?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase()));
+                                                || f.modelo.nombreModelo?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase()));
     }
     this.dataSource = new MatTableDataSource(this.listaFiltro);
     this.configTable();

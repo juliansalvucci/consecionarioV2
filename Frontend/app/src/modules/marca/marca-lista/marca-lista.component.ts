@@ -98,8 +98,7 @@ export class MarcaListaComponent implements OnInit {
     if (this.filtro == '') {
       this.listaFiltro = this.lista;
     } else {
-      this.listaFiltro = this.lista?.filter((f) => f.nombreMarca?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase())
-                                                || f.pais.nombrePais?.toLocaleLowerCase().trim().includes(this.filtro.toLocaleLowerCase()));
+      this.listaFiltro = this.lista?.filter((f) => f.nombreMarca?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase()));
     }
     this.dataSource = new MatTableDataSource(this.listaFiltro);
     this.configTable();
