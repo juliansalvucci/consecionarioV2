@@ -82,8 +82,6 @@ export class PaisListaComponent implements OnInit {
   }
 
   eliminar(id: number) {
-    sweetalert.Toast.fire()
-    sweetalert.Alert("TE ROMPO EL CULO","CON MI PIJA")
     try {
       this.service.baja(id).subscribe((r) => {
         if (r) {
