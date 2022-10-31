@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.tppa.tppa.Models.Cliente;
 import com.tppa.tppa.Services.ClienteService;
 
@@ -36,10 +37,16 @@ public class ClienteController
         return this.service.guardar(cliente);
     }
 
-    @GetMapping( path = "/{id}")
-    public Optional<Cliente> obtenerPorId(@PathVariable("id") Long id)
+    //@GetMapping( path = "/{id}")
+    //public Optional<Cliente> obtenerPorId(@PathVariable("id") Long id)
+    //{
+      //return this.service.obtenerPorId(id);
+    //}
+
+    @GetMapping( value = "/{documento}")
+    public Optional<Cliente> obtenerPorDocumento(@PathVariable("documento") String documento)
     {
-        return this.service.obtenerPorId(id);
+        return this.service.obtenerPorDocumento(documento);
     }
 
     @DeleteMapping( path = "/{id}")

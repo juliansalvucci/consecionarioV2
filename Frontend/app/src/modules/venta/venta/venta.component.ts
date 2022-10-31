@@ -78,9 +78,12 @@ export class VentaComponent implements OnInit {
     precio: ['', Validators.required],
     costo: [0],
     porcentaje: [0],
+    documento:[],
+    nombre:[],
+    apellido:[],
     auto: this.fb.group({
       id: [0],
-      precio: [0,[Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      precio: [0,[Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       costo: [0, [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       vendido: [],
       modelo: this.fb.group({
@@ -133,6 +136,8 @@ export class VentaComponent implements OnInit {
   setFormValues() {
     this.registerForm.value.auto.id = this.dataService.id;
     this.registerForm.value.auto.vendido = true;
+    this.registerForm.value.auto.costo = this.registerForm.value.costo;
+    this.registerForm.value.auto.precio = this.registerForm.value.precio;
     this.registerForm.value.auto.modelo.id = this.modelo.id;
     this.registerForm.value.auto.modelo.nombreModelo = this.modelo.nombreModelo;
     this.registerForm.value.auto.modelo.marca.id = this.modelo.marca.id;
@@ -142,8 +147,6 @@ export class VentaComponent implements OnInit {
     this.registerForm.value.auto.pais.categoria.id = this.pais.categoria.id;
     this.registerForm.value.auto.pais.categoria.nombreCategoria = this.pais.categoria.nombreCategoria;
     this.registerForm.value.auto.pais.categoria.porcentaje = this.pais.categoria.porcentaje;
-
-    this.registerForm.value.cliente.id = this.registerForm.value.idCliente;
     this.registerForm.value.fechaVenta = new Date();
   }
 
@@ -152,7 +155,7 @@ export class VentaComponent implements OnInit {
       this.setFormValues();
 
       console.log(this.registerForm.value);
-      this.service4.alta(this.registerForm.value).subscribe((data) => {
+      await this.service4.alta(this.registerForm.value).subscribe((data) => {
         this.registerAuto();
         this.dataService.object = data;
         console.log('Registro realizado con éxito');
@@ -311,6 +314,24 @@ export class VentaComponent implements OnInit {
     this.pais = this.listaPaises[index];
   
     return this.pais.nombrePais
+  }
+
+  
+  autoCompletarCliente() {
+    let documento = this.registerForm.value.documento
+
+    console.log(documento)
+
+    this.service3.consultaPorDoumento(documento).subscribe((r) => {
+      console.log(r);
+      this.registerForm.get('idCliente')?.setValue(r.id);
+      this.registerForm.value.cliente.id = r.id;
+      this.registerForm.get('nombre')?.setValue(r.nombre);
+      this.registerForm.value.cliente.nombre = r.nombre
+      this.registerForm.get('apellido')?.setValue(r.apellido);
+      this.registerForm.value.cliente.apellido = r.apellido;
+      this.registerForm.value.cliente.documento = r.documento;
+    });
   }
 }
 

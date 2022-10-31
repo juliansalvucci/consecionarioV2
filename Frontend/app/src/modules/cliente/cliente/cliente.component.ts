@@ -35,14 +35,14 @@ export class ClienteComponent implements OnInit {
 
 
   configurarFormulario() {
-    if (this.dataService.id != 0) {
+    if (this.dataService.documento != '') {
       this.autocompletar();
     }
   }
 
 
   autocompletar() {
-    this.service.consultaPorId(this.dataService.id).subscribe((r) => {
+    this.service.consultaPorDoumento(this.dataService.documento).subscribe((r) => {
       console.log(r);
       this.registerForm.patchValue({
         id: r.id,

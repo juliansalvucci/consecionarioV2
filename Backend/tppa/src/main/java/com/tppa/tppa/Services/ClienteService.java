@@ -29,6 +29,12 @@ public class ClienteService{
         return repository.findById(id);
     }
 
+    public Optional<Cliente> obtenerPorDocumento(String documento)
+    {
+        return repository.findByDocumento(documento);
+    }
+
+
 
     public boolean eliminar(Long id) 
     {

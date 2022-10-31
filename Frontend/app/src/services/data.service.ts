@@ -7,5 +7,6 @@ import { FormGroup } from '@angular/forms';
 export class DataService 
 {
   id!: number;
+  documento!: string
   object!: any
 }

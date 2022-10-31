@@ -60,14 +60,14 @@ export class ClienteListaComponent implements OnInit {
     }
   }
 
-  abrirModal(id: number): void {
-    this.dataService.id = id;
+  abrirModal(documento: string): void {
+    this.dataService.documento = documento;
     const dialogRef = this.dialog.open(ClienteComponent, {
       width: '450px',
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (this.dataService.object != null) {
-        this.lista = this.lista.filter((element) => element.id != id);
+        this.lista = this.lista.filter((element) => element.documento != documento);
         this.lista.push(this.dataService.object);
         this.dataSource = new MatTableDataSource(this.lista);
         this.configTable();

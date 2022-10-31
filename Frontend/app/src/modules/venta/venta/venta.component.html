@@ -60,40 +60,40 @@
         </mat-error>
 
         <mat-form-field appearance="fill">
-            <mat-label id="negrita">Cliente</mat-label>
-            <input formControlName="idCliente" matInput type="text" [matAutocomplete]="a4" [(ngModel)]="filtro4" (ngModelChange)="filtrarClientes()" (keyup)="filtrarClientes()"
-            (keyup.enter)="filtrarClientes()"/>
-            <mat-autocomplete #a4="matAutocomplete" [displayWith]="displayClientes.bind(this)">
-                <mat-option *ngFor="let item of filterClientes" [value]="item.id">
-                    {{item.nombre}}
-                </mat-option>
-            </mat-autocomplete>
-        </mat-form-field>
-
-        <mat-error class="text-danger"
-          *ngIf="registerForm.get('idCliente')?.invalid && registerForm.get('idCliente')?.touched">
-          El <strong>campo</strong> es requerido
-        </mat-error>
-
-        <!--
-        <mat-form-field appearance="fill">
-            <mat-label id="negrita">Cliente</mat-label>
-            <input formControlName="documento" matInput type="text" [matAutocomplete]="a4" [(ngModel)]="filtro4" (ngModelChange)="filtrarClientes()" (keyup)="filtrarClientes()"
-            (keyup.enter)="filtrarClientes()"/>
-            <mat-autocomplete #a4="matAutocomplete" [displayWith]="displayClientes.bind(this)">
-                <mat-option *ngFor="let item of filterClientes" [value]="item.id">
-                    {{item.nombre}}
-                </mat-option>
-            </mat-autocomplete>
+            <mat-label id="negrita">Documento</mat-label>
+            <input matInput formControlName="documento">
         </mat-form-field>
 
         <mat-error class="text-danger"
           *ngIf="registerForm.get('documento')?.invalid && registerForm.get('documento')?.touched">
           El <strong>campo</strong> es requerido
         </mat-error>
-        -->
+
+        <mat-form-field appearance="fill">
+            <mat-label id="negrita">Apellido</mat-label>
+            <input matInput formControlName="apellido" readonly="true">
+        </mat-form-field>
+
+        <mat-error class="text-danger"
+          *ngIf="registerForm.get('apellido')?.invalid && registerForm.get('apellido')?.touched">
+          El <strong>campo</strong> es requerido
+        </mat-error>
+
+        <mat-form-field appearance="fill">
+            <mat-label id="negrita">Nombre</mat-label>
+            <input matInput formControlName="nombre" readonly="true">
+        </mat-form-field>
+
+        <mat-error class="text-danger"
+          *ngIf="registerForm.get('nombre')?.invalid && registerForm.get('nombre')?.touched">
+          El <strong>campo</strong> es requerido
+        </mat-error>
+
 
     </form>
 </div>
+
+<button mat-raised-button class="col-3 m-auto mb-4 bg-success" (click)="autoCompletarCliente()">Guardar</button>
+
 <button mat-raised-button class="col-3 m-auto mb-4 bg-success" (click)="register()"
     [disabled]="registerForm.invalid">Guardar</button>
