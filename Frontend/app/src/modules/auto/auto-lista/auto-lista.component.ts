@@ -83,7 +83,7 @@ export class AutoListaComponent implements OnInit {
   abrirModal2(id: number): void {
     this.dataService.id = id;
     const dialogRef = this.dialog.open(VentaComponent, {
-      width: '450px',
+      width: '750px',
     });
     dialogRef.afterClosed().subscribe((result) => {
       

@@ -83,8 +83,8 @@ export class VentaComponent implements OnInit {
     apellido:[],
     auto: this.fb.group({
       id: [0],
-      precio: [0,[Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      costo: [0, [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      precio: [0],
+      costo: [0],
       vendido: [],
       modelo: this.fb.group({
         id: [0],

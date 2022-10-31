@@ -1,3 +1,22 @@
 mat-form-field,button{
     width: 100%;
 }
+
+.form{
+    display: flex;
+    width: 100%;
+}
+
+.seccionCliente{
+    width: 40%;
+    margin-right: 10px;
+}
+
+.seccionEspacio{
+    width: 10%;
+}
+
+.seccionAuto{
+    width: 40%;
+    margin-left: 20px;
+}

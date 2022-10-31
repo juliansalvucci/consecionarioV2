@@ -1,99 +1,79 @@
 <div>
     <h1 class="d-flex justify-content-between">Venta</h1>
-    <form [formGroup]="registerForm" (ngSubmit)="register()">
-        <mat-form-field appearance="fill">
-            <mat-label id="negrita">Marca</mat-label>
-            <input formControlName="idMarca" matInput type="text" [matAutocomplete]="a2" [(ngModel)]="filtro1" (ngModelChange)="filtrarMarcas()" (keyup)="filtrarMarcas()"
-            (keyup.enter)="filtrarMarcas()" readonly="true"/>
-            <mat-autocomplete #a2="matAutocomplete" [displayWith]="displayMarcas.bind(this)">
-                <mat-option *ngFor="let item of filterMarcas" [value]="item.id">
-                    {{item.nombreMarca}}
-                </mat-option>
-            </mat-autocomplete>
-        </mat-form-field>
+    <div [formGroup]="registerForm" (ngSubmit)="register()" class="form">
+        <div class="seccionAuto">
+            <h3 class="d-flex justify-content-between">Datos del vehículo</h3>
+            <mat-form-field appearance="fill">
+                <mat-label id="negrita">Marca</mat-label>
+                <input formControlName="idMarca" matInput type="text" [matAutocomplete]="a2" [(ngModel)]="filtro1"
+                    (ngModelChange)="filtrarMarcas()" (keyup)="filtrarMarcas()" (keyup.enter)="filtrarMarcas()"
+                    readonly="true" />
+                <mat-autocomplete #a2="matAutocomplete" [displayWith]="displayMarcas.bind(this)">
+                    <mat-option *ngFor="let item of filterMarcas" [value]="item.id">
+                        {{item.nombreMarca}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
 
-        <mat-error class="text-danger"
-          *ngIf="registerForm.get('idMarca')?.invalid && registerForm.get('idMarca')?.touched">
-          El <strong>campo</strong> es requerido
-        </mat-error>
+            <mat-form-field appearance="fill">
+                <mat-label id="negrita">Modelo</mat-label>
+                <input formControlName="idModelo" matInput type="text" [matAutocomplete]="a1" [(ngModel)]="filtro"
+                    (ngModelChange)="filtrarModelos()" (keyup)="filtrarModelos()" (keyup.enter)="filtrarModelos()"
+                    readonly="true" />
+                <mat-autocomplete #a1="matAutocomplete" [displayWith]="displayModelos.bind(this)">
+                    <mat-option *ngFor="let item of filterModelos" [value]="item.id">
+                        {{item.nombreModelo}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
 
-        <mat-form-field appearance="fill">
-            <mat-label id="negrita">Modelo</mat-label>
-            <input formControlName="idModelo" matInput type="text" [matAutocomplete]="a1" [(ngModel)]="filtro" (ngModelChange)="filtrarModelos()" (keyup)="filtrarModelos()"
-            (keyup.enter)="filtrarModelos()" readonly="true"/>
-            <mat-autocomplete #a1="matAutocomplete" [displayWith]="displayModelos.bind(this)">
-                <mat-option *ngFor="let item of filterModelos" [value]="item.id">
-                    {{item.nombreModelo}}
-                </mat-option>
-            </mat-autocomplete>
-        </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label id="negrita">País</mat-label>
+                <input formControlName="idPais" matInput type="text" [matAutocomplete]="a3" [(ngModel)]="filtro3"
+                    (ngModelChange)="filtrarPaises()" (keyup)="filtrarPaises()" (keyup.enter)="filtrarPaises()"
+                    readonly="true" />
+                <mat-autocomplete #a3="matAutocomplete" [displayWith]="displayPaises.bind(this)">
+                    <mat-option *ngFor="let item of filterPaises" [value]="item.id">
+                        {{item.nombrePais}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
 
-        <mat-error class="text-danger"
-          *ngIf="registerForm.get('idModelo')?.invalid && registerForm.get('idModelo')?.touched">
-          El <strong>campo</strong> es requerido
-        </mat-error>
+            <mat-form-field appearance="fill">
+                <mat-label id="negrita">Precio</mat-label>
+                <input matInput formControlName="costo" readonly="true">
+            </mat-form-field>
+        </div>
 
-        <mat-form-field appearance="fill">
-            <mat-label id="negrita">País</mat-label>
-            <input formControlName="idPais" matInput type="text" [matAutocomplete]="a3" [(ngModel)]="filtro3" (ngModelChange)="filtrarPaises()" (keyup)="filtrarPaises()"
-            (keyup.enter)="filtrarPaises()" readonly="true"/>
-            <mat-autocomplete #a3="matAutocomplete" [displayWith]="displayPaises.bind(this)">
-                <mat-option *ngFor="let item of filterPaises" [value]="item.id">
-                    {{item.nombrePais}}
-                </mat-option>
-            </mat-autocomplete>
-        </mat-form-field>
+        <div class="seccionEspacio">
 
-        <mat-error class="text-danger"
-          *ngIf="registerForm.get('idPais')?.invalid && registerForm.get('idPais')?.touched">
-          El <strong>campo</strong> es requerido
-        </mat-error>
+        </div>
 
-        <mat-form-field appearance="fill">
-            <mat-label id="negrita">Precio</mat-label>
-            <input matInput formControlName="costo" readonly="true">
-        </mat-form-field>
+        <div class="seccionCliente">
+            <h3 class="d-flex justify-content-between">Datos de cliente</h3>
+            <mat-form-field appearance="fill">
+                <mat-label id="negrita">Documento</mat-label>
+                <input matInput formControlName="documento">
+                <mat-icon matSuffix style="font-size: 1.2em" (click)="autoCompletarCliente()">search</mat-icon>
+            </mat-form-field>
 
-        <mat-error class="text-danger"
-          *ngIf="registerForm.get('costo')?.invalid && registerForm.get('costo')?.touched">
-          El <strong>campo</strong> es requerido
-        </mat-error>
+            <mat-error class="text-danger"
+                *ngIf="registerForm.get('documento')?.invalid && registerForm.get('documento')?.touched">
+                El <strong>campo</strong> es requerido
+            </mat-error>
 
-        <mat-form-field appearance="fill">
-            <mat-label id="negrita">Documento</mat-label>
-            <input matInput formControlName="documento">
-        </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label id="negrita">Apellido</mat-label>
+                <input matInput formControlName="apellido" readonly="true">
+            </mat-form-field>
 
-        <mat-error class="text-danger"
-          *ngIf="registerForm.get('documento')?.invalid && registerForm.get('documento')?.touched">
-          El <strong>campo</strong> es requerido
-        </mat-error>
-
-        <mat-form-field appearance="fill">
-            <mat-label id="negrita">Apellido</mat-label>
-            <input matInput formControlName="apellido" readonly="true">
-        </mat-form-field>
-
-        <mat-error class="text-danger"
-          *ngIf="registerForm.get('apellido')?.invalid && registerForm.get('apellido')?.touched">
-          El <strong>campo</strong> es requerido
-        </mat-error>
-
-        <mat-form-field appearance="fill">
-            <mat-label id="negrita">Nombre</mat-label>
-            <input matInput formControlName="nombre" readonly="true">
-        </mat-form-field>
-
-        <mat-error class="text-danger"
-          *ngIf="registerForm.get('nombre')?.invalid && registerForm.get('nombre')?.touched">
-          El <strong>campo</strong> es requerido
-        </mat-error>
-
-
-    </form>
+            <mat-form-field appearance="fill">
+                <mat-label id="negrita">Nombre</mat-label>
+                <input matInput formControlName="nombre" readonly="true">
+            </mat-form-field>
+        </div>
+    </div>
 </div>
-
-<button mat-raised-button class="col-3 m-auto mb-4 bg-success" (click)="autoCompletarCliente()">Guardar</button>
 
 <button mat-raised-button class="col-3 m-auto mb-4 bg-success" (click)="register()"
     [disabled]="registerForm.invalid">Guardar</button>

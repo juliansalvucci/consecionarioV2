@@ -1,11 +1,9 @@
 package com.tppa.tppa.Models;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Index;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -24,11 +22,9 @@ public class Venta
     @NotNull private Double precio;
     @NotNull private int porcentaje;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "auto_id", referencedColumnName = "id")
+    @OneToOne
     private Auto auto;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
+    @OneToOne
     private Cliente cliente;
 
     public int getPorcentaje() 
@@ -109,6 +105,6 @@ public class Venta
         setId(id);
         setFechaVenta(fechaVenta);
         setAuto(auto);
-        setCliente(cliente);
+        //setCliente(cliente);
     }  
 }

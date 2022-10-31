@@ -39,12 +39,12 @@
 
             <ng-container matColumnDef="costo">
                 <th mat-header-cell mat-sort-header *matHeaderCellDef> Costo </th>
-                <td mat-cell *matCellDef="let element" class="columna"> {{element.costo}} </td>
+                <td mat-cell *matCellDef="let element" class="columna"> ${{element.costo}} </td>
             </ng-container>
 
             <ng-container matColumnDef="precio">
                 <th mat-header-cell mat-sort-header *matHeaderCellDef> Precio </th>
-                <td mat-cell *matCellDef="let element" class="columna"> {{element.precio}} </td>
+                <td mat-cell *matCellDef="let element" class="columna"> ${{element.precio}} </td>
             </ng-container>
 
             <ng-container matColumnDef="porcentaje">
@@ -54,7 +54,7 @@
 
             <ng-container matColumnDef="cliente">
                 <th mat-header-cell mat-sort-header *matHeaderCellDef> Cliente </th>
-                <td mat-cell *matCellDef="let element" class="columna"> {{element.cliente?.nombre}} </td>
+                <td mat-cell *matCellDef="let element" class="columna"> {{element.cliente?.apellido}}   {{element.cliente?.nombre}} </td>
             </ng-container>
 
 
