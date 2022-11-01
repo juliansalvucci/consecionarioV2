@@ -99,10 +99,9 @@ export class ClienteListaComponent implements OnInit {
       this.listaFiltro = this.lista;
     } else {
       this.listaFiltro = this.lista?.filter((f) =>
-        f.nombre
-          ?.toLowerCase()
-          .trim()
-          .includes(this.filtro.toLocaleLowerCase())
+        f.nombre?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase())
+    ||  f.apellido?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase())
+    ||  f.documento?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase())
       );
     }
     this.dataSource = new MatTableDataSource(this.listaFiltro);
