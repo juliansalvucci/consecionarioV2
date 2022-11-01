@@ -1,6 +1,7 @@
 package com.tppa.tppa.Models;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Index;
@@ -22,10 +23,19 @@ public class Venta
     @NotNull private Double precio;
     @NotNull private int porcentaje;
 
-    @OneToOne
-    private Auto auto;
-    @OneToOne
-    private Cliente cliente;
+    @OneToOne(fetch = FetchType.EAGER) private Auto auto;
+    @OneToOne private Cliente cliente;
+    @OneToOne private Empleado empleado;
+
+    public Empleado getEmpleado() 
+    {
+        return empleado;
+    }
+
+    public void setEmpleado(Empleado empleado) 
+    {
+        this.empleado = empleado;
+    }
 
     public int getPorcentaje() 
     {
