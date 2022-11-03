@@ -1,5 +1,6 @@
 package com.tppa.tppa.Repositories;
 
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
