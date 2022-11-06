@@ -41,39 +41,43 @@ public class VentaController
         return service.obtener();
     }
 
-    //Endpoint para buscar ventas en un intervalo de costos.
-    @GetMapping(path = "/criteria")
-    public List<Venta> obtenerPorCriteria(Double montoInicial, Double montoFinal, String fechaDesde,String fechaHasta) {
+    @GetMapping(path = "/criteria/obtenerPorRangoDeCostosYFechas")
+    public List<Venta> obtenerPorRangoDeCostosYFechas(Double montoInicial, Double montoFinal, String fechaDesde,String fechaHasta) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Venta> cr = cb.createQuery(Venta.class);
+        Root<Venta> root = cr.from(Venta.class);
+
+        cr.select(root).where(cb.between(root.get("costo"), montoInicial, montoFinal));
+        cr.select(root).where(cb.between(root.get("fechaVenta"), fechaDesde, fechaHasta));
+
+        TypedQuery<Venta> query = em.createQuery(cr);
+        List<Venta> results = query.getResultList();
+
+        em.close();
+
+
+        return results;
+    }
+
+    @GetMapping(path = "/criteria/obtenerPorRangoDeCostos")
+    public List<Venta> obtenerPorRangoDeCostos(Double montoInicial, Double montoFinal) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Venta> cr = cb.createQuery(Venta.class);
         Root<Venta> root = cr.from(Venta.class);
 
         cr.select(root).where(cb.between(root.get("costo"), montoInicial, montoFinal));
 
-        cr.select(root).where(cb.between(root.get("fechaVenta"), fechaDesde, fechaHasta));
-
         TypedQuery<Venta> query = em.createQuery(cr);
         List<Venta> results = query.getResultList();
+
+        em.close();
+
 
         return results;
     }
 
-    @GetMapping(path = "/criteria1")
-    public List<Venta> obtenerPorCriteria1(Double montoInicial, Double montoFinal) {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Venta> cr = cb.createQuery(Venta.class);
-        Root<Venta> root = cr.from(Venta.class);
-
-        cr.select(root).where(cb.between(root.get("costo"), montoInicial, montoFinal));
-
-        TypedQuery<Venta> query = em.createQuery(cr);
-        List<Venta> results = query.getResultList();
-
-        return results;
-    }
-
-    @GetMapping(path = "/criteria2")
-    public List<Venta> obtenerPorCriteri2(String fechaDesde,String fechaHasta) {
+    @GetMapping(path = "/criteria/obtenerPorRangoDeFechas")
+    public List<Venta> obtenerPorRangoDeFechas(String fechaDesde,String fechaHasta) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Venta> cr = cb.createQuery(Venta.class);
         Root<Venta> root = cr.from(Venta.class);
@@ -83,8 +87,45 @@ public class VentaController
         TypedQuery<Venta> query = em.createQuery(cr);
         List<Venta> results = query.getResultList();
 
+        em.close();
+
+
         return results;
     }
+
+    @GetMapping(path = "/criteria/gananciaTotal")
+    public List<Double> obtenerGananciaTotal() {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Double> cr = cb.createQuery(Double.class);
+        Root<Venta> root = cr.from(Venta.class);
+        
+        cr.select(cb.sum(root.get("costo")));
+
+        TypedQuery<Double> query = em.createQuery(cr);
+        List<Double> results = query.getResultList();
+
+        em.close();
+
+        return results;
+    }
+
+    @GetMapping(path = "/criteria/gananciaTotalPorMarca")
+    public List<Double> obtenerGananciaTotalPorMarca() {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Double> cr = cb.createQuery(Double.class);
+        Root<Venta> root = cr.from(Venta.class);
+        
+        cr.select(cb.sum(root.get("costo")))
+          .groupBy(root.get("auto").get("modelo").get("marca").get("nombreMarca"));
+
+        TypedQuery<Double> query = em.createQuery(cr);
+        List<Double> results = query.getResultList();
+
+        em.close();
+
+        return results;
+    }
+
 
     @PostMapping()
     public Venta guardar(@RequestBody Venta venta)
