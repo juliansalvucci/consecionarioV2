@@ -126,7 +126,6 @@ public class VentaController
         return results;
     }
 
-
     @PostMapping()
     public Venta guardar(@RequestBody Venta venta)
     {        
