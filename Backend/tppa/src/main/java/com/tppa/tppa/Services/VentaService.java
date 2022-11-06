@@ -20,6 +20,7 @@ public class VentaService
         return (ArrayList<Venta>) repository.findAll();
     }
 
+
     public Venta guardar(Venta venta)
     {
         return repository.save(venta);

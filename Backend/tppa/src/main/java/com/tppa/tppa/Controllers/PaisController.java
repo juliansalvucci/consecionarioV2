@@ -1,7 +1,13 @@
 package com.tppa.tppa.Controllers;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,13 +29,35 @@ public class PaisController
 {
     @Autowired
     PaisService service;
+    EntityManager em;
 
+    public PaisController(EntityManager em){
+        this.em = em;
+    }
+    
     @GetMapping()
-    public ArrayList<Pais> obtener()
+    public List<Pais> obtener()
     {
         return service.obtener();
     }
+    
 
+    @GetMapping(path = "/criteria")
+    public List<Pais> obtenerPorCriteria()
+    {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Pais> cr = cb.createQuery(Pais.class);
+        Root<Pais> root = cr.from(Pais.class);
+        //cr.select(root);
+        cr.select(root).where(cb.like(root.get("nombrePais"), "Argentina"));
+
+        TypedQuery<Pais> query = em.createQuery(cr);
+        List<Pais> results = query.getResultList();
+
+        return results;
+    }
+    
+    
     @PostMapping()
     public Pais guardar(@RequestBody Pais pais)
     {
