@@ -71,8 +71,7 @@ public class VentaController
         List<Venta> results = query.getResultList();
 
         em.close();
-
-
+        
         return results;
     }
 
@@ -89,12 +88,11 @@ public class VentaController
 
         em.close();
 
-
         return results;
     }
 
     @GetMapping(path = "/criteria/gananciaTotal")
-    public List<Double> obtenerGananciaTotal() {
+    public Double obtenerGananciaTotal() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Double> cr = cb.createQuery(Double.class);
         Root<Venta> root = cr.from(Venta.class);
@@ -102,11 +100,11 @@ public class VentaController
         cr.select(cb.sum(root.get("costo")));
 
         TypedQuery<Double> query = em.createQuery(cr);
-        List<Double> results = query.getResultList();
+        Double result = query.getSingleResult();
 
         em.close();
 
-        return results;
+        return result;
     }
 
     @GetMapping(path = "/criteria/gananciaTotalPorMarca")
