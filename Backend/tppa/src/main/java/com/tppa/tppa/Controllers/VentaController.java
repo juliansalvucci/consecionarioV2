@@ -29,6 +29,7 @@ public class VentaController
         return service.obtener();
     }
 
+
     @PostMapping()
     public Venta guardar(@RequestBody Venta venta)
     {        
