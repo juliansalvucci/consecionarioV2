@@ -14,11 +14,11 @@ public class PaisService  {
     @Autowired
     PaisRepository repository;
      
+    
     public ArrayList<Pais> obtener()
     {
         return (ArrayList<Pais>) repository.findAll();
     }
-    
 
     public Pais guardar(Pais pais)
     {
