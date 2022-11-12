@@ -1,6 +1,7 @@
 package com.tppa.tppa.Controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -91,6 +92,21 @@ public class VentaController
         return results;
     }
 
+
+    @GetMapping(path = "/jpql/test")
+    public List<Venta> tetas(String fechaDesde, String fechaHasta) {        
+        String CONSULTA = "SELECT SUM(venta.costo), m.nombreModelo FROM Venta venta JOIN venta.auto a JOIN a.modelo m WHERE venta.fechaVenta > :fechaDesde AND venta.fechaVenta < :fechaHasta GROUP BY m.nombreModelo";
+        @SuppressWarnings("unchecked")
+        List<Venta> ventas = em.createQuery(CONSULTA)
+        .setParameter("fechaDesde", fechaDesde)
+        .setParameter("fechaHasta", fechaHasta)
+        .getResultList();
+        em.close();
+        return ventas;
+    }
+
+
+
     @GetMapping(path = "/criteria/gananciaTotal")
     public Double obtenerGananciaTotal() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -112,9 +128,11 @@ public class VentaController
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Double> cr = cb.createQuery(Double.class);
         Root<Venta> root = cr.from(Venta.class);
+
         
-        cr.select(cb.sum(root.get("costo")))
-          .groupBy(root.get("auto").get("modelo").get("marca").get("nombreMarca"));
+        //cr.select(cb.sum(root.get("costo")))
+          //.groupBy(root.get("auto").get("modelo").get("marca").get("nombreMarca"));
+
 
         TypedQuery<Double> query = em.createQuery(cr);
         List<Double> results = query.getResultList();

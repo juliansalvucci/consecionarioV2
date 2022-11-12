@@ -1,3 +1,20 @@
 //Datos útiles
 
 //this.lista = this.lista.map(objeto => objeto.id === id ? this.dataService.object : objeto)  Actualiza la lista solo para elementos modificados, pero no para nuevos, por eso se descarta.
+
+
+//  OBTENER GANANCIA POR MARCA
+SELECT SUM(venta.costo), marca.nombre_marca FROM Venta 
+INNER JOIN auto ON auto.id = venta.auto_id 
+INNER JOIN modelo ON modelo.id = auto.modelo_id
+INNER JOIN marca ON marca.id = modelo.marca_id
+GROUP BY marca.nombre_marca;
+//
+
+//  OBTENER GANANCIA POR MODELO DE MARCAS
+SELECT SUM(venta.costo), marca.nombre_marca, modelo.nombre_modelo FROM Venta
+INNER JOIN auto ON auto.id = venta.auto_id 
+INNER JOIN modelo ON modelo.id = auto.modelo_id
+INNER JOIN marca ON marca.id = modelo.marca_id
+GROUP BY marca.nombre_marca,modelo.nombre_modelo;
+//
