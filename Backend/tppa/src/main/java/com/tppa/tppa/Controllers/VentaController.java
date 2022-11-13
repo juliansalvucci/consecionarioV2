@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import javax.persistence.EntityManager;
 
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
