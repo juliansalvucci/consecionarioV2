@@ -32,11 +32,9 @@ public class VentaController
     @Autowired
     VentaService service;
     EntityManager em;
-    List<GananciaPorModeloYMarca> putita;
 
-    public VentaController(EntityManager em, List<GananciaPorModeloYMarca> putita){
+    public VentaController(EntityManager em){
         this.em = em;
-        this.putita = putita;
     }
 
     @GetMapping()
