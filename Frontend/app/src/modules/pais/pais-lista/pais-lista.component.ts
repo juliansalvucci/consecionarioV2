@@ -6,7 +6,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { IPais } from 'src/interfaces/IPais';
 import { DataService } from 'src/services/data.service';
 import { PaisService } from 'src/services/pais/pais.service';
-import { sweetalert } from 'src/utils/utils';
 import { PaisComponent } from '../pais/pais.component';
 
 

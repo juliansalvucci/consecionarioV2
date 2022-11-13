@@ -60,6 +60,10 @@ export const API_ROUTES = {
         ALTA: `${ENV.apiUrl}venta`,
         CONSULTA:`${ENV.apiUrl}venta`,
         CONSULTAPORID:`${ENV.apiUrl}venta/`,
+    },
+
+    REPORTES:{
+
     }
 }
 

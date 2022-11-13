@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GananciaycantidadpormarcaComponent } from './gananciaycantidadpormarca/gananciaycantidadpormarca.component';
+import { SharedModule } from 'src/shared/shared/shared.module';
 
 
 
@@ -9,7 +10,11 @@ import { GananciaycantidadpormarcaComponent } from './gananciaycantidadpormarca/
     GananciaycantidadpormarcaComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule
+  ],
+  exports: [
+    GananciaycantidadpormarcaComponent
   ]
 })
 export class ReportesModule { }

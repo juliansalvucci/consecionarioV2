@@ -17,6 +17,7 @@ import { LoginComponent } from './layout/login/login.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { CategoriaModule } from 'src/modules/categoria/categoria.module';
 import { VentaModule } from 'src/modules/venta/venta.module';
+import { ReportesModule } from 'src/modules/reportes/reportes.module';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { VentaModule } from 'src/modules/venta/venta.module';
     ClienteModule,
     CategoriaModule,
     VentaModule,
+    ReportesModule,
     HttpClientModule,
     SharedModule,
     AppRoutingModule

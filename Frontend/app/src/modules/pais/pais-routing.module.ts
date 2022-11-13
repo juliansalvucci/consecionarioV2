@@ -10,7 +10,6 @@ const routes: Routes = [
       component: SkeletonComponent,
       children: [
   
-        //AUDITORIA
         {
           path:'/listaPaises',
           component: PaisListaComponent
