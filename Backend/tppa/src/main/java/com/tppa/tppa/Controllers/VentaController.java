@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tppa.tppa.Models.GananciaPorCategoria;
 import com.tppa.tppa.Models.GananciaPorModeloYMarca;
 import com.tppa.tppa.Models.Venta;
 import com.tppa.tppa.Services.VentaService;
@@ -81,6 +82,36 @@ public class VentaController
             gpm.setMarca(marca);
             
             test.add(gpm);
+        }
+
+        em.close();
+        return test;
+    }
+
+    @GetMapping(path = "/jpql/getReporteVentasPorCategoria")
+    public List<Object> getReporteVentasPorCategoria(String fechaDesde, String fechaHasta) {        
+        String CONSULTA = "SELECT COUNT(venta) as cantidadVentas, SUM(venta.costo) as costo, venta.auto.pais.categoria.nombreCategoria as categoria FROM Venta venta WHERE venta.fechaVenta > :fechaDesde AND venta.fechaVenta < :fechaHasta GROUP BY categoria";
+        var registros = em.createQuery(CONSULTA)
+        .setParameter("fechaDesde", fechaDesde)
+        .setParameter("fechaHasta", fechaHasta)
+        .getResultList();
+
+        List<Object> test = new ArrayList<>();
+
+        for(int i = 0; i < registros.size(); i++ ){
+            Object[] obj = (Object[])registros.get(i);
+            GananciaPorCategoria gpc = new GananciaPorCategoria();
+
+            var cantidad = obj[0].toString();
+            var costo = obj[1].toString();
+            var categoria = obj[2].toString();
+
+
+            gpc.setCantidadVentas(cantidad);
+            gpc.setCosto(costo);
+            gpc.setCategoria(categoria);
+            
+            test.add(gpc);
         }
 
         em.close();
