@@ -2,22 +2,22 @@ package com.tppa.tppa.Models;
 
 public class GananciaPorModeloYMarca {
     
-    private int cantidadVentas;
-    private Double costo;
+    private String cantidadVentas;
+    private String costo;
     private String marca;
 
-    public int getCantidadVentas() {
+    public String getCantidadVentas() {
         return cantidadVentas;
     }
     
-    public void setCantidadVentas(int cantidad) {
+    public void setCantidadVentas(String cantidad) {
         this.cantidadVentas = cantidad;
     }
 
-    public Double getCosto() {
+    public String getCosto() {
         return costo;
     }
-    public void setCosto(Double costo) {
+    public void setCosto(String costo) {
         this.costo = costo;
     }
 

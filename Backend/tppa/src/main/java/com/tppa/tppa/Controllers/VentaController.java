@@ -1,16 +1,12 @@
 package com.tppa.tppa.Controllers;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,16 +59,33 @@ public class VentaController
 
 
     @GetMapping(path = "/jpql/getReporteCantidadYGananciaPorMarca")
-    public List<GananciaPorModeloYMarca> getReporteCantidadYGananciaPorMarca(String fechaDesde, String fechaHasta) {        
+    public List<Object> getReporteCantidadYGananciaPorMarca(String fechaDesde, String fechaHasta) {        
         String CONSULTA = "SELECT COUNT(venta) as cantidadVentas, SUM(venta.costo) as costo, venta.auto.modelo.marca.nombreMarca as marca FROM Venta venta WHERE venta.fechaVenta > :fechaDesde AND venta.fechaVenta < :fechaHasta GROUP BY marca";
-        @SuppressWarnings("unchecked")
-        List<GananciaPorModeloYMarca> registros = em.createQuery(CONSULTA)
+        var registros = em.createQuery(CONSULTA)
         .setParameter("fechaDesde", fechaDesde)
         .setParameter("fechaHasta", fechaHasta)
         .getResultList();
 
+        List<Object> test = new ArrayList<>();
+
+        for(int i = 0; i < registros.size(); i++ ){
+            Object[] obj = (Object[])registros.get(i);
+            GananciaPorModeloYMarca gpm = new GananciaPorModeloYMarca();
+
+            var cantidad = obj[0].toString();
+            var costo = obj[1].toString();
+            var marca = obj[2].toString();
+
+
+            gpm.setCantidadVentas(cantidad);
+            gpm.setCosto(costo);
+            gpm.setMarca(marca);
+            
+            test.add(gpm);
+        }
+
         em.close();
-        return registros;
+        return test;
     }
 
 
