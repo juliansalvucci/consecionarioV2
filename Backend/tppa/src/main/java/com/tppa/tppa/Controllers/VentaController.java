@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tppa.tppa.Models.GananciaPorModeloYMarca;
 import com.tppa.tppa.Models.Venta;
 import com.tppa.tppa.Services.VentaService;
 
@@ -31,9 +32,11 @@ public class VentaController
     @Autowired
     VentaService service;
     EntityManager em;
+    List<GananciaPorModeloYMarca> putita;
 
-    public VentaController(EntityManager em){
+    public VentaController(EntityManager em, List<GananciaPorModeloYMarca> putita){
         this.em = em;
+        this.putita = putita;
     }
 
     @GetMapping()
@@ -44,104 +47,51 @@ public class VentaController
 
     @GetMapping(path = "/criteria/obtenerPorRangoDeCostosYFechas")
     public List<Venta> obtenerPorRangoDeCostosYFechas(Double montoInicial, Double montoFinal, String fechaDesde,String fechaHasta) {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Venta> cr = cb.createQuery(Venta.class);
-        Root<Venta> root = cr.from(Venta.class);
-
-        cr.select(root).where(cb.between(root.get("costo"), montoInicial, montoFinal));
-        cr.select(root).where(cb.between(root.get("fechaVenta"), fechaDesde, fechaHasta));
-
-        TypedQuery<Venta> query = em.createQuery(cr);
-        List<Venta> results = query.getResultList();
-
-        em.close();
-
-
-        return results;
+        return null;
     }
 
-    @GetMapping(path = "/criteria/obtenerPorRangoDeCostos")
+    @GetMapping(path = "/jpql/obtenerPorRangoDeCostos")
     public List<Venta> obtenerPorRangoDeCostos(Double montoInicial, Double montoFinal) {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Venta> cr = cb.createQuery(Venta.class);
-        Root<Venta> root = cr.from(Venta.class);
-
-        cr.select(root).where(cb.between(root.get("costo"), montoInicial, montoFinal));
-
-        TypedQuery<Venta> query = em.createQuery(cr);
-        List<Venta> results = query.getResultList();
-
-        em.close();
-        
-        return results;
-    }
-
-    @GetMapping(path = "/criteria/obtenerPorRangoDeFechas")
-    public List<Venta> obtenerPorRangoDeFechas(String fechaDesde,String fechaHasta) {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Venta> cr = cb.createQuery(Venta.class);
-        Root<Venta> root = cr.from(Venta.class);
-
-        cr.select(root).where(cb.between(root.get("fechaVenta"), fechaDesde, fechaHasta));
-
-        TypedQuery<Venta> query = em.createQuery(cr);
-        List<Venta> results = query.getResultList();
-
-        em.close();
-
-        return results;
-    }
-
-
-    @GetMapping(path = "/jpql/test")
-    public List<Venta> tetas(String fechaDesde, String fechaHasta) {        
-        String CONSULTA = "SELECT SUM(venta.costo), m.nombreModelo FROM Venta venta JOIN venta.auto a JOIN a.modelo m WHERE venta.fechaVenta > :fechaDesde AND venta.fechaVenta < :fechaHasta GROUP BY m.nombreModelo";
+        String CONSULTA = "SELECT venta FROM Venta venta WHERE venta.costo > :montoInicial AND venta.costo < :montoFinal ";
         @SuppressWarnings("unchecked")
-        List<Venta> ventas = em.createQuery(CONSULTA)
+        List<Venta> registros = em.createQuery(CONSULTA)
+        .setParameter("montoInicial", montoInicial)
+        .setParameter("montoFinal", montoFinal)
+        .getResultList();
+
+        em.close();
+        return registros;
+    }
+
+
+    @GetMapping(path = "/jpql/getReporteCantidadYGananciaPorMarca")
+    public List<GananciaPorModeloYMarca> getReporteCantidadYGananciaPorMarca(String fechaDesde, String fechaHasta) {        
+        String CONSULTA = "SELECT COUNT(venta) as cantidadVentas, SUM(venta.costo) as costo, venta.auto.modelo.marca.nombreMarca as marca FROM Venta venta WHERE venta.fechaVenta > :fechaDesde AND venta.fechaVenta < :fechaHasta GROUP BY marca";
+        @SuppressWarnings("unchecked")
+        List<GananciaPorModeloYMarca> registros = em.createQuery(CONSULTA)
         .setParameter("fechaDesde", fechaDesde)
         .setParameter("fechaHasta", fechaHasta)
         .getResultList();
+
         em.close();
-        return ventas;
+        return registros;
     }
 
 
 
-    @GetMapping(path = "/criteria/gananciaTotal")
-    public Double obtenerGananciaTotal() {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Double> cr = cb.createQuery(Double.class);
-        Root<Venta> root = cr.from(Venta.class);
-        
-        cr.select(cb.sum(root.get("costo")));
-
-        TypedQuery<Double> query = em.createQuery(cr);
-        Double result = query.getSingleResult();
+    @GetMapping(path = "/jpql/gananciaTotal")
+    public Double obtenerGananciaTotal(String fechaDesde, String fechaHasta) {
+        String CONSULTA = "SELECT SUM(venta.costo) as costo FROM Venta venta WHERE venta.fechaVenta > :fechaDesde AND venta.fechaVenta < :fechaHasta";
+        @SuppressWarnings("unchecked")
+        List<Double> registros = em.createQuery(CONSULTA)
+        .setParameter("fechaDesde", fechaDesde)
+        .setParameter("fechaHasta", fechaHasta).getResultList();
 
         em.close();
-
-        return result;
+        return registros.get(0);
     }
 
-    @GetMapping(path = "/criteria/gananciaTotalPorMarca")
-    public List<Double> obtenerGananciaTotalPorMarca() {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Double> cr = cb.createQuery(Double.class);
-        Root<Venta> root = cr.from(Venta.class);
-
-        
-        //cr.select(cb.sum(root.get("costo")))
-          //.groupBy(root.get("auto").get("modelo").get("marca").get("nombreMarca"));
-
-
-        TypedQuery<Double> query = em.createQuery(cr);
-        List<Double> results = query.getResultList();
-
-        em.close();
-
-        return results;
-    }
-
+    
     @PostMapping()
     public Venta guardar(@RequestBody Venta venta)
     {        
