@@ -18,6 +18,7 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { CategoriaModule } from 'src/modules/categoria/categoria.module';
 import { VentaModule } from 'src/modules/venta/venta.module';
 import { ReportesModule } from 'src/modules/reportes/reportes.module';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { ReportesModule } from 'src/modules/reportes/reportes.module';
     ReportesModule,
     HttpClientModule,
     SharedModule,
+    NgxChartsModule,
     AppRoutingModule
   ],
   providers: [],
