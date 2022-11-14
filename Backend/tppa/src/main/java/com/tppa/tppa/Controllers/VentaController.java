@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tppa.tppa.Models.GananciaPorCategoria;
 import com.tppa.tppa.Models.GananciaPorModeloYMarca;
+import com.tppa.tppa.Models.GananciaYCantidadEnPeriodo;
 import com.tppa.tppa.Models.Venta;
 import com.tppa.tppa.Services.VentaService;
 
@@ -121,15 +122,27 @@ public class VentaController
 
 
     @GetMapping(path = "/jpql/gananciaTotal")
-    public Double obtenerGananciaTotal(String fechaDesde, String fechaHasta) {
-        String CONSULTA = "SELECT SUM(venta.costo) as costo FROM Venta venta WHERE venta.fechaVenta > :fechaDesde AND venta.fechaVenta < :fechaHasta";
-        @SuppressWarnings("unchecked")
-        List<Double> registros = em.createQuery(CONSULTA)
+    public Object obtenerGananciaTotal(String fechaDesde, String fechaHasta) {
+        String CONSULTA = "SELECT COUNT(venta), SUM(venta.costo) as costo FROM Venta venta WHERE venta.fechaVenta > :fechaDesde AND venta.fechaVenta < :fechaHasta";
+        var registros = em.createQuery(CONSULTA)
         .setParameter("fechaDesde", fechaDesde)
-        .setParameter("fechaHasta", fechaHasta).getResultList();
+        .setParameter("fechaHasta", fechaHasta).getSingleResult();
 
+        Object[] obj = (Object[])registros;
+        GananciaYCantidadEnPeriodo gpc = new GananciaYCantidadEnPeriodo();
+
+        if(obj[0]!= null && obj[1] != null){   //No se itera porque se devuelve un solo registro.
+            var cantidad = obj[0].toString();
+            var total = obj[1].toString();
+
+            gpc.setCantidadVentas(cantidad);
+            gpc.setTotal(total);
+        }else{
+            gpc = null; //Sino se encuentran resultado, devolver un objeto nulo.
+        }
+        
         em.close();
-        return registros.get(0);
+        return gpc;
     }
 
     
