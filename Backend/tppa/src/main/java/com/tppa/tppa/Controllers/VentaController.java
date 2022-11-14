@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tppa.tppa.Models.GananaciaPorMarca;
 import com.tppa.tppa.Models.GananciaPorCategoria;
 import com.tppa.tppa.Models.GananciaPorModeloYMarca;
 import com.tppa.tppa.Models.GananciaYCantidadEnPeriodo;
@@ -71,7 +72,7 @@ public class VentaController
 
         for(int i = 0; i < registros.size(); i++ ){
             Object[] obj = (Object[])registros.get(i);
-            GananciaPorModeloYMarca gpm = new GananciaPorModeloYMarca();
+            GananaciaPorMarca gpm = new GananaciaPorMarca();
 
             var cantidad = obj[0].toString();
             var costo = obj[1].toString();
@@ -81,6 +82,38 @@ public class VentaController
             gpm.setCantidadVentas(cantidad);
             gpm.setCosto(costo);
             gpm.setMarca(marca);
+            
+            test.add(gpm);
+        }
+
+        em.close();
+        return test;
+    }
+
+    @GetMapping(path = "/jpql/getReporteCantidadYGananciaPorMarcaYModelo")
+    public List<Object> getReporteCantidadYGananciaPorMarcaYModelo(String fechaDesde, String fechaHasta) {        
+        String CONSULTA = "SELECT COUNT(venta) as cantidadVentas, SUM(venta.costo) as costo, venta.auto.modelo.marca.nombreMarca as marca, venta.auto.modelo.nombreModelo as modelo FROM Venta venta WHERE venta.fechaVenta > :fechaDesde AND venta.fechaVenta < :fechaHasta GROUP BY modelo,marca";
+        var registros = em.createQuery(CONSULTA)
+        .setParameter("fechaDesde", fechaDesde)
+        .setParameter("fechaHasta", fechaHasta)
+        .getResultList();
+
+        List<Object> test = new ArrayList<>();
+
+        for(int i = 0; i < registros.size(); i++ ){
+            Object[] obj = (Object[])registros.get(i);
+            GananciaPorModeloYMarca gpm = new GananciaPorModeloYMarca();
+
+            var cantidad = obj[0].toString();
+            var costo = obj[1].toString();
+            var marca = obj[2].toString();
+            var modelo = obj[3].toString();
+
+
+            gpm.setCantidadVentas(cantidad);
+            gpm.setCosto(costo);
+            gpm.setMarca(marca);
+            gpm.setModelo(modelo);
             
             test.add(gpm);
         }
