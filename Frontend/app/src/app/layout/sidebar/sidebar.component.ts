@@ -20,5 +20,8 @@ export class SidebarComponent implements OnInit {
    public STR_CATEGORIAS = 'listaCategorias'
    public STR_VENTAS = 'listaVentas'
    public STR_GANANCIA_MARCAS = 'gananciaPorMarca'
+   public STR_GANANCIA_EMPLEADOS = 'gananciaPorEmpleado'
+   public STR_GANANCIA_MODELOYMARCA = 'gananciaPorMarcaYModelo'
+   public STR_GANANCIA_CATEGORIA = 'gananciaPorCategoria'
 
 }

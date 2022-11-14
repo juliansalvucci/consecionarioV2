@@ -6,7 +6,10 @@ import { ClienteListaComponent } from "src/modules/cliente/cliente-lista/cliente
 import { MarcaListaComponent } from "src/modules/marca/marca-lista/marca-lista.component";
 import { ModeloListaComponent } from "src/modules/modelo/modelo-lista/modelo-lista.component";
 import { PaisListaComponent } from "src/modules/pais/pais-lista/pais-lista.component";
+import { GananciaporempleadoComponent } from "src/modules/reportes/gananciaporempleado/gananciaporempleado.component";
+import { GananciapormodeloymarcaComponent } from "src/modules/reportes/gananciapormodeloymarca/gananciapormodeloymarca.component";
 import { GananciaycantidadpormarcaComponent } from "src/modules/reportes/gananciaycantidadpormarca/gananciaycantidadpormarca.component";
+import { VentasPorCategoriasComponent } from "src/modules/reportes/ventas-por-categorias/ventas-por-categorias.component";
 import { VentaListaComponent } from "src/modules/venta/venta-lista/venta-lista.component";
 import { LoginComponent } from "./layout/login/login.component";
 import { SkeletonComponent } from "./layout/skeleton/skeleton.component";
@@ -55,7 +58,18 @@ const routes: Routes = [
         path: 'gananciaPorMarca',
         component: GananciaycantidadpormarcaComponent,
       },
-
+      {
+        path: 'gananciaPorEmpleado',
+        component: GananciaporempleadoComponent
+      },
+      {
+        path: 'gananciaPorMarcaYModelo',
+        component: GananciapormodeloymarcaComponent
+      },
+      {
+        path: 'gananciaPorCategoria',
+        component: VentasPorCategoriasComponent
+      },
     ]
   },
 

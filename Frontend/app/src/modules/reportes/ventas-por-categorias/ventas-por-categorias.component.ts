@@ -3,16 +3,17 @@ import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { IGananciaYCantidadPorMarca } from 'src/interfaces/IGananaciaYCantidadPorMarca';
+import { IGananciaPorCategoria } from 'src/interfaces/IGananciaPorCategoria';
 import { ReportesService } from 'src/services/reportes/reportes.service';
 
 @Component({
-  selector: 'app-gananciaycantidadpormarca',
-  templateUrl: './gananciaycantidadpormarca.component.html',
-  styleUrls: ['./gananciaycantidadpormarca.component.css']
+  selector: 'app-ventas-por-categorias',
+  templateUrl: './ventas-por-categorias.component.html',
+  styleUrls: ['./ventas-por-categorias.component.css']
 })
-export class GananciaycantidadpormarcaComponent {
+export class VentasPorCategoriasComponent implements OnInit {
 
-  displayedColumns: string[] = ['cantidadVentas','costo','marca'];
+  displayedColumns: string[] = ['cantidadVentas','costo','categoria'];
   dataSource!: MatTableDataSource<IGenerica>;
 
   cargando: boolean = false;
@@ -42,7 +43,7 @@ export class GananciaycantidadpormarcaComponent {
 
  consultar() {
     try {
-     this.service.consulta().subscribe((r: IGenerica[]) => {
+     this.service.consulta4().subscribe((r: IGenerica[]) => {
         console.log(r);
         this.lista = r;
         this.dataSource = new MatTableDataSource(this.lista);
@@ -60,7 +61,7 @@ export class GananciaycantidadpormarcaComponent {
       this.listaFiltro = this.lista;
     } else {
       this.listaFiltro = this.lista?.filter((f) =>
-        f.marca
+        f.categoria
           ?.toLowerCase()
           .trim()
           .includes(this.filtro.toLocaleLowerCase())
@@ -72,4 +73,4 @@ export class GananciaycantidadpormarcaComponent {
 
 }
 
-export interface IGenerica extends IGananciaYCantidadPorMarca{}
+export interface IGenerica extends IGananciaPorCategoria{}

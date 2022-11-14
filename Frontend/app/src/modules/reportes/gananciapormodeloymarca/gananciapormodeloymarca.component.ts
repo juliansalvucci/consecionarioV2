@@ -2,17 +2,17 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { IGananciaYCantidadPorMarca } from 'src/interfaces/IGananaciaYCantidadPorMarca';
+import { IGananciaYCantidadPorModeloYMarca } from 'src/interfaces/IGananciaPorModeloYMarca';
 import { ReportesService } from 'src/services/reportes/reportes.service';
 
 @Component({
-  selector: 'app-gananciaycantidadpormarca',
-  templateUrl: './gananciaycantidadpormarca.component.html',
-  styleUrls: ['./gananciaycantidadpormarca.component.css']
+  selector: 'app-gananciapormodeloymarca',
+  templateUrl: './gananciapormodeloymarca.component.html',
+  styleUrls: ['./gananciapormodeloymarca.component.css']
 })
-export class GananciaycantidadpormarcaComponent {
+export class GananciapormodeloymarcaComponent implements OnInit {
 
-  displayedColumns: string[] = ['cantidadVentas','costo','marca'];
+  displayedColumns: string[] = ['cantidadVentas','costo','marca', 'modelo'];
   dataSource!: MatTableDataSource<IGenerica>;
 
   cargando: boolean = false;
@@ -42,7 +42,7 @@ export class GananciaycantidadpormarcaComponent {
 
  consultar() {
     try {
-     this.service.consulta().subscribe((r: IGenerica[]) => {
+     this.service.consulta3().subscribe((r: IGenerica[]) => {
         console.log(r);
         this.lista = r;
         this.dataSource = new MatTableDataSource(this.lista);
@@ -72,4 +72,4 @@ export class GananciaycantidadpormarcaComponent {
 
 }
 
-export interface IGenerica extends IGananciaYCantidadPorMarca{}
+export interface IGenerica extends IGananciaYCantidadPorModeloYMarca{}
