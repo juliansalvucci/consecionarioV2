@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tppa.tppa.Models.GananaciaPorMarca;
 import com.tppa.tppa.Models.GananciaPorCategoria;
+import com.tppa.tppa.Models.GananciaPorEmpleado;
 import com.tppa.tppa.Models.GananciaPorModeloYMarca;
 import com.tppa.tppa.Models.GananciaYCantidadEnPeriodo;
 import com.tppa.tppa.Models.Venta;
@@ -121,6 +122,37 @@ public class VentaController
         em.close();
         return test;
     }
+
+    @GetMapping(path = "/jpql/getReporteCantidadYGananciaPorEmpleado")
+    public List<Object> getReporteCantidadYGananciaPorEmpleado(String fechaDesde, String fechaHasta) {        
+        String CONSULTA = "SELECT COUNT(venta) as cantidadVentas, SUM(venta.costo) as costo, venta.empleado.nombre as empleado FROM Venta venta WHERE venta.fechaVenta > :fechaDesde AND venta.fechaVenta < :fechaHasta GROUP BY empleado";
+        var registros = em.createQuery(CONSULTA)
+        .setParameter("fechaDesde", fechaDesde)
+        .setParameter("fechaHasta", fechaHasta)
+        .getResultList();
+
+        List<Object> test = new ArrayList<>();
+
+        for(int i = 0; i < registros.size(); i++ ){
+            Object[] obj = (Object[])registros.get(i);
+            GananciaPorEmpleado gpm = new GananciaPorEmpleado();
+
+            var cantidad = obj[0].toString();
+            var costo = obj[1].toString();
+            var empleado = obj[2].toString();
+
+
+            gpm.setCantidadVentas(cantidad);
+            gpm.setCosto(costo);
+            gpm.setEmpleado(empleado);
+            
+            test.add(gpm);
+        }
+
+        em.close();
+        return test;
+    }
+
 
     @GetMapping(path = "/jpql/getReporteVentasPorCategoria")
     public List<Object> getReporteVentasPorCategoria(String fechaDesde, String fechaHasta) {        
