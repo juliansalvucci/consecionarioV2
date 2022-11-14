@@ -18,3 +18,7 @@ INNER JOIN modelo ON modelo.id = auto.modelo_id
 INNER JOIN marca ON marca.id = modelo.marca_id
 GROUP BY marca.nombre_marca,modelo.nombre_modelo;
 //
+
+//Para usar las gráficas.
+npm install @swimlane/ngx-charts --save
+npm install @types/d3 --save-dev
