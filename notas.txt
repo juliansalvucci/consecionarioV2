@@ -22,3 +22,16 @@ GROUP BY marca.nombre_marca,modelo.nombre_modelo;
 //Para usar las gráficas.
 npm install @swimlane/ngx-charts --save
 npm install @types/d3 --save-dev
+
+
+//CASOS DE PRUEBA
+
+CASO DE PRUEBA: DESCRIPCIÓN.
+
+PRECONDICION: DATOS A PROBAR
+(CONTEXTO PARA PROBAR)
+
+VERIFICAR: OBJETIVOS ESPECÍFICOS
+
+POSCONDICIÓN: GENERALMENTE NO APLICA
+EN CASO DE QUE SEA DE VISUALIZACION
