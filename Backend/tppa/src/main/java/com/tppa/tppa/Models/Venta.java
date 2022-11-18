@@ -25,14 +25,14 @@ public class Venta
 
     @OneToOne(fetch = FetchType.EAGER) private Auto auto;
     @OneToOne private Cliente cliente;
-    @OneToOne private Empleado empleado;
+    @OneToOne private Vendedor empleado;
 
-    public Empleado getEmpleado() 
+    public Vendedor getEmpleado() 
     {
         return empleado;
     }
 
-    public void setEmpleado(Empleado empleado) 
+    public void setEmpleado(Vendedor empleado) 
     {
         this.empleado = empleado;
     }

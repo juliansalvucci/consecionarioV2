@@ -8,18 +8,27 @@ import javax.validation.constraints.NotNull;
 
 
 @Entity
-@Table (name="empleado") 
-public class Empleado 
+@Table (name="vendedor") 
+public class Vendedor 
 {
     @Id @GeneratedValue(strategy=javax.persistence.GenerationType.AUTO)
     private long id;
     @NotNull private String nombre;
     @NotNull private String apellido;
     @NotNull private String documento;
-    @NotNull public String legajo;
-    @NotNull public String nombreUsuario;
+    @NotNull private String legajo;
+    @NotNull private String nombreUsuario;
+    @NotNull private String contraseña;
 
     
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
     public long getId() 
     {
         return id;
@@ -81,9 +90,9 @@ public class Empleado
     }
 
     ///////////////////////////////////////////
-    public Empleado(){}
+    public Vendedor(){}
 
-    public Empleado(String Legajo) 
+    public Vendedor(String Legajo) 
     {
         this.setLegajo(Legajo);
     } 
