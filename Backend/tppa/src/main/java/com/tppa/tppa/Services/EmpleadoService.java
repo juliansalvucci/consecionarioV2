@@ -6,25 +6,25 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tppa.tppa.Models.Empleado;
-import com.tppa.tppa.Repositories.EmpleadoRepository;
+import com.tppa.tppa.Models.Vendedor;
+import com.tppa.tppa.Repositories.VendedorRepository;
 
 @Service
 public class EmpleadoService{
     @Autowired
-    EmpleadoRepository repository;
+    VendedorRepository repository;
     
-    public ArrayList<Empleado> obtener()
+    public ArrayList<Vendedor> obtener()
     {
-        return (ArrayList<Empleado>) repository.findAll();
+        return (ArrayList<Vendedor>) repository.findAll();
     }
 
-    public Empleado guardar(Empleado empleado)
+    public Vendedor guardar(Vendedor empleado)
     {
         return repository.save(empleado);
     }
 
-    public Optional<Empleado> obtenerPorId(Long id)
+    public Optional<Vendedor> obtenerPorId(Long id)
     {
         return repository.findById(id);
     }
