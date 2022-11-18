@@ -16,14 +16,9 @@ public class Vendedor
     @NotNull private String nombre;
     @NotNull private String apellido;
     @NotNull private String documento;
-    @NotNull private String legajo;
     @NotNull private String nombreUsuario;
     @NotNull private String contraseña;
 
-    
-    public String getContraseña() {
-        return contraseña;
-    }
 
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
@@ -69,21 +64,6 @@ public class Vendedor
         this.nombre = nombre;
     }
 
-    public String getLegajo() 
-    {
-        return legajo;
-    }
-
-    public void setLegajo(String legajo)
-    {
-        this.legajo = legajo;
-    }
-
-    public String getNombreUsuario()
-    {
-        return nombreUsuario;
-    }
-
     public void setNombreUsuario(String nombreUsuario) 
     {
         this.nombreUsuario = nombreUsuario;
@@ -94,6 +74,5 @@ public class Vendedor
 
     public Vendedor(String Legajo) 
     {
-        this.setLegajo(Legajo);
     } 
 }
