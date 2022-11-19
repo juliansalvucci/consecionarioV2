@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
       console.log(this.registerForm.value);
       this.authService.login(this.registerForm.value).subscribe((data:IUsuario) => {
         console.log('Registro realizado con éxito');
+        localStorage.setItem("user",JSON.stringify(data))
         this.router.navigateByUrl('system');
         console.log(data)
       });
