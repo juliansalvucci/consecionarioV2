@@ -33,12 +33,6 @@ export class LoginComponent implements OnInit {
         console.log('Registro realizado con éxito');
         this.router.navigateByUrl('system');
         console.log(data)
-        localStorage.setItem("user",JSON.stringify(data));
-        const usuario = localStorage.getItem("user");
-        if(usuario){
-          let jsonUser = JSON.parse(usuario);
-          console.log('Test', jsonUser.apellido)
-        } 
       });
     } catch (e) {
       console.log(this.registerForm.value);

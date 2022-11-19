@@ -6,6 +6,8 @@ import { ICliente } from 'src/interfaces/ICliente';
 import { IMarca } from 'src/interfaces/IMarca';
 import { IModelo } from 'src/interfaces/IModelo';
 import { IPais } from 'src/interfaces/IPais';
+import { IUsuario } from 'src/interfaces/IUsuario';
+import { IVendedor } from 'src/interfaces/IVendedor';
 import { AutoService } from 'src/services/auto/auto.service';
 import { ClienteService } from 'src/services/cliente/cliente.service';
 import { DataService } from 'src/services/data.service';
@@ -78,9 +80,9 @@ export class VentaComponent implements OnInit {
     precio: ['', Validators.required],
     costo: [0],
     porcentaje: [0],
-    documento:[],
-    nombre:[],
-    apellido:[],
+    documento: [],
+    nombre: [],
+    apellido: [],
     auto: this.fb.group({
       id: [0],
       precio: [0],
@@ -108,8 +110,11 @@ export class VentaComponent implements OnInit {
       id: [],
       nombre: [],
       apellido: [],
-      documento:[]
+      documento: [],
     }),
+    empleado: this.fb.group({
+      id:[]
+    })
   });
 
   configurarFormulario() {
@@ -128,9 +133,19 @@ export class VentaComponent implements OnInit {
         porcentaje: r.pais.categoria.porcentaje,
         idModelo: r.modelo.id,
         idMarca: r.modelo.marca.id,
-        idPais: r.pais.id
+        idPais: r.pais.id,
       });
     });
+  }
+
+  jsonUser!: IVendedor
+
+  getVendedor() {
+    const usuario = localStorage.getItem('user');
+    if (usuario) {
+      this.jsonUser = JSON.parse(usuario);
+      console.log('Test', this.jsonUser);
+    }
   }
 
   setFormValues() {
@@ -141,17 +156,22 @@ export class VentaComponent implements OnInit {
     this.registerForm.value.auto.modelo.id = this.modelo.id;
     this.registerForm.value.auto.modelo.nombreModelo = this.modelo.nombreModelo;
     this.registerForm.value.auto.modelo.marca.id = this.modelo.marca.id;
-    this.registerForm.value.auto.modelo.marca.nombreMarca = this.modelo.marca.nombreMarca;
+    this.registerForm.value.auto.modelo.marca.nombreMarca =
+      this.modelo.marca.nombreMarca;
     this.registerForm.value.auto.pais.id = this.pais.id;
     this.registerForm.value.auto.pais.nombrePais = this.pais.nombrePais;
     this.registerForm.value.auto.pais.categoria.id = this.pais.categoria.id;
-    this.registerForm.value.auto.pais.categoria.nombreCategoria = this.pais.categoria.nombreCategoria;
-    this.registerForm.value.auto.pais.categoria.porcentaje = this.pais.categoria.porcentaje;
+    this.registerForm.value.auto.pais.categoria.nombreCategoria =
+      this.pais.categoria.nombreCategoria;
+    this.registerForm.value.auto.pais.categoria.porcentaje =
+      this.pais.categoria.porcentaje;
     this.registerForm.value.fechaVenta = new Date();
+    this.registerForm.value.empleado.id = this.jsonUser.id;
   }
 
   async register() {
     try {
+      this.getVendedor();
       this.setFormValues();
 
       console.log(this.registerForm.value);
@@ -287,47 +307,48 @@ export class VentaComponent implements OnInit {
   listaPaises!: IPais[];
   filterPaises!: IPais[];
 
-  consultarPaises(){
-    try  {
+  consultarPaises() {
+    try {
       this.paisService.consulta().subscribe((r: IGenerica[]) => {
-        console.log('Países',r);
-        this.listaPaises = r
-        this.filterPaises = this.listaPaises
+        console.log('Países', r);
+        this.listaPaises = r;
+        this.filterPaises = this.listaPaises;
       });
     } catch (e) {
       console.log(e);
     }
   }
-  
+
   filtrarPaises() {
-    this.filterPaises = this.listaPaises?.filter((f) => f.nombrePais?.toLowerCase().trim().includes(this.filtro4));
+    this.filterPaises = this.listaPaises?.filter((f) =>
+      f.nombrePais?.toLowerCase().trim().includes(this.filtro4)
+    );
   }
-  
-  pais!: IPais
-  
+
+  pais!: IPais;
+
   displayPaises(id: number) {
     if (!id) return '';
-  
+
     let index = this.listaPaises.findIndex((r) => r.id === id);
     console.log('index', index);
-  
+
     this.pais = this.listaPaises[index];
-  
-    return this.pais.nombrePais
+
+    return this.pais.nombrePais;
   }
 
-  
   autoCompletarCliente() {
-    let documento = this.registerForm.value.documento
+    let documento = this.registerForm.value.documento;
 
-    console.log(documento)
+    console.log(documento);
 
     this.service3.consultaPorDoumento(documento).subscribe((r) => {
       console.log(r);
       this.registerForm.get('idCliente')?.setValue(r.id);
       this.registerForm.value.cliente.id = r.id;
       this.registerForm.get('nombre')?.setValue(r.nombre);
-      this.registerForm.value.cliente.nombre = r.nombre
+      this.registerForm.value.cliente.nombre = r.nombre;
       this.registerForm.get('apellido')?.setValue(r.apellido);
       this.registerForm.value.cliente.apellido = r.apellido;
       this.registerForm.value.cliente.documento = r.documento;

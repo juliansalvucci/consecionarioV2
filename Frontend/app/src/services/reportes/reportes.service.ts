@@ -11,7 +11,7 @@ export class ReportesService {
 
   consulta():Observable<any>
   {
-    return this.http.get('http://localhost:8080/venta/jpql/getReporteCantidadYGananciaPorMarca?fechaDesde=2022-11-01T03%3A21%3A40.487Z&fechaHasta=2022-11-15T03%3A21%3A40.487Z')
+    return this.http.get('http://localhost:8080/venta/jpql/getReporteCantidadYGananciaPorMarca?fechaDesde=2022-11-19T05%3A41%3A37.836Z&fechaHasta=2022-12-29T05%3A41%3A37.836Z')
   }
 
   consulta2():Observable<any>
