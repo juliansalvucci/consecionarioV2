@@ -1,6 +1,6 @@
 <main class="container-fluid bg-general p-0 min-vh-100">
     <section class="row w-100 min-vh-100 d-flex justify-content-center align-items-center">
-        <div class="col-5 text-center">
+        <div class="col-5 text-center" [formGroup]="registerForm" (ngSubmit)="login()">
             
             <img src="../../../../assets/imagenes/logo.png" alt="Logo" class="logo">
             
@@ -8,12 +8,12 @@
                 
                 <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label id="negrita">Email</mat-label>
-                    <input matInput  placeholder="Email">
+                    <input matInput placeholder="Email" formControlName="nombreUsuario">
                 </mat-form-field>
 
                 <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label id="negrita">Contraseña</mat-label>
-                    <input matInput  placeholder="Email" type="password">
+                    <input matInput  placeholder="Email" type="password" formControlName="contraseña">
                 </mat-form-field>
 
                 <br>
