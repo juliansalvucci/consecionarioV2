@@ -1,4 +1,4 @@
-<p>gananciaporempleado works!</p><div class="container-fluid">
+<div class="container-fluid">
     <br>
     <h3>Ganancia por marca</h3>
       <div class="container">
@@ -12,7 +12,31 @@
               </div>
           </div>
       </div>
-  
+    <div [formGroup]="registerForm">
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Fecha desde</mat-label>
+                <input matInput [matDatepicker]="pickerDesde" readonly="true" formControlName="fechaDesde">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="pickerDesde"></mat-datepicker-toggle>
+                <mat-datepicker #pickerDesde></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Fecha hasta</mat-label>
+                <input matInput [matDatepicker]="pickerHasta" readonly="true" formControlName="fechaHasta">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="pickerHasta"></mat-datepicker-toggle>
+                <mat-datepicker #pickerHasta></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div>
+            <button (click)="buscar()">Buscar</button>
+        </div>
+    </div>
+      
+      
       <div class="mat-elevation-z8">
           <table mat-table matSort [dataSource]="dataSource">
         

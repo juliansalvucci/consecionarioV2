@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { IGananciaPorEmpleado } from 'src/interfaces/IGananciaPorEmpleado';
 import { ReportesService } from 'src/services/reportes/reportes.service';
+import * as moment from 'moment-timezone'
 
 @Component({
   selector: 'app-gananciaporempleado',
@@ -21,11 +23,16 @@ export class GananciaporempleadoComponent  {
   listaFiltro!: IGenerica[];
   lista!: IGenerica[];
 
+  registerForm = this.fb.group({
+    fechaDesde: [''],
+    fechaHasta: [''],
+  });
+
   constructor(
     private service: ReportesService,
-    public _MatPaginatorIntl: MatPaginatorIntl
+    public _MatPaginatorIntl: MatPaginatorIntl,
+    private fb: FormBuilder
   ) {
-    this.consultar();
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -40,9 +47,14 @@ export class GananciaporempleadoComponent  {
     this.dataSource.paginator = this.paginator;
   }
 
- consultar() {
+ buscar() {
     try {
-     this.service.consulta2().subscribe((r: IGenerica[]) => {
+      let fechaDesde = moment(this.registerForm.value.fechaDesde).tz('America/Argentina/Cordoba')
+      .format();
+      let fechaHasta = moment(this.registerForm.value.fechaHasta).tz('America/Argentina/Cordoba')
+      .format();
+
+     this.service.consulta2(fechaDesde,fechaHasta).subscribe((r: IGenerica[]) => {
         console.log(r);
         this.lista = r;
         this.dataSource = new MatTableDataSource(this.lista);
