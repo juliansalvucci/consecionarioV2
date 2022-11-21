@@ -33,6 +33,8 @@ export class GananciaporempleadoComponent  {
     public _MatPaginatorIntl: MatPaginatorIntl,
     private fb: FormBuilder
   ) {
+    //Inicio datasource vació para que me indique el span que no hay registros inicialmente.
+    this.dataSource = new MatTableDataSource(this.lista);
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
