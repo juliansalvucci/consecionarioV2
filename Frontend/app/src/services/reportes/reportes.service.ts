@@ -9,25 +9,24 @@ export class ReportesService {
 
   constructor(private http: HttpClient) { }
 
-  consulta():Observable<any>
+  consulta(fechaDesde:string, fechaHasta: string):Observable<any>
   {
-    return this.http.get('http://localhost:8080/venta/jpql/getReporteCantidadYGananciaPorMarca?fechaDesde=2022-11-19T05%3A41%3A37.836Z&fechaHasta=2022-12-29T05%3A41%3A37.836Z')
+    return this.http.get(`http://localhost:8080/venta/jpql/getReporteCantidadYGananciaPorMarca?fechaDesde=${fechaDesde}&fechaHasta=${fechaHasta}`)
   }
 
   consulta2(fechaDesde:string, fechaHasta: string):Observable<any>
   {
-    console.log(fechaDesde)
     return this.http.get(`http://localhost:8080/venta/jpql/getReporteCantidadYGananciaPorEmpleado?fechaDesde=${fechaDesde}&fechaHasta=${fechaHasta}`)
   }
 
-  consulta3():Observable<any>
+  consulta3(fechaDesde:string,fechaHasta:string):Observable<any>
   {
-    return this.http.get('http://localhost:8080/venta/jpql/getReporteCantidadYGananciaPorMarcaYModelo?fechaDesde=2022-10-06T19%3A58%3A17.355Z&fechaHasta=2022-11-26T19%3A58%3A17.355Z')
+    return this.http.get(`http://localhost:8080/venta/jpql/getReporteCantidadYGananciaPorMarcaYModelo?fechaDesde=${fechaDesde}&fechaHasta=${fechaHasta}`)
   }
 
-  consulta4():Observable<any>
+  consulta4(fechaDesde:string,fechaHasta:string):Observable<any>
   {
-    return this.http.get('http://localhost:8080/venta/jpql/getReporteVentasPorCategoria?fechaDesde=2022-10-06T19%3A58%3A17.355Z&fechaHasta=2022-11-26T19%3A58%3A17.355Z')
+    return this.http.get(`http://localhost:8080/venta/jpql/getReporteVentasPorCategoria?fechaDesde=${fechaDesde}&fechaHasta=${fechaHasta}`)
     
   }
 

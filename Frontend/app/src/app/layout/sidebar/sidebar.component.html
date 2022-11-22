@@ -4,17 +4,36 @@
     <mat-nav-list>
 
         <a mat-list-item [routerLink]="STR_AUTO" [routerLinkActive]="['active']" id="red"> Autos</a>
-        <a mat-list-item [routerLink]="STR_MODELO" [routerLinkActive]="['active']"  id="red"> Modelos </a>
+        
+        <a mat-list-item [routerLink]="STR_VENTAS" [routerLinkActive]="['active']"  id="red"> Ventas </a>
+        
+
+        <a  mat-list-item id="boton" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" id="red">
+            Datos
+            <i id="flecha" class="ms-2 fas fa-angle-left"></i>
+        </a>
+        <div class="collapse" id="collapseExample">
+            <mat-nav-list>
+                <a mat-list-item [routerLink]="STR_MODELO" [routerLinkActive]="['active']"  id="red"> Modelos </a>
         <a mat-list-item [routerLink]="STR_MARCA" [routerLinkActive]="['active']" id="red"> Marcas </a>
         <a mat-list-item [routerLink]="STR_PAIS" [routerLinkActive]="['active']"  id="red"> Países </a>
         <a mat-list-item [routerLink]="STR_CLIENTE" [routerLinkActive]="['active']"  id="red"> Clientes </a>
         <a mat-list-item [routerLink]="STR_CATEGORIAS" [routerLinkActive]="['active']"  id="red"> Categorías </a>
-        <a mat-list-item [routerLink]="STR_VENTAS" [routerLinkActive]="['active']"  id="red"> Ventas </a>
-        <a mat-list-item [routerLink]="STR_GANANCIA_MARCAS" [routerLinkActive]="['active']"  id="red"> REP1 </a>
-        <a mat-list-item [routerLink]="STR_GANANCIA_EMPLEADOS" [routerLinkActive]="['active']"  id="red"> REP2 </a>
-        <a mat-list-item [routerLink]="STR_GANANCIA_MODELOYMARCA" [routerLinkActive]="['active']"  id="red"> REP2 </a>
-        <a mat-list-item [routerLink]="STR_GANANCIA_CATEGORIA" [routerLinkActive]="['active']"  id="red"> REP2 </a>
+            </mat-nav-list>
+        </div>
         
+        <a  mat-list-item id="boton" data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="true" aria-controls="collapseExample1" id="red">
+            Reportes
+            <i id="flecha" class="ms-2 fas fa-angle-left"></i>
+        </a>
+        <div class="collapse" id="collapseExample1">
+            <mat-nav-list>
+                <a mat-list-item [routerLink]="STR_GANANCIA_MARCAS" [routerLinkActive]="['active']"  id="red"> Marca </a>
+                <a mat-list-item [routerLink]="STR_GANANCIA_EMPLEADOS" [routerLinkActive]="['active']"  id="red"> Vendedor </a>
+                <a mat-list-item [routerLink]="STR_GANANCIA_MODELOYMARCA" [routerLinkActive]="['active']"  id="red"> Modelo </a>
+                <a mat-list-item [routerLink]="STR_GANANCIA_CATEGORIA" [routerLinkActive]="['active']"  id="red"> Categoría </a>
+            </mat-nav-list>
+        </div>
 
         
     </mat-nav-list>
