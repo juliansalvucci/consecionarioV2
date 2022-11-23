@@ -6,7 +6,8 @@ import { FormGroup } from '@angular/forms';
 })
 export class DataService 
 {
-  id!: number;
-  documento!: string
-  object!: any
+  id: number = 0;
+  idMarca: number = 0;
+  documento!: string;
+  object!: any;
 }

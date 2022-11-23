@@ -10,6 +10,7 @@
                     {{item.nombreMarca}}
                 </mat-option>
             </mat-autocomplete>
+            <mat-icon matSuffix (click)="abrirModalMarca()"><img src="../../../assets/iconos/add.svg" height="30px" style="margin-bottom: 15px;"></mat-icon>
         </mat-form-field>
 
         <mat-error class="text-danger"
@@ -26,6 +27,7 @@
                     {{item.nombreModelo}}
                 </mat-option>
             </mat-autocomplete>
+            <mat-icon matSuffix (click)="abrirModalModelo()"><img src="../../../assets/iconos/add.svg" height="30px" style="margin-bottom: 15px;"></mat-icon>
         </mat-form-field>
 
         <mat-error class="text-danger"
@@ -42,6 +44,7 @@
                     {{item.nombrePais}}
                 </mat-option>
             </mat-autocomplete>
+            <mat-icon matSuffix (click)="abrirModalPais()"><img src="../../../assets/iconos/add.svg" height="30px" style="margin-bottom: 15px;"></mat-icon>
         </mat-form-field>
 
         <mat-error class="text-danger"

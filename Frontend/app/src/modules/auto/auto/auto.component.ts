@@ -5,6 +5,9 @@ import { IAuto } from 'src/interfaces/IAuto';
 import { IMarca } from 'src/interfaces/IMarca';
 import { IModelo } from 'src/interfaces/IModelo';
 import { IPais } from 'src/interfaces/IPais';
+import { MarcaComponent } from 'src/modules/marca/marca/marca.component';
+import { ModeloComponent } from 'src/modules/modelo/modelo/modelo.component';
+import { PaisComponent } from 'src/modules/pais/pais/pais.component';
 import { AutoService } from 'src/services/auto/auto.service';
 import { DataService } from 'src/services/data.service';
 import { MarcaService } from 'src/services/marca/marca.service';
@@ -242,6 +245,37 @@ export class AutoComponent implements OnInit {
     return this.pais.nombrePais
   }
 
+  abrirModalPais(): void {
+    const dialogRef = this.dialog.open(PaisComponent, {
+      width: '450px',
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      
+    });
+  }
+
+  abrirModalMarca(): void {
+    const dialogRef = this.dialog.open(MarcaComponent, {
+      width: '450px',
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      
+    });
+  }
+
+  abrirModalModelo(): void {
+    if(this.registerForm.get('idMarca')?.value != 0){
+      console.log('id que llega',this.registerForm.get('idMarca')?.value)
+      this.dataService.idMarca = this.registerForm.get('idMarca')?.value;
+      console.log('id que pasa',this.dataService.idMarca)
+      const dialogRef = this.dialog.open(ModeloComponent, {
+        width: '450px',
+      });
+      dialogRef.afterClosed().subscribe((result) => {
+        
+      });
+    } 
+  }
 }
 
 

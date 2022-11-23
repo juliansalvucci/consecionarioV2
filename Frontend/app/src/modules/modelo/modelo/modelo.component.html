@@ -9,7 +9,7 @@
             *ngIf="registerForm.get('nombreModelo')?.invalid && registerForm.get('nombreModelo')?.touched">
             El <strong>campo</strong> es requerido
         </mat-error>
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="fill" [hidden]="hiddeMarca">
                 <mat-label id="negrita">Marca</mat-label>
                 <input formControlName="idMarca" matInput type="text" [matAutocomplete]="a1" [(ngModel)]="filtro"
                     (ngModelChange)="filtrar()" (keyup)="filtrar()" (keyup.enter)="filtrar()" />
