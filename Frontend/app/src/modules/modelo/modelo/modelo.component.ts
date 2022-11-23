@@ -44,9 +44,22 @@ export class ModeloComponent implements OnInit {
     }),
   });
 
+
+  hiddeMarca: boolean = false
+
   configurarFormulario() {
-    if (this.dataService.id != 0) {
+    if (this.dataService.id != 0){
       this.autocompletar();
+    } 
+    if (this.dataService.idMarca !=0){
+      console.log("llegó")
+      let id = this.dataService.idMarca
+
+      this.registerForm.value.idMarca = id;
+      this.registerForm.value.marca.id = id;
+      this.hiddeMarca = true;
+      
+      console.log(this.registerForm.value)
     }
   }
 
