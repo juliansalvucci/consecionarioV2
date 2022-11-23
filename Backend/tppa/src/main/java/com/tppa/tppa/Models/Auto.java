@@ -20,12 +20,23 @@ public class Auto
     private long id; 
     @NotNull private Double precio;
     @NotNull private Double costo;
+    @NotNull private Double ganancia;
     @NotNull private Boolean vendido;
 
     @OneToOne(fetch=FetchType.EAGER) 
     private Modelo modelo;
     @OneToOne(fetch=FetchType.EAGER) 
     private Pais pais;
+
+    public Double getGanancia()
+    {
+        return ganancia;
+    }
+
+    public void setGanancia(Double ganancia) 
+    {
+        this.ganancia = ganancia;
+    }
 
     public Pais getPais() 
     {

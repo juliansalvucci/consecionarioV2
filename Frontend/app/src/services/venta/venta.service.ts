@@ -22,6 +22,11 @@ export class VentaService {
     return this.http.get(this.URL.CONSULTA);
   }
 
+  consultaAvanzada(data:any):Observable<any>
+  {
+    return this.http.post(`http://localhost:8080/venta/jpql/obtenerPorRangoDeCostosYFechas`,data)
+  }
+
   consultaPorId(id:number):Observable<any>
   {
     return this.http.get(this.URL.CONSULTAPORID + id);

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tppa.tppa.Models.BusquedaAvanzadaRequest;
 import com.tppa.tppa.Models.GananaciaPorMarca;
 import com.tppa.tppa.Models.GananciaPorCategoria;
 import com.tppa.tppa.Models.GananciaPorEmpleado;
@@ -42,9 +43,20 @@ public class VentaController
         return service.obtener();
     }
 
-    @GetMapping(path = "/criteria/obtenerPorRangoDeCostosYFechas")
-    public List<Venta> obtenerPorRangoDeCostosYFechas(Double montoInicial, Double montoFinal, String fechaDesde,String fechaHasta) {
-        return null;
+    @PostMapping(path = "/jpql/obtenerPorRangoDeCostosYFechas")
+    public List<Venta> obtenerPorRangoDeCostosYFechas(@RequestBody BusquedaAvanzadaRequest bar) 
+    {
+        String CONSULTA = "SELECT venta FROM Venta venta WHERE venta.costo > :montoInicial AND venta.costo < :montoFinal AND  venta.fechaVenta > :fechaDesde AND venta.fechaVenta < :fechaHasta";
+        @SuppressWarnings("unchecked")
+        List<Venta> registros = em.createQuery(CONSULTA)
+        .setParameter("montoInicial", bar.getMontoInicial())
+        .setParameter("montoFinal", bar.getMontoFinal())
+        .setParameter("fechaDesde", bar.getFechaDesde())
+        .setParameter("fechaHasta", bar.getFechaHasta())
+        .getResultList();
+
+        em.close();
+        return registros;
     }
 
     @GetMapping(path = "/jpql/obtenerPorRangoDeCostos")

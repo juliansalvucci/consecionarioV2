@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -24,11 +25,19 @@ export class VentaListaComponent implements OnInit {
   listaFiltro!: IGenerica[];
   lista!: IGenerica[];
 
+  registerForm = this.fb.group({
+    fechaDesde: [''],
+    fechaHasta: [''],
+    montoInicial: [0],
+    montoFinal: [0],
+  });
+
   constructor(
     public dialog: MatDialog,
     private service: VentaService,
     private dataService: DataService,
-    public _MatPaginatorIntl: MatPaginatorIntl
+    public _MatPaginatorIntl: MatPaginatorIntl,
+    private fb: FormBuilder
   ) {
     this.consultar();
   }
@@ -48,6 +57,22 @@ export class VentaListaComponent implements OnInit {
   consultar(): void {
     try {
       this.service.consulta().subscribe((r: IGenerica[]) => {
+        console.log(r);
+        this.lista = r;
+        this.dataSource = new MatTableDataSource(this.lista);
+        this.configTable();
+        this.cargando = false;
+      });
+    } catch (e) {
+      console.log(e);
+      this.cargando = false;
+    }
+  }
+
+  buscar(){
+    try {
+      console.log(this.registerForm.value)
+      this.service.consultaAvanzada(this.registerForm.value).subscribe((r: IGenerica[]) => {
         console.log(r);
         this.lista = r;
         this.dataSource = new MatTableDataSource(this.lista);

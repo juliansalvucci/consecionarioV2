@@ -1,23 +1,55 @@
 <div class="container-fluid">
     <br>
     <h3>Gestión ventas</h3>
-    <div class="container">
-        <div class="row">
-            <div class="col-10">
+    <div class="d-flex">
+        <div class="container">
+            <div class="row">
+                <div class="col-10">
                     <mat-form-field class="example-full-width" appearance="legacy">
-                      <mat-label>Búsqueda por nombre</mat-label>
-                      <input matInput name="filtro" [(ngModel)]="filtro" (ngModelChange)="filtrar()" (keyup)="filtrar()"
-                          (keyup.enter)="filtrar()">
-                  </mat-form-field>
+                        <mat-label>Búsqueda por nombre</mat-label>
+                        <input matInput name="filtro" [(ngModel)]="filtro" (ngModelChange)="filtrar()"
+                            (keyup)="filtrar()" (keyup.enter)="filtrar()">
+                    </mat-form-field>
+                </div>
             </div>
-
-            <!--
-            <div class="col-2">
-                <button mat-raised-button class="bg-success" (click)="abrirModal()">Agregar</button>
+        </div>
+        <div [formGroup]="registerForm" class="d-flex">
+            <div>
+                <mat-form-field appearance="legacy" class="datepickers">
+                    <mat-label>Fecha desde</mat-label>
+                    <input matInput [matDatepicker]="pickerDesde" readonly="true" formControlName="fechaDesde">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="pickerDesde"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerDesde></mat-datepicker>
+                </mat-form-field>
             </div>
-            -->
+            <div>
+                <mat-form-field appearance="legacy" class="datepickers">
+                    <mat-label>Fecha hasta</mat-label>
+                    <input matInput [matDatepicker]="pickerHasta" readonly="true" formControlName="fechaHasta">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="pickerHasta"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerHasta></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="example-full-width" appearance="legacy">
+                    <mat-label>Búsqueda por nombre</mat-label>
+                    <input matInput type="number" formControlName="montoInicial">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="example-full-width" appearance="legacy">
+                    <mat-label>Búsqueda por nombre</mat-label>
+                    <input matInput type="number" formControlName="montoFinal">
+                </mat-form-field>
+            </div>
+            <div>
+                <button mat-raised-button (click)="buscar()">Buscar</button>
+            </div>
         </div>
     </div>
+
 
     <div class="mat-elevation-z8">
         <table mat-table matSort [dataSource]="dataSource">
