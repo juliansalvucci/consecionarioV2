@@ -27,11 +27,11 @@ class TppaApplicationTests {
 		pais.setCategoria(categoria);
 		auto.setPais(pais);
 
-		auto.setPrecio(230.000);
+		auto.setPrecio(230000D);
 
 		var a = ece.calcularCosto(auto);
         
-		assertEquals(23.000, a.getCosto());
+		assertEquals(253000D, a.getCosto());
 	}
 
 }
