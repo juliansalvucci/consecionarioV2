@@ -33,9 +33,9 @@ public class Auto
         return ganancia;
     }
 
-    public void setGanancia(Double ganancia) 
+    public void setGanancia(Double costo, Double precio) 
     {
-        this.ganancia = ganancia;
+        this.ganancia = costo - precio;
     }
 
     public Pais getPais() 
