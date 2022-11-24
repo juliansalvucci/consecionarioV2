@@ -9,13 +9,14 @@ import com.tppa.tppa.Models.Auto;
 import com.tppa.tppa.Models.Categoria;
 import com.tppa.tppa.Models.Pais;
 import com.tppa.tppa.strategies.costoStrategies.EstrategiaCostoAmericaExtranjero;
+import com.tppa.tppa.strategies.costoStrategies.EstrategiaCostoNacional;
 
 
 @SpringBootTest
 class TppaApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void testCalculoImpuestoExtranjeroYAmerica() {
 
 		EstrategiaCostoAmericaExtranjero ece = new EstrategiaCostoAmericaExtranjero();
 		Auto auto = new Auto();
@@ -32,6 +33,66 @@ class TppaApplicationTests {
 		var a = ece.calcularCosto(auto);
         
 		assertEquals(253000D, a.getCosto());
+	}
+
+	@Test
+	void testCalculoImpuestoNacionalRango1() {
+
+		EstrategiaCostoNacional ecn = new EstrategiaCostoNacional();
+		Auto auto = new Auto();
+		Pais pais = new Pais();
+		Categoria categoria = new Categoria();
+
+		pais.setNombrePais("testPais");
+		categoria.setPorcentaje(10);
+		pais.setCategoria(categoria);
+		auto.setPais(pais);
+
+		auto.setPrecio(230000D);
+
+		var a = ecn.calcularCosto(auto);
+        
+		assertEquals(280000D, a.getCosto());
+	}
+
+	@Test
+	void testCalculoImpuestoNacionalRango2() {
+
+		EstrategiaCostoNacional ecn = new EstrategiaCostoNacional();
+		Auto auto = new Auto();
+		Pais pais = new Pais();
+		Categoria categoria = new Categoria();
+
+		pais.setNombrePais("testPais");
+		categoria.setPorcentaje(10);
+		pais.setCategoria(categoria);
+		auto.setPais(pais);
+
+		auto.setPrecio(60000D);
+
+		var a = ecn.calcularCosto(auto);
+        
+		assertEquals(70000D, a.getCosto());
+	}
+
+	@Test
+	void testCalculoImpuestoNacionalRango3() {
+
+		EstrategiaCostoNacional ecn = new EstrategiaCostoNacional();
+		Auto auto = new Auto();
+		Pais pais = new Pais();
+		Categoria categoria = new Categoria();
+
+		pais.setNombrePais("testPais");
+		categoria.setPorcentaje(10);
+		pais.setCategoria(categoria);
+		auto.setPais(pais);
+
+		auto.setPrecio(40000D);
+
+		var a = ecn.calcularCosto(auto);
+        
+		assertEquals(45000D, a.getCosto());
 	}
 
 }
