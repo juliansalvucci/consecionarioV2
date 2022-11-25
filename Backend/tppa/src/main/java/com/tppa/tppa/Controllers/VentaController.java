@@ -196,6 +196,38 @@ public class VentaController
         return test;
     }
 
+    @GetMapping(path = "/jpql/getReporteVentasPorCategoria1")
+    public List<Object> getReporteMAMADO(String fechaDesde, String fechaHasta) {        
+        String CONSULTA = "SELECT COUNT(venta) as cantidadVentas, SUM(venta.costo) as ganancia, venta.auto.modelo.nombreModelo as modelo , venta.auto.modelo.marca.nombreMarca as marca, venta.auto.pais.categoria.nombreCategoria as categoria, venta.cliente.nombre as clienteNombre, venta.cliente.apellido as clienteApellido ,venta.empleado.nombre as empleadoNombre, venta.empleado.apellido as empleadoApellido FROM Venta venta WHERE venta.fechaVenta > :fechaDesde AND venta.fechaVenta < :fechaHasta GROUP BY modelo,marca,categoria,clienteNombre,clienteApellido,empleadoNombre,empleadoApellido";
+        List<Object> registros = em.createQuery(CONSULTA)
+        .setParameter("fechaDesde", fechaDesde)
+        .setParameter("fechaHasta", fechaHasta)
+        .getResultList();
+
+
+        /* 
+        List<Object> test = new ArrayList<>();
+
+        for(int i = 0; i < registros.size(); i++ ){
+            Object[] obj = (Object[])registros.get(i);
+            GananciaPorCategoria gpc = new GananciaPorCategoria();
+
+            var cantidad = obj[0].toString();
+            var costo = obj[1].toString();
+            var categoria = obj[2].toString();
+
+
+            gpc.setCantidadVentas(cantidad);
+            gpc.setCosto(costo);
+            gpc.setCategoria(categoria);
+            
+            test.add(gpc);
+        }
+        */
+
+        em.close();
+        return registros;
+    }
 
 
     @GetMapping(path = "/jpql/gananciaTotal")
