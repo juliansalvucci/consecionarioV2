@@ -41,4 +41,39 @@ public class VentaService
     {
         return customRepository.obtenerPorRangoDeCostosYFechas(bar);
     }
+
+    public List<Venta> obtenerPorRangoDeCostos(Double montoInicial, Double montoFinal)
+    {
+        return customRepository.obtenerPorRangoDeCostos(montoInicial, montoFinal);
+    }
+
+    public List<Object> getReporteCantidadYGananciaPorMarca(String fechaDesde, String fechaHasta) 
+    {        
+        return customRepository.getReporteCantidadYGananciaPorMarca(fechaDesde, fechaHasta);
+    }
+
+    public List<Object> getReporteCantidadYGananciaPorMarcaYModelo(String fechaDesde, String fechaHasta) 
+    {        
+        return customRepository.getReporteCantidadYGananciaPorMarcaYModelo(fechaDesde, fechaHasta);
+    }
+
+    public List<Object> getReporteCantidadYGananciaPorEmpleado(String fechaDesde, String fechaHasta) 
+    {        
+        return customRepository.getReporteCantidadYGananciaPorEmpleado(fechaDesde, fechaHasta);
+    }
+
+    public List<Object> getReporteVentasPorCategoria(String fechaDesde, String fechaHasta) 
+    {        
+        return customRepository.getReporteVentasPorCategoria(fechaDesde, fechaHasta);
+    }
+
+    public List<Object> getReporteDetalleVentasPorEmpleado(String fechaDesde, String fechaHasta) 
+    {        
+        return customRepository.getReporteDetalleVentasPorEmpleado(fechaDesde, fechaHasta);
+    }
+
+    public Object obtenerGananciaTotal(String fechaDesde, String fechaHasta) 
+    {
+        return customRepository.obtenerGananciaTotal(fechaDesde, fechaHasta);
+    }
 }
