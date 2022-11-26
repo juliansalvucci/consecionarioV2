@@ -13,39 +13,45 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tppa.tppa.Models.Pais;
-import com.tppa.tppa.Services.PaisService;
+import com.tppa.tppa.Models.Rango;
+import com.tppa.tppa.Services.RangoService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200/")
-@RequestMapping("/pais")
-public class PaisController 
+@RequestMapping("/rango")
+public class RangoController 
 {
     @Autowired
-    PaisService service;
-    
+    RangoService service;
+   
     @GetMapping()
-    public List<Pais> obtener()
+    public List<Rango> obtener()
     {
         return service.obtener();
     }
     
     @PostMapping()
-    public Pais guardar(@RequestBody Pais pais)
+    public Rango guardar(@RequestBody Rango rango)
     {
-        return this.service.guardar(pais);
+        return service.guardar(rango);
     }
 
     @GetMapping( path = "/{id}")
-    public Optional<Pais> obtenerPorId(@PathVariable("id") Long id)
+    public Optional<Rango> obtenerPorId(@PathVariable("id") Long id)
     {
-        return this.service.obtenerPorId(id);
+        return service.obtenerPorId(id);
+    }
+
+    @GetMapping( path = "obtenerPorPrecio/{precio}")
+    public Rango obtenerPorId(@PathVariable("precio") Double precio)
+    {
+        return service.obtenerPorPrecio(precio);
     }
 
     @DeleteMapping( path = "/{id}")
     public Boolean eliminarPorId(@PathVariable("id") Long id)
     {
-        return this.service.eliminar(id);    
+        return service.eliminar(id);    
     }
     
 }
