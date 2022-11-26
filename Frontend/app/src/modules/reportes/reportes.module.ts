@@ -5,6 +5,7 @@ import { SharedModule } from 'src/shared/shared/shared.module';
 import { GananciaporempleadoComponent } from './gananciaporempleado/gananciaporempleado.component';
 import { GananciapormodeloymarcaComponent } from './gananciapormodeloymarca/gananciapormodeloymarca.component';
 import { VentasPorCategoriasComponent } from './ventas-por-categorias/ventas-por-categorias.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 
@@ -17,7 +18,8 @@ import { VentasPorCategoriasComponent } from './ventas-por-categorias/ventas-por
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    NgxChartsModule,
   ],
   exports: [
     GananciaycantidadpormarcaComponent

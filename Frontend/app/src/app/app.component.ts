@@ -21,21 +21,27 @@ export class AppComponent {
   single = [
     {
       "name": "Germany",
+      "lel":345,
       "value": 8940000
     },
     {
       "name": "USA",
+      "lel":345,
       "value": 5000000
     },
     {
       "name": "France",
+      "lel":345,
       "value": 7200000
     },
       {
-      "name": "UK",
+      "name": "UKA",
+      "lel":345,
       "value": 6200000
     }
   ];
+
+  
 
   colorScheme: Color = {
     name: 'myScheme',

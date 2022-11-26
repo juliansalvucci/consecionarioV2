@@ -3,15 +3,22 @@ import { FormBuilder } from '@angular/forms';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Color, ScaleType } from '@swimlane/ngx-charts';
 import * as moment from 'moment';
 import { IGananciaYCantidadPorMarca } from 'src/interfaces/IGananaciaYCantidadPorMarca';
 import { ReportesService } from 'src/services/reportes/reportes.service';
+
+export interface data{
+  name:string
+  value:string
+}
 
 @Component({
   selector: 'app-gananciaycantidadpormarca',
   templateUrl: './gananciaycantidadpormarca.component.html',
   styleUrls: ['./gananciaycantidadpormarca.component.css']
 })
+
 export class GananciaycantidadpormarcaComponent {
 
   displayedColumns: string[] = ['cantidadVentas','costo','marca'];
@@ -22,6 +29,7 @@ export class GananciaycantidadpormarcaComponent {
 
   listaFiltro!: IGenerica[];
   lista!: IGenerica[];
+  listaGrafica: data[] = [];
 
   registerForm = this.fb.group({
     fechaDesde: [''],
@@ -59,6 +67,7 @@ export class GananciaycantidadpormarcaComponent {
         console.log(r);
         this.lista = r;
         this.dataSource = new MatTableDataSource(this.lista);
+        this.generarData();
         this.configTable();
         this.cargando = false;
       });
@@ -66,6 +75,22 @@ export class GananciaycantidadpormarcaComponent {
       console.log(e);
       this.cargando = false;
     }
+  }
+
+  generarData(){
+    this.lista.forEach((element)=>{
+
+        let obj = {
+          name:element.marca,
+          value:element.costo,
+        }
+        console.log("torta",obj)
+        this.listaGrafica.push(obj)
+        console.log("fuente",this.listaGrafica)
+        
+    })
+    Object.assign(this.listaGrafica,this.listaGrafica)
+    console.log(Object)
   }
 
   filtrar() {
@@ -81,6 +106,53 @@ export class GananciaycantidadpormarcaComponent {
     }
     this.dataSource = new MatTableDataSource(this.listaFiltro);
     this.configTable();
+  }
+
+  view: [number,number] = [700, 400];
+
+  // options
+  gradient: boolean = true;
+  showLegend: boolean = true;
+  showLabels: boolean = true;
+  isDoughnut: boolean = false;
+
+  single = [
+    {
+      "name": "Germany",
+      "value": 8940000
+    },
+    {
+      "name": "USA",
+      "value": 5000000
+    },
+    {
+      "name": "France",
+      "value": 7200000
+    },
+      {
+      "name": "UK",
+      "value": 6200000
+    }
+  ];
+
+  colorScheme: Color = {
+    name: 'myScheme',
+    selectable: true,
+    group: ScaleType.Ordinal,
+    domain: ['#f00', '#0f0', '#0ff'],
+  };
+
+
+  onSelect(data: any): void {
+    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+  }
+
+  onActivate(data: any): void {
+    console.log('Activate', JSON.parse(JSON.stringify(data)));
+  }
+
+  onDeactivate(data: any): void {
+    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 
 }
