@@ -24,7 +24,6 @@ public class VentaController
 {
     @Autowired
     VentaService service;
-    
 
     @GetMapping()
     public ArrayList<Venta> obtener()
@@ -95,6 +94,6 @@ public class VentaController
     public Optional<Venta> obtenerPorId(@PathVariable("id") Long id)
     {
         return this.service.obtenerPorId(id);
-    }   
+    }     
 }
 

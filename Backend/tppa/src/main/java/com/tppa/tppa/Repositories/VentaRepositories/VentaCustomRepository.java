@@ -77,6 +77,7 @@ public class VentaCustomRepository {
             test.add(gpm);
         }
 
+
         em.close();
         return test;
     }
