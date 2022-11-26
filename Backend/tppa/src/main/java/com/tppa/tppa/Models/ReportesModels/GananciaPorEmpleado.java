@@ -1,4 +1,4 @@
-package com.tppa.tppa.Models;
+package com.tppa.tppa.Models.ReportesModels;
 
 public class GananciaPorEmpleado {
     private String cantidadVentas;

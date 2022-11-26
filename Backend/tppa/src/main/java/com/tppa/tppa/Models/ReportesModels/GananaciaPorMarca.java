@@ -1,19 +1,9 @@
-package com.tppa.tppa.Models;
+package com.tppa.tppa.Models.ReportesModels;
 
-public class GananciaPorModeloYMarca {
-    
+public class GananaciaPorMarca {
     private String cantidadVentas;
     private String costo;
     private String marca;
-    private String modelo;
-
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
 
     public String getCantidadVentas() {
         return cantidadVentas;
@@ -36,5 +26,4 @@ public class GananciaPorModeloYMarca {
     public void setMarca(String marca) {
         this.marca = marca;
     }
-    
 }

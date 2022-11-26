@@ -1,4 +1,4 @@
-package com.tppa.tppa.Models;
+package com.tppa.tppa.Models.Requests;
 
 public class BusquedaAvanzadaRequest {
     private String fechaDesde;

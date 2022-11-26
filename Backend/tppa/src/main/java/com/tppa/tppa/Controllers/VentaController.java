@@ -15,13 +15,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tppa.tppa.Models.BusquedaAvanzadaRequest;
-import com.tppa.tppa.Models.GananaciaPorMarca;
-import com.tppa.tppa.Models.GananciaPorCategoria;
-import com.tppa.tppa.Models.GananciaPorEmpleado;
-import com.tppa.tppa.Models.GananciaPorModeloYMarca;
-import com.tppa.tppa.Models.GananciaYCantidadEnPeriodo;
 import com.tppa.tppa.Models.Venta;
+import com.tppa.tppa.Models.ReportesModels.DetalleVentasPorEmpleado;
+import com.tppa.tppa.Models.ReportesModels.GananaciaPorMarca;
+import com.tppa.tppa.Models.ReportesModels.GananciaPorCategoria;
+import com.tppa.tppa.Models.ReportesModels.GananciaPorEmpleado;
+import com.tppa.tppa.Models.ReportesModels.GananciaPorModeloYMarca;
+import com.tppa.tppa.Models.ReportesModels.GananciaYCantidadEnPeriodo;
+import com.tppa.tppa.Models.Requests.BusquedaAvanzadaRequest;
 import com.tppa.tppa.Services.VentaService;
 
 @RestController
@@ -46,17 +47,7 @@ public class VentaController
     @PostMapping(path = "/jpql/obtenerPorRangoDeCostosYFechas")
     public List<Venta> obtenerPorRangoDeCostosYFechas(@RequestBody BusquedaAvanzadaRequest bar) 
     {
-        String CONSULTA = "SELECT venta FROM Venta venta WHERE venta.costo > :montoInicial AND venta.costo < :montoFinal AND  venta.fechaVenta > :fechaDesde AND venta.fechaVenta < :fechaHasta";
-        @SuppressWarnings("unchecked")
-        List<Venta> registros = em.createQuery(CONSULTA)
-        .setParameter("montoInicial", bar.getMontoInicial())
-        .setParameter("montoFinal", bar.getMontoFinal())
-        .setParameter("fechaDesde", bar.getFechaDesde())
-        .setParameter("fechaHasta", bar.getFechaHasta())
-        .getResultList();
-
-        em.close();
-        return registros;
+        return service.obtenerPorRangoDeCostosYFechas(bar);
     }
 
     @GetMapping(path = "/jpql/obtenerPorRangoDeCostos")
@@ -196,37 +187,49 @@ public class VentaController
         return test;
     }
 
-    @GetMapping(path = "/jpql/getReporteVentasPorCategoria1")
-    public List<Object> getReporteMAMADO(String fechaDesde, String fechaHasta) {        
+    @GetMapping(path = "/jpql/getReporteDetalleVentasPorEmpleado")
+    public List<Object> getReporteDetalleVentasPorEmpleado(String fechaDesde, String fechaHasta) {        
         String CONSULTA = "SELECT COUNT(venta) as cantidadVentas, SUM(venta.costo) as ganancia, venta.auto.modelo.nombreModelo as modelo , venta.auto.modelo.marca.nombreMarca as marca, venta.auto.pais.categoria.nombreCategoria as categoria, venta.cliente.nombre as clienteNombre, venta.cliente.apellido as clienteApellido ,venta.empleado.nombre as empleadoNombre, venta.empleado.apellido as empleadoApellido FROM Venta venta WHERE venta.fechaVenta > :fechaDesde AND venta.fechaVenta < :fechaHasta GROUP BY modelo,marca,categoria,clienteNombre,clienteApellido,empleadoNombre,empleadoApellido";
-        List<Object> registros = em.createQuery(CONSULTA)
+        var registros = em.createQuery(CONSULTA)
         .setParameter("fechaDesde", fechaDesde)
         .setParameter("fechaHasta", fechaHasta)
         .getResultList();
 
-
-        /* 
         List<Object> test = new ArrayList<>();
 
         for(int i = 0; i < registros.size(); i++ ){
             Object[] obj = (Object[])registros.get(i);
-            GananciaPorCategoria gpc = new GananciaPorCategoria();
+            DetalleVentasPorEmpleado dvpe = new DetalleVentasPorEmpleado();
 
             var cantidad = obj[0].toString();
-            var costo = obj[1].toString();
-            var categoria = obj[2].toString();
-
-
-            gpc.setCantidadVentas(cantidad);
-            gpc.setCosto(costo);
-            gpc.setCategoria(categoria);
+            var ganancia = obj[1].toString();
+            var modelo = obj[2].toString();
+            var marca = obj[3].toString();
+            var categoria = obj[4].toString();
+            var nombreCliente = obj[5].toString();
+            var apellidoCliente = obj[6].toString();
+            var nombreVendedor = obj[7].toString();
+            var apellidoVendedor = obj[8].toString();
             
-            test.add(gpc);
+            
+
+
+            dvpe.setCantidadVentas(cantidad);
+            dvpe.setGanancia(ganancia);
+            dvpe.setModelo(modelo);
+            dvpe.setMarca(marca);
+            dvpe.setCategoria(categoria);
+            dvpe.setNombreCliente(nombreCliente);
+            dvpe.setApellidoCliente(apellidoCliente);
+            dvpe.setNombreVendedor(nombreVendedor);
+            dvpe.setApellidoVendedor(apellidoVendedor);
+            
+            test.add(dvpe);
         }
-        */
+        
 
         em.close();
-        return registros;
+        return test;
     }
 
 

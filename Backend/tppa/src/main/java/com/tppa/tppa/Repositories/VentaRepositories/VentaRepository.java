@@ -1,4 +1,4 @@
-package com.tppa.tppa.Repositories;
+package com.tppa.tppa.Repositories.VentaRepositories;
 
 
 
