@@ -37,13 +37,13 @@ public class ClienteController
         return this.service.guardar(cliente);
     }
 
-    //@GetMapping( path = "/{id}")
-    //public Optional<Cliente> obtenerPorId(@PathVariable("id") Long id)
-    //{
-      //return this.service.obtenerPorId(id);
-    //}
+    @GetMapping( path = "obtenerPorId/{id}")
+    public Optional<Cliente> obtenerPorId(@PathVariable("id") Long id)
+    {
+      return this.service.obtenerPorId(id);
+    }
 
-    @GetMapping( value = "/{documento}")
+    @GetMapping( value = "obtenerPorDocumento/{documento}")
     public Optional<Cliente> obtenerPorDocumento(@PathVariable("documento") String documento)
     {
         return this.service.obtenerPorDocumento(documento);
