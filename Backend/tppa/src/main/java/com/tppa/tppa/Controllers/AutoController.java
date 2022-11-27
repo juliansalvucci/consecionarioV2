@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tppa.tppa.Models.Auto;
 import com.tppa.tppa.Services.AutoService;
+import com.tppa.tppa.Services.RangoService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200/")
@@ -23,6 +24,8 @@ public class AutoController
 {
     @Autowired
     AutoService service;
+    @Autowired
+    RangoService rangoService;
 
     @GetMapping()
     public ArrayList<Auto> obtener()

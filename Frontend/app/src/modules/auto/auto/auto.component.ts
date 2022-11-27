@@ -246,20 +246,28 @@ export class AutoComponent implements OnInit {
   }
 
   abrirModalPais(): void {
+    this.onNoClick();
     const dialogRef = this.dialog.open(PaisComponent, {
       width: '450px',
     });
     dialogRef.afterClosed().subscribe((result) => {
-      
+      this.abrirModalAuto();
+    });
+  }
+
+  abrirModalAuto():void{
+    const dialogRef = this.dialog.open(AutoComponent, {
+      width: '450px'
     });
   }
 
   abrirModalMarca(): void {
+    this.onNoClick();
     const dialogRef = this.dialog.open(MarcaComponent, {
-      width: '450px',
+      width: '450px'
     });
     dialogRef.afterClosed().subscribe((result) => {
-      
+      this.abrirModalAuto();
     });
   }
 

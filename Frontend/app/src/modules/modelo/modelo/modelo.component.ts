@@ -46,20 +46,18 @@ export class ModeloComponent implements OnInit {
 
 
   hiddeMarca: boolean = false
+  index2!: any
 
-  configurarFormulario() {
+  async configurarFormulario() {
     if (this.dataService.id != 0){
       this.autocompletar();
     } 
     if (this.dataService.idMarca !=0){
-      console.log("llegó")
       let id = this.dataService.idMarca
 
-      this.registerForm.value.idMarca = id;
-      this.registerForm.value.marca.id = id;
-      this.hiddeMarca = true;
-      
-      console.log(this.registerForm.value)
+      setTimeout(()=>{
+        this.autocompletarMarca(id);
+      },100)
     }
   }
 
@@ -72,6 +70,16 @@ export class ModeloComponent implements OnInit {
         idMarca: r.marca.id,
       });
     });
+  }
+
+  async autocompletarMarca(idMarca:number){
+    await this.registerForm.patchValue({
+      id: 0,
+      nombreModelo: '',
+      idMarca: idMarca,
+    });
+    
+    console.log(this.registerForm.value)
   }
 
   setFormValues() {
