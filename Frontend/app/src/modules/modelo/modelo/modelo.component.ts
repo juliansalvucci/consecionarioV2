@@ -35,7 +35,7 @@ export class ModeloComponent {
   registerForm = this.fb.group({
     id: [0],
     nombreModelo: ['', Validators.required],
-    idMarca: ['', Validators.required],
+    //idMarca: ['', Validators.required],
     marca: this.fb.group({
       id: [0],
       nombreMarca: [''],
@@ -64,8 +64,13 @@ export class ModeloComponent {
       this.registerForm.patchValue({
         id: r.id,
         nombreModelo: r.nombreModelo,
-        idMarca: r.marca.id,
+        //idMarca: r.marca.id,
+        marca:({
+          id: r.marca.id,
+          nombreMarca: r.marca.nombreMarca,
+        }),
       });
+      console.log(this.registerForm.value)
     });
   }
 
@@ -85,7 +90,7 @@ export class ModeloComponent {
   }
 
   register() {
-    this.setFormValues();
+    //this.setFormValues();
 
     this.service.alta(this.registerForm.value).subscribe((data) => {
       this.dataService.object = data;

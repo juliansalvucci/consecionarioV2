@@ -9,6 +9,7 @@
             *ngIf="registerForm.get('nombreModelo')?.invalid && registerForm.get('nombreModelo')?.touched">
             El <strong>campo</strong> es requerido
         </mat-error>
+        <!--
             <mat-form-field appearance="fill" [hidden]="hiddeMarca">
                 <mat-label id="negrita">Marca</mat-label>
                 <input formControlName="idMarca" matInput type="text" [matAutocomplete]="a1" [(ngModel)]="filtro"
@@ -25,6 +26,26 @@
             *ngIf="registerForm.get('idMarca')?.invalid && registerForm.get('idMarca')?.touched">
             El <strong>campo</strong> es requerido
         </mat-error>
+    -->
+
+        <div formGroupName="marca">
+            <mat-form-field appearance="fill" [hidden]="hiddeMarca">
+                <mat-label id="negrita">Marca</mat-label>
+                <input formControlName="id" matInput type="text" [matAutocomplete]="a1" [(ngModel)]="filtro"
+                    (ngModelChange)="filtrar()" (keyup)="filtrar()" (keyup.enter)="filtrar()" />
+                <mat-autocomplete #a1="matAutocomplete" [displayWith]="displayMarca.bind(this)">
+                    <mat-option *ngFor="let item of filterItems" [value]="item.id">
+                        {{item.nombreMarca}}
+                    </mat-option>
+                </mat-autocomplete>
+                <mat-icon matSuffix (click)="abrirModal(0)"><img src="../../../assets/iconos/add.svg" height="30px" style="margin-bottom: 15px;"></mat-icon>
+            </mat-form-field>
+            <mat-error class="text-danger"
+                *ngIf="registerForm.get('marca.nombreMarca')?.invalid && registerForm.get('marca.nombreMarca')?.touched">
+                El <strong>campo</strong> es requerido
+            </mat-error>
+        </div>
+
 
     </div>
 <button mat-raised-button class="col-3 m-auto mb-4 bg-success" (click)="register()"
