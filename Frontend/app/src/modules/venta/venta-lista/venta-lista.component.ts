@@ -19,6 +19,7 @@ export class VentaListaComponent implements OnInit {
     'fecha',
     'modelo',
     'marca',
+    'categoria',
     'precio',
     'costo',
     'ganancia',

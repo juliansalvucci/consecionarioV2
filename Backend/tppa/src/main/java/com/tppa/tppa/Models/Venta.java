@@ -126,6 +126,5 @@ public class Venta
         setId(id);
         setFechaVenta(fechaVenta);
         setAuto(auto);
-        //setCliente(cliente);
     }  
 }

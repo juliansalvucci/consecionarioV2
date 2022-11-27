@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.tppa.tppa.Models.Auto;
 import com.tppa.tppa.Models.Venta;
 import com.tppa.tppa.Models.Requests.BusquedaAvanzadaRequest;
-import com.tppa.tppa.Repositories.AutoRepository;
+import com.tppa.tppa.Repositories.AutoRepositories.AutoCustomRepository;
+import com.tppa.tppa.Repositories.AutoRepositories.AutoRepository;
 import com.tppa.tppa.Repositories.VentaRepositories.VentaCustomRepository;
 import com.tppa.tppa.Repositories.VentaRepositories.VentaRepository;
 
@@ -23,6 +24,7 @@ public class VentaService
     @Autowired
     VentaCustomRepository customRepository;
     @Autowired AutoRepository autoRepository;
+    @Autowired AutoCustomRepository autoCustomRepository;
     
     public ArrayList<Venta> obtener()
     {
@@ -32,11 +34,11 @@ public class VentaService
 
     public Venta guardar(Venta venta)
     {
-        Auto auto = venta.getAuto();
+
+        Auto auto = autoCustomRepository.obtenerPorIdAuto(venta.getAuto().getId());
 
         auto.setVendido(true);
         
-
         Double precio = auto.getPrecio();
         Double costo = auto.getCosto();
         Double ganancia = auto.getGanancia();
@@ -48,6 +50,7 @@ public class VentaService
         venta.setCosto(costo);
         venta.setGanancia(ganancia);
         venta.setPorcentaje(porcentaje);
+        
         
         return repository.save(venta);
     }

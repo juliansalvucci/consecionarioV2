@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.tppa.tppa.Models.Auto;
 import com.tppa.tppa.Models.Rango;
-import com.tppa.tppa.Repositories.AutoRepository;
+import com.tppa.tppa.Repositories.AutoRepositories.AutoRepository;
 import com.tppa.tppa.Repositories.RangoRepositories.RangoCustomRepository;
 import com.tppa.tppa.strategies.costoStrategies.EstrategiaCostoAmericaExtranjero;
 import com.tppa.tppa.strategies.costoStrategies.EstrategiaCostoNacional;

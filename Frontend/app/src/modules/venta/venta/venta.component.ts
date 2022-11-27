@@ -80,36 +80,12 @@ export class VentaComponent {
     apellido: [],
     auto: this.fb.group({
       id: [0],
-      precio: [0],
-      costo: [0],
-      ganancia:[0],
-      vendido: [],
-      modelo: this.fb.group({
-        id: [0],
-        nombreModelo: [''],
-        marca: this.fb.group({
-          id: [0],
-          nombreMarca: [''],
-        }),
-      }),
-      pais: this.fb.group({
-        id: [0],
-        nombrePais: [''],
-        categoria: this.fb.group({
-          id: [0],
-          nombreCategoria: [''],
-          porcentaje: [''],
-        }),
-      }),
     }),
     cliente: this.fb.group({
-      id: [],
-      nombre: [],
-      apellido: [],
-      documento: [],
+      id: [0],
     }),
     empleado: this.fb.group({
-      id: [],
+      id: [0],
     }),
   });
 
@@ -146,21 +122,6 @@ export class VentaComponent {
 
   setFormValues() {
     this.registerForm.value.auto.id = this.dataService.id;
-    this.registerForm.value.auto.costo = this.registerForm.value.costo;
-    this.registerForm.value.auto.precio = this.registerForm.value.precio;
-    this.registerForm.value.auto.ganancia = this.registerForm.value.ganancia;
-    this.registerForm.value.auto.modelo.id = this.modelo.id;
-    this.registerForm.value.auto.modelo.nombreModelo = this.modelo.nombreModelo;
-    this.registerForm.value.auto.modelo.marca.id = this.modelo.marca.id;
-    this.registerForm.value.auto.modelo.marca.nombreMarca =
-      this.modelo.marca.nombreMarca;
-    this.registerForm.value.auto.pais.id = this.pais.id;
-    this.registerForm.value.auto.pais.nombrePais = this.pais.nombrePais;
-    this.registerForm.value.auto.pais.categoria.id = this.pais.categoria.id;
-    this.registerForm.value.auto.pais.categoria.nombreCategoria =
-      this.pais.categoria.nombreCategoria;
-    this.registerForm.value.auto.pais.categoria.porcentaje =
-      this.pais.categoria.porcentaje;
     this.registerForm.value.fechaVenta = new Date();
     this.registerForm.value.empleado.id = this.jsonUser.id;
   }
@@ -271,17 +232,11 @@ export class VentaComponent {
   autoCompletarCliente() {
     let documento = this.registerForm.value.documento;
 
-    console.log(documento);
-
     this.service3.consultaPorDoumento(documento).subscribe((r) => {
       console.log(r);
-      this.registerForm.get('idCliente')?.setValue(r.id);
-      this.registerForm.value.cliente.id = r.id;
-      this.registerForm.get('nombre')?.setValue(r.nombre);
-      this.registerForm.value.cliente.nombre = r.nombre;
+      this.registerForm.value.cliente.id = r.id;  //Establezo del id del cliente
+      this.registerForm.get('nombre')?.setValue(r.nombre); //Lleno los campos visibles del formulario.
       this.registerForm.get('apellido')?.setValue(r.apellido);
-      this.registerForm.value.cliente.apellido = r.apellido;
-      this.registerForm.value.cliente.documento = r.documento;
     });
   }
 }

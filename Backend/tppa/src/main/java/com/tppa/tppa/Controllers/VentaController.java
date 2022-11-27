@@ -85,7 +85,7 @@ public class VentaController
     
     @PostMapping()
     public Venta guardar(@RequestBody Venta venta)
-    {        
+    {       
         return this.service.guardar(venta);
     }
  

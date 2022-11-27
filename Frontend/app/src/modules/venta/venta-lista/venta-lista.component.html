@@ -34,13 +34,13 @@
             </div>
             <div>
                 <mat-form-field class="example-full-width" appearance="legacy">
-                    <mat-label>Búsqueda por nombre</mat-label>
+                    <mat-label>Monto inicial</mat-label>
                     <input matInput type="number" formControlName="montoInicial">
                 </mat-form-field>
             </div>
             <div>
                 <mat-form-field class="example-full-width" appearance="legacy">
-                    <mat-label>Búsqueda por nombre</mat-label>
+                    <mat-label>Monto final</mat-label>
                     <input matInput type="number" formControlName="montoFinal">
                 </mat-form-field>
             </div>
@@ -68,6 +68,12 @@
                 <th mat-header-cell mat-sort-header *matHeaderCellDef> Marca </th>
                 <td mat-cell *matCellDef="let element" class="columna"> {{element.auto?.modelo?.marca?.nombreMarca}} </td>
             </ng-container>
+
+            <ng-container matColumnDef="categoria">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> Categoría </th>
+                <td mat-cell *matCellDef="let element" class="columna"> {{element.auto?.pais?.categoria?.nombreCategoria}} </td>
+            </ng-container>
+            
 
             
             <ng-container matColumnDef="precio">

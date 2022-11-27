@@ -54,7 +54,7 @@ export class ModeloComponent {
 
       setTimeout(() => {
         this.autocompletarMarca(id);
-      }, 100);
+      }, 1000);
     }
   }
 
@@ -64,7 +64,6 @@ export class ModeloComponent {
       this.registerForm.patchValue({
         id: r.id,
         nombreModelo: r.nombreModelo,
-        //idMarca: r.marca.id,
         marca:({
           id: r.marca.id,
           nombreMarca: r.marca.nombreMarca,
@@ -75,13 +74,18 @@ export class ModeloComponent {
   }
 
   async autocompletarMarca(idMarca: number) {
-    await this.registerForm.patchValue({
-      id: 0,
-      nombreModelo: '',
-      idMarca: idMarca,
+    this.service1.consultaPorId(idMarca).subscribe((r) => {
+      console.log(r);
+      this.registerForm.patchValue({
+        id: 0,
+        nombreModelo: '',
+        marca:({
+          id: r.id,
+          nombreMarca: r.nombreMarca,
+        }),
+      });
+      console.log(this.registerForm.value)
     });
-
-    console.log(this.registerForm.value);
   }
 
   setFormValues() {
