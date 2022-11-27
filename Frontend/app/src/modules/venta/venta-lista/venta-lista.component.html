@@ -69,15 +69,22 @@
                 <td mat-cell *matCellDef="let element" class="columna"> {{element.auto?.modelo?.marca?.nombreMarca}} </td>
             </ng-container>
 
+            
+            <ng-container matColumnDef="precio">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> Precio </th>
+                <td mat-cell *matCellDef="let element" class="columna"> ${{element.precio}} </td>
+            </ng-container>
+
             <ng-container matColumnDef="costo">
                 <th mat-header-cell mat-sort-header *matHeaderCellDef> Costo </th>
                 <td mat-cell *matCellDef="let element" class="columna"> ${{element.costo}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="precio">
-                <th mat-header-cell mat-sort-header *matHeaderCellDef> Precio </th>
-                <td mat-cell *matCellDef="let element" class="columna"> ${{element.precio}} </td>
+            <ng-container matColumnDef="ganancia">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> Ganancia </th>
+                <td mat-cell *matCellDef="let element" class="columna"> ${{element.ganancia}} </td>
             </ng-container>
+
 
             <ng-container matColumnDef="porcentaje">
                 <th mat-header-cell mat-sort-header *matHeaderCellDef> %Impuesto </th>

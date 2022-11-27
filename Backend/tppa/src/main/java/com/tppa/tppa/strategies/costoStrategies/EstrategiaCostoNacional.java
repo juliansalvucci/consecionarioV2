@@ -15,7 +15,7 @@ public class EstrategiaCostoNacional implements IEstrategiaCosto {
         Double costo = valor + precio;
 
         auto.setCosto(costo);
-        auto.setGanancia(costo, precio);
+        auto.setGanancia(valor);
 
         return auto;
     }

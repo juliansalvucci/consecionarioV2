@@ -21,11 +21,22 @@ public class Venta
     @NotNull private String fechaVenta;
     @NotNull private Double costo;
     @NotNull private Double precio;
+    @NotNull private Double ganancia;
     @NotNull private int porcentaje;
 
     @OneToOne(fetch = FetchType.EAGER) private Auto auto;
     @OneToOne private Cliente cliente;
     @OneToOne private Vendedor empleado;
+
+    public Double getGanancia() 
+    {
+        return ganancia;
+    }
+
+    public void setGanancia(Double ganancia) 
+    {
+        this.ganancia = ganancia;
+    }
 
     public Vendedor getEmpleado() 
     {

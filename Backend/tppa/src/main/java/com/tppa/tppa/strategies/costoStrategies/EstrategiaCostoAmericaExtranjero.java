@@ -13,8 +13,10 @@ public class EstrategiaCostoAmericaExtranjero implements IEstrategiaCosto{
 
         Double costo = precio + ((precio * porcentaje) / 100);
 
+        Double ganancia = costo - precio;
+
         auto.setCosto(costo);
-        auto.setGanancia(costo, precio);
+        auto.setGanancia(ganancia);
 
         return auto;
     }

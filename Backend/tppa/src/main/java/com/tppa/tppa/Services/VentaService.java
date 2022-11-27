@@ -35,9 +35,20 @@ public class VentaService
         Auto auto = venta.getAuto();
 
         auto.setVendido(true);
+        
+
+        Double precio = auto.getPrecio();
+        Double costo = auto.getCosto();
+        Double ganancia = auto.getGanancia();
+        int porcentaje = auto.getPais().getCategoria().getPorcentaje();
 
         autoRepository.save(auto);
 
+        venta.setPrecio(precio);
+        venta.setCosto(costo);
+        venta.setGanancia(ganancia);
+        venta.setPorcentaje(porcentaje);
+        
         return repository.save(venta);
     }
 

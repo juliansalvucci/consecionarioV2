@@ -5,6 +5,7 @@ export interface IAuto {
     id:      number;
     precio:  number;
     costo:   number;
+    ganancia: number;
     vendido: boolean;
     modelo:  IModelo;
     pais:    IPais;

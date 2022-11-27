@@ -71,11 +71,10 @@ export class VentaComponent {
     idModelo: [, Validators.required],
     idMarca: [, Validators.required],
     idPais: [, Validators.required],
-    idCliente: [, Validators.required],
     fechaVenta: [],
     precio: ['', Validators.required],
     costo: [0],
-    porcentaje: [0],
+    ganancia:[0],
     documento: [],
     nombre: [],
     apellido: [],
@@ -83,6 +82,7 @@ export class VentaComponent {
       id: [0],
       precio: [0],
       costo: [0],
+      ganancia:[0],
       vendido: [],
       modelo: this.fb.group({
         id: [0],
@@ -126,12 +126,13 @@ export class VentaComponent {
         id: r.id,
         precio: r.precio,
         costo: r.costo,
-        porcentaje: r.pais.categoria.porcentaje,
+        ganancia: r.ganancia,
         idModelo: r.modelo.id,
         idMarca: r.modelo.marca.id,
         idPais: r.pais.id,
       });
     });
+    console.log(this.registerForm.value)
   }
 
   jsonUser!: IVendedor;
@@ -145,9 +146,9 @@ export class VentaComponent {
 
   setFormValues() {
     this.registerForm.value.auto.id = this.dataService.id;
-    //this.registerForm.value.auto.vendido = true;
     this.registerForm.value.auto.costo = this.registerForm.value.costo;
     this.registerForm.value.auto.precio = this.registerForm.value.precio;
+    this.registerForm.value.auto.ganancia = this.registerForm.value.ganancia;
     this.registerForm.value.auto.modelo.id = this.modelo.id;
     this.registerForm.value.auto.modelo.nombreModelo = this.modelo.nombreModelo;
     this.registerForm.value.auto.modelo.marca.id = this.modelo.marca.id;
@@ -170,23 +171,11 @@ export class VentaComponent {
 
     console.log(this.registerForm.value);
     await this.service4.alta(this.registerForm.value).subscribe((data) => {
-      //this.registerAuto();
       this.dataService.object = data;
       console.log('Registro realizado con éxito');
       this.onNoClick();
     });
   }
-
-  //Función provisoria para setear el estado vendido del auto.
-  /*
-  async registerAuto() {
-    console.log(this.registerForm.value);
-    this.service.alta(this.registerForm.value.auto).subscribe(() => {
-      console.log('Registro realizado con éxito');
-      this.onNoClick();
-    });
-  }
-  */
 
   consultarModelos(): void {
     this.service1.consulta().subscribe((r: IGenerica[]) => {
