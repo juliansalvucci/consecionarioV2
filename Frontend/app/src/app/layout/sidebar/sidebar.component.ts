@@ -23,5 +23,6 @@ export class SidebarComponent implements OnInit {
    public STR_GANANCIA_EMPLEADOS = 'gananciaPorEmpleado'
    public STR_GANANCIA_MODELOYMARCA = 'gananciaPorMarcaYModelo'
    public STR_GANANCIA_CATEGORIA = 'gananciaPorCategoria'
+   public STR_DETALLE_POR_VENDEDOR ='detalleVentasPorVendedor'
 
 }

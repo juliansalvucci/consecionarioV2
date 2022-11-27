@@ -30,4 +30,10 @@ export class ReportesService {
     
   }
 
+  consulta5(fechaDesde:string,fechaHasta:string):Observable<any>
+  {
+    return this.http.get(`http://localhost:8080/venta/jpql/getReporteDetalleVentasPorEmpleado?fechaDesde=${fechaDesde}&fechaHasta=${fechaHasta}`)
+    
+  }
+
 }

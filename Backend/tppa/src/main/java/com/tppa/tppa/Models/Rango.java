@@ -16,6 +16,13 @@ public class Rango {
     @Id @GeneratedValue(strategy=javax.persistence.GenerationType.AUTO)
     private long id;    
 
+    public long getId() {
+        return id;
+    }
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @NotNull private Double montoInicial;
     public Double getMontoInicial() {
         return montoInicial;

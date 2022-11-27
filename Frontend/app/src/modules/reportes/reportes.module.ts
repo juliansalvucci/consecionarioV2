@@ -6,6 +6,7 @@ import { GananciaporempleadoComponent } from './gananciaporempleado/gananciapore
 import { GananciapormodeloymarcaComponent } from './gananciapormodeloymarca/gananciapormodeloymarca.component';
 import { VentasPorCategoriasComponent } from './ventas-por-categorias/ventas-por-categorias.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { DetallePorVendedorComponent } from './detalle-por-vendedor/detalle-por-vendedor.component';
 
 
 
@@ -14,7 +15,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     GananciaycantidadpormarcaComponent,
     GananciaporempleadoComponent,
     GananciapormodeloymarcaComponent,
-    VentasPorCategoriasComponent
+    VentasPorCategoriasComponent,
+    DetallePorVendedorComponent
   ],
   imports: [
     CommonModule,
