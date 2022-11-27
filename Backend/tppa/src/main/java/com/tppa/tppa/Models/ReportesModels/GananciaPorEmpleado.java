@@ -15,11 +15,18 @@ public class GananciaPorEmpleado {
     public void setCosto(String costo) {
         this.costo = costo;
     }
-    private String empleado;
-    public String getEmpleado() {
-        return empleado;
+    private String empleadoNombre;
+    public String getEmpleadoNombre() {
+        return empleadoNombre;
     }
-    public void setEmpleado(String empleado) {
-        this.empleado = empleado;
+    public void setEmpleadoNombre(String empleadoNombre) {
+        this.empleadoNombre = empleadoNombre;
+    }
+    private String empleadoApellido;
+    public String getEmpleadoApellido() {
+        return empleadoApellido;
+    }
+    public void setEmpleadoApellido(String empleadoApellido) {
+        this.empleadoApellido = empleadoApellido;
     }
 }

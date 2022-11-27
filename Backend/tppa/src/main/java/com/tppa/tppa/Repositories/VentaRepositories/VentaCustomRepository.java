@@ -114,7 +114,7 @@ public class VentaCustomRepository {
     }
 
     public List<Object> getReporteCantidadYGananciaPorEmpleado(String fechaDesde, String fechaHasta) {        
-        String CONSULTA = "SELECT COUNT(venta) as cantidadVentas, SUM(venta.costo) as costo, venta.empleado.nombre as empleado FROM Venta venta WHERE venta.fechaVenta > :fechaDesde AND venta.fechaVenta < :fechaHasta GROUP BY empleado";
+        String CONSULTA = "SELECT COUNT(venta) as cantidadVentas, SUM(venta.costo) as costo, venta.empleado.nombre as empleadoNombre, venta.empleado.apellido as empleadoApellido FROM Venta venta WHERE venta.fechaVenta > :fechaDesde AND venta.fechaVenta < :fechaHasta GROUP BY empleadoNombre, empleadoApellido";
         var registros = em.createQuery(CONSULTA)
         .setParameter("fechaDesde", fechaDesde)
         .setParameter("fechaHasta", fechaHasta)
@@ -128,12 +128,14 @@ public class VentaCustomRepository {
 
             var cantidad = obj[0].toString();
             var costo = obj[1].toString();
-            var empleado = obj[2].toString();
+            var empleadoNombre = obj[2].toString();
+            var empleadoApellido = obj[3].toString();
 
 
             gpm.setCantidadVentas(cantidad);
             gpm.setCosto(costo);
-            gpm.setEmpleado(empleado);
+            gpm.setEmpleadoNombre(empleadoNombre);
+            gpm.setEmpleadoApellido(empleadoApellido);
             
             test.add(gpm);
         }

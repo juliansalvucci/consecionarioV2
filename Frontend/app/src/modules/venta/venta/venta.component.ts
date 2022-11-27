@@ -140,13 +140,12 @@ export class VentaComponent {
     const usuario = localStorage.getItem('user');
     if (usuario) {
       this.jsonUser = JSON.parse(usuario);
-      console.log('Test', this.jsonUser);
     }
   }
 
   setFormValues() {
     this.registerForm.value.auto.id = this.dataService.id;
-    this.registerForm.value.auto.vendido = true;
+    //this.registerForm.value.auto.vendido = true;
     this.registerForm.value.auto.costo = this.registerForm.value.costo;
     this.registerForm.value.auto.precio = this.registerForm.value.precio;
     this.registerForm.value.auto.modelo.id = this.modelo.id;
@@ -171,7 +170,7 @@ export class VentaComponent {
 
     console.log(this.registerForm.value);
     await this.service4.alta(this.registerForm.value).subscribe((data) => {
-      this.registerAuto();
+      //this.registerAuto();
       this.dataService.object = data;
       console.log('Registro realizado con éxito');
       this.onNoClick();
@@ -179,6 +178,7 @@ export class VentaComponent {
   }
 
   //Función provisoria para setear el estado vendido del auto.
+  /*
   async registerAuto() {
     console.log(this.registerForm.value);
     this.service.alta(this.registerForm.value.auto).subscribe(() => {
@@ -186,6 +186,7 @@ export class VentaComponent {
       this.onNoClick();
     });
   }
+  */
 
   consultarModelos(): void {
     this.service1.consulta().subscribe((r: IGenerica[]) => {

@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.tppa.tppa.Models.Auto;
 import com.tppa.tppa.Models.Venta;
 import com.tppa.tppa.Models.Requests.BusquedaAvanzadaRequest;
+import com.tppa.tppa.Repositories.AutoRepository;
 import com.tppa.tppa.Repositories.VentaRepositories.VentaCustomRepository;
 import com.tppa.tppa.Repositories.VentaRepositories.VentaRepository;
 
@@ -20,6 +22,7 @@ public class VentaService
     VentaRepository repository;
     @Autowired
     VentaCustomRepository customRepository;
+    @Autowired AutoRepository autoRepository;
     
     public ArrayList<Venta> obtener()
     {
@@ -29,6 +32,12 @@ public class VentaService
 
     public Venta guardar(Venta venta)
     {
+        Auto auto = venta.getAuto();
+
+        auto.setVendido(true);
+
+        autoRepository.save(auto);
+
         return repository.save(venta);
     }
 

@@ -45,7 +45,7 @@ export const API_ROUTES = {
         BAJA:`${ENV.apiUrl}cliente/`,
         MODIFICACION: `${ENV.apiUrl}cliente/`,
         CONSULTA:`${ENV.apiUrl}cliente`,
-        CONSULTAPORDOCUMENTO:`${ENV.apiUrl}cliente/`,
+        CONSULTAPORDOCUMENTO:`${ENV.apiUrl}cliente/obtenerPorDocumento/`,
     },
     
     CATEGORIA: {
