@@ -138,14 +138,10 @@ export class AutoComponent implements OnInit {
   }
 
   consultarModelos(): void {
-    try {
-      this.service1.consulta().subscribe((r: IGenerica[]) => {
-        console.log(r);
-        this.listaModelos = r;
-      });
-    } catch (e) {
-      console.log(e);
-    }
+    this.service1.consulta().subscribe((r: IGenerica[]) => {
+      console.log(r);
+      this.listaModelos = r;
+    });
   }
 
   filterModelosAux!: IGenerica[];

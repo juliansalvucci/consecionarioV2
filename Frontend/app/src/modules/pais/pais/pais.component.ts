@@ -36,7 +36,7 @@ export class PaisComponent {
   registerForm = this.fb.group({
     id: [0],
     nombrePais: ['', Validators.required],
-    idCategoria: ['', Validators.required],
+    //idCategoria: ['', Validators.required],
     categoria: this.fb.group({
       id: [0],
       nombreCategoria: [''],
@@ -56,7 +56,12 @@ export class PaisComponent {
       this.registerForm.patchValue({
         id: r.id,
         nombrePais: r.nombrePais,
-        idCategoria: r.categoria?.id,
+        //idCategoria: r.categoria?.id,
+        categoria: {
+          id: r.categoria.id,
+          nombreCategoria: r.nombreCategoria,
+          porcentaje: r.porcentaje,
+        },
       });
     });
   }
@@ -68,7 +73,7 @@ export class PaisComponent {
   }
 
   register() {
-    this.setFormValues();
+    //this.setFormValues();
 
     this.service.alta(this.registerForm.value).subscribe((data) => {
       this.dataService.object = data;

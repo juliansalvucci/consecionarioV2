@@ -11,6 +11,7 @@
           El <strong>campo</strong> es requerido
         </mat-error>
 
+        <!--
         <mat-form-field appearance="fill">
             <mat-label id="negrita">Categoría</mat-label>
             <input formControlName="idCategoria" matInput type="text" [matAutocomplete]="a1" [(ngModel)]="filtro" (ngModelChange)="filtrar()" (keyup)="filtrar()"
@@ -27,6 +28,26 @@
           *ngIf="registerForm.get('idCategoria')?.invalid && registerForm.get('idCategoria')?.touched">
           El <strong>campo</strong> es requerido
         </mat-error>
+    -->
+
+        <div formGroupName="categoria">
+            <mat-form-field appearance="fill">
+                <mat-label id="negrita">Categoría</mat-label>
+                <input formControlName="id" matInput type="text" [matAutocomplete]="a1" [(ngModel)]="filtro"
+                    (ngModelChange)="filtrar()" (keyup)="filtrar()" (keyup.enter)="filtrar()" />
+                <mat-autocomplete #a1="matAutocomplete" [displayWith]="displayCategoria.bind(this)">
+                    <mat-option *ngFor="let item of filterItems" [value]="item.id">
+                        {{item.nombreCategoria}}
+                    </mat-option>
+                </mat-autocomplete>
+                <mat-icon matSuffix (click)="abrirModal(0)"><img src="../../../assets/iconos/add.svg" height="30px" style="margin-bottom: 15px;"></mat-icon>
+            </mat-form-field>
+            <mat-error class="text-danger"
+                *ngIf="registerForm.get('categoria.nombreCategoria')?.invalid && registerForm.get('categoria.nombreCategoria')?.touched">
+                El <strong>campo</strong> es requerido
+            </mat-error>
+        </div>
+
     </form>
 </div>
 <button mat-raised-button class="col-3 m-auto mb-4 bg-success" (click)="register()"
