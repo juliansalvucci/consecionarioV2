@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import {MatDialog,MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ICategoria } from 'src/interfaces/ICategoria';
@@ -14,7 +14,7 @@ import { sweetalert } from 'src/utils/utils';
   templateUrl: './pais.component.html',
   styleUrls: ['./pais.component.css'],
 })
-export class PaisComponent implements OnInit {
+export class PaisComponent {
   filterItems!: IGenerica[];
   lista!: IGenerica[];
 
@@ -32,8 +32,6 @@ export class PaisComponent implements OnInit {
     this.consultarCategorias();
     this.configurarFormulario();
   }
-
-  ngOnInit(): void {}
 
   registerForm = this.fb.group({
     id: [0],
@@ -65,24 +63,19 @@ export class PaisComponent implements OnInit {
 
   setFormValues() {
     this.registerForm.value.categoria.id = this.categoria.id;
-    this.registerForm.value.categoria.nombreCategoria = this.categoria.nombreCategoria;
+    this.registerForm.value.categoria.nombreCategoria =
+      this.categoria.nombreCategoria;
   }
 
   register() {
-    try {
-      this.setFormValues();
+    this.setFormValues();
 
-      this.service.alta(this.registerForm.value).subscribe((data) => {
-        this.dataService.object = data;
-        console.log('Registro realizado con éxito');
-        sweetalert.success()
-        this.onNoClick();
-      });
-    } catch (e) {
-      console.log(this.registerForm.value);
-      console.log('modelo invalido');
+    this.service.alta(this.registerForm.value).subscribe((data) => {
+      this.dataService.object = data;
+      console.log('Registro realizado con éxito');
+      sweetalert.success();
       this.onNoClick();
-    }
+    });
   }
 
   onNoClick(): void {
@@ -90,15 +83,11 @@ export class PaisComponent implements OnInit {
   }
 
   consultarCategorias(): void {
-    try {
-      this.service1.consulta().subscribe((r: IGenerica[]) => {
-        console.log(r);
-        this.lista = r;
-        this.filterItems = r;
-      });
-    } catch (e) {
-      console.log(e);
-    }
+    this.service1.consulta().subscribe((r: IGenerica[]) => {
+      console.log(r);
+      this.lista = r;
+      this.filterItems = r;
+    });
   }
 
   filtrar() {

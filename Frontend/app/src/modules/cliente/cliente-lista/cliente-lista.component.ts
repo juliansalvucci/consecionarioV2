@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -11,11 +11,10 @@ import { ClienteComponent } from '../cliente/cliente.component';
 @Component({
   selector: 'app-cliente-lista',
   templateUrl: './cliente-lista.component.html',
-  styleUrls: ['./cliente-lista.component.css']
+  styleUrls: ['./cliente-lista.component.css'],
 })
-export class ClienteListaComponent implements OnInit {
-
-  displayedColumns: string[] = ['apellido','nombre','documento','acciones'];
+export class ClienteListaComponent {
+  displayedColumns: string[] = ['apellido', 'nombre', 'documento', 'acciones'];
   dataSource!: MatTableDataSource<IGenerica>;
 
   cargando: boolean = false;
@@ -46,18 +45,13 @@ export class ClienteListaComponent implements OnInit {
   }
 
   consultar(): void {
-    try {
-      this.service.consulta().subscribe((r: IGenerica[]) => {
-        console.log(r);
-        this.lista = r;
-        this.dataSource = new MatTableDataSource(this.lista);
-        this.configTable();
-        this.cargando = false;
-      });
-    } catch (e) {
-      console.log(e);
+    this.service.consulta().subscribe((r: IGenerica[]) => {
+      console.log(r);
+      this.lista = r;
+      this.dataSource = new MatTableDataSource(this.lista);
+      this.configTable();
       this.cargando = false;
-    }
+    });
   }
 
   abrirModal(documento: string): void {
@@ -67,7 +61,9 @@ export class ClienteListaComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (this.dataService.object != null) {
-        this.lista = this.lista.filter((element) => element.documento != documento);
+        this.lista = this.lista.filter(
+          (element) => element.documento != documento
+        );
         this.lista.push(this.dataService.object);
         this.dataSource = new MatTableDataSource(this.lista);
         this.configTable();
@@ -78,36 +74,40 @@ export class ClienteListaComponent implements OnInit {
   }
 
   eliminar(id: number) {
-    try {
-      this.service.baja(id).subscribe((r) => {
-        if (r) {
-          //Si el back me devuelve un true.
-          this.lista = this.lista.filter((element) => element.id != id);
-          this.dataSource = new MatTableDataSource(this.lista);
-          this.configTable();
-        }
-        this.cargando = false;
-      });
-    } catch (e) {
-      console.log(e);
+    this.service.baja(id).subscribe((r) => {
+      if (r) {
+        //Si el back me devuelve un true.
+        this.lista = this.lista.filter((element) => element.id != id);
+        this.dataSource = new MatTableDataSource(this.lista);
+        this.configTable();
+      }
       this.cargando = false;
-    }
+    });
   }
 
   filtrar() {
     if (this.filtro == '') {
       this.listaFiltro = this.lista;
     } else {
-      this.listaFiltro = this.lista?.filter((f) =>
-        f.nombre?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase())
-    ||  f.apellido?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase())
-    ||  f.documento?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase())
+      this.listaFiltro = this.lista?.filter(
+        (f) =>
+          f.nombre
+            ?.toLowerCase()
+            .trim()
+            .includes(this.filtro.toLocaleLowerCase()) ||
+          f.apellido
+            ?.toLowerCase()
+            .trim()
+            .includes(this.filtro.toLocaleLowerCase()) ||
+          f.documento
+            ?.toLowerCase()
+            .trim()
+            .includes(this.filtro.toLocaleLowerCase())
       );
     }
     this.dataSource = new MatTableDataSource(this.listaFiltro);
     this.configTable();
   }
-
 }
 
 export interface IGenerica extends ICliente{}

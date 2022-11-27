@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -10,11 +10,10 @@ import * as moment from 'moment-timezone'
 @Component({
   selector: 'app-gananciaporempleado',
   templateUrl: './gananciaporempleado.component.html',
-  styleUrls: ['./gananciaporempleado.component.css']
+  styleUrls: ['./gananciaporempleado.component.css'],
 })
-export class GananciaporempleadoComponent  {
-
-  displayedColumns: string[] = ['cantidadVentas','costo','empleado'];
+export class GananciaporempleadoComponent {
+  displayedColumns: string[] = ['cantidadVentas', 'costo', 'empleado'];
   dataSource!: MatTableDataSource<IGenerica>;
 
   cargando: boolean = false;
@@ -49,24 +48,23 @@ export class GananciaporempleadoComponent  {
     this.dataSource.paginator = this.paginator;
   }
 
- buscar() {
-    try {
-      let fechaDesde = moment(this.registerForm.value.fechaDesde).tz('America/Argentina/Cordoba')
+  buscar() {
+    let fechaDesde = moment(this.registerForm.value.fechaDesde)
+      .tz('America/Argentina/Cordoba')
       .format();
-      let fechaHasta = moment(this.registerForm.value.fechaHasta).tz('America/Argentina/Cordoba')
+    let fechaHasta = moment(this.registerForm.value.fechaHasta)
+      .tz('America/Argentina/Cordoba')
       .format();
 
-     this.service.consulta2(fechaDesde,fechaHasta).subscribe((r: IGenerica[]) => {
+    this.service
+      .consulta2(fechaDesde, fechaHasta)
+      .subscribe((r: IGenerica[]) => {
         console.log(r);
         this.lista = r;
         this.dataSource = new MatTableDataSource(this.lista);
         this.configTable();
         this.cargando = false;
       });
-    } catch (e) {
-      console.log(e);
-      this.cargando = false;
-    }
   }
 
   filtrar() {
@@ -83,7 +81,6 @@ export class GananciaporempleadoComponent  {
     this.dataSource = new MatTableDataSource(this.listaFiltro);
     this.configTable();
   }
-
 }
 
 export interface IGenerica extends IGananciaPorEmpleado{}

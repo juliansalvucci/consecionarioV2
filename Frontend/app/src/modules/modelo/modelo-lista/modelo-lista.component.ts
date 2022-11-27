@@ -12,10 +12,10 @@ import { ModeloComponent } from '../modelo/modelo.component';
 @Component({
   selector: 'app-modelo-lista',
   templateUrl: './modelo-lista.component.html',
-  styleUrls: ['./modelo-lista.component.css']
+  styleUrls: ['./modelo-lista.component.css'],
 })
 export class ModeloListaComponent implements OnInit {
-  displayedColumns: string[] = ['nombre','marca', 'acciones'];
+  displayedColumns: string[] = ['nombre', 'marca', 'acciones'];
   dataSource!: MatTableDataSource<IGenerica>;
 
   cargando: boolean = false;
@@ -46,18 +46,13 @@ export class ModeloListaComponent implements OnInit {
   }
 
   consultar(): void {
-    try {
-      this.service.consulta().subscribe((r: IGenerica[]) => {
-        console.log(r);
-        this.lista = r;
-        this.dataSource = new MatTableDataSource(this.lista);
-        this.configTable();
-        this.cargando = false;
-      });
-    } catch (e) {
-      console.log(e);
+    this.service.consulta().subscribe((r: IGenerica[]) => {
+      console.log(r);
+      this.lista = r;
+      this.dataSource = new MatTableDataSource(this.lista);
+      this.configTable();
       this.cargando = false;
-    }
+    });
   }
 
   abrirModal(id: number): void {
@@ -78,33 +73,36 @@ export class ModeloListaComponent implements OnInit {
   }
 
   eliminar(id: number) {
-    try {
-      this.service.baja(id).subscribe((r) => {
-        if (r) {
-          //Si el back me devuelve un true.
-          this.lista = this.lista.filter((element) => element.id != id);
-          this.dataSource = new MatTableDataSource(this.lista);
-          this.configTable();
-        }
-        this.cargando = false;
-      });
-    } catch (e) {
-      console.log(e);
+    this.service.baja(id).subscribe((r) => {
+      if (r) {
+        //Si el back me devuelve un true.
+        this.lista = this.lista.filter((element) => element.id != id);
+        this.dataSource = new MatTableDataSource(this.lista);
+        this.configTable();
+      }
       this.cargando = false;
-    }
+    });
   }
 
   filtrar() {
     if (this.filtro == '') {
       this.listaFiltro = this.lista;
     } else {
-      this.listaFiltro = this.lista?.filter((f) =>f.nombreModelo?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase())
-                                               || f.marca.nombreMarca.toLowerCase().trim().includes(this.filtro.toLowerCase()));
+      this.listaFiltro = this.lista?.filter(
+        (f) =>
+          f.nombreModelo
+            ?.toLowerCase()
+            .trim()
+            .includes(this.filtro.toLocaleLowerCase()) ||
+          f.marca.nombreMarca
+            .toLowerCase()
+            .trim()
+            .includes(this.filtro.toLowerCase())
+      );
     }
     this.dataSource = new MatTableDataSource(this.listaFiltro);
     this.configTable();
   }
-
 }
 
 export interface IGenerica extends IModelo,IMarca{}

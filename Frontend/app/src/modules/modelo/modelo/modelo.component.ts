@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IMarca } from 'src/interfaces/IMarca';
@@ -13,7 +13,7 @@ import { ModeloService } from 'src/services/modelo/modelo.service';
   templateUrl: './modelo.component.html',
   styleUrls: ['./modelo.component.css'],
 })
-export class ModeloComponent implements OnInit {
+export class ModeloComponent {
   filterItems!: IGenerica[];
   lista!: IGenerica[];
 
@@ -32,8 +32,6 @@ export class ModeloComponent implements OnInit {
     this.configurarFormulario();
   }
 
-  ngOnInit(): void {}
-
   registerForm = this.fb.group({
     id: [0],
     nombreModelo: ['', Validators.required],
@@ -44,20 +42,19 @@ export class ModeloComponent implements OnInit {
     }),
   });
 
-
-  hiddeMarca: boolean = false
-  index2!: any
+  hiddeMarca: boolean = false;
 
   async configurarFormulario() {
-    if (this.dataService.id != 0){
+    if (this.dataService.id != 0) {
       this.autocompletar();
-    } 
-    if (this.dataService.idMarca !=0){
-      let id = this.dataService.idMarca
+    }
+    if (this.dataService.idMarca != 0) {
+      this.hiddeMarca = true;
+      let id = this.dataService.idMarca;
 
-      setTimeout(()=>{
+      setTimeout(() => {
         this.autocompletarMarca(id);
-      },100)
+      }, 100);
     }
   }
 
@@ -72,14 +69,14 @@ export class ModeloComponent implements OnInit {
     });
   }
 
-  async autocompletarMarca(idMarca:number){
+  async autocompletarMarca(idMarca: number) {
     await this.registerForm.patchValue({
       id: 0,
       nombreModelo: '',
       idMarca: idMarca,
     });
-    
-    console.log(this.registerForm.value)
+
+    console.log(this.registerForm.value);
   }
 
   setFormValues() {
@@ -88,31 +85,21 @@ export class ModeloComponent implements OnInit {
   }
 
   register() {
-    try {
-      this.setFormValues();
+    this.setFormValues();
 
-      this.service.alta(this.registerForm.value).subscribe((data) => {
-        this.dataService.object = data;
-        console.log('Registro realizado con éxito');
-        this.onNoClick();
-      });
-    } catch (e) {
-      console.log(this.registerForm.value);
-      console.log('modelo invalido');
+    this.service.alta(this.registerForm.value).subscribe((data) => {
+      this.dataService.object = data;
+      console.log('Registro realizado con éxito');
       this.onNoClick();
-    }
+    });
   }
 
   consultarMarcas(): void {
-    try {
-      this.service1.consulta().subscribe((r: IGenerica[]) => {
-        console.log(r);
-        this.lista = r;
-        this.filterItems = r;
-      });
-    } catch (e) {
-      console.log(e);
-    }
+    this.service1.consulta().subscribe((r: IGenerica[]) => {
+      console.log(r);
+      this.lista = r;
+      this.filterItems = r;
+    });
   }
 
   filtrar() {

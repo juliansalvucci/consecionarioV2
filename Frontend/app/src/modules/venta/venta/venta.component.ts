@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IAuto } from 'src/interfaces/IAuto';
@@ -6,7 +6,6 @@ import { ICliente } from 'src/interfaces/ICliente';
 import { IMarca } from 'src/interfaces/IMarca';
 import { IModelo } from 'src/interfaces/IModelo';
 import { IPais } from 'src/interfaces/IPais';
-import { IUsuario } from 'src/interfaces/IUsuario';
 import { IVendedor } from 'src/interfaces/IVendedor';
 import { AutoService } from 'src/services/auto/auto.service';
 import { ClienteService } from 'src/services/cliente/cliente.service';
@@ -21,7 +20,7 @@ import { VentaService } from 'src/services/venta/venta.service';
   templateUrl: './venta.component.html',
   styleUrls: ['./venta.component.css'],
 })
-export class VentaComponent implements OnInit {
+export class VentaComponent {
   filterModelos!: IGenerica[];
   filterMarcas!: IGenerica[];
   listaModelos!: IGenerica[];
@@ -47,14 +46,11 @@ export class VentaComponent implements OnInit {
     private paisService: PaisService,
     public dialog: MatDialog
   ) {
-    this.consultarClientes();
     this.consultarMarcas();
     this.consultarModelos();
     this.consultarPaises();
     this.configurarFormulario();
   }
-
-  ngOnInit(): void {}
 
   modelo!: IModelo;
 
@@ -113,8 +109,8 @@ export class VentaComponent implements OnInit {
       documento: [],
     }),
     empleado: this.fb.group({
-      id:[]
-    })
+      id: [],
+    }),
   });
 
   configurarFormulario() {
@@ -138,7 +134,7 @@ export class VentaComponent implements OnInit {
     });
   }
 
-  jsonUser!: IVendedor
+  jsonUser!: IVendedor;
 
   getVendedor() {
     const usuario = localStorage.getItem('user');
@@ -170,48 +166,32 @@ export class VentaComponent implements OnInit {
   }
 
   async register() {
-    try {
-      this.getVendedor();
-      this.setFormValues();
+    this.getVendedor();
+    this.setFormValues();
 
-      console.log(this.registerForm.value);
-      await this.service4.alta(this.registerForm.value).subscribe((data) => {
-        this.registerAuto();
-        this.dataService.object = data;
-        console.log('Registro realizado con éxito');
-        this.onNoClick();
-      });
-    } catch (e) {
-      console.log(this.registerForm.value);
-      console.log('modelo invalido');
+    console.log(this.registerForm.value);
+    await this.service4.alta(this.registerForm.value).subscribe((data) => {
+      this.registerAuto();
+      this.dataService.object = data;
+      console.log('Registro realizado con éxito');
       this.onNoClick();
-    }
+    });
   }
 
   //Función provisoria para setear el estado vendido del auto.
   async registerAuto() {
-    try {
-      console.log(this.registerForm.value);
-      this.service.alta(this.registerForm.value.auto).subscribe((data) => {
-        console.log('Registro realizado con éxito');
-        this.onNoClick();
-      });
-    } catch (e) {
-      console.log(this.registerForm.value);
-      console.log('modelo invalido');
+    console.log(this.registerForm.value);
+    this.service.alta(this.registerForm.value.auto).subscribe(() => {
+      console.log('Registro realizado con éxito');
       this.onNoClick();
-    }
+    });
   }
 
   consultarModelos(): void {
-    try {
-      this.service1.consulta().subscribe((r: IGenerica[]) => {
-        console.log(r);
-        this.listaModelos = r;
-      });
-    } catch (e) {
-      console.log(e);
-    }
+    this.service1.consulta().subscribe((r: IGenerica[]) => {
+      console.log(r);
+      this.listaModelos = r;
+    });
   }
 
   filterModelosAux!: IGenerica[];
@@ -234,15 +214,11 @@ export class VentaComponent implements OnInit {
   }
 
   consultarMarcas(): void {
-    try {
-      this.service2.consulta().subscribe((r: IGenerica[]) => {
-        console.log(r);
-        this.listaMarcas = r;
-        this.filterMarcas = r;
-      });
-    } catch (e) {
-      console.log(e);
-    }
+    this.service2.consulta().subscribe((r: IGenerica[]) => {
+      console.log(r);
+      this.listaMarcas = r;
+      this.filterMarcas = r;
+    });
   }
 
   filtrarMarcas() {
@@ -270,53 +246,17 @@ export class VentaComponent implements OnInit {
     return this.listaMarcas[index].nombreMarca;
   }
 
-  listaClientes!: IGenerica[];
-  filterClientes!: IGenerica[];
-  consultarClientes() {
-    try {
-      this.service3.consulta().subscribe((r: IGenerica[]) => {
-        console.log(r);
-        this.listaClientes = r;
-        this.filterClientes = r;
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  filtrarClientes() {
-    if (this.filtro3 == '') {
-      this.filterClientes = this.listaClientes;
-    } else {
-      this.filterClientes = this.listaClientes?.filter((f) =>
-        f.nombre?.toLowerCase().trim().includes(this.filtro3)
-      );
-    }
-  }
-
-  displayClientes(id: number) {
-    console.log(id);
-    if (!id) return '';
-
-    this.obtenerModelosPorMarca(id);
-    let index = this.listaClientes.findIndex((r) => r.id === id);
-    console.log('index', index);
-    return this.listaClientes[index].nombre;
-  }
-
+  
   listaPaises!: IPais[];
   filterPaises!: IPais[];
 
   consultarPaises() {
-    try {
+    
       this.paisService.consulta().subscribe((r: IGenerica[]) => {
         console.log('Países', r);
         this.listaPaises = r;
         this.filterPaises = this.listaPaises;
       });
-    } catch (e) {
-      console.log(e);
-    }
   }
 
   filtrarPaises() {

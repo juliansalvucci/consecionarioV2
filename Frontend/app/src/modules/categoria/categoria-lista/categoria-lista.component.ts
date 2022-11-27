@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -11,11 +11,10 @@ import { CategoriaComponent } from '../categoria/categoria.component';
 @Component({
   selector: 'app-categoria-lista',
   templateUrl: './categoria-lista.component.html',
-  styleUrls: ['./categoria-lista.component.css']
+  styleUrls: ['./categoria-lista.component.css'],
 })
-export class CategoriaListaComponent implements OnInit {
-
-  displayedColumns: string[] = ['nombre','porcentaje','acciones'];
+export class CategoriaListaComponent {
+  displayedColumns: string[] = ['nombre', 'porcentaje', 'acciones'];
   dataSource!: MatTableDataSource<IGenerica>;
 
   cargando: boolean = false;
@@ -46,18 +45,13 @@ export class CategoriaListaComponent implements OnInit {
   }
 
   consultar(): void {
-    try {
-      this.service.consulta().subscribe((r: IGenerica[]) => {
-        console.log(r);
-        this.lista = r;
-        this.dataSource = new MatTableDataSource(this.lista);
-        this.configTable();
-        this.cargando = false;
-      });
-    } catch (e) {
-      console.log(e);
+    this.service.consulta().subscribe((r: IGenerica[]) => {
+      console.log(r);
+      this.lista = r;
+      this.dataSource = new MatTableDataSource(this.lista);
+      this.configTable();
       this.cargando = false;
-    }
+    });
   }
 
   abrirModal(id: number): void {
@@ -78,20 +72,15 @@ export class CategoriaListaComponent implements OnInit {
   }
 
   eliminar(id: number) {
-    try {
-      this.service.baja(id).subscribe((r) => {
-        if (r) {
-          //Si el back me devuelve un true.
-          this.lista = this.lista.filter((element) => element.id != id);
-          this.dataSource = new MatTableDataSource(this.lista);
-          this.configTable();
-        }
-        this.cargando = false;
-      });
-    } catch (e) {
-      console.log(e);
+    this.service.baja(id).subscribe((r) => {
+      if (r) {
+        //Si el back me devuelve un true.
+        this.lista = this.lista.filter((element) => element.id != id);
+        this.dataSource = new MatTableDataSource(this.lista);
+        this.configTable();
+      }
       this.cargando = false;
-    }
+    });
   }
 
   filtrar() {
@@ -108,7 +97,6 @@ export class CategoriaListaComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.listaFiltro);
     this.configTable();
   }
-
 }
 
 export interface IGenerica extends ICategoria{}

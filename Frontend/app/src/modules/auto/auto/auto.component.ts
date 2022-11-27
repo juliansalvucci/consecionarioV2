@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { IAuto } from 'src/interfaces/IAuto';
 import { IMarca } from 'src/interfaces/IMarca';
 import { IModelo } from 'src/interfaces/IModelo';
@@ -66,12 +66,12 @@ export class AutoComponent implements OnInit {
 
   registerForm = this.fb.group({
     id: [0],
-    precio: [0, [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/) ]],
-    costo: [0,[Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+    precio: [0, [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+    costo: [0, [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
     vendido: [],
     idModelo: [, Validators.required],
     idMarca: [, Validators.required],
-    idPais:[, Validators.required],
+    idPais: [, Validators.required],
     modelo: this.fb.group({
       id: [0],
       nombreModelo: [''],
@@ -105,7 +105,7 @@ export class AutoComponent implements OnInit {
         precio: r.precio,
         idModelo: r.modelo.id,
         idMarca: r.modelo.marca.id,
-        idPais: r.pais.id
+        idPais: r.pais.id,
       });
     });
   }
@@ -115,29 +115,26 @@ export class AutoComponent implements OnInit {
     this.registerForm.value.modelo.id = this.modelo.id;
     this.registerForm.value.modelo.nombreModelo = this.modelo.nombreModelo;
     this.registerForm.value.modelo.marca.id = this.modelo.marca.id;
-    this.registerForm.value.modelo.marca.nombreMarca = this.modelo.marca.nombreMarca;
+    this.registerForm.value.modelo.marca.nombreMarca =
+      this.modelo.marca.nombreMarca;
     this.registerForm.value.pais.id = this.pais.id;
     this.registerForm.value.pais.nombrePais = this.pais.nombrePais;
     this.registerForm.value.pais.categoria.id = this.pais.categoria.id;
-    this.registerForm.value.pais.categoria.nombreCategoria = this.pais.categoria.nombreCategoria;
-    this.registerForm.value.pais.categoria.porcentaje = this.pais.categoria.porcentaje;
+    this.registerForm.value.pais.categoria.nombreCategoria =
+      this.pais.categoria.nombreCategoria;
+    this.registerForm.value.pais.categoria.porcentaje =
+      this.pais.categoria.porcentaje;
   }
 
   async register() {
-    try {
-      this.setFormValues();
+    this.setFormValues();
 
-      console.log(this.registerForm.value);
-      this.service.alta(this.registerForm.value).subscribe((data) => {
-          this.dataService.object = data;
-          console.log('Registro realizado con éxito');
-          this.onNoClick();
-        });
-    } catch (e) {
-      console.log(this.registerForm.value);
-      console.log('modelo invalido');
+    console.log(this.registerForm.value);
+    this.service.alta(this.registerForm.value).subscribe((data) => {
+      this.dataService.object = data;
+      console.log('Registro realizado con éxito');
       this.onNoClick();
-    }
+    });
   }
 
   consultarModelos(): void {
@@ -167,19 +164,14 @@ export class AutoComponent implements OnInit {
     if (id != null) {
       this.filterModelosAux = this.listaModelos.filter((f) => f.marca.id == id);
     }
-    console.log(this.filterModelos);
   }
 
   consultarMarcas(): void {
-    try {
-      this.service2.consulta().subscribe((r: IGenerica[]) => {
-        console.log(r);
-        this.listaMarcas = r;
-        this.filterMarcas = r;
-      });
-    } catch (e) {
-      console.log(e);
-    }
+    this.service2.consulta().subscribe((r: IGenerica[]) => {
+      console.log(r);
+      this.listaMarcas = r;
+      this.filterMarcas = r;
+    });
   }
 
   filtrarMarcas() {
@@ -212,37 +204,34 @@ export class AutoComponent implements OnInit {
     return this.marca.nombreMarca;
   }
 
-
   listaPaises!: IPais[];
   filterPaises!: IPais[];
 
-  consultarPaises(){
-    try  {
-      this.paisService.consulta().subscribe((r: IGenerica[]) => {
-        console.log('Países',r);
-        this.listaPaises = r
-        this.filterPaises = this.listaPaises
-      });
-    } catch (e) {
-      console.log(e);
-    }
+  consultarPaises() {
+    this.paisService.consulta().subscribe((r: IGenerica[]) => {
+      console.log('Países', r);
+      this.listaPaises = r;
+      this.filterPaises = this.listaPaises;
+    });
   }
-  
+
   filtrarPaises() {
-    this.filterPaises = this.listaPaises?.filter((f) => f.nombrePais?.toLowerCase().trim().includes(this.filtro3));
+    this.filterPaises = this.listaPaises?.filter((f) =>
+      f.nombrePais?.toLowerCase().trim().includes(this.filtro3)
+    );
   }
-  
-  pais!: IPais
-  
+
+  pais!: IPais;
+
   displayPaises(id: number) {
     if (!id) return '';
-  
+
     let index = this.listaPaises.findIndex((r) => r.id === id);
     console.log('index', index);
-  
+
     this.pais = this.listaPaises[index];
-  
-    return this.pais.nombrePais
+
+    return this.pais.nombrePais;
   }
 
   abrirModalPais(): void {
@@ -250,41 +239,42 @@ export class AutoComponent implements OnInit {
     const dialogRef = this.dialog.open(PaisComponent, {
       width: '450px',
     });
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(() => {
       this.abrirModalAuto();
     });
   }
 
-  abrirModalAuto():void{
+  abrirModalAuto(): void {
     const dialogRef = this.dialog.open(AutoComponent, {
-      width: '450px'
+      width: '450px',
     });
   }
 
   abrirModalMarca(): void {
     this.onNoClick();
     const dialogRef = this.dialog.open(MarcaComponent, {
-      width: '450px'
+      width: '450px',
     });
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(() => {
       this.abrirModalAuto();
     });
   }
 
+  mensaje!: String;
   abrirModalModelo(): void {
-    if(this.registerForm.get('idMarca')?.value != 0){
-      console.log('id que llega',this.registerForm.get('idMarca')?.value)
+    if (this.registerForm.get('idMarca')?.value != 0) {
+      this.onNoClick();
       this.dataService.idMarca = this.registerForm.get('idMarca')?.value;
-      console.log('id que pasa',this.dataService.idMarca)
       const dialogRef = this.dialog.open(ModeloComponent, {
         width: '450px',
       });
-      dialogRef.afterClosed().subscribe((result) => {
-        
+      dialogRef.afterClosed().subscribe(() => {
+        this.abrirModalAuto();
       });
-    } 
+    } else {
+      this.mensaje = 'Seleccione una marca';
+    }
   }
 }
 
-
-export interface IGenerica extends IMarca, IModelo, IAuto, IPais{}
+export interface IGenerica extends IMarca, IModelo, IAuto, IPais {}

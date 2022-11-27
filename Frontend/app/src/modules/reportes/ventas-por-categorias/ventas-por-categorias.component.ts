@@ -4,18 +4,16 @@ import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
-import { IGananciaYCantidadPorMarca } from 'src/interfaces/IGananaciaYCantidadPorMarca';
 import { IGananciaPorCategoria } from 'src/interfaces/IGananciaPorCategoria';
 import { ReportesService } from 'src/services/reportes/reportes.service';
 
 @Component({
   selector: 'app-ventas-por-categorias',
   templateUrl: './ventas-por-categorias.component.html',
-  styleUrls: ['./ventas-por-categorias.component.css']
+  styleUrls: ['./ventas-por-categorias.component.css'],
 })
 export class VentasPorCategoriasComponent implements OnInit {
-
-  displayedColumns: string[] = ['cantidadVentas','costo','categoria'];
+  displayedColumns: string[] = ['cantidadVentas', 'costo', 'categoria'];
   dataSource!: MatTableDataSource<IGenerica>;
 
   cargando: boolean = false;
@@ -32,7 +30,7 @@ export class VentasPorCategoriasComponent implements OnInit {
   constructor(
     private service: ReportesService,
     public _MatPaginatorIntl: MatPaginatorIntl,
-    private fb: FormBuilder,
+    private fb: FormBuilder
   ) {
     this.dataSource = new MatTableDataSource(this.lista);
   }
@@ -49,25 +47,23 @@ export class VentasPorCategoriasComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
- buscar() {
-    try {
-
-      let fechaDesde = moment(this.registerForm.value.fechaDesde).tz('America/Argentina/Cordoba')
+  buscar() {
+    let fechaDesde = moment(this.registerForm.value.fechaDesde)
+      .tz('America/Argentina/Cordoba')
       .format();
-      let fechaHasta = moment(this.registerForm.value.fechaHasta).tz('America/Argentina/Cordoba')
+    let fechaHasta = moment(this.registerForm.value.fechaHasta)
+      .tz('America/Argentina/Cordoba')
       .format();
 
-     this.service.consulta4(fechaDesde,fechaHasta).subscribe((r: IGenerica[]) => {
+    this.service
+      .consulta4(fechaDesde, fechaHasta)
+      .subscribe((r: IGenerica[]) => {
         console.log(r);
         this.lista = r;
         this.dataSource = new MatTableDataSource(this.lista);
         this.configTable();
         this.cargando = false;
       });
-    } catch (e) {
-      console.log(e);
-      this.cargando = false;
-    }
   }
 
   filtrar() {
@@ -84,7 +80,6 @@ export class VentasPorCategoriasComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.listaFiltro);
     this.configTable();
   }
-
 }
 
 export interface IGenerica extends IGananciaPorCategoria{}

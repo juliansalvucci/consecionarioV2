@@ -14,11 +14,8 @@ import { PaisComponent } from '../pais/pais.component';
   templateUrl: './pais-lista.component.html',
   styleUrls: ['./pais-lista.component.css'],
 })
-
-
 export class PaisListaComponent implements OnInit {
-
-  displayedColumns: string[] = ['nombre','categoria','acciones'];
+  displayedColumns: string[] = ['nombre', 'categoria', 'acciones'];
   dataSource!: MatTableDataSource<IGenerica>;
 
   cargando: boolean = false;
@@ -48,19 +45,14 @@ export class PaisListaComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
- consultar() {
-    try {
-     this.service.consulta().subscribe((r: IGenerica[]) => {
-        console.log(r);
-        this.lista = r;
-        this.dataSource = new MatTableDataSource(this.lista);
-        this.configTable();
-        this.cargando = false;
-      });
-    } catch (e) {
-      console.log(e);
+  consultar() {
+    this.service.consulta().subscribe((r: IGenerica[]) => {
+      console.log(r);
+      this.lista = r;
+      this.dataSource = new MatTableDataSource(this.lista);
+      this.configTable();
       this.cargando = false;
-    }
+    });
   }
 
   abrirModal(id: number): void {
@@ -81,20 +73,15 @@ export class PaisListaComponent implements OnInit {
   }
 
   eliminar(id: number) {
-    try {
-      this.service.baja(id).subscribe((r) => {
-        if (r) {
-          //Si el back me devuelve un true.
-          this.lista = this.lista.filter((element) => element.id != id);
-          this.dataSource = new MatTableDataSource(this.lista);
-          this.configTable();
-        }
-        this.cargando = false;
-      });
-    } catch (e) {
-      console.log(e);
+    this.service.baja(id).subscribe((r) => {
+      if (r) {
+        //Si el back me devuelve un true.
+        this.lista = this.lista.filter((element) => element.id != id);
+        this.dataSource = new MatTableDataSource(this.lista);
+        this.configTable();
+      }
       this.cargando = false;
-    }
+    });
   }
 
   filtrar() {

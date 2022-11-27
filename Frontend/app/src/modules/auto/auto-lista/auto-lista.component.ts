@@ -12,11 +12,17 @@ import { AutoComponent } from '../auto/auto.component';
 @Component({
   selector: 'app-auto-lista',
   templateUrl: './auto-lista.component.html',
-  styleUrls: ['./auto-lista.component.css']
+  styleUrls: ['./auto-lista.component.css'],
 })
 export class AutoListaComponent implements OnInit {
-
-  displayedColumns: string[] = ['precio','costo','modelo','marca','pais','acciones'];
+  displayedColumns: string[] = [
+    'precio',
+    'costo',
+    'modelo',
+    'marca',
+    'pais',
+    'acciones',
+  ];
   dataSource!: MatTableDataSource<IGenerica>;
 
   cargando: boolean = false;
@@ -47,18 +53,13 @@ export class AutoListaComponent implements OnInit {
   }
 
   consultar(): void {
-    try {
-      this.service.consulta().subscribe((r: IGenerica[]) => {
-        console.log(r);
-        this.lista = r.filter((f)=> f.vendido == false)
-        this.dataSource = new MatTableDataSource(this.lista);
-        this.configTable();
-        this.cargando = false;
-      });
-    } catch (e) {
-      console.log(e);
+    this.service.consulta().subscribe((r: IGenerica[]) => {
+      console.log(r);
+      this.lista = r.filter((f) => f.vendido == false);
+      this.dataSource = new MatTableDataSource(this.lista);
+      this.configTable();
       this.cargando = false;
-    }
+    });
   }
 
   abrirModal(id: number): void {
@@ -67,7 +68,6 @@ export class AutoListaComponent implements OnInit {
       width: '450px',
     });
     dialogRef.afterClosed().subscribe((result) => {
-      
       if (this.dataService.object != null) {
         this.lista = this.lista.filter((element) => element.id != id);
         this.lista.push(this.dataService.object);
@@ -75,7 +75,7 @@ export class AutoListaComponent implements OnInit {
         this.configTable();
         this.dataService.object = null;
       }
-      
+
       this.cargando = false;
     });
   }
@@ -86,47 +86,48 @@ export class AutoListaComponent implements OnInit {
       width: '750px',
     });
     dialogRef.afterClosed().subscribe((result) => {
-      
       if (this.dataService.object != null) {
         this.lista = this.lista.filter((element) => element.id != id);
         this.dataSource = new MatTableDataSource(this.lista);
         this.configTable();
         this.dataService.object = null;
       }
-      
+
       this.cargando = false;
     });
   }
 
   eliminar(id: number) {
-    try {
-      this.service.baja(id).subscribe((r) => {
-        if (r) {
-          //Si el back me devuelve un true.
-          this.lista = this.lista.filter((element) => element.id != id);
-          this.dataSource = new MatTableDataSource(this.lista);
-          this.configTable();
-        }
-        this.cargando = false;
-      });
-    } catch (e) {
-      console.log(e);
+    this.service.baja(id).subscribe((r) => {
+      if (r) {
+        //Si el back me devuelve un true.
+        this.lista = this.lista.filter((element) => element.id != id);
+        this.dataSource = new MatTableDataSource(this.lista);
+        this.configTable();
+      }
       this.cargando = false;
-    }
+    });
   }
 
   filtrar() {
     if (this.filtro == '') {
       this.listaFiltro = this.lista;
     } else {
-      this.listaFiltro = this.lista?.filter((f) => f.modelo.marca.nombreMarca?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase())
-                                                || f.modelo.nombreModelo?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase()));
+      this.listaFiltro = this.lista?.filter(
+        (f) =>
+          f.modelo.marca.nombreMarca
+            ?.toLowerCase()
+            .trim()
+            .includes(this.filtro.toLocaleLowerCase()) ||
+          f.modelo.nombreModelo
+            ?.toLowerCase()
+            .trim()
+            .includes(this.filtro.toLocaleLowerCase())
+      );
     }
     this.dataSource = new MatTableDataSource(this.listaFiltro);
     this.configTable();
   }
-
-  
 }
 
 export interface IGenerica extends IAuto{}

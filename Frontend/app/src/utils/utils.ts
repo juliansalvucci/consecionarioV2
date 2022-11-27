@@ -1,6 +1,6 @@
 import { FormControl, FormGroup } from "@angular/forms";
-import Swal, { SweetAlertCustomClass, SweetAlertIcon, SweetAlertOptions, SweetAlertResult } from "sweetalert2";
-import swal from 'sweetalert2';
+import Swal, { SweetAlertIcon, SweetAlertResult } from "sweetalert2";
+
 
 export const pattern = {
     letters:"[a-zA-Z ]{2,254}",

@@ -12,11 +12,19 @@ import { VentaComponent } from '../venta/venta.component';
 @Component({
   selector: 'app-venta-lista',
   templateUrl: './venta-lista.component.html',
-  styleUrls: ['./venta-lista.component.css']
+  styleUrls: ['./venta-lista.component.css'],
 })
 export class VentaListaComponent implements OnInit {
-
-  displayedColumns: string[] = ['fecha','modelo','marca','costo','precio','porcentaje','cliente','empleado'];
+  displayedColumns: string[] = [
+    'fecha',
+    'modelo',
+    'marca',
+    'costo',
+    'precio',
+    'porcentaje',
+    'cliente',
+    'empleado',
+  ];
   dataSource!: MatTableDataSource<IGenerica>;
 
   cargando: boolean = false;
@@ -55,34 +63,26 @@ export class VentaListaComponent implements OnInit {
   }
 
   consultar(): void {
-    try {
-      this.service.consulta().subscribe((r: IGenerica[]) => {
-        console.log(r);
-        this.lista = r;
-        this.dataSource = new MatTableDataSource(this.lista);
-        this.configTable();
-        this.cargando = false;
-      });
-    } catch (e) {
-      console.log(e);
+    this.service.consulta().subscribe((r: IGenerica[]) => {
+      console.log(r);
+      this.lista = r;
+      this.dataSource = new MatTableDataSource(this.lista);
+      this.configTable();
       this.cargando = false;
-    }
+    });
   }
 
-  buscar(){
-    try {
-      console.log(this.registerForm.value)
-      this.service.consultaAvanzada(this.registerForm.value).subscribe((r: IGenerica[]) => {
+  buscar() {
+    console.log(this.registerForm.value);
+    this.service
+      .consultaAvanzada(this.registerForm.value)
+      .subscribe((r: IGenerica[]) => {
         console.log(r);
         this.lista = r;
         this.dataSource = new MatTableDataSource(this.lista);
         this.configTable();
         this.cargando = false;
       });
-    } catch (e) {
-      console.log(e);
-      this.cargando = false;
-    }
   }
 
   abrirModal(): void {
@@ -100,20 +100,29 @@ export class VentaListaComponent implements OnInit {
     });
   }
 
-  
   filtrar() {
     if (this.filtro == '') {
       this.listaFiltro = this.lista;
     } else {
-      this.listaFiltro = this.lista?.filter((f) => f.cliente.nombre?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase())
-                                                || f.auto?.modelo?.nombreModelo?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase())
-                                                || f.auto?.modelo?.marca?.nombreMarca?.toLowerCase().trim().includes(this.filtro.toLowerCase()));
+      this.listaFiltro = this.lista?.filter(
+        (f) =>
+          f.cliente.nombre
+            ?.toLowerCase()
+            .trim()
+            .includes(this.filtro.toLocaleLowerCase()) ||
+          f.auto?.modelo?.nombreModelo
+            ?.toLowerCase()
+            .trim()
+            .includes(this.filtro.toLocaleLowerCase()) ||
+          f.auto?.modelo?.marca?.nombreMarca
+            ?.toLowerCase()
+            .trim()
+            .includes(this.filtro.toLowerCase())
+      );
     }
     this.dataSource = new MatTableDataSource(this.listaFiltro);
     this.configTable();
   }
-  
-
 }
 
 export interface IGenerica extends IVenta{}

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ICategoria } from 'src/interfaces/ICategoria';
@@ -8,10 +8,9 @@ import { DataService } from 'src/services/data.service';
 @Component({
   selector: 'app-categoria',
   templateUrl: './categoria.component.html',
-  styleUrls: ['./categoria.component.css']
+  styleUrls: ['./categoria.component.css'],
 })
-export class CategoriaComponent implements OnInit {
-
+export class CategoriaComponent {
   constructor(
     public dialogRef: MatDialogRef<ICategoria>,
     @Inject(MAT_DIALOG_DATA) public data: ICategoria,
@@ -22,8 +21,6 @@ export class CategoriaComponent implements OnInit {
   ) {
     this.configurarFormulario();
   }
-
-  ngOnInit(): void {}
 
   registerForm = this.fb.group({
     id: [0],
@@ -43,27 +40,20 @@ export class CategoriaComponent implements OnInit {
       this.registerForm.patchValue({
         id: r.id,
         nombreCategoria: r.nombreCategoria,
-        porcentaje: r.porcentaje
+        porcentaje: r.porcentaje,
       });
     });
   }
 
   register() {
-    try {
-      this.service.alta(this.registerForm.value).subscribe((data) => {
-        this.dataService.object = data;
-        console.log('Registro realizado con éxito');
-        this.onNoClick();
-      });
-    } catch (e) {
-      console.log(this.registerForm.value);
-      console.log('modelo invalido');
+    this.service.alta(this.registerForm.value).subscribe((data) => {
+      this.dataService.object = data;
+      console.log('Registro realizado con éxito');
       this.onNoClick();
-    }
+    });
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 }

@@ -11,10 +11,9 @@ import { MarcaComponent } from '../marca/marca.component';
 @Component({
   selector: 'app-marca-lista',
   templateUrl: './marca-lista.component.html',
-  styleUrls: ['./marca-lista.component.css']
+  styleUrls: ['./marca-lista.component.css'],
 })
 export class MarcaListaComponent implements OnInit {
-
   displayedColumns: string[] = ['nombre', 'acciones'];
   dataSource!: MatTableDataSource<IGenerica>;
 
@@ -46,18 +45,13 @@ export class MarcaListaComponent implements OnInit {
   }
 
   consultar(): void {
-    try {
-      this.service.consulta().subscribe((r: IGenerica[]) => {
-        console.log(r);
-        this.lista = r;
-        this.dataSource = new MatTableDataSource(this.lista);
-        this.configTable();
-        this.cargando = false;
-      });
-    } catch (e) {
-      console.log(e);
+    this.service.consulta().subscribe((r: IGenerica[]) => {
+      console.log(r);
+      this.lista = r;
+      this.dataSource = new MatTableDataSource(this.lista);
+      this.configTable();
       this.cargando = false;
-    }
+    });
   }
 
   abrirModal(id: number): void {
@@ -78,32 +72,31 @@ export class MarcaListaComponent implements OnInit {
   }
 
   eliminar(id: number) {
-    try {
-      this.service.baja(id).subscribe((r) => {
-        if (r) {
-          //Si el back me devuelve un true.
-          this.lista = this.lista.filter((element) => element.id != id);
-          this.dataSource = new MatTableDataSource(this.lista);
-          this.configTable();
-        }
-        this.cargando = false;
-      });
-    } catch (e) {
-      console.log(e);
+    this.service.baja(id).subscribe((r) => {
+      if (r) {
+        //Si el back me devuelve un true.
+        this.lista = this.lista.filter((element) => element.id != id);
+        this.dataSource = new MatTableDataSource(this.lista);
+        this.configTable();
+      }
       this.cargando = false;
-    }
+    });
   }
 
   filtrar() {
     if (this.filtro == '') {
       this.listaFiltro = this.lista;
     } else {
-      this.listaFiltro = this.lista?.filter((f) => f.nombreMarca?.toLowerCase().trim().includes(this.filtro.toLocaleLowerCase()));
+      this.listaFiltro = this.lista?.filter((f) =>
+        f.nombreMarca
+          ?.toLowerCase()
+          .trim()
+          .includes(this.filtro.toLocaleLowerCase())
+      );
     }
     this.dataSource = new MatTableDataSource(this.listaFiltro);
     this.configTable();
   }
-
 }
 
 export interface IGenerica extends IMarca{}

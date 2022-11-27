@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import {MatDialog,MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { IPais } from 'src/interfaces/IPais';
@@ -8,11 +8,9 @@ import { DataService } from 'src/services/data.service';
 @Component({
   selector: 'app-cliente',
   templateUrl: './cliente.component.html',
-  styleUrls: ['./cliente.component.css']
+  styleUrls: ['./cliente.component.css'],
 })
-
-export class ClienteComponent implements OnInit {
-
+export class ClienteComponent {
   constructor(
     public dialogRef: MatDialogRef<IPais>,
     @Inject(MAT_DIALOG_DATA) public data: IPais,
@@ -24,15 +22,13 @@ export class ClienteComponent implements OnInit {
     this.configurarFormulario();
   }
 
-  ngOnInit(): void {}
 
   registerForm = this.fb.group({
     id: [0],
-    nombre: ['',Validators.required],
-    apellido: ['',Validators.required],
-    documento: ['',Validators.required],
+    nombre: ['', Validators.required],
+    apellido: ['', Validators.required],
+    documento: ['', Validators.required],
   });
-
 
   configurarFormulario() {
     if (this.dataService.documento != '') {
@@ -40,37 +36,29 @@ export class ClienteComponent implements OnInit {
     }
   }
 
-
   autocompletar() {
-    this.service.consultaPorDoumento(this.dataService.documento).subscribe((r) => {
-      console.log(r);
-      this.registerForm.patchValue({
-        id: r.id,
-        nombre: r.nombre,
-        apellido: r.apellido,
-        documento: r.documento
+    this.service
+      .consultaPorDoumento(this.dataService.documento)
+      .subscribe((r) => {
+        console.log(r);
+        this.registerForm.patchValue({
+          id: r.id,
+          nombre: r.nombre,
+          apellido: r.apellido,
+          documento: r.documento,
+        });
       });
-    });
   }
-
 
   register() {
-    try {
-      this.service.alta(this.registerForm.value).subscribe((data) => {
-        this.dataService.object = data;
-        console.log('Registro realizado con éxito');
-        this.onNoClick();
-      });
-    } catch (e) {
-      console.log(this.registerForm.value);
-      console.log('modelo invalido');
+    this.service.alta(this.registerForm.value).subscribe((data) => {
+      this.dataService.object = data;
+      console.log('Registro realizado con éxito');
       this.onNoClick();
-    }
+    });
   }
-
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 }

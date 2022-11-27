@@ -35,6 +35,11 @@
           El <strong>campo</strong> es requerido
         </mat-error>
 
+        <mat-error class="text-danger"
+          *ngIf="registerForm.get('idModelo')?.invalid && registerForm.get('idModelo')?.touched">
+          <strong>{{mensaje}}</strong> 
+        </mat-error>
+
         <mat-form-field appearance="fill">
             <mat-label id="negrita">País</mat-label>
             <input formControlName="idPais" matInput type="text" [matAutocomplete]="a3" [(ngModel)]="filtro3" (ngModelChange)="filtrarPaises()" (keyup)="filtrarPaises()"
