@@ -47,6 +47,14 @@ export const API_ROUTES = {
         CONSULTA:`${ENV.apiUrl}cliente`,
         CONSULTAPORDOCUMENTO:`${ENV.apiUrl}cliente/obtenerPorDocumento/`,
     },
+
+    VENDEDOR: {
+        ALTA: `${ENV.apiUrl}cliente`,
+        BAJA:`${ENV.apiUrl}cliente/`,
+        MODIFICACION: `${ENV.apiUrl}cliente/`,
+        CONSULTA:`${ENV.apiUrl}vendedor`,
+        CONSULTAPORDOCUMENTO:`${ENV.apiUrl}cliente/obtenerPorDocumento/`,
+    },
     
     CATEGORIA: {
         ALTA: `${ENV.apiUrl}categoria`,

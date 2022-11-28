@@ -13,6 +13,7 @@ import { DataService } from 'src/services/data.service';
 import { MarcaService } from 'src/services/marca/marca.service';
 import { ModeloService } from 'src/services/modelo/modelo.service';
 import { PaisService } from 'src/services/pais/pais.service';
+import { sweetalert } from 'src/utils/utils';
 
 @Component({
   selector: 'app-auto',
@@ -131,8 +132,8 @@ export class AutoComponent implements OnInit {
 
     console.log(this.registerForm.value);
     this.service.alta(this.registerForm.value).subscribe((data) => {
+      sweetalert.success();
       this.dataService.object = data;
-      console.log('Registro realizado con éxito');
       this.onNoClick();
     });
   }

@@ -9,12 +9,14 @@ import { ICategoria } from 'src/interfaces/ICategoria';
 import { ICliente } from 'src/interfaces/ICliente';
 import { IMarca } from 'src/interfaces/IMarca';
 import { IModelo } from 'src/interfaces/IModelo';
+import { IVendedor } from 'src/interfaces/IVendedor';
 import { IVenta } from 'src/interfaces/IVenta';
 import { CategoriaService } from 'src/services/categoria/categoria.service';
 import { ClienteService } from 'src/services/cliente/cliente.service';
 import { DataService } from 'src/services/data.service';
 import { MarcaService } from 'src/services/marca/marca.service';
 import { ModeloService } from 'src/services/modelo/modelo.service';
+import { VendedorService } from 'src/services/vendedor/vendedor.service';
 import { VentaService } from 'src/services/venta/venta.service';
 import { VentaComponent } from '../venta/venta.component';
 
@@ -48,9 +50,13 @@ export class VentaListaComponent implements OnInit {
   listaFiltro!: IGenerica[];
   lista!: IGenerica[];
 
+  date = new Date();
+  yesterDay!:string
+  now!:string
+
   registerForm = this.fb.group({
-    fechaDesde: [''],
-    fechaHasta: [''],
+    fechaDesde: [this.yesterDay],
+    fechaHasta: [this.now],
     montoInicial: [0],
     montoFinal: [0],
     idMarca:[0],
@@ -67,15 +73,31 @@ export class VentaListaComponent implements OnInit {
     private modeloService:ModeloService,
     private marcaService: MarcaService,
     private clienteService: ClienteService,
+    private vendedorService: VendedorService,
     private dataService: DataService,
     public _MatPaginatorIntl: MatPaginatorIntl,
     private fb: FormBuilder
   ) {
-    this.consultar();
+    
+    //Defino el intervalo de 24 horas, para trael los registros en ese intervalo.
+
+    this.registerForm.get('fechaHasta')?.setValue(moment(this.date)
+    .tz('America/Argentina/Cordoba') 
+    .format());
+
+    this.date.setDate(this.date.getDate()-1)
+    this.registerForm.get('fechaDesde')?.setValue(moment(this.date)
+      .tz('America/Argentina/Cordoba') 
+      .format());
+    
+
+    setTimeout(()=>{this.buscar()},100)
+    
     this.consultarCategorias();
     this.consultarModelos();
     this.consultarMarcas();
     this.consultarClientes();
+    this.consultarVendedores();
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -103,7 +125,7 @@ export class VentaListaComponent implements OnInit {
   buscar() {
 
     this.registerForm.value.fechaDesde = moment(this.registerForm.value.fechaDesde)
-      .tz('America/Argentina/Cordoba')
+      .tz('America/Argentina/Cordoba') 
       .format();
     this.registerForm.value.fechaHasta = moment(this.registerForm.value.fechaHasta)
       .tz('America/Argentina/Cordoba')
@@ -171,6 +193,39 @@ export class VentaListaComponent implements OnInit {
 
 
     return apellido +' '+ nombre;
+  }
+
+  listaVendedores!: IVendedor[];
+  filterVendedores!: IVendedor[];
+  filtroVendedores: string = ''
+
+  consultarVendedores(): void {
+    this.vendedorService.consulta().subscribe((r: IVendedor[]) => {
+      console.log(r);
+      this.listaVendedores = r;
+      this.filterVendedores = r;
+    });
+  }
+
+  filtrarVendedores() {
+    this.filterVendedores = this.listaVendedores?.filter((f) =>
+      f.nombre?.toLowerCase().trim().includes(this.filtroVendedores)
+    );
+  }
+
+
+  displayVendedores(id: number) {
+    console.log(id);
+
+    if (!id) return '';
+
+    let index = this.listaVendedores.findIndex((r) => r.id === id);
+    console.log('index', index);
+
+    let nombre = this.listaVendedores[index].nombre;
+    let apellido = this.listaVendedores[index].apellido;
+
+    return apellido + ' ' +nombre;
   }
 
   listaMarcas!: IMarca[];
@@ -253,8 +308,6 @@ export class VentaListaComponent implements OnInit {
       f.nombreCategoria?.toLowerCase().trim().includes(this.filtroCategorias)
     );
   }
-
-  categoria!: ICategoria;
 
   displayCategoria(id: number) {
     console.log(id);

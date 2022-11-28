@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { ICategoria } from 'src/interfaces/ICategoria';
 import { CategoriaService } from 'src/services/categoria/categoria.service';
 import { DataService } from 'src/services/data.service';
+import { sweetalert } from 'src/utils/utils';
 
 @Component({
   selector: 'app-categoria',
@@ -47,8 +48,8 @@ export class CategoriaComponent {
 
   register() {
     this.service.alta(this.registerForm.value).subscribe((data) => {
+      sweetalert.success();
       this.dataService.object = data;
-      console.log('Registro realizado con éxito');
       this.onNoClick();
     });
   }

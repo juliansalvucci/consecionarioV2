@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { IRango } from 'src/interfaces/IRango';
 import { DataService } from 'src/services/data.service';
 import { RangoService } from 'src/services/rango/rango.service';
+import { sweetalert } from 'src/utils/utils';
 
 @Component({
   selector: 'app-rango',
@@ -58,8 +59,8 @@ export class RangoComponent  {
   register() {
     console.log(this.registerForm.value);
     this.service.alta(this.registerForm.value).subscribe((data) => {
+      sweetalert.success();
       this.dataService.object = data;
-      console.log('Registro realizado con éxito');
       this.onNoClick();
     });
   }

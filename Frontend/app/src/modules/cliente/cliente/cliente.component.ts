@@ -4,6 +4,7 @@ import {MatDialog,MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { IPais } from 'src/interfaces/IPais';
 import { ClienteService } from 'src/services/cliente/cliente.service';
 import { DataService } from 'src/services/data.service';
+import { sweetalert } from 'src/utils/utils';
 
 @Component({
   selector: 'app-cliente',
@@ -52,8 +53,8 @@ export class ClienteComponent {
 
   register() {
     this.service.alta(this.registerForm.value).subscribe((data) => {
+      sweetalert.success();
       this.dataService.object = data;
-      console.log('Registro realizado con éxito');
       this.onNoClick();
     });
   }

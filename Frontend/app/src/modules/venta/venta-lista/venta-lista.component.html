@@ -1,129 +1,154 @@
 <div class="container-fluid">
     <br>
     <h3>Gestión ventas</h3>
-    <div class="d-flex">
-       
-        
-
-        <div [formGroup]="registerForm">
-            <div>
-                <mat-form-field appearance="legacy" class="datepickers">
-                    <mat-label>Fecha desde</mat-label>
-                    <input matInput [matDatepicker]="pickerDesde" readonly="true" formControlName="fechaDesde">
-                    <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matIconSuffix [for]="pickerDesde"></mat-datepicker-toggle>
-                    <mat-datepicker #pickerDesde></mat-datepicker>
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-form-field appearance="legacy" class="datepickers">
-                    <mat-label>Fecha hasta</mat-label>
-                    <input matInput [matDatepicker]="pickerHasta" readonly="true" formControlName="fechaHasta">
-                    <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matIconSuffix [for]="pickerHasta"></mat-datepicker-toggle>
-                    <mat-datepicker #pickerHasta></mat-datepicker>
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-form-field class="example-full-width" appearance="legacy" class="datepickers">
-                    <mat-label>Monto inicial</mat-label>
-                    <input matInput type="number" formControlName="montoInicial">
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-form-field class="example-full-width" appearance="legacy" class="datepickers">
-                    <mat-label>Monto final</mat-label>
-                    <input matInput type="number" formControlName="montoFinal">
-                </mat-form-field>
-            </div>
-
-            <mat-form-field appearance="fill">
-                <mat-label id="negrita">Modelo</mat-label>
-                <input formControlName="idModelo" matInput type="text" [matAutocomplete]="a2" [(ngModel)]="filtroModelos"
-                    (ngModelChange)="filtrarModelos()" (keyup)="filtrarModelos()" (keyup.enter)="filtrarModelos()" />
-                <mat-autocomplete #a2="matAutocomplete" [displayWith]="displayModelos.bind(this)">
-                    <mat-option *ngFor="let item of filterModelos" [value]="item.id">
-                        {{item.nombreModelo}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
-
-            <mat-form-field appearance="fill">
-                <mat-label id="negrita">Marca</mat-label>
-                <input formControlName="idMarca" matInput type="text" [matAutocomplete]="a3" [(ngModel)]="filtroMarcas"
-                    (ngModelChange)="filtrarMarcas()" (keyup)="filtrarMarcas()" (keyup.enter)="filtrarMarcas()" />
-                <mat-autocomplete #a3="matAutocomplete" [displayWith]="displayMarcas.bind(this)">
-                    <mat-option *ngFor="let item of filterMarcas" [value]="item.id">
-                        {{item.nombreMarca}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
-
-            <mat-form-field appearance="fill">
-                <mat-label id="negrita">Cliente</mat-label>
-                <input formControlName="idCliente" matInput type="text" [matAutocomplete]="a4" [(ngModel)]="filtroClientes"
-                    (ngModelChange)="filtrarClientes()" (keyup)="filtrarClientes()" (keyup.enter)="filtrarClientes()" />
-                <mat-autocomplete #a4="matAutocomplete" [displayWith]="displayClientes.bind(this)">
-                    <mat-option *ngFor="let item of filterClientes" [value]="item.id">
-                        {{item.apellido}} {{' '}} {{item.nombre}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
-
-            <!--
-            <mat-form-field appearance="fill">
-                <mat-label id="negrita">Categoría</mat-label>
-                <input formControlName="idCategoria" matInput type="text" [matAutocomplete]="a1" [(ngModel)]="filtroCategorias"
-                    (ngModelChange)="filtrarCategorias()" (keyup)="filtrarCategorias()" (keyup.enter)="filtrarCategorias()" />
-                <mat-autocomplete #a1="matAutocomplete" [displayWith]="displayCategoria.bind(this)">
-                    <mat-option *ngFor="let item of filterCategorias" [value]="item.id">
-                        {{item.nombreCategoria}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
-
-            
-
-            
-
-            
-        -->
-            <div>
-                <button mat-raised-button (click)="buscar()">Buscar</button>
+    <div>
+        <div class="card">
+            <br>
+            <div [formGroup]="registerForm" class="d-flex">
+                <div>
+                    <div class="d-flex">
+                        <div>
+                            <mat-form-field appearance="legacy" class="datepickers">
+                                <mat-label>Fecha desde</mat-label>
+                                <input matInput [matDatepicker]="pickerDesde" readonly="true" formControlName="fechaDesde">
+                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matIconSuffix [for]="pickerDesde"></mat-datepicker-toggle>
+                                <mat-datepicker #pickerDesde></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field appearance="legacy" class="datepickers">
+                                <mat-label>Fecha hasta</mat-label>
+                                <input matInput [matDatepicker]="pickerHasta" readonly="true" formControlName="fechaHasta">
+                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matIconSuffix [for]="pickerHasta"></mat-datepicker-toggle>
+                                <mat-datepicker #pickerHasta></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="d-flex">
+                        <div>
+                            <mat-form-field class="example-full-width" appearance="legacy" class="datepickers">
+                                <mat-label>Monto inicial</mat-label>
+                                <input matInput type="number" formControlName="montoInicial">
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field class="example-full-width" appearance="legacy" class="datepickers">
+                                <mat-label>Monto final</mat-label>
+                                <input matInput type="number" formControlName="montoFinal">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <br>
+                    <div>
+                        <mat-form-field appearance="fill" class="datepickers">
+                            <mat-label id="negrita">Modelo</mat-label>
+                            <input formControlName="idModelo" matInput type="text" [matAutocomplete]="a2"
+                                [(ngModel)]="filtroModelos" (ngModelChange)="filtrarModelos()" (keyup)="filtrarModelos()"
+                                (keyup.enter)="filtrarModelos()" />
+                            <mat-autocomplete #a2="matAutocomplete" [displayWith]="displayModelos.bind(this)">
+                                <mat-option *ngFor="let item of filterModelos" [value]="item.id">
+                                    {{item.nombreModelo}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+    
+                        <mat-form-field appearance="fill" class="datepickers">
+                            <mat-label id="negrita">Marca</mat-label>
+                            <input formControlName="idMarca" matInput type="text" [matAutocomplete]="a3"
+                                [(ngModel)]="filtroMarcas" (ngModelChange)="filtrarMarcas()" (keyup)="filtrarMarcas()"
+                                (keyup.enter)="filtrarMarcas()" />
+                            <mat-autocomplete #a3="matAutocomplete" [displayWith]="displayMarcas.bind(this)">
+                                <mat-option *ngFor="let item of filterMarcas" [value]="item.id">
+                                    {{item.nombreMarca}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+    
+                        <mat-form-field appearance="fill" class="datepickers">
+                            <mat-label id="negrita">Cliente</mat-label>
+                            <input formControlName="idCliente" matInput type="text" [matAutocomplete]="a4"
+                                [(ngModel)]="filtroClientes" (ngModelChange)="filtrarClientes()" (keyup)="filtrarClientes()"
+                                (keyup.enter)="filtrarClientes()" />
+                            <mat-autocomplete #a4="matAutocomplete" [displayWith]="displayClientes.bind(this)">
+                                <mat-option *ngFor="let item of filterClientes" [value]="item.id">
+                                    {{item.apellido}} {{' '}} {{item.nombre}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="fill" class="datepickers">
+                            <mat-label id="negrita">Categoría</mat-label>
+                            <input formControlName="idCategoria" matInput type="text" [matAutocomplete]="a1"
+                                [(ngModel)]="filtroCategorias" (ngModelChange)="filtrarCategorias()"
+                                (keyup)="filtrarCategorias()" (keyup.enter)="filtrarCategorias()" />
+                            <mat-autocomplete #a1="matAutocomplete" [displayWith]="displayCategoria.bind(this)">
+                                <mat-option *ngFor="let item of filterCategorias" [value]="item.id">
+                                    {{item.nombreCategoria}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+    
+                        <mat-form-field appearance="fill" class="datepickers">
+                            <mat-label id="negrita">Vendedor</mat-label>
+                            <input formControlName="idVendedor" matInput type="text" [matAutocomplete]="a5"
+                                [(ngModel)]="filtroVendedores" (ngModelChange)="filtrarVendedores()"
+                                (keyup)="filtrarVendedores()" (keyup.enter)="filtrarVendedores()" />
+                            <mat-autocomplete #a5="matAutocomplete" [displayWith]="displayVendedores.bind(this)">
+                                <mat-option *ngFor="let item of filterVendedores" [value]="item.id">
+                                    {{item.apellido}}{{' '}}{{item.nombre}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                </div>
             </div>
         </div>
-
+        <div>
+            <button mat-raised-button (click)="buscar()" style="width: 100%;" class="bg-danger"><strong>Buscar</strong></button>
+        </div>
+        </div>
         
-    </div>
+
+    <br>
 
 
-    
+
 
     <div class="mat-elevation-z8">
         <table mat-table matSort [dataSource]="dataSource">
 
             <ng-container matColumnDef="fecha">
                 <th mat-header-cell mat-sort-header *matHeaderCellDef> Fecha de venta </th>
-                <td mat-cell *matCellDef="let element" class="columna"> {{element.fechaVenta | date:'dd/MM/yyyy, h:mma'}} </td>
+                <td mat-cell *matCellDef="let element" class="columna"> {{element.fechaVenta | date:'dd/MM/yyyy,
+                    h:mma'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="modelo">
-                <th mat-header-cell mat-sort-header *matHeaderCellDef>  Modelo </th>
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> Modelo </th>
                 <td mat-cell *matCellDef="let element" class="columna"> {{element.auto?.modelo?.nombreModelo}} </td>
             </ng-container>
 
             <ng-container matColumnDef="marca">
                 <th mat-header-cell mat-sort-header *matHeaderCellDef> Marca </th>
-                <td mat-cell *matCellDef="let element" class="columna"> {{element.auto?.modelo?.marca?.nombreMarca}} </td>
+                <td mat-cell *matCellDef="let element" class="columna"> {{element.auto?.modelo?.marca?.nombreMarca}}
+                </td>
             </ng-container>
 
             <ng-container matColumnDef="categoria">
                 <th mat-header-cell mat-sort-header *matHeaderCellDef> Categoría </th>
-                <td mat-cell *matCellDef="let element" class="columna"> {{element.auto?.pais?.categoria?.nombreCategoria}} </td>
+                <td mat-cell *matCellDef="let element" class="columna">
+                    {{element.auto?.pais?.categoria?.nombreCategoria}} </td>
             </ng-container>
-            
 
-            
+
+
             <ng-container matColumnDef="precio">
                 <th mat-header-cell mat-sort-header *matHeaderCellDef> Precio </th>
                 <td mat-cell *matCellDef="let element" class="columna"> ${{element.precio}} </td>
@@ -147,12 +172,14 @@
 
             <ng-container matColumnDef="cliente">
                 <th mat-header-cell mat-sort-header *matHeaderCellDef> Cliente </th>
-                <td mat-cell *matCellDef="let element" class="columna"> {{element.cliente?.apellido}}   {{element.cliente?.nombre}} </td>
+                <td mat-cell *matCellDef="let element" class="columna"> {{element.cliente?.apellido}}
+                    {{element.cliente?.nombre}} </td>
             </ng-container>
 
             <ng-container matColumnDef="empleado">
                 <th mat-header-cell mat-sort-header *matHeaderCellDef> Vendedor </th>
-                <td mat-cell *matCellDef="let element" class="columna"> {{element.empleado?.nombre}}   {{element.empleado?.apellido}} </td>
+                <td mat-cell *matCellDef="let element" class="columna"> {{element.empleado?.nombre}}
+                    {{element.empleado?.apellido}} </td>
             </ng-container>
 
 

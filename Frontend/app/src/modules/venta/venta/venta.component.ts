@@ -14,6 +14,7 @@ import { MarcaService } from 'src/services/marca/marca.service';
 import { ModeloService } from 'src/services/modelo/modelo.service';
 import { PaisService } from 'src/services/pais/pais.service';
 import { VentaService } from 'src/services/venta/venta.service';
+import { sweetalert } from 'src/utils/utils';
 
 @Component({
   selector: 'app-venta',
@@ -132,8 +133,8 @@ export class VentaComponent {
 
     console.log(this.registerForm.value);
     await this.service4.alta(this.registerForm.value).subscribe((data) => {
+      sweetalert.success();
       this.dataService.object = data;
-      console.log('Registro realizado con éxito');
       this.onNoClick();
     });
   }
