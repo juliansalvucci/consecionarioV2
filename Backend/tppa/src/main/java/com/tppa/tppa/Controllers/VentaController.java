@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tppa.tppa.Models.Venta;
 import com.tppa.tppa.Models.Requests.BusquedaAvanzadaRequest;
+import com.tppa.tppa.Models.Requests.BusquedaAvanzadaV2Request;
 import com.tppa.tppa.Services.VentaService;
 
 @RestController
@@ -29,6 +30,12 @@ public class VentaController
     public ArrayList<Venta> obtener()
     {
         return service.obtener();
+    }
+
+    @PostMapping(path = "criteria/test/{idModelo}")
+    public List<Venta> busquedaAvanzada(@RequestBody BusquedaAvanzadaV2Request bar)
+    {
+        return service.busquedaAvanzada(bar);
     }
 
     @PostMapping(path = "/jpql/obtenerPorRangoDeCostosYFechas")

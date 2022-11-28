@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.tppa.tppa.Models.Auto;
 import com.tppa.tppa.Models.Venta;
 import com.tppa.tppa.Models.Requests.BusquedaAvanzadaRequest;
+import com.tppa.tppa.Models.Requests.BusquedaAvanzadaV2Request;
 import com.tppa.tppa.Repositories.AutoRepositories.AutoCustomRepository;
 import com.tppa.tppa.Repositories.AutoRepositories.AutoRepository;
 import com.tppa.tppa.Repositories.VentaRepositories.VentaCustomRepository;
@@ -68,6 +69,11 @@ public class VentaService
     public List<Venta> obtenerPorRangoDeCostos(Double montoInicial, Double montoFinal)
     {
         return customRepository.obtenerPorRangoDeCostos(montoInicial, montoFinal);
+    }
+
+    public List<Venta> busquedaAvanzada(BusquedaAvanzadaV2Request bar)
+    {
+        return customRepository.busquedaAvanzada(bar);
     }
 
     public List<Object> getReporteCantidadYGananciaPorMarca(String fechaDesde, String fechaHasta) 

@@ -1,9 +1,15 @@
 package com.tppa.tppa.Repositories.VentaRepositories;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +22,7 @@ import com.tppa.tppa.Models.ReportesModels.GananciaPorEmpleado;
 import com.tppa.tppa.Models.ReportesModels.GananciaPorModeloYMarca;
 import com.tppa.tppa.Models.ReportesModels.GananciaYCantidadEnPeriodo;
 import com.tppa.tppa.Models.Requests.BusquedaAvanzadaRequest;
+import com.tppa.tppa.Models.Requests.BusquedaAvanzadaV2Request;
 
 @Repository
 public class VentaCustomRepository {
@@ -23,6 +30,42 @@ public class VentaCustomRepository {
 
     public VentaCustomRepository(EntityManager em){
         this.em = em;
+    }
+
+    public List<Venta> busquedaAvanzada(BusquedaAvanzadaV2Request bar) {
+        final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+        final CriteriaQuery<Venta> cq = cb.createQuery(Venta.class);
+        final Root<Venta> root = cq.from(Venta.class);
+
+        Set<Predicate> predicates = new HashSet<>(6);
+
+        predicates.add(cb.between(root.get("fechaVenta"),bar.getFechaDesde(),bar.getFechaHasta()));
+        
+
+        if(bar.getMontoInicial() !=0 && bar.getMontoFinal() !=0){
+            predicates.add(cb.between(root.get("costo"),bar.getMontoInicial(),bar.getMontoFinal()));
+        }
+
+        if (bar.getIdModelo() != 0) {
+            predicates.add(cb.equal(root.get("auto").get("modelo").get("id"), bar.getIdModelo()));
+        }
+
+        if (bar.getIdMarca() != 0) {
+            predicates.add(cb.equal(root.get("auto").get("modelo").get("marca").get("id"), bar.getIdMarca()));
+        }
+
+        if (bar.getIdCiente() != 0) {
+            predicates.add(cb.equal(root.get("cliente").get("id"), bar.getIdCiente()));
+        }
+
+        if (bar.getIdVendedor() != 0) {
+            predicates.add(cb.equal(root.get("vendedor").get("id"), bar.getIdVendedor()));
+        }
+
+        cq.where(predicates.toArray(new Predicate[predicates.size()]));
+
+        return em.createQuery(cq).getResultList();
     }
 
     public List<Venta> obtenerPorRangoDeCostosYFechas(@RequestBody BusquedaAvanzadaRequest bar) 

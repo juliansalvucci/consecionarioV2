@@ -62,6 +62,14 @@ export const API_ROUTES = {
         CONSULTAPORID:`${ENV.apiUrl}venta/`,
     },
 
+    RANGO: {
+        ALTA:`${ENV.apiUrl}rango`,
+        BAJA:`${ENV.apiUrl}rango/`,
+        MODIFICACION: `${ENV.apiUrl}rango/`,
+        CONSULTA:`${ENV.apiUrl}rango`,
+        CONSULTAPORID:`${ENV.apiUrl}rango/`,
+    },
+
     REPORTES:{
 
     }

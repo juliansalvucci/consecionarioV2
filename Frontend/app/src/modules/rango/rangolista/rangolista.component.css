@@ -1,0 +1,14 @@
+/*Estilo para centrar las columnas de mat tables*/
+:host ::ng-deep .mat-sort-header-container {
+    display: flex;
+    justify-content: center;
+}
+
+td.mat-cell, th.mat-header-cell {
+    text-align: center;
+    justify-content:center;
+}
+
+.bg-danger{
+    margin-left: 5px;
+}

@@ -6,6 +6,7 @@ import { ClienteListaComponent } from "src/modules/cliente/cliente-lista/cliente
 import { MarcaListaComponent } from "src/modules/marca/marca-lista/marca-lista.component";
 import { ModeloListaComponent } from "src/modules/modelo/modelo-lista/modelo-lista.component";
 import { PaisListaComponent } from "src/modules/pais/pais-lista/pais-lista.component";
+import { RangolistaComponent } from "src/modules/rango/rangolista/rangolista.component";
 import { DetallePorVendedorComponent } from "src/modules/reportes/detalle-por-vendedor/detalle-por-vendedor.component";
 import { GananciaporempleadoComponent } from "src/modules/reportes/gananciaporempleado/gananciaporempleado.component";
 import { GananciapormodeloymarcaComponent } from "src/modules/reportes/gananciapormodeloymarca/gananciapormodeloymarca.component";
@@ -74,6 +75,10 @@ const routes: Routes = [
       {
         path: 'detalleVentasPorVendedor',
         component: DetallePorVendedorComponent
+      },
+      {
+        path: 'listaRangos',
+        component: RangolistaComponent
       },
     ]
   },

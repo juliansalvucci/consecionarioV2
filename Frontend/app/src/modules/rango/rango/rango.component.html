@@ -1,0 +1,31 @@
+<div>
+    <h1 class="d-flex justify-content-between">Rango</h1>
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <mat-form-field appearance="fill">
+            <mat-label id="negrita">Monto Inicial</mat-label>
+            <input type="number" matInput formControlName="montoInicial">
+        </mat-form-field>
+        <mat-error class="text-danger"
+          *ngIf="registerForm.get('montoInicial')?.invalid && registerForm.get('montoInicial')?.touched">
+          El <strong>campo</strong> es requerido
+        </mat-error>
+        <mat-form-field appearance="fill">
+            <mat-label id="negrita">Monto Final</mat-label>
+            <input type="number" matInput formControlName="montoFinal">
+        </mat-form-field>
+        <mat-error class="text-danger"
+          *ngIf="registerForm.get('montoFinal')?.invalid && registerForm.get('montoFinal')?.touched">
+          El <strong>campo</strong> es requerido
+        </mat-error>
+        <mat-form-field appearance="fill">
+            <mat-label id="negrita">Valor</mat-label>
+            <input type="number" matInput formControlName="valor">
+        </mat-form-field>
+        <mat-error class="text-danger"
+          *ngIf="registerForm.get('valor')?.invalid && registerForm.get('valor')?.touched">
+          El <strong>campo</strong> es requerido
+        </mat-error>
+    </form>
+</div>
+<button mat-raised-button class="col-3 m-auto mb-4 bg-success" (click)="register()"
+    [disabled]="registerForm.invalid">Guardar</button>

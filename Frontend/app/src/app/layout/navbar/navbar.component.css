@@ -19,7 +19,7 @@ mat-toolbar-row{
 }
 
 button{
-    color: var(--color5);
+    color: white;
 }
 button:hover,
 button:focus,

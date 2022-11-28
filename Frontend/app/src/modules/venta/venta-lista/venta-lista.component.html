@@ -3,16 +3,64 @@
     <h3>Gestión ventas</h3>
     <div class="d-flex">
         <div class="container">
-            <div class="row">
-                <div class="col-10">
-                    <mat-form-field class="example-full-width" appearance="legacy">
-                        <mat-label>Búsqueda por nombre</mat-label>
-                        <input matInput name="filtro" [(ngModel)]="filtro" (ngModelChange)="filtrar()"
-                            (keyup)="filtrar()" (keyup.enter)="filtrar()">
-                    </mat-form-field>
+            <div class="container">
+                <div class="row">
+                    <div class="col-10">
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Búsqueda por marca</mat-label>
+                            <input matInput name="filtro1" [(ngModel)]="filtro1" (ngModelChange)="filtraPorMarca()"
+                                (keyup)="filtraPorMarca()" (keyup.enter)="filtraPorMarca()">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-10">
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Búsqueda por modelo</mat-label>
+                            <input matInput name="filtro2" [(ngModel)]="filtro2" (ngModelChange)="filtrarPorModelo()"
+                                (keyup)="filtrarPorModelo()" (keyup.enter)="filtrarPorModelo()">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-10">
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Búsqueda por categoria</mat-label>
+                            <input matInput name="filtro3" [(ngModel)]="filtro3" (ngModelChange)="filtrarPorCategoria()"
+                                (keyup)="filtrarPorCategoria()" (keyup.enter)="filtrarPorCategoria()">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-10">
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Búsqueda por cliente</mat-label>
+                            <input matInput name="filtro4" [(ngModel)]="filtro4" (ngModelChange)="filtrarPorCliente()"
+                                (keyup)="filtrarPorCliente()" (keyup.enter)="filtrarPorCliente()">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-10">
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Búsqueda por vendedor</mat-label>
+                            <input matInput name="filtro5" [(ngModel)]="filtro5" (ngModelChange)="filtrarPorVendedor()"
+                                (keyup)="filtrarPorVendedor()" (keyup.enter)="filtrarPorVendedor()">
+                        </mat-form-field>
+                    </div>
                 </div>
             </div>
         </div>
+        
+
         <div [formGroup]="registerForm" class="d-flex">
             <div>
                 <mat-form-field appearance="legacy" class="datepickers">
@@ -33,13 +81,13 @@
                 </mat-form-field>
             </div>
             <div>
-                <mat-form-field class="example-full-width" appearance="legacy">
+                <mat-form-field class="example-full-width" appearance="legacy" class="datepickers">
                     <mat-label>Monto inicial</mat-label>
                     <input matInput type="number" formControlName="montoInicial">
                 </mat-form-field>
             </div>
             <div>
-                <mat-form-field class="example-full-width" appearance="legacy">
+                <mat-form-field class="example-full-width" appearance="legacy" class="datepickers">
                     <mat-label>Monto final</mat-label>
                     <input matInput type="number" formControlName="montoFinal">
                 </mat-form-field>
@@ -111,7 +159,7 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             <tr class="mat-row" *matNoDataRow>
-                <td class="mat-cell" colspan="4">No hay registros</td>
+                <td class="mat-cell" colspan="10">No hay registros</td>
             </tr>
         </table>
 

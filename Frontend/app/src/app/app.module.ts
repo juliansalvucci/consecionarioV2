@@ -19,6 +19,7 @@ import { CategoriaModule } from 'src/modules/categoria/categoria.module';
 import { VentaModule } from 'src/modules/venta/venta.module';
 import { ReportesModule } from 'src/modules/reportes/reportes.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { RangoModule } from 'src/modules/rango/rango.module';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     AutoModule,
     ClienteModule,
     CategoriaModule,
+    RangoModule,
     VentaModule,
     ReportesModule,
     HttpClientModule,

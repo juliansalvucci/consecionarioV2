@@ -30,7 +30,11 @@ export class VentaListaComponent implements OnInit {
   dataSource!: MatTableDataSource<IGenerica>;
 
   cargando: boolean = false;
-  filtro: string = '';
+  filtro1: string = '';
+  filtro2: string = '';
+  filtro3: string = '';
+  filtro4: string = '';
+  filtro5: string = '';
 
   listaFiltro!: IGenerica[];
   lista!: IGenerica[];
@@ -102,29 +106,86 @@ export class VentaListaComponent implements OnInit {
     });
   }
 
-  filtrar() {
-    if (this.filtro == '') {
+  filtraPorMarca() {
+    if (this.filtro1 == '') {
       this.listaFiltro = this.lista;
     } else {
       this.listaFiltro = this.lista?.filter(
         (f) =>
-          f.cliente.nombre
-            ?.toLowerCase()
-            .trim()
-            .includes(this.filtro.toLocaleLowerCase()) ||
-          f.auto?.modelo?.nombreModelo
-            ?.toLowerCase()
-            .trim()
-            .includes(this.filtro.toLocaleLowerCase()) ||
           f.auto?.modelo?.marca?.nombreMarca
             ?.toLowerCase()
             .trim()
-            .includes(this.filtro.toLowerCase())
+            .includes(this.filtro1.toLowerCase())
       );
     }
     this.dataSource = new MatTableDataSource(this.listaFiltro);
     this.configTable();
   }
+
+  filtrarPorModelo() {
+    if (this.filtro2 == '') {
+      this.listaFiltro = this.lista;
+    } else {
+      this.listaFiltro = this.lista?.filter(
+        (f) =>
+          f.auto?.modelo?.nombreModelo
+            ?.toLowerCase()
+            .trim()
+            .includes(this.filtro2.toLocaleLowerCase()) 
+      );
+    }
+    this.dataSource = new MatTableDataSource(this.listaFiltro);
+    this.configTable();
+  }
+
+  filtrarPorCategoria() {
+    if (this.filtro3 == '') {
+      this.listaFiltro = this.lista;
+    } else {
+      this.listaFiltro = this.lista?.filter(
+        (f) =>
+          f.auto?.pais?.categoria?.nombreCategoria
+            ?.toLowerCase()
+            .trim()
+            .includes(this.filtro3.toLocaleLowerCase()) 
+      );
+    }
+    this.dataSource = new MatTableDataSource(this.listaFiltro);
+    this.configTable();
+  }
+
+  filtrarPorCliente() {
+    if (this.filtro4 == '') {
+      this.listaFiltro = this.lista;
+    } else {
+      this.listaFiltro = this.lista?.filter(
+        (f) =>
+          f.cliente?.nombre
+            ?.toLowerCase()
+            .trim()
+            .includes(this.filtro4.toLocaleLowerCase()) 
+      );
+    }
+    this.dataSource = new MatTableDataSource(this.listaFiltro);
+    this.configTable();
+  }
+
+  filtrarPorVendedor() {
+    if (this.filtro5 == '') {
+      this.listaFiltro = this.lista;
+    } else {
+      this.listaFiltro = this.lista?.filter(
+        (f) =>
+          f.vendedor?.nombre
+            ?.toLowerCase()
+            .trim()
+            .includes(this.filtro5.toLocaleLowerCase()) 
+      );
+    }
+    this.dataSource = new MatTableDataSource(this.listaFiltro);
+    this.configTable();
+  }
+
 }
 
 export interface IGenerica extends IVenta{}

@@ -1,16 +1,17 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { IMarca } from 'src/interfaces/IMarca';
+import { IRango } from 'src/interfaces/IRango';
 import { DataService } from 'src/services/data.service';
-import { MarcaService } from 'src/services/marca/marca.service';
+import { RangoService } from 'src/services/rango/rango.service';
 
 @Component({
-  selector: 'app-marca',
-  templateUrl: './marca.component.html',
-  styleUrls: ['./marca.component.css'],
+  selector: 'app-rango',
+  templateUrl: './rango.component.html',
+  styleUrls: ['./rango.component.css']
 })
-export class MarcaComponent {
+export class RangoComponent  {
+
   filterItems!: IGenerica[];
   lista!: IGenerica[];
 
@@ -21,7 +22,7 @@ export class MarcaComponent {
   constructor(
     public dialogRef: MatDialogRef<IGenerica>,
     @Inject(MAT_DIALOG_DATA) public data: IGenerica,
-    private service: MarcaService,
+    private service: RangoService,
     private fb: FormBuilder,
     private dataService: DataService,
     public dialog: MatDialog
@@ -31,7 +32,9 @@ export class MarcaComponent {
 
   registerForm = this.fb.group({
     id: [0],
-    nombreMarca: ['', Validators.required],
+    montoInicial: ['', Validators.required],
+    montoFinal: ['', Validators.required],
+    valor: ['', Validators.required],
   });
 
   configurarFormulario() {
@@ -45,7 +48,9 @@ export class MarcaComponent {
       console.log(r);
       this.registerForm.patchValue({
         id: r.id,
-        nombreMarca: r.nombreMarca,
+        montoInicial: r.montoInicial,
+        montoFinal: r.montoFinal,
+        valor: r.valor
       });
     });
   }
@@ -62,6 +67,7 @@ export class MarcaComponent {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
 }
 
-export interface IGenerica extends IMarca{}
+export interface IGenerica extends IRango{}
