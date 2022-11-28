@@ -32,7 +32,7 @@ public class VentaController
         return service.obtener();
     }
 
-    @PostMapping(path = "criteria/test/{idModelo}")
+    @PostMapping(path = "criteria/busquedaAvanzada")
     public List<Venta> busquedaAvanzada(@RequestBody BusquedaAvanzadaV2Request bar)
     {
         return service.busquedaAvanzada(bar);

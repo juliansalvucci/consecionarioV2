@@ -38,30 +38,37 @@ public class VentaCustomRepository {
         final CriteriaQuery<Venta> cq = cb.createQuery(Venta.class);
         final Root<Venta> root = cq.from(Venta.class);
 
-        Set<Predicate> predicates = new HashSet<>(6);
+        Set<Predicate> predicates = new HashSet<>(7);
 
         predicates.add(cb.between(root.get("fechaVenta"),bar.getFechaDesde(),bar.getFechaHasta()));
-        
 
-        if(bar.getMontoInicial() !=0 && bar.getMontoFinal() !=0){
+        
+        if(bar.getMontoInicial() != null && bar.getMontoFinal() != null){
             predicates.add(cb.between(root.get("costo"),bar.getMontoInicial(),bar.getMontoFinal()));
         }
-
-        if (bar.getIdModelo() != 0) {
+        
+        
+        if (bar.getIdModelo() != null) {
             predicates.add(cb.equal(root.get("auto").get("modelo").get("id"), bar.getIdModelo()));
         }
 
-        if (bar.getIdMarca() != 0) {
+        
+        if (bar.getIdMarca() != null) {
             predicates.add(cb.equal(root.get("auto").get("modelo").get("marca").get("id"), bar.getIdMarca()));
         }
+        
 
-        if (bar.getIdCiente() != 0) {
-            predicates.add(cb.equal(root.get("cliente").get("id"), bar.getIdCiente()));
+        
+        if (bar.getIdCliente() != null) {
+            predicates.add(cb.equal(root.get("cliente").get("id"),bar.getIdCliente()));
         }
-
+        
+        
+        /* 
         if (bar.getIdVendedor() != 0) {
             predicates.add(cb.equal(root.get("vendedor").get("id"), bar.getIdVendedor()));
         }
+        */
 
         cq.where(predicates.toArray(new Predicate[predicates.size()]));
 

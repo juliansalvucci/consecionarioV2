@@ -4,8 +4,17 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import * as moment from 'moment';
+import { ICategoria } from 'src/interfaces/ICategoria';
+import { ICliente } from 'src/interfaces/ICliente';
+import { IMarca } from 'src/interfaces/IMarca';
+import { IModelo } from 'src/interfaces/IModelo';
 import { IVenta } from 'src/interfaces/IVenta';
+import { CategoriaService } from 'src/services/categoria/categoria.service';
+import { ClienteService } from 'src/services/cliente/cliente.service';
 import { DataService } from 'src/services/data.service';
+import { MarcaService } from 'src/services/marca/marca.service';
+import { ModeloService } from 'src/services/modelo/modelo.service';
 import { VentaService } from 'src/services/venta/venta.service';
 import { VentaComponent } from '../venta/venta.component';
 
@@ -44,16 +53,29 @@ export class VentaListaComponent implements OnInit {
     fechaHasta: [''],
     montoInicial: [0],
     montoFinal: [0],
+    idMarca:[0],
+    idModelo:[0],
+    idCliente:[0],
+    idVendedor:[0],
+    idCategoria:[0],
   });
 
   constructor(
     public dialog: MatDialog,
     private service: VentaService,
+    private categoriaService:CategoriaService,
+    private modeloService:ModeloService,
+    private marcaService: MarcaService,
+    private clienteService: ClienteService,
     private dataService: DataService,
     public _MatPaginatorIntl: MatPaginatorIntl,
     private fb: FormBuilder
   ) {
     this.consultar();
+    this.consultarCategorias();
+    this.consultarModelos();
+    this.consultarMarcas();
+    this.consultarClientes();
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -79,9 +101,17 @@ export class VentaListaComponent implements OnInit {
   }
 
   buscar() {
+
+    this.registerForm.value.fechaDesde = moment(this.registerForm.value.fechaDesde)
+      .tz('America/Argentina/Cordoba')
+      .format();
+    this.registerForm.value.fechaHasta = moment(this.registerForm.value.fechaHasta)
+      .tz('America/Argentina/Cordoba')
+      .format();
+
     console.log(this.registerForm.value);
     this.service
-      .consultaAvanzada(this.registerForm.value)
+      .busquedaAvanzada(this.registerForm.value)
       .subscribe((r: IGenerica[]) => {
         console.log(r);
         this.lista = r;
@@ -106,84 +136,137 @@ export class VentaListaComponent implements OnInit {
     });
   }
 
-  filtraPorMarca() {
-    if (this.filtro1 == '') {
-      this.listaFiltro = this.lista;
-    } else {
-      this.listaFiltro = this.lista?.filter(
-        (f) =>
-          f.auto?.modelo?.marca?.nombreMarca
-            ?.toLowerCase()
-            .trim()
-            .includes(this.filtro1.toLowerCase())
-      );
-    }
-    this.dataSource = new MatTableDataSource(this.listaFiltro);
-    this.configTable();
+  
+  listaClientes!: ICliente[];
+  filterClientes!: ICliente[];
+  filtroClientes: string = '';
+
+  consultarClientes(): void {
+    this.clienteService.consulta().subscribe((r: ICliente[]) => {
+      console.log(r);
+      this.listaClientes = r;
+      this.filterClientes = r;
+    });
   }
 
-  filtrarPorModelo() {
-    if (this.filtro2 == '') {
-      this.listaFiltro = this.lista;
-    } else {
-      this.listaFiltro = this.lista?.filter(
-        (f) =>
-          f.auto?.modelo?.nombreModelo
-            ?.toLowerCase()
-            .trim()
-            .includes(this.filtro2.toLocaleLowerCase()) 
-      );
-    }
-    this.dataSource = new MatTableDataSource(this.listaFiltro);
-    this.configTable();
+  filtrarClientes() {
+    this.filterClientes = this.listaClientes?.filter((f) =>
+      f.nombre?.toLowerCase().trim().includes(this.filtroClientes) ||
+      f.apellido?.toLocaleLowerCase().trim().includes(this.filtroClientes)
+    );
   }
 
-  filtrarPorCategoria() {
-    if (this.filtro3 == '') {
-      this.listaFiltro = this.lista;
-    } else {
-      this.listaFiltro = this.lista?.filter(
-        (f) =>
-          f.auto?.pais?.categoria?.nombreCategoria
-            ?.toLowerCase()
-            .trim()
-            .includes(this.filtro3.toLocaleLowerCase()) 
-      );
-    }
-    this.dataSource = new MatTableDataSource(this.listaFiltro);
-    this.configTable();
+  displayClientes(id: number) {
+    console.log(id);
+
+    if (!id) return '';
+
+    this.registerForm.value.idCliente = id;
+
+    let index = this.listaClientes.findIndex((r) => r.id === id);
+    console.log('index', index);
+
+    let nombre = this.listaClientes[index].nombre;
+    let apellido = this.listaClientes[index].apellido;
+
+
+    return apellido +' '+ nombre;
   }
 
-  filtrarPorCliente() {
-    if (this.filtro4 == '') {
-      this.listaFiltro = this.lista;
-    } else {
-      this.listaFiltro = this.lista?.filter(
-        (f) =>
-          f.cliente?.nombre
-            ?.toLowerCase()
-            .trim()
-            .includes(this.filtro4.toLocaleLowerCase()) 
-      );
-    }
-    this.dataSource = new MatTableDataSource(this.listaFiltro);
-    this.configTable();
+  listaMarcas!: IMarca[];
+  filterMarcas!: IMarca[];
+  filtroMarcas: string = '';
+
+  consultarMarcas(): void {
+    this.marcaService.consulta().subscribe((r: IMarca[]) => {
+      console.log(r);
+      this.listaMarcas = r;
+      this.filterMarcas = r;
+    });
   }
 
-  filtrarPorVendedor() {
-    if (this.filtro5 == '') {
-      this.listaFiltro = this.lista;
-    } else {
-      this.listaFiltro = this.lista?.filter(
-        (f) =>
-          f.vendedor?.nombre
-            ?.toLowerCase()
-            .trim()
-            .includes(this.filtro5.toLocaleLowerCase()) 
-      );
-    }
-    this.dataSource = new MatTableDataSource(this.listaFiltro);
-    this.configTable();
+  filtrarMarcas() {
+    this.filterMarcas = this.listaMarcas?.filter((f) =>
+      f.nombreMarca?.toLowerCase().trim().includes(this.filtroMarcas)
+    );
+  }
+
+  displayMarcas(id: number) {
+    console.log(id);
+
+    if (!id) return '';
+
+    let index = this.listaMarcas.findIndex((r) => r.id === id);
+    console.log('index', index);
+
+    let nombre = this.listaMarcas[index].nombreMarca;
+
+    return nombre;
+  }
+
+  listaModelos!: IModelo[];
+  filterModelos!: IModelo[];
+  filtroModelos: string = '';
+
+  consultarModelos(): void {
+    this.modeloService.consulta().subscribe((r: IModelo[]) => {
+      console.log(r);
+      this.listaModelos = r;
+      this.filterModelos = r;
+    });
+  }
+
+  filtrarModelos() {
+    this.filterModelos = this.listaModelos?.filter((f) =>
+      f.nombreModelo?.toLowerCase().trim().includes(this.filtroModelos)
+    );
+  }
+
+  displayModelos(id: number) {
+    console.log(id);
+
+    if (!id) return '';
+
+    let index = this.listaModelos.findIndex((r) => r.id === id);
+    console.log('index', index);
+
+    let nombre = this.listaModelos[index].nombreModelo;
+
+    return nombre;
+  }
+
+
+  listaCategorias!: ICategoria[];
+  filterCategorias!: ICategoria[];
+  filtroCategorias: string = ''
+
+  consultarCategorias(): void {
+    this.categoriaService.consulta().subscribe((r: ICategoria[]) => {
+      console.log(r);
+      this.listaCategorias = r;
+      this.filterCategorias = r;
+    });
+  }
+
+  filtrarCategorias() {
+    this.filterCategorias = this.listaCategorias?.filter((f) =>
+      f.nombreCategoria?.toLowerCase().trim().includes(this.filtroCategorias)
+    );
+  }
+
+  categoria!: ICategoria;
+
+  displayCategoria(id: number) {
+    console.log(id);
+
+    if (!id) return '';
+
+    let index = this.listaCategorias.findIndex((r) => r.id === id);
+    console.log('index', index);
+
+    let nombre = this.listaCategorias[index].nombreCategoria;
+
+    return nombre;
   }
 
 }

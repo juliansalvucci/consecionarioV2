@@ -44,12 +44,12 @@ public class BusquedaAvanzadaV2Request {
     public void setIdModelo(Long idModelo) {
         this.idModelo = idModelo;
     }
-    private Long idCiente;
-    public Long getIdCiente() {
-        return idCiente;
+    private Long idCliente;
+    public Long getIdCliente() {
+        return idCliente;
     }
-    public void setIdCiente(Long idCiente) {
-        this.idCiente = idCiente;
+    public void setIdCliente(Long idCiente) {
+        this.idCliente = idCiente;
     }
     private Long idVendedor;
     public Long getIdVendedor() {

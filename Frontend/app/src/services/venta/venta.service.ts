@@ -31,4 +31,9 @@ export class VentaService {
   {
     return this.http.get(this.URL.CONSULTAPORID + id);
   }
+
+  busquedaAvanzada(data:any):Observable<any>
+  {
+    return this.http.post(`http://localhost:8080/venta/criteria/busquedaAvanzada`,data);
+  }
 }

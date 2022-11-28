@@ -2,66 +2,10 @@
     <br>
     <h3>Gestión ventas</h3>
     <div class="d-flex">
-        <div class="container">
-            <div class="container">
-                <div class="row">
-                    <div class="col-10">
-                        <mat-form-field class="example-full-width" appearance="legacy">
-                            <mat-label>Búsqueda por marca</mat-label>
-                            <input matInput name="filtro1" [(ngModel)]="filtro1" (ngModelChange)="filtraPorMarca()"
-                                (keyup)="filtraPorMarca()" (keyup.enter)="filtraPorMarca()">
-                        </mat-form-field>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-10">
-                        <mat-form-field class="example-full-width" appearance="legacy">
-                            <mat-label>Búsqueda por modelo</mat-label>
-                            <input matInput name="filtro2" [(ngModel)]="filtro2" (ngModelChange)="filtrarPorModelo()"
-                                (keyup)="filtrarPorModelo()" (keyup.enter)="filtrarPorModelo()">
-                        </mat-form-field>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-10">
-                        <mat-form-field class="example-full-width" appearance="legacy">
-                            <mat-label>Búsqueda por categoria</mat-label>
-                            <input matInput name="filtro3" [(ngModel)]="filtro3" (ngModelChange)="filtrarPorCategoria()"
-                                (keyup)="filtrarPorCategoria()" (keyup.enter)="filtrarPorCategoria()">
-                        </mat-form-field>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-10">
-                        <mat-form-field class="example-full-width" appearance="legacy">
-                            <mat-label>Búsqueda por cliente</mat-label>
-                            <input matInput name="filtro4" [(ngModel)]="filtro4" (ngModelChange)="filtrarPorCliente()"
-                                (keyup)="filtrarPorCliente()" (keyup.enter)="filtrarPorCliente()">
-                        </mat-form-field>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-10">
-                        <mat-form-field class="example-full-width" appearance="legacy">
-                            <mat-label>Búsqueda por vendedor</mat-label>
-                            <input matInput name="filtro5" [(ngModel)]="filtro5" (ngModelChange)="filtrarPorVendedor()"
-                                (keyup)="filtrarPorVendedor()" (keyup.enter)="filtrarPorVendedor()">
-                        </mat-form-field>
-                    </div>
-                </div>
-            </div>
-        </div>
+       
         
 
-        <div [formGroup]="registerForm" class="d-flex">
+        <div [formGroup]="registerForm">
             <div>
                 <mat-form-field appearance="legacy" class="datepickers">
                     <mat-label>Fecha desde</mat-label>
@@ -92,12 +36,68 @@
                     <input matInput type="number" formControlName="montoFinal">
                 </mat-form-field>
             </div>
+
+            <mat-form-field appearance="fill">
+                <mat-label id="negrita">Modelo</mat-label>
+                <input formControlName="idModelo" matInput type="text" [matAutocomplete]="a2" [(ngModel)]="filtroModelos"
+                    (ngModelChange)="filtrarModelos()" (keyup)="filtrarModelos()" (keyup.enter)="filtrarModelos()" />
+                <mat-autocomplete #a2="matAutocomplete" [displayWith]="displayModelos.bind(this)">
+                    <mat-option *ngFor="let item of filterModelos" [value]="item.id">
+                        {{item.nombreModelo}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label id="negrita">Marca</mat-label>
+                <input formControlName="idMarca" matInput type="text" [matAutocomplete]="a3" [(ngModel)]="filtroMarcas"
+                    (ngModelChange)="filtrarMarcas()" (keyup)="filtrarMarcas()" (keyup.enter)="filtrarMarcas()" />
+                <mat-autocomplete #a3="matAutocomplete" [displayWith]="displayMarcas.bind(this)">
+                    <mat-option *ngFor="let item of filterMarcas" [value]="item.id">
+                        {{item.nombreMarca}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label id="negrita">Cliente</mat-label>
+                <input formControlName="idCliente" matInput type="text" [matAutocomplete]="a4" [(ngModel)]="filtroClientes"
+                    (ngModelChange)="filtrarClientes()" (keyup)="filtrarClientes()" (keyup.enter)="filtrarClientes()" />
+                <mat-autocomplete #a4="matAutocomplete" [displayWith]="displayClientes.bind(this)">
+                    <mat-option *ngFor="let item of filterClientes" [value]="item.id">
+                        {{item.apellido}} {{' '}} {{item.nombre}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
+            <!--
+            <mat-form-field appearance="fill">
+                <mat-label id="negrita">Categoría</mat-label>
+                <input formControlName="idCategoria" matInput type="text" [matAutocomplete]="a1" [(ngModel)]="filtroCategorias"
+                    (ngModelChange)="filtrarCategorias()" (keyup)="filtrarCategorias()" (keyup.enter)="filtrarCategorias()" />
+                <mat-autocomplete #a1="matAutocomplete" [displayWith]="displayCategoria.bind(this)">
+                    <mat-option *ngFor="let item of filterCategorias" [value]="item.id">
+                        {{item.nombreCategoria}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
+            
+
+            
+
+            
+        -->
             <div>
                 <button mat-raised-button (click)="buscar()">Buscar</button>
             </div>
         </div>
+
+        
     </div>
 
+
+    
 
     <div class="mat-elevation-z8">
         <table mat-table matSort [dataSource]="dataSource">
