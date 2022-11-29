@@ -16,7 +16,6 @@ export const pattern = {
         }
 
         return null;
-        // return this.form.get('nombre')?.hasError('email') ? 'Not a valid email' : '';
     },
 }
 

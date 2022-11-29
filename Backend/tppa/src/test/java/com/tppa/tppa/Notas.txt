@@ -1,0 +1,26 @@
+Caso de prueba 1
+Calcular el costo correspondiente para los autos extranjeros.
+
+Precondición:
+Auto cuyo país pertenece a la categoría extranjero.
+
+Verificar:
+Que al agregar un auto, se calcule el costo correspondiente al porcentaje de la categoría extranjero.
+
+Caso de prueba 2
+Calcular el costo correspondiente para los autos nacionales.
+
+Precondición:
+Auto cuyo país pertenece a la categoría nacional.
+
+Verificar:
+Que al agregar un auto, se calcule el costo correspondiente al porcentaje de la categoría nacional.
+
+Caso de prueba 3
+calcular el valor de IVA correspondiente dependiendo del precio del vehículo.
+
+Precondición:
+Auto cuyo país pertenece a la categoría nacional.
+
+Verificar:
+Que al agregar un auto, se calcule el costo correspondiente al porcentaje de la categoría extranjero y el precio definido.

@@ -101,6 +101,7 @@ export class AutoListaComponent implements OnInit {
     this.service.baja(id).subscribe((r) => {
       if (r) {
         //Si el back me devuelve un true.
+        window.confirm("SEGURO ")
         this.lista = this.lista.filter((element) => element.id != id);
         this.dataSource = new MatTableDataSource(this.lista);
         this.configTable();
