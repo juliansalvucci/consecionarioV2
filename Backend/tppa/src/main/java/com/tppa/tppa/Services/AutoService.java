@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tppa.tppa.Models.Auto;
-import com.tppa.tppa.Models.Rango;
 import com.tppa.tppa.Repositories.AutoRepositories.AutoRepository;
 import com.tppa.tppa.Repositories.RangoRepositories.RangoCustomRepository;
 import com.tppa.tppa.strategies.costoStrategies.EstrategiaCostoAmericaExtranjero;
@@ -35,8 +34,7 @@ public class AutoService {
         }
 
         if(procentaje == 0){
-            Rango rango = rangoCustomRepository.obtenerPorPrecio(auto.getPrecio());
-            autoAux = this.calcularCostoNacional(auto,rango);
+            autoAux = this.calcularCostoNacional(auto);
         }
 
          return repository.save(autoAux);
@@ -54,10 +52,10 @@ public class AutoService {
         return auto;
     }
 
-    public Auto calcularCostoNacional(Auto auto,Rango rango)
+    public Auto calcularCostoNacional(Auto auto)
     {
         EstrategiaCostoNacional ec = new EstrategiaCostoNacional();
-        auto = ec.calcularCosto(auto,rango);
+        auto = ec.calcularCosto(auto);
         return auto;
     }
 

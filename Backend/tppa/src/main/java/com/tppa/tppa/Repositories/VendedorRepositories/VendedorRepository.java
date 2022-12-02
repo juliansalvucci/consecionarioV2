@@ -1,4 +1,4 @@
-package com.tppa.tppa.Repositories;
+package com.tppa.tppa.Repositories.VendedorRepositories;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

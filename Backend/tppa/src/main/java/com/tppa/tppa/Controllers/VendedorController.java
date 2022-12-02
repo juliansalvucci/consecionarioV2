@@ -55,14 +55,7 @@ public class VendedorController
     @PostMapping(path="/login")
     public Object ObtenerPorUsuario(@RequestBody Usuario usuario)
     {
-        String CONSULTA = "SELECT vendedor FROM Vendedor vendedor WHERE vendedor.nombreUsuario = :nombreUsuario AND vendedor.contraseña = :contraseña";
-        var registro = em.createQuery(CONSULTA)
-        .setParameter("nombreUsuario", usuario.getNombreUsuario())
-        .setParameter("contraseña", usuario.getContraseña())
-        .getSingleResult();
-
-        em.close();
-        return registro;
+        return service.ObtenerPorUsuario(usuario);
     }
 
     @DeleteMapping( path = "/{id}")

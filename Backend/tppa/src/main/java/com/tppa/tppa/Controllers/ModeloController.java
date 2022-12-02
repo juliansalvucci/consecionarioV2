@@ -21,15 +21,8 @@ import com.tppa.tppa.Services.ModeloService;
 @RequestMapping("/modelo")
 public class ModeloController 
 {
-    //@Autowired
+    @Autowired
     ModeloService service;
-
-    @Autowired // add here
-    public ModeloController(ModeloService modeloService)
-    {
-       this.service = modeloService;
-    }
-
 
     @GetMapping()
     public ArrayList<Modelo> obtener()
@@ -49,11 +42,9 @@ public class ModeloController
         return this.service.obtenerPorId(id);
     }
     
-
     @DeleteMapping( path = "/{id}")
     public Boolean eliminarPorId(@PathVariable("id") Long id)
     {
         return this.service.eliminar(id);    
-    }
-    
+    }   
 }
