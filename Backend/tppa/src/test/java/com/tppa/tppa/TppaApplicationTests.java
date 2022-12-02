@@ -2,17 +2,26 @@ package com.tppa.tppa;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.tppa.tppa.Models.Auto;
 import com.tppa.tppa.Models.Categoria;
 import com.tppa.tppa.Models.Pais;
 import com.tppa.tppa.Models.Rango;
+import com.tppa.tppa.Services.RangoService;
 import com.tppa.tppa.strategies.costoStrategies.EstrategiaCostoAmericaExtranjero;
+import com.tppa.tppa.strategies.costoStrategies.EstrategiaCostoNacional;
 
 
 @SpringBootTest
+@AutoConfigureTestDatabase(replace = Replace.NONE)
 class TppaApplicationTests {
+
+	@Autowired 
+    RangoService rangoService;
 
 	@Test
 	void testCalculoImpuestoExtranjeroYAmerica() {
@@ -39,29 +48,21 @@ class TppaApplicationTests {
 
 		Auto auto = new Auto();
 		Pais pais = new Pais();
-	    Rango rango = new Rango();
 		Categoria categoria = new Categoria();
-
-		rango.setMontoInicial(0D);
-		rango.setMontoFinal(50000D);
-		rango.setValor(5000D);
+		EstrategiaCostoNacional ecn = new EstrategiaCostoNacional();
 
 		pais.setNombrePais("testPais");
-		categoria.setPorcentaje(10);
+		categoria.setPorcentaje(0);
 		pais.setCategoria(categoria);
 		auto.setPais(pais);
 
-		auto.setPrecio(60000D);
+		auto.setPrecio(40000D);
 
-		Double precio = auto.getPrecio();
+		Rango rango = rangoService.obtenerPorPrecio(auto.getPrecio());
 
-        Double valor = rango.getValor();
-
-        Double costo = valor + precio;
-
-        auto.setCosto(costo);
+		var a = ecn.calcularCosto(auto, rango);
         
-		assertEquals(65000D, auto.getCosto());
+		assertEquals(45000D, a.getCosto());
 	}
 
 	@Test
@@ -69,29 +70,21 @@ class TppaApplicationTests {
 
 		Auto auto = new Auto();
 		Pais pais = new Pais();
-	    Rango rango = new Rango();
 		Categoria categoria = new Categoria();
-
-		rango.setMontoInicial(50000D);
-		rango.setMontoFinal(100000D);
-		rango.setValor(50000D);
+		EstrategiaCostoNacional ecn = new EstrategiaCostoNacional();
 
 		pais.setNombrePais("testPais");
-		categoria.setPorcentaje(10);
+		categoria.setPorcentaje(0);
 		pais.setCategoria(categoria);
 		auto.setPais(pais);
 
 		auto.setPrecio(60000D);
 
-		Double precio = auto.getPrecio();
+		Rango rango = rangoService.obtenerPorPrecio(auto.getPrecio());
 
-        Double valor = rango.getValor();
-
-        Double costo = valor + precio;
-
-        auto.setCosto(costo);
+		var a = ecn.calcularCosto(auto, rango);
         
-		assertEquals(110000D, auto.getCosto());
+		assertEquals(70000D, a.getCosto());
 	}
 
 	@Test
@@ -99,29 +92,21 @@ class TppaApplicationTests {
 
 		Auto auto = new Auto();
 		Pais pais = new Pais();
-	    Rango rango = new Rango();
 		Categoria categoria = new Categoria();
-
-		rango.setMontoInicial(100000D);
-		rango.setMontoFinal(1000000D);
-		rango.setValor(50000D);
+		EstrategiaCostoNacional ecn = new EstrategiaCostoNacional();
 
 		pais.setNombrePais("testPais");
-		categoria.setPorcentaje(10);
+		categoria.setPorcentaje(0);
 		pais.setCategoria(categoria);
 		auto.setPais(pais);
 
-		auto.setPrecio(60000D);
+		auto.setPrecio(110000D);
 
-		Double precio = auto.getPrecio();
+		Rango rango = rangoService.obtenerPorPrecio(auto.getPrecio());
 
-        Double valor = rango.getValor();
-
-        Double costo = valor + precio;
-
-        auto.setCosto(costo);
+		var a = ecn.calcularCosto(auto, rango);
         
-		assertEquals(110000D, auto.getCosto());
+		assertEquals(160000D, a.getCosto());
 	}
 
 	//GANANCIA
@@ -146,35 +131,26 @@ class TppaApplicationTests {
 		assertEquals(23000D, a.getGanancia());	
 	}
 
-	@Test
+    @Test
 	void testCalculoGananciaImpuestoNacionalRango1() {
 
 		Auto auto = new Auto();
 		Pais pais = new Pais();
-		Rango rango = new Rango();
 		Categoria categoria = new Categoria();
-
-		rango.setMontoInicial(1000000D);
-		rango.setMontoFinal(100000D);
-		rango.setValor(50000D);
+		EstrategiaCostoNacional ecn = new EstrategiaCostoNacional();
 
 		pais.setNombrePais("testPais");
-		categoria.setPorcentaje(0);
+		categoria.setPorcentaje(10);
 		pais.setCategoria(categoria);
 		auto.setPais(pais);
 
 		auto.setPrecio(110000D);
 
-		Double precio = auto.getPrecio();
+		Rango rango = rangoService.obtenerPorPrecio(auto.getPrecio());
 
-        Double valor = rango.getValor();
-
-        Double costo = valor + precio;
-
-        auto.setCosto(costo);
-        auto.setGanancia(valor);
-
-		assertEquals(50000D, auto.getGanancia());
+		var a = ecn.calcularCosto(auto, rango);
+        
+		assertEquals(50000D, a.getGanancia());
 	}
 
 	@Test
@@ -182,30 +158,21 @@ class TppaApplicationTests {
 
 		Auto auto = new Auto();
 		Pais pais = new Pais();
-		Rango rango = new Rango();
 		Categoria categoria = new Categoria();
-
-		rango.setMontoInicial(0D);
-		rango.setMontoFinal(100000D);
-		rango.setValor(5000D);
+		EstrategiaCostoNacional ecn = new EstrategiaCostoNacional();
 
 		pais.setNombrePais("testPais");
-		categoria.setPorcentaje(0);
+		categoria.setPorcentaje(10);
 		pais.setCategoria(categoria);
 		auto.setPais(pais);
+
 		auto.setPrecio(41000D);
 
-		Double precio = auto.getPrecio();
+		Rango rango = rangoService.obtenerPorPrecio(auto.getPrecio());
 
-        Double valor = rango.getValor();
-
-        Double costo = valor + precio;
-
-        auto.setCosto(costo);
-        auto.setGanancia(valor);
-
-
-		assertEquals(5000D, auto.getGanancia());
+		var a = ecn.calcularCosto(auto, rango);
+        
+		assertEquals(5000D, a.getGanancia());
 	}
 
 	@Test
@@ -213,31 +180,21 @@ class TppaApplicationTests {
 
 		Auto auto = new Auto();
 		Pais pais = new Pais();
-		Rango rango = new Rango();
 		Categoria categoria = new Categoria();
-
-
-		rango.setMontoInicial(50000D);
-		rango.setMontoFinal(10000D);
-		rango.setValor(10000D);
+		EstrategiaCostoNacional ecn = new EstrategiaCostoNacional();
 
 		pais.setNombrePais("testPais");
-		categoria.setPorcentaje(0);
+		categoria.setPorcentaje(10);
 		pais.setCategoria(categoria);
 		auto.setPais(pais);
 
 		auto.setPrecio(235440D);
 
-		Double precio = auto.getPrecio();
+		Rango rango = rangoService.obtenerPorPrecio(auto.getPrecio());
 
-        Double valor = rango.getValor();
-
-        Double costo = valor + precio;
-
-        auto.setCosto(costo);
-        auto.setGanancia(valor);
-
-
-		assertEquals(10000D, auto.getGanancia());
+		var a = ecn.calcularCosto(auto, rango);
+        
+		assertEquals(50000D, a.getGanancia());
 	}
+
 }
