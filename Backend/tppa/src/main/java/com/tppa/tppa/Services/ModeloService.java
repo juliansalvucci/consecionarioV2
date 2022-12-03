@@ -10,7 +10,8 @@ import com.tppa.tppa.Models.Modelo;
 import com.tppa.tppa.Repositories.ModeloRepository;
 
 @Service
-public class ModeloService {
+public class ModeloService 
+{
    @Autowired
    ModeloRepository repository;
     

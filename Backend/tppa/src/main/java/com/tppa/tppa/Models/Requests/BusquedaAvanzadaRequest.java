@@ -1,32 +1,48 @@
 package com.tppa.tppa.Models.Requests;
 
-public class BusquedaAvanzadaRequest {
+public class BusquedaAvanzadaRequest 
+{
     private String fechaDesde;
-    public String getFechaDesde() {
+    private String fechaHasta;
+    private Double montoInicial;
+    private Double montoFinal;
+
+    public String getFechaDesde() 
+    {
         return fechaDesde;
     }
-    public void setFechaDesde(String fechaDesde) {
+    public void setFechaDesde(String fechaDesde) 
+    {
         this.fechaDesde = fechaDesde;
     }
-    private String fechaHasta;
-    public String getFechaHasta() {
+
+    public String getFechaHasta() 
+    {
         return fechaHasta;
     }
-    public void setFechaHasta(String fechaHasta) {
+
+    public void setFechaHasta(String fechaHasta) 
+    {
         this.fechaHasta = fechaHasta;
     }
-    private Double montoInicial;
-    public Double getMontoInicial() {
+
+    public Double getMontoInicial() 
+    {
         return montoInicial;
     }
-    public void setMontoInicial(Double montoInicial) {
+
+    public void setMontoInicial(Double montoInicial) 
+    {
         this.montoInicial = montoInicial;
     }
-    private Double montoFinal;
-    public Double getMontoFinal() {
+
+    public Double getMontoFinal() 
+    {
         return montoFinal;
     }
-    public void setMontoFinal(Double montoFinal) {
+
+    public void setMontoFinal(Double montoFinal) 
+    {
         this.montoFinal = montoFinal;
     }
 }

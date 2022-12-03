@@ -11,13 +11,13 @@ import com.tppa.tppa.Repositories.RangoRepositories.RangoCustomRepository;
 import com.tppa.tppa.Repositories.RangoRepositories.RangoRepository;
 
 @Service
-public class RangoService  {
+public class RangoService  
+{
     @Autowired
     RangoRepository repository;
     @Autowired
     RangoCustomRepository customRepository;
      
-    
     public ArrayList<Rango> obtener()
     {
         return (ArrayList<Rango>) repository.findAll();
@@ -50,6 +50,4 @@ public class RangoService  {
             return false;
         }
     }
-
-
 }

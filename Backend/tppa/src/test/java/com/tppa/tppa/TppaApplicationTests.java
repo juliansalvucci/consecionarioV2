@@ -10,22 +10,23 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.tppa.tppa.Models.Auto;
 import com.tppa.tppa.Models.Categoria;
 import com.tppa.tppa.Models.Pais;
-import com.tppa.tppa.Models.Rango;
 import com.tppa.tppa.Services.RangoService;
 import com.tppa.tppa.strategies.costoStrategies.EstrategiaCostoAmericaExtranjero;
 import com.tppa.tppa.strategies.costoStrategies.EstrategiaCostoNacional;
+import com.tppa.tppa.strategies.costoStrategies.EstrategiasCostoDefinition;
 
 
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-class TppaApplicationTests {
+class TppaApplicationTests 
+{
 
 	@Autowired 
     RangoService rangoService;
 
-	/* 
 	@Test
-	void testCalculoImpuestoExtranjeroYAmerica() {
+	void testCalculoImpuestoExtranjeroYAmerica() 
+	{
 
 		EstrategiaCostoAmericaExtranjero ece = new EstrategiaCostoAmericaExtranjero();
 		Auto auto = new Auto();
@@ -45,7 +46,8 @@ class TppaApplicationTests {
 	}
 
 	@Test
-	void testCalculoImpuestoNacionalRango1() {
+	void testCalculoImpuestoNacionalRango1() 
+	{
 
 		Auto auto = new Auto();
 		Pais pais = new Pais();
@@ -59,9 +61,7 @@ class TppaApplicationTests {
 
 		auto.setPrecio(40000D);
 
-		Rango rango = rangoService.obtenerPorPrecio(auto.getPrecio());
-
-		var a = ecn.calcularCosto(auto, rango);
+		var a = ecn.calcularCosto(auto);
         
 		assertEquals(45000D, a.getCosto());
 	}
@@ -81,15 +81,14 @@ class TppaApplicationTests {
 
 		auto.setPrecio(60000D);
 
-		Rango rango = rangoService.obtenerPorPrecio(auto.getPrecio());
-
-		var a = ecn.calcularCosto(auto, rango);
+		var a = ecn.calcularCosto(auto);
         
 		assertEquals(70000D, a.getCosto());
 	}
 
 	@Test
-	void testCalculoImpuestoNacionalRango3() {
+	void testCalculoImpuestoNacionalRango3() 
+	{
 
 		Auto auto = new Auto();
 		Pais pais = new Pais();
@@ -103,9 +102,7 @@ class TppaApplicationTests {
 
 		auto.setPrecio(110000D);
 
-		Rango rango = rangoService.obtenerPorPrecio(auto.getPrecio());
-
-		var a = ecn.calcularCosto(auto, rango);
+		var a = ecn.calcularCosto(auto);
         
 		assertEquals(160000D, a.getCosto());
 	}
@@ -113,7 +110,8 @@ class TppaApplicationTests {
 	//GANANCIA
 
 	@Test
-	void testCalculoGananciaImpuestoExtranjeroYAmerica() {
+	void testCalculoGananciaImpuestoExtranjeroYAmerica() 
+	{
 
 		EstrategiaCostoAmericaExtranjero ece = new EstrategiaCostoAmericaExtranjero();
 		Auto auto = new Auto();
@@ -133,12 +131,13 @@ class TppaApplicationTests {
 	}
 
     @Test
-	void testCalculoGananciaImpuestoNacionalRango1() {
+	void testCalculoGananciaImpuestoNacionalRango1() 
+	{
 
 		Auto auto = new Auto();
 		Pais pais = new Pais();
 		Categoria categoria = new Categoria();
-		EstrategiaCostoNacional ecn = new EstrategiaCostoNacional();
+		EstrategiasCostoDefinition ecd = new EstrategiasCostoDefinition();
 
 		pais.setNombrePais("testPais");
 		categoria.setPorcentaje(10);
@@ -147,15 +146,14 @@ class TppaApplicationTests {
 
 		auto.setPrecio(110000D);
 
-		Rango rango = rangoService.obtenerPorPrecio(auto.getPrecio());
-
-		var a = ecn.calcularCosto(auto, rango);
+		var a = ecd.calcularCosto(auto);
         
-		assertEquals(50000D, a.getGanancia());
+		assertEquals(11000D, a.getGanancia());
 	}
 
 	@Test
-	void testCalculoGananciaImpuestoNacionalRango2() {
+	void testCalculoGananciaImpuestoNacionalRango2() 
+	{
 
 		Auto auto = new Auto();
 		Pais pais = new Pais();
@@ -169,15 +167,14 @@ class TppaApplicationTests {
 
 		auto.setPrecio(41000D);
 
-		Rango rango = rangoService.obtenerPorPrecio(auto.getPrecio());
-
-		var a = ecn.calcularCosto(auto, rango);
+		var a = ecn.calcularCosto(auto);
         
 		assertEquals(5000D, a.getGanancia());
 	}
 
 	@Test
-	void testCalculoGananciaImpuestoNacionalRango3() {
+	void testCalculoGananciaImpuestoNacionalRango3() 
+	{
 
 		Auto auto = new Auto();
 		Pais pais = new Pais();
@@ -191,11 +188,8 @@ class TppaApplicationTests {
 
 		auto.setPrecio(235440D);
 
-		Rango rango = rangoService.obtenerPorPrecio(auto.getPrecio());
-
-		var a = ecn.calcularCosto(auto, rango);
+		var a = ecn.calcularCosto(auto);
         
 		assertEquals(50000D, a.getGanancia());
 	}
-    */
 }

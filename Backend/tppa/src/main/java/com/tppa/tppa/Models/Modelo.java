@@ -57,9 +57,49 @@ public class Modelo
     ///////////////////////////////////////////
     public Modelo(){}
 
-    public Modelo(String nombreModelo, Marca marca) 
+    public Modelo(Long id,String nombreModelo, Marca marca) 
     {
+        this.setId(id);
         this.setNombreModelo(nombreModelo);
         this.setMarca(marca);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (int) (id ^ (id >>> 32));
+        result = prime * result + ((nombreModelo == null) ? 0 : nombreModelo.hashCode());
+        result = prime * result + ((marca == null) ? 0 : marca.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Modelo other = (Modelo) obj;
+        if (id != other.id)
+            return false;
+        if (nombreModelo == null) {
+            if (other.nombreModelo != null)
+                return false;
+        } else if (!nombreModelo.equals(other.nombreModelo))
+            return false;
+        if (marca == null) {
+            if (other.marca != null)
+                return false;
+        } else if (!marca.equals(other.marca))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Modelo [id=" + id + ", nombreModelo=" + nombreModelo + ", marca=" + marca + "]";
     }  
 }

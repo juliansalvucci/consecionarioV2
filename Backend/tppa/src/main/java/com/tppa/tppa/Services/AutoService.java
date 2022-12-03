@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 import com.tppa.tppa.Models.Auto;
 import com.tppa.tppa.Repositories.AutoRepositories.AutoRepository;
 import com.tppa.tppa.Repositories.RangoRepositories.RangoCustomRepository;
-import com.tppa.tppa.strategies.costoStrategies.EstrategiaCostoAmericaExtranjero;
-import com.tppa.tppa.strategies.costoStrategies.EstrategiaCostoNacional;
+import com.tppa.tppa.strategies.costoStrategies.EstrategiasCostoDefinition;
 
 @Service
-public class AutoService {
+public class AutoService 
+{
    @Autowired
    AutoRepository repository;
    @Autowired 
@@ -26,39 +26,17 @@ public class AutoService {
 
     public Auto guardar(Auto auto)
     {
-        var procentaje = auto.getPais().getCategoria().getPorcentaje();
-        Auto autoAux = new Auto();
+        EstrategiasCostoDefinition ecd = new EstrategiasCostoDefinition();
 
-        if(procentaje > 0){
-            autoAux = this.calcularCostoAmericaExtranjero(auto);
-        }
+        var autoAux = ecd.calcularCosto(auto);
 
-        if(procentaje == 0){
-            autoAux = this.calcularCostoNacional(auto);
-        }
-
-         return repository.save(autoAux);
+        return repository.save(autoAux);
     }
 
     public Optional<Auto> obtenerPorId(Long id)
     {
         return repository.findById(id);
     }
-
-    public Auto calcularCostoAmericaExtranjero(Auto auto)
-    {
-        EstrategiaCostoAmericaExtranjero ec = new EstrategiaCostoAmericaExtranjero();
-        auto = ec.calcularCosto(auto);
-        return auto;
-    }
-
-    public Auto calcularCostoNacional(Auto auto)
-    {
-        EstrategiaCostoNacional ec = new EstrategiaCostoNacional();
-        auto = ec.calcularCosto(auto);
-        return auto;
-    }
-
 
     public boolean eliminar(Long id) 
     {

@@ -1,18 +1,16 @@
 package com.tppa.tppa.Repositories.VendedorRepositories;
-
 import javax.persistence.EntityManager;
-
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
-
 import com.tppa.tppa.Models.Usuario;
 
 @Repository
-public class VendedorCustomRepository {
-
+public class VendedorCustomRepository 
+{
     EntityManager em;
 
-    public VendedorCustomRepository(EntityManager em){
+    public VendedorCustomRepository(EntityManager em)
+    {
         this.em = em;
     }
 

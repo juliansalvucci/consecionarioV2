@@ -32,6 +32,19 @@ public class VentaController
         return service.obtener();
     }
 
+    @PostMapping()
+    public Venta guardar(@RequestBody Venta venta)
+    {       
+        return this.service.guardar(venta);
+    }
+ 
+
+    @GetMapping( path = "/{id}")
+    public Optional<Venta> obtenerPorId(@PathVariable("id") Long id)
+    {
+        return this.service.obtenerPorId(id);
+    } 
+
     @PostMapping(path = "criteria/busquedaAvanzada")
     public List<Venta> busquedaAvanzada(@RequestBody BusquedaAvanzadaV2Request bar)
     {
@@ -87,20 +100,6 @@ public class VentaController
     public Object obtenerGananciaTotal(String fechaDesde, String fechaHasta)
     {
         return service.obtenerGananciaTotal(fechaDesde, fechaHasta);
-    }
-
-    
-    @PostMapping()
-    public Venta guardar(@RequestBody Venta venta)
-    {       
-        return this.service.guardar(venta);
-    }
- 
-
-    @GetMapping( path = "/{id}")
-    public Optional<Venta> obtenerPorId(@PathVariable("id") Long id)
-    {
-        return this.service.obtenerPorId(id);
-    }     
+    }    
 }
 

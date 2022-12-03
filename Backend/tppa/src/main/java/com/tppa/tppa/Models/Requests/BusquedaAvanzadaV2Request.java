@@ -1,68 +1,102 @@
 package com.tppa.tppa.Models.Requests;
 
-public class BusquedaAvanzadaV2Request {
+public class BusquedaAvanzadaV2Request 
+{
     private String fechaDesde;
-    public String getFechaDesde() {
+    private String fechaHasta;
+    private Double montoInicial;
+    private Double montoFinal;
+    private Long idMarca;
+    private Long idModelo;
+    private Long idCliente;
+    private Long idVendedor;
+    private Long idCategoria;
+
+
+    public String getFechaDesde() 
+    {
         return fechaDesde;
     }
-    public void setFechaDesde(String fechaDesde) {
+    public void setFechaDesde(String fechaDesde) 
+    {
         this.fechaDesde = fechaDesde;
     }
-    private String fechaHasta;
-    public String getFechaHasta() {
+
+    public String getFechaHasta() 
+    {
         return fechaHasta;
     }
-    public void setFechaHasta(String fechaHasta) {
+    public void setFechaHasta(String fechaHasta) 
+    {
         this.fechaHasta = fechaHasta;
     }
-    private Double montoInicial;
-    public Double getMontoInicial() {
+
+    public Double getMontoInicial() 
+    {
         return montoInicial;
     }
-    public void setMontoInicial(Double montoInicial) {
+
+    public void setMontoInicial(Double montoInicial) 
+    {
         this.montoInicial = montoInicial;
     }
-    private Double montoFinal;
-    public Double getMontoFinal() {
+
+    public Double getMontoFinal() 
+    {
         return montoFinal;
     }
-    public void setMontoFinal(Double montoFinal) {
+
+    public void setMontoFinal(Double montoFinal) 
+    {
         this.montoFinal = montoFinal;
     }
 
-    private Long idMarca;
-    public Long getIdMarca() {
+    public Long getIdMarca() 
+    {
         return idMarca;
     }
-    public void setIdMarca(Long idMarca) {
+
+    public void setIdMarca(Long idMarca) 
+    {
         this.idMarca = idMarca;
     }
-    private Long idModelo;
-    public Long getIdModelo() {
+
+    public Long getIdModelo() 
+    {
         return idModelo;
     }
-    public void setIdModelo(Long idModelo) {
+
+    public void setIdModelo(Long idModelo) 
+    {
         this.idModelo = idModelo;
     }
-    private Long idCliente;
-    public Long getIdCliente() {
+
+    public Long getIdCliente() 
+    {
         return idCliente;
     }
-    public void setIdCliente(Long idCiente) {
+    public void setIdCliente(Long idCiente) 
+    {
         this.idCliente = idCiente;
     }
-    private Long idVendedor;
-    public Long getIdVendedor() {
+
+    public Long getIdVendedor() 
+    {
         return idVendedor;
     }
-    public void setIdVendedor(Long idVendedor) {
+
+    public void setIdVendedor(Long idVendedor) 
+    {
         this.idVendedor = idVendedor;
     }
-    private Long idCategoria;
-    public Long getIdCategoria() {
+
+    public Long getIdCategoria() 
+    {
         return idCategoria;
     }
-    public void setIdCategoria(Long idCategoria) {
+
+    public void setIdCategoria(Long idCategoria) 
+    {
         this.idCategoria = idCategoria;
     }
 }

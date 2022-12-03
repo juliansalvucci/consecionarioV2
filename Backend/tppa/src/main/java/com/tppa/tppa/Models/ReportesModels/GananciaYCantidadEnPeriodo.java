@@ -1,18 +1,26 @@
 package com.tppa.tppa.Models.ReportesModels;
 
-public class GananciaYCantidadEnPeriodo {
+public class GananciaYCantidadEnPeriodo
+{
     private String cantidadVentas;
-    public String getCantidadVentas() {
+    private String total;
+
+    public String getCantidadVentas() 
+    {
         return cantidadVentas;
     }
-    public void setCantidadVentas(String cantidadVentas) {
+    public void setCantidadVentas(String cantidadVentas) 
+    {
         this.cantidadVentas = cantidadVentas;
     }
-    private String total;
-    public String getTotal() {
+
+    public String getTotal() 
+    {
         return total;
     }
-    public void setTotal(String total) {
+
+    public void setTotal(String total) 
+    {
         this.total = total;
     }
 }

@@ -3,8 +3,6 @@ package com.tppa.tppa.Controllers;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import javax.persistence.EntityManager;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,13 +24,7 @@ public class VendedorController
 {
     @Autowired
     EmpleadoService service;
-    EntityManager em;
-
-    public VendedorController(EntityManager em){
-        this.em = em;
-    }
-
-
+    
     @GetMapping()
     public ArrayList<Vendedor> obtener()
     {

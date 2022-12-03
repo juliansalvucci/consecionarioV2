@@ -7,14 +7,14 @@ import com.tppa.tppa.Models.Rango;
 import com.tppa.tppa.Services.RangoService;
 
 
-public class EstrategiaCostoNacional implements IEstrategiaCosto {
-    
+public class EstrategiaCostoNacional implements IEstrategiaCosto 
+{
     @Autowired
     RangoService rangoService;
 
-
     @Override
-    public Auto calcularCosto(Auto auto) {
+    public Auto calcularCosto(Auto auto) 
+    {
 
         Double precio = auto.getPrecio();
 

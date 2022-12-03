@@ -32,10 +32,8 @@ public class VentaService
         return (ArrayList<Venta>) repository.findAll();
     }
 
-
     public Venta guardar(Venta venta)
     {
-
         Auto auto = autoCustomRepository.obtenerPorIdAuto(venta.getAuto().getId());
 
         auto.setVendido(true);
@@ -51,7 +49,6 @@ public class VentaService
         venta.setCosto(costo);
         venta.setGanancia(ganancia);
         venta.setPorcentaje(porcentaje);
-        
         
         return repository.save(venta);
     }

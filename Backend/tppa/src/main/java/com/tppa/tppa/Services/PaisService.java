@@ -10,10 +10,10 @@ import com.tppa.tppa.Models.Pais;
 import com.tppa.tppa.Repositories.PaisRepository;
 
 @Service
-public class PaisService  {
+public class PaisService  
+{
     @Autowired
     PaisRepository repository;
-     
     
     public ArrayList<Pais> obtener()
     {

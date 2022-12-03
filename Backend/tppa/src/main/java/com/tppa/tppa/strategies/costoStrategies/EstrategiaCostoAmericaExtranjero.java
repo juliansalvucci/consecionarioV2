@@ -1,11 +1,11 @@
 package com.tppa.tppa.strategies.costoStrategies;
-
 import com.tppa.tppa.Models.Auto;
 
-public class EstrategiaCostoAmericaExtranjero implements IEstrategiaCosto{
-
+public class EstrategiaCostoAmericaExtranjero implements IEstrategiaCosto
+{
     @Override
-    public Auto calcularCosto(Auto auto) {
+    public Auto calcularCosto(Auto auto) 
+    {
 
         Double precio = auto.getPrecio();
 
@@ -20,5 +20,4 @@ public class EstrategiaCostoAmericaExtranjero implements IEstrategiaCosto{
 
         return auto;
     }
-    
 }

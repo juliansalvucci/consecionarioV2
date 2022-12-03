@@ -13,7 +13,8 @@ import com.tppa.tppa.Repositories.VendedorRepositories.VendedorCustomRepository;
 import com.tppa.tppa.Repositories.VendedorRepositories.VendedorRepository;
 
 @Service
-public class EmpleadoService{
+public class EmpleadoService
+{
     @Autowired
     VendedorRepository repository;
     @Autowired
@@ -38,7 +39,6 @@ public class EmpleadoService{
     {
         return customRepository.ObtenerPorUsuario(usuario);
     }
-
 
     public boolean eliminar(Long id) 
     {

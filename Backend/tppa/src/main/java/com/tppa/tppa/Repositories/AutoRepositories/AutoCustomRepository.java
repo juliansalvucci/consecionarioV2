@@ -1,16 +1,15 @@
 package com.tppa.tppa.Repositories.AutoRepositories;
-
 import javax.persistence.EntityManager;
-
 import org.springframework.stereotype.Repository;
-
 import com.tppa.tppa.Models.Auto;
 
 @Repository
-public class AutoCustomRepository {
+public class AutoCustomRepository 
+{
     EntityManager em;
 
-    public AutoCustomRepository(EntityManager em){
+    public AutoCustomRepository(EntityManager em)
+    {
         this.em = em;
     }
 

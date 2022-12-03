@@ -10,7 +10,8 @@ import com.tppa.tppa.Models.Cliente;
 import com.tppa.tppa.Repositories.ClienteRepository;
 
 @Service
-public class ClienteService{
+public class ClienteService
+{
     @Autowired
     ClienteRepository repository;
     
@@ -33,8 +34,6 @@ public class ClienteService{
     {
         return repository.findByDocumento(documento);
     }
-
-
 
     public boolean eliminar(Long id) 
     {

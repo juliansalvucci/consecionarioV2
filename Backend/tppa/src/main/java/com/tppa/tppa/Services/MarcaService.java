@@ -10,7 +10,8 @@ import com.tppa.tppa.Models.Marca;
 import com.tppa.tppa.Repositories.MarcaReposiroty;
 
 @Service
-public class MarcaService {
+public class MarcaService 
+{
     @Autowired
     MarcaReposiroty repository;
     
