@@ -1,17 +1,15 @@
 package com.tppa.tppa.Repositories.RangoRepositories;
 import javax.persistence.EntityManager;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.tppa.tppa.Models.Rango;
 
 @Repository
 public class RangoCustomRepository 
 {
+    @Autowired
     EntityManager em;
-
-    public RangoCustomRepository(EntityManager em)
-    {
-        this.em = em;
-    }
 
     public Rango obtenerPorPrecio(Double precio) 
     {

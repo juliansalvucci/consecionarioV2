@@ -43,7 +43,7 @@ public class RangoController
     }
 
     @GetMapping( path = "obtenerPorPrecio/{precio}")
-    public Rango obtenerPorId(@PathVariable("precio") Double precio)
+    public Rango obtenerPorPrecio(@PathVariable("precio") Double precio)
     {
         return service.obtenerPorPrecio(precio);
     }
