@@ -7,16 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tppa.tppa.Models.Rango;
-import com.tppa.tppa.Repositories.RangoRepositories.RangoCustomRepository;
-import com.tppa.tppa.Repositories.RangoRepositories.RangoRepository;
+import com.tppa.tppa.Repositories.RangoRepositories.IRangoCustomRepository;
+import com.tppa.tppa.Repositories.RangoRepositories.IRangoRepository;
 
 @Service
 public class RangoService  
 {
     @Autowired
-    RangoRepository repository;
+    IRangoRepository repository;
     @Autowired
-    RangoCustomRepository customRepository;
+    IRangoCustomRepository customRepository;
      
     public ArrayList<Rango> obtener()
     {

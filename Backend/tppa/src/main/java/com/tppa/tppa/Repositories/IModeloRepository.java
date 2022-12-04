@@ -7,7 +7,7 @@ import com.tppa.tppa.Models.Modelo;
 
 
 @Repository
-public interface ModeloRepository  extends CrudRepository<Modelo, Long> 
+public interface IModeloRepository  extends CrudRepository<Modelo, Long> 
 {
     //Método no utilizado. Se resuelve en frontend.
     //public abstract ArrayList<Modelo>findByIdMarca(Long idMarca); //El método va a funcionar correctamente siempre y cuando el nombre sea representativo.

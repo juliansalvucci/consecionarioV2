@@ -7,7 +7,7 @@ import com.tppa.tppa.Models.Vendedor;
 
 
 @Repository
-public interface VendedorRepository extends CrudRepository<Vendedor, Long> 
+public interface IVendedorRepository extends CrudRepository<Vendedor, Long> 
 {
     
 }

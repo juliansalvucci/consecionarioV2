@@ -8,7 +8,7 @@ import com.tppa.tppa.Models.Pais;
 
 
 @Repository
-public interface PaisRepository  extends CrudRepository<Pais, Long> 
+public interface IPaisRepository  extends CrudRepository<Pais, Long> 
 {
    
 }

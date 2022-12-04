@@ -7,7 +7,7 @@ import com.tppa.tppa.Models.Marca;
 
 
 @Repository
-public interface MarcaReposiroty extends CrudRepository<Marca, Long> 
+public interface IMarcaReposiroty extends CrudRepository<Marca, Long> 
 {
     
 }

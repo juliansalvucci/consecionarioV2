@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.tppa.tppa.Models.Rango;
 
 @Repository
-public class RangoCustomRepository 
+public class RangoCustomRepository implements IRangoCustomRepository
 {
     @Autowired
     EntityManager em;

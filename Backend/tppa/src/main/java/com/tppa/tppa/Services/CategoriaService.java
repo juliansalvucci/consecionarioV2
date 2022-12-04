@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tppa.tppa.Models.Categoria;
-import com.tppa.tppa.Repositories.CategoriaRepository;
+import com.tppa.tppa.Repositories.ICategoriaRepository;
 
 @Service
 public class CategoriaService  
 {
     @Autowired
-    CategoriaRepository repository;
+    ICategoriaRepository repository;
     
     public ArrayList<Categoria> obtener()
     {

@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tppa.tppa.Models.Pais;
-import com.tppa.tppa.Repositories.PaisRepository;
+import com.tppa.tppa.Repositories.IPaisRepository;
 
 @Service
 public class PaisService  
 {
     @Autowired
-    PaisRepository repository;
+    IPaisRepository repository;
     
     public ArrayList<Pais> obtener()
     {

@@ -7,7 +7,7 @@ import com.tppa.tppa.Models.Auto;
 
 
 @Repository
-public interface AutoRepository extends CrudRepository<Auto, Long> 
+public interface IAutoRepository extends CrudRepository<Auto, Long> 
 {
 
 }

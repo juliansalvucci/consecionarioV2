@@ -7,18 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tppa.tppa.Models.Auto;
-import com.tppa.tppa.Repositories.AutoRepositories.AutoRepository;
-import com.tppa.tppa.Repositories.RangoRepositories.RangoCustomRepository;
+import com.tppa.tppa.Repositories.AutoRepositories.IAutoRepository;
 import com.tppa.tppa.strategies.costoStrategies.EstrategiasCostoDefinition;
 
 @Service
 public class AutoService 
 {
    @Autowired
-   AutoRepository repository;
-   @Autowired 
-   RangoCustomRepository rangoCustomRepository;
-    
+   IAutoRepository repository;
+   
     public ArrayList<Auto> obtener()
     {
         return (ArrayList<Auto>) repository.findAll();

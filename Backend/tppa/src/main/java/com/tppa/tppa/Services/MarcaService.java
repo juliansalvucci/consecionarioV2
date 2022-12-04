@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tppa.tppa.Models.Marca;
-import com.tppa.tppa.Repositories.MarcaReposiroty;
+import com.tppa.tppa.Repositories.IMarcaReposiroty;
 
 @Service
 public class MarcaService 
 {
     @Autowired
-    MarcaReposiroty repository;
+    IMarcaReposiroty repository;
     
     public ArrayList<Marca> obtener()
     {

@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tppa.tppa.Models.Modelo;
-import com.tppa.tppa.Repositories.ModeloRepository;
+import com.tppa.tppa.Repositories.IModeloRepository;
 
 @Service
 public class ModeloService 
 {
    @Autowired
-   ModeloRepository repository;
+   IModeloRepository repository;
     
     public ArrayList<Modelo> obtener()
     {

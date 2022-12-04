@@ -13,18 +13,18 @@ import com.tppa.tppa.Models.Venta;
 import com.tppa.tppa.Models.Requests.BusquedaAvanzadaRequest;
 import com.tppa.tppa.Models.Requests.BusquedaAvanzadaV2Request;
 import com.tppa.tppa.Repositories.AutoRepositories.AutoCustomRepository;
-import com.tppa.tppa.Repositories.AutoRepositories.AutoRepository;
+import com.tppa.tppa.Repositories.AutoRepositories.IAutoRepository;
 import com.tppa.tppa.Repositories.VentaRepositories.VentaCustomRepository;
-import com.tppa.tppa.Repositories.VentaRepositories.VentaRepository;
+import com.tppa.tppa.Repositories.VentaRepositories.IVentaRepository;
 
 @Service
 public class VentaService
 {
     @Autowired
-    VentaRepository repository;
+    IVentaRepository repository;
     @Autowired
     VentaCustomRepository customRepository;
-    @Autowired AutoRepository autoRepository;
+    @Autowired IAutoRepository autoRepository;
     @Autowired AutoCustomRepository autoCustomRepository;
     
     public ArrayList<Venta> obtener()

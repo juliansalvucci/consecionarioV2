@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import com.tppa.tppa.Models.Usuario;
 import com.tppa.tppa.Models.Vendedor;
 import com.tppa.tppa.Repositories.VendedorRepositories.VendedorCustomRepository;
-import com.tppa.tppa.Repositories.VendedorRepositories.VendedorRepository;
+import com.tppa.tppa.Repositories.VendedorRepositories.IVendedorRepository;
 
 @Service
 public class EmpleadoService
 {
     @Autowired
-    VendedorRepository repository;
+    IVendedorRepository repository;
     @Autowired
     VendedorCustomRepository customRepository;
     
