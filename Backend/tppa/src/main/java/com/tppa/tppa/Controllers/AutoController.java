@@ -49,5 +49,5 @@ public class AutoController
     public Boolean eliminarPorId(@PathVariable("id") Long id)
     {
         return this.service.eliminar(id);    
-    } 
+    }
 }

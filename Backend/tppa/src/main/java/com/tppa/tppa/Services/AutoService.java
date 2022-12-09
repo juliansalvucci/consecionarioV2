@@ -15,6 +15,8 @@ public class AutoService
 {
    @Autowired
    IAutoRepository repository;
+   @Autowired(required = true)
+   EstrategiasCostoDefinition estrategiasCostoDefinition;
    
     public ArrayList<Auto> obtener()
     {
@@ -23,10 +25,7 @@ public class AutoService
 
     public Auto guardar(Auto auto)
     {
-        EstrategiasCostoDefinition ecd = new EstrategiasCostoDefinition();
-
-        var autoAux = ecd.calcularCosto(auto);
-
+        var autoAux = estrategiasCostoDefinition.calcularCosto(auto);
         return repository.save(autoAux);
     }
 

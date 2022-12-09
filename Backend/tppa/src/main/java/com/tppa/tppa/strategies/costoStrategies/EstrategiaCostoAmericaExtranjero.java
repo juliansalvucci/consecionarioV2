@@ -1,6 +1,9 @@
 package com.tppa.tppa.strategies.costoStrategies;
+import org.springframework.stereotype.Service;
+
 import com.tppa.tppa.Models.Auto;
 
+@Service
 public class EstrategiaCostoAmericaExtranjero implements IEstrategiaCosto
 {
     @Override
