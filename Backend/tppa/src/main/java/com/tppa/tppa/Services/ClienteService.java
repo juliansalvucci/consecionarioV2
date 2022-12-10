@@ -7,22 +7,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tppa.tppa.Models.Cliente;
-import com.tppa.tppa.Repositories.ClienteRepository;
+import com.tppa.tppa.Repositories.IClienteRepository;
 
 @Service
 public class ClienteService
 {
     @Autowired
-    ClienteRepository repository;
+    IClienteRepository repository;
     
     public ArrayList<Cliente> obtener()
     {
         return (ArrayList<Cliente>) repository.findAll();
     }
 
-    public Cliente guardar(Cliente Cliente)
+    public void guardar(Cliente Cliente)
     {
-        return repository.save(Cliente);
+        repository.save(Cliente);
     }
 
     public Optional<Cliente> obtenerPorId(Long id)
@@ -35,16 +35,8 @@ public class ClienteService
         return repository.findByDocumento(documento);
     }
 
-    public boolean eliminar(Long id) 
-    {
-        try
-        {
-            repository.deleteById(id);
-            return true;
-        }
-        catch(Exception err)
-        {
-            return false;
-        }
+    public void eliminar(Long id) 
+    {   
+       repository.deleteById(id);   
     }
 }

@@ -20,9 +20,9 @@ public class PaisService
         return (ArrayList<Pais>) repository.findAll();
     }
 
-    public Pais guardar(Pais pais)
+    public void guardar(Pais pais)
     {
-        return repository.save(pais);
+        repository.save(pais);
     }
 
     public Optional<Pais> obtenerPorId(Long id)
@@ -30,17 +30,8 @@ public class PaisService
         return repository.findById(id);
     }
 
-
-    public boolean eliminar(Long id) 
+    public void eliminar(Long id) 
     {
-        try
-        {
-            repository.deleteById(id);
-            return true;
-        }
-        catch(Exception err)
-        {
-            return false;
-        }
+       repository.deleteById(id);
     }
 }
