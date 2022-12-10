@@ -20,9 +20,9 @@ public class ModeloService
         return (ArrayList<Modelo>) repository.findAll();
     }
 
-    public Modelo guardar(Modelo modelo)
+    public void guardar(Modelo modelo)
     {
-        return repository.save(modelo);
+        repository.save(modelo);
     }
 
     public Optional<Modelo> obtenerPorId(Long id)
@@ -30,16 +30,8 @@ public class ModeloService
         return repository.findById(id);
     }
 
-    public boolean eliminar(Long id) 
+    public void eliminar(Long id) 
     {
-        try
-        {
-            repository.deleteById(id);
-            return true;
-        }
-        catch(Exception err)
-        {
-            return false;
-        }
+       repository.deleteById(id);
     }
 }

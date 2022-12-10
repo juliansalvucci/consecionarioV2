@@ -34,16 +34,8 @@ public class AutoService
         return repository.findById(id);
     }
 
-    public boolean eliminar(Long id) 
+    public void eliminar(Long id) 
     {
-        try
-        {
-            repository.deleteById(id);
-            return true;
-        }
-        catch(Exception err)
-        {
-            return false;
-        }
+        repository.deleteById(id);
     }
 }

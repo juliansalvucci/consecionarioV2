@@ -28,31 +28,68 @@ public class ClienteController
     @GetMapping()
     public ArrayList<Cliente> obtener()
     {
-        return service.obtener();
+        try
+        {
+            return service.obtener();
+        }
+        catch(Exception ex)
+        {
+            return null;
+        }
     }
 
     @PostMapping()
-    public Cliente guardar(@RequestBody Cliente cliente)
+    public Boolean guardar(@RequestBody Cliente cliente)
     {
-        return this.service.guardar(cliente);
+        try
+        {
+            service.guardar(cliente);
+            return true;
+        }
+        catch(Exception ex)
+        {
+            return false;
+        }
     }
 
     @GetMapping( path = "obtenerPorId/{id}")
     public Optional<Cliente> obtenerPorId(@PathVariable("id") Long id)
     {
-      return this.service.obtenerPorId(id);
+        try
+        {
+            return service.obtenerPorId(id);
+        }
+        catch(Exception ex)
+        {
+            return null;
+        }  
     }
 
     @GetMapping( value = "obtenerPorDocumento/{documento}")
     public Optional<Cliente> obtenerPorDocumento(@PathVariable("documento") String documento)
     {
-        return this.service.obtenerPorDocumento(documento);
+        try
+        {
+            return service.obtenerPorDocumento(documento);
+        }
+        catch(Exception ex)
+        {
+            return null;
+        }
     }
 
     @DeleteMapping( path = "/{id}")
     public Boolean eliminarPorId(@PathVariable("id") Long id)
     {
-        return this.service.eliminar(id);    
+        try
+        {
+            service.eliminar(id); 
+            return true;   
+        }
+        catch(Exception ex)
+        {
+            return false;
+        }
     }
     
 }

@@ -20,9 +20,9 @@ public class CategoriaService
         return (ArrayList<Categoria>) repository.findAll();
     }
 
-    public Categoria guardar(Categoria categoria)
+    public void guardar(Categoria categoria)
     {
-        return repository.save(categoria);
+        repository.save(categoria);
     }
 
     public Optional<Categoria> obtenerPorId(Long id)
@@ -31,16 +31,8 @@ public class CategoriaService
     }
 
 
-    public boolean eliminar(Long id) 
+    public void eliminar(Long id) 
     {
-        try
-        {
-            repository.deleteById(id);
-            return true;
-        }
-        catch(Exception err)
-        {
-            return false;
-        }
+        repository.deleteById(id);
     }
 }

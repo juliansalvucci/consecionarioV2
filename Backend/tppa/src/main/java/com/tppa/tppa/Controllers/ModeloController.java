@@ -27,24 +27,54 @@ public class ModeloController
     @GetMapping()
     public ArrayList<Modelo> obtener()
     {
-        return service.obtener();
+        try
+        {
+            return service.obtener();
+        }
+        catch(Exception ex)
+        {
+            return null;
+        }
     }
 
     @PostMapping()
-    public Modelo guardar(@RequestBody Modelo modelo)
+    public Boolean guardar(@RequestBody Modelo modelo)
     {
-        return this.service.guardar(modelo);
+        try
+        {
+            service.guardar(modelo);
+            return true;
+        }
+        catch(Exception ex)
+        {
+            return false;
+        }
     }
 
     @GetMapping( path = "/{id}")
     public Optional<Modelo> obtenerPorId(@PathVariable("id") Long id)
     {
-        return this.service.obtenerPorId(id);
+        try
+        {
+            return service.obtenerPorId(id);
+        }
+        catch(Exception ex)
+        {
+            return null;
+        }
     }
     
     @DeleteMapping( path = "/{id}")
     public Boolean eliminarPorId(@PathVariable("id") Long id)
     {
-        return this.service.eliminar(id);    
+        try
+        {
+            service.eliminar(id); 
+            return true;   
+        }
+        catch(Exception ex)
+        {
+            return false;
+        }    
     }   
 }

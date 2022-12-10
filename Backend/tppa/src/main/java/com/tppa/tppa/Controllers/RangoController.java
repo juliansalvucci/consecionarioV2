@@ -27,31 +27,68 @@ public class RangoController
     @GetMapping()
     public List<Rango> obtener()
     {
-        return service.obtener();
+        try
+        {
+            return service.obtener();
+        }
+        catch(Exception ex)
+        {
+            return null;
+        }
     }
     
     @PostMapping()
-    public Rango guardar(@RequestBody Rango rango)
+    public Boolean guardar(@RequestBody Rango rango)
     {
-        return service.guardar(rango);
+        try
+        {
+            service.guardar(rango);
+            return true;
+        }
+        catch(Exception ex)
+        {
+            return false;
+        }
     }
 
     @GetMapping( path = "/{id}")
     public Optional<Rango> obtenerPorId(@PathVariable("id") Long id)
     {
-        return service.obtenerPorId(id);
+        try
+        {
+            return service.obtenerPorId(id);
+        }
+        catch(Exception ex)
+        {
+            return null;
+        }
     }
 
     @GetMapping( path = "obtenerPorPrecio/{precio}")
     public Rango obtenerPorPrecio(@PathVariable("precio") Double precio)
     {
-        return service.obtenerPorPrecio(precio);
+        try
+        {
+            return service.obtenerPorPrecio(precio);
+        }
+        catch(Exception ex)
+        {
+            return null;
+        }
     }
 
     @DeleteMapping( path = "/{id}")
     public Boolean eliminarPorId(@PathVariable("id") Long id)
     {
-        return service.eliminar(id);    
+        try
+        {
+            service.eliminar(id); 
+            return true;   
+        }
+        catch(Exception ex)
+        {
+            return false;
+        }   
     }
     
 }

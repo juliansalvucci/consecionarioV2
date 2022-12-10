@@ -27,25 +27,55 @@ public class MarcaController
     @GetMapping()
     public ArrayList<Marca> obtener()
     {
-        return service.obtener();
+        try
+        {
+            return service.obtener();
+        }
+        catch(Exception ex)
+        {
+            return null;
+        }
     }
 
     @PostMapping()
-    public Marca guardar(@RequestBody Marca marca)
+    public Boolean guardar(@RequestBody Marca marca)
     {
-        return this.service.guardar(marca);
+        try
+        {
+            service.guardar(marca);
+            return true;
+        }
+        catch(Exception ex)
+        {
+            return false;
+        }
     }
 
     @GetMapping( path = "/{id}")
     public Optional<Marca> obtenerPorId(@PathVariable("id") Long id)
     {
-        return this.service.obtenerPorId(id);
+        try
+        {
+            return service.obtenerPorId(id);
+        }
+        catch(Exception ex)
+        {
+            return null;
+        }
     }
 
     @DeleteMapping( path = "/{id}")
     public Boolean eliminarPorId(@PathVariable("id") Long id)
     {
-        return this.service.eliminar(id);    
+        try
+        {
+            service.eliminar(id); 
+            return true;   
+        }
+        catch(Exception ex)
+        {
+            return false;
+        }    
     }
     
 }

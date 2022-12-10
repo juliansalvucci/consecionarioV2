@@ -27,25 +27,54 @@ public class CategoriaController
     @GetMapping()
     public ArrayList<Categoria> obtener()
     {
-        return service.obtener();
+        try 
+        {
+            return service.obtener();
+        } 
+        catch (Exception ex) 
+        {
+            return null;
+        }
     }
 
     @PostMapping()
-    public Categoria guardar(@RequestBody Categoria categoria)
+    public Boolean guardar(@RequestBody Categoria categoria)
     {
-        return this.service.guardar(categoria);
+        try
+        {
+            service.guardar(categoria);
+            return true;
+        }
+        catch(Exception ex)
+        {
+            return false;
+        }
     }
 
     @GetMapping( path = "/{id}")
     public Optional<Categoria> obtenerPorId(@PathVariable("id") Long id)
     {
-        return this.service.obtenerPorId(id);
+        try
+        {
+            return service.obtenerPorId(id);
+        }
+        catch(Exception ex)
+        {
+            return null;
+        }
     }
 
     @DeleteMapping( path = "/{id}")
     public Boolean eliminarPorId(@PathVariable("id") Long id)
     {
-        return this.service.eliminar(id);    
-    }
-    
+        try 
+        {
+            service.eliminar(id);
+            return true;
+        } 
+        catch (Exception ex) 
+        {
+            return false;
+        }  
+    } 
 }

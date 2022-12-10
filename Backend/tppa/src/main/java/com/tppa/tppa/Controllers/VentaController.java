@@ -29,77 +29,162 @@ public class VentaController
     @GetMapping()
     public ArrayList<Venta> obtener()
     {
-        return service.obtener();
+        try
+        {
+            return service.obtener();
+        }
+        catch(Exception ex)
+        {
+            return null;
+        }
     }
 
     @PostMapping()
-    public Venta guardar(@RequestBody Venta venta)
+    public Boolean guardar(@RequestBody Venta venta)
     {       
-        return this.service.guardar(venta);
+        try
+        {
+            service.guardar(venta);
+            return true;
+        }
+        catch(Exception ex)
+        {
+            return false;
+        }
     }
  
 
     @GetMapping( path = "/{id}")
     public Optional<Venta> obtenerPorId(@PathVariable("id") Long id)
     {
-        return this.service.obtenerPorId(id);
+        try
+        {
+            return service.obtenerPorId(id);
+        }
+        catch(Exception ex)
+        {
+            return null;
+        } 
     } 
 
     @PostMapping(path = "criteria/busquedaAvanzada")
     public List<Venta> busquedaAvanzada(@RequestBody BusquedaAvanzadaV2Request bar)
     {
-        return service.busquedaAvanzada(bar);
+        try
+        {
+            return service.busquedaAvanzada(bar);
+        }
+        catch(Exception ex)
+        {
+             return null;
+        }
     }
 
     @PostMapping(path = "/jpql/obtenerPorRangoDeCostosYFechas")
     public List<Venta> obtenerPorRangoDeCostosYFechas(@RequestBody BusquedaAvanzadaRequest bar) 
     {
-        return service.obtenerPorRangoDeCostosYFechas(bar);
+        try
+        {
+            return service.obtenerPorRangoDeCostosYFechas(bar);
+        }
+        catch(Exception ex)
+        {
+             return null;
+        }
     }
 
     @GetMapping(path = "/jpql/obtenerPorRangoDeCostos")
     public List<Venta> obtenerPorRangoDeCostos(Double montoInicial, Double montoFinal) 
     {
-        return service.obtenerPorRangoDeCostos(montoInicial, montoFinal);
+        try
+        {
+            return service.obtenerPorRangoDeCostos(montoInicial, montoFinal);
+        }
+        catch(Exception ex)
+        {
+             return null;
+        }
     }
 
 
     @GetMapping(path = "/jpql/getReporteCantidadYGananciaPorMarca")
     public List<Object> getReporteCantidadYGananciaPorMarca(String fechaDesde, String fechaHasta) 
     {        
-        return service.getReporteCantidadYGananciaPorMarca(fechaDesde, fechaHasta);
+        try
+        {
+            return service.getReporteCantidadYGananciaPorMarca(fechaDesde, fechaHasta);
+        }
+        catch(Exception ex)
+        {
+             return null;
+        }
     }
 
     @GetMapping(path = "/jpql/getReporteCantidadYGananciaPorMarcaYModelo")
     public List<Object> getReporteCantidadYGananciaPorMarcaYModelo(String fechaDesde, String fechaHasta) 
-    {        
-        return service.getReporteCantidadYGananciaPorMarcaYModelo(fechaDesde, fechaHasta);
+    {     
+        try
+        {
+            return service.getReporteCantidadYGananciaPorMarcaYModelo(fechaDesde, fechaHasta);
+        }
+        catch(Exception ex)
+        {
+             return null;
+        }   
     }
 
     @GetMapping(path = "/jpql/getReporteCantidadYGananciaPorEmpleado")
     public List<Object> getReporteCantidadYGananciaPorEmpleado(String fechaDesde, String fechaHasta) 
-    {        
-        return service.getReporteCantidadYGananciaPorEmpleado(fechaDesde, fechaHasta);
+    {    
+        try
+        {
+            return service.getReporteCantidadYGananciaPorEmpleado(fechaDesde, fechaHasta);
+        }
+        catch(Exception ex)
+        {
+             return null;
+        }    
     }
 
 
     @GetMapping(path = "/jpql/getReporteVentasPorCategoria")
     public List<Object> getReporteVentasPorCategoria(String fechaDesde, String fechaHasta) 
-    {        
-        return service.getReporteVentasPorCategoria(fechaDesde, fechaHasta);
+    {    
+        try
+        {
+            return service.getReporteVentasPorCategoria(fechaDesde, fechaHasta);
+        }
+        catch(Exception ex)
+        {
+             return null;
+        }    
     }
 
     @GetMapping(path = "/jpql/getReporteDetalleVentasPorEmpleado")
     public List<Object> getReporteDetalleVentasPorEmpleado(String fechaDesde, String fechaHasta) 
-    {        
-        return service.getReporteDetalleVentasPorEmpleado(fechaDesde, fechaHasta);
+    {      
+        try
+        {
+            return service.getReporteDetalleVentasPorEmpleado(fechaDesde, fechaHasta);
+        }
+        catch(Exception ex)
+        {
+             return null;
+        }  
     }
 
 
     @GetMapping(path = "/jpql/gananciaTotal")
     public Object obtenerGananciaTotal(String fechaDesde, String fechaHasta)
     {
-        return service.obtenerGananciaTotal(fechaDesde, fechaHasta);
+        try
+        {
+            return service.obtenerGananciaTotal(fechaDesde, fechaHasta);
+        }
+        catch(Exception ex)
+        {
+             return null;
+        }
     }    
 }
 

@@ -12,8 +12,6 @@ public class DetalleVentasPorEmpleado
     private String nombreVendedor;
     private String apellidoVendedor;
 
-
-
     public String getCantidadVentas() 
     {
         return cantidadVentas;

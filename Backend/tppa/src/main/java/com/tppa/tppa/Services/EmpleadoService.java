@@ -25,9 +25,9 @@ public class EmpleadoService
         return (ArrayList<Vendedor>) repository.findAll();
     }
 
-    public Vendedor guardar(Vendedor empleado)
+    public void guardar(Vendedor empleado)
     {
-        return repository.save(empleado);
+        repository.save(empleado);
     }
 
     public Optional<Vendedor> obtenerPorId(Long id)
@@ -40,16 +40,8 @@ public class EmpleadoService
         return customRepository.ObtenerPorUsuario(usuario);
     }
 
-    public boolean eliminar(Long id) 
+    public void eliminar(Long id) 
     {
-        try
-        {
-            repository.deleteById(id);
-            return true;
-        }
-        catch(Exception err)
-        {
-            return false;
-        }
+        repository.deleteById(id);
     }
 }

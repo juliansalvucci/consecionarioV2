@@ -23,9 +23,9 @@ public class RangoService
         return (ArrayList<Rango>) repository.findAll();
     }
 
-    public Rango guardar(Rango rango)
+    public void guardar(Rango rango)
     {
-        return repository.save(rango);
+        repository.save(rango);
     }
 
     public Optional<Rango> obtenerPorId(Long id)
@@ -38,16 +38,8 @@ public class RangoService
         return customRepository.obtenerPorPrecio(precio);
     }
 
-    public boolean eliminar(Long id) 
+    public void eliminar(Long id) 
     {
-        try
-        {
-            repository.deleteById(id);
-            return true;
-        }
-        catch(Exception err)
-        {
-            return false;
-        }
+        repository.deleteById(id);    
     }
 }

@@ -1,7 +1,6 @@
 package com.tppa.tppa.Repositories.VendedorRepositories;
 import javax.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestBody;
 import com.tppa.tppa.Models.Usuario;
 
 @Repository
@@ -14,7 +13,7 @@ public class VendedorCustomRepository
         this.em = em;
     }
 
-    public Object ObtenerPorUsuario(@RequestBody Usuario usuario)
+    public Object ObtenerPorUsuario(Usuario usuario)
     {
         String CONSULTA = "SELECT vendedor FROM Vendedor vendedor WHERE vendedor.nombreUsuario = :nombreUsuario AND vendedor.contraseña = :contraseña";
         var registro = em.createQuery(CONSULTA)

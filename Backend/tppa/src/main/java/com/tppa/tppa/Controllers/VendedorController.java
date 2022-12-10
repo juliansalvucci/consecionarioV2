@@ -28,31 +28,68 @@ public class VendedorController
     @GetMapping()
     public ArrayList<Vendedor> obtener()
     {
-        return service.obtener();
+        try
+        {
+            return service.obtener();
+        }
+        catch(Exception ex)
+        {
+            return null;
+        }
     }
 
     @PostMapping()
-    public Vendedor guardar(@RequestBody Vendedor vendedor)
+    public Boolean guardar(@RequestBody Vendedor vendedor)
     {
-        return this.service.guardar(vendedor);
+        try
+        {
+            service.guardar(vendedor);
+            return true;
+        }
+        catch(Exception ex)
+        {
+            return false;
+        }
     }
 
     @GetMapping( path = "/{id}")
     public Optional<Vendedor> obtenerPorId(@PathVariable("id") Long id)
     {
-        return this.service.obtenerPorId(id);
+        try
+        {
+            return service.obtenerPorId(id);
+        }
+        catch(Exception ex)
+        {
+            return null;
+        }  
     }
 
 
     @PostMapping(path="/login")
     public Object ObtenerPorUsuario(@RequestBody Usuario usuario)
     {
-        return service.ObtenerPorUsuario(usuario);
+        try
+        {
+            return service.ObtenerPorUsuario(usuario);
+        }
+        catch(Exception ex)
+        {
+            return null;
+        }
     }
 
     @DeleteMapping( path = "/{id}")
     public Boolean eliminarPorId(@PathVariable("id") Long id)
     {
-        return this.service.eliminar(id);    
+        try
+        {
+            service.eliminar(id); 
+            return true;   
+        }
+        catch(Exception ex)
+        {
+            return false;
+        }   
     }    
 }

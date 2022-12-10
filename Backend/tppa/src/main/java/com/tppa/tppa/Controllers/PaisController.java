@@ -27,13 +27,28 @@ public class PaisController
     @GetMapping()
     public List<Pais> obtener()
     {
-        return service.obtener();
+        try
+        {
+            return service.obtener();
+        }
+        catch(Exception ex)
+        {
+            return null;
+        }
     }
     
     @PostMapping()
-    public Pais guardar(@RequestBody Pais pais)
+    public Boolean guardar(@RequestBody Pais pais)
     {
-        return this.service.guardar(pais);
+        try
+        {
+            service.guardar(pais);
+            return true;
+        }
+        catch(Exception ex)
+        {
+            return false;
+        }
     }
 
     @GetMapping( path = "/{id}")
@@ -45,7 +60,15 @@ public class PaisController
     @DeleteMapping( path = "/{id}")
     public Boolean eliminarPorId(@PathVariable("id") Long id)
     {
-        return this.service.eliminar(id);    
+        try
+        {
+            service.eliminar(id); 
+            return true;   
+        }
+        catch(Exception ex)
+        {
+            return false;
+        }    
     }
     
 }
