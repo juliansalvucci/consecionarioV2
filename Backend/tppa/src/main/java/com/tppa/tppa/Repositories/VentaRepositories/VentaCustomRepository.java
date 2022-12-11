@@ -11,6 +11,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -25,12 +26,15 @@ import com.tppa.tppa.Models.Requests.BusquedaAvanzadaRequest;
 import com.tppa.tppa.Models.Requests.BusquedaAvanzadaV2Request;
 
 @Repository
-public class VentaCustomRepository {
+public class VentaCustomRepository implements IVentaCustomRepository {
+    @Autowired
     EntityManager em;
 
+    /* 
     public VentaCustomRepository(EntityManager em){
         this.em = em;
     }
+    */
 
     public List<Venta> busquedaAvanzada(BusquedaAvanzadaV2Request bar) {
         final CriteriaBuilder cb = em.getCriteriaBuilder();

@@ -23,9 +23,10 @@ public class RangoService
         return (ArrayList<Rango>) repository.findAll();
     }
 
-    public void guardar(Rango rango)
+    public Long guardar(Rango rango)
     {
-        repository.save(rango);
+        var aux = repository.save(rango);
+        return aux.getId();
     }
 
     public Optional<Rango> obtenerPorId(Long id)

@@ -38,16 +38,15 @@ public class RangoController
     }
     
     @PostMapping()
-    public Boolean guardar(@RequestBody Rango rango)
+    public Long guardar(@RequestBody Rango rango)
     {
         try
         {
-            service.guardar(rango);
-            return true;
+            return service.guardar(rango);
         }
         catch(Exception ex)
         {
-            return false;
+            return null;
         }
     }
 

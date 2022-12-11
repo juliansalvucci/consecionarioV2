@@ -25,9 +25,10 @@ public class EmpleadoService
         return (ArrayList<Vendedor>) repository.findAll();
     }
 
-    public void guardar(Vendedor empleado)
+    public Long guardar(Vendedor empleado)
     {
-        repository.save(empleado);
+        var aux = repository.save(empleado);
+        return aux.getId();
     }
 
     public Optional<Vendedor> obtenerPorId(Long id)

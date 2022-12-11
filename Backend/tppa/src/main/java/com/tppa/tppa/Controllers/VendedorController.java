@@ -19,7 +19,7 @@ import com.tppa.tppa.Services.EmpleadoService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200/")
-@RequestMapping("/Vendedor")
+@RequestMapping("/vendedor")
 public class VendedorController 
 {
     @Autowired
@@ -39,16 +39,15 @@ public class VendedorController
     }
 
     @PostMapping()
-    public Boolean guardar(@RequestBody Vendedor vendedor)
+    public Long guardar(@RequestBody Vendedor vendedor)
     {
         try
         {
-            service.guardar(vendedor);
-            return true;
+            return service.guardar(vendedor);
         }
         catch(Exception ex)
         {
-            return false;
+            return null;
         }
     }
 

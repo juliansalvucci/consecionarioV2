@@ -21,6 +21,8 @@ public interface IVentaCustomRepository
 
     public List<Object> getReporteCantidadYGananciaPorMarcaYModelo(String fechaDesde, String fechaHasta);
 
+    public List<Object> getReporteCantidadYGananciaPorEmpleado(String fechaDesde, String fechaHasta);
+
     public List<Object> getReporteVentasPorCategoria(String fechaDesde, String fechaHasta);
 
     public List<Object> getReporteDetalleVentasPorEmpleado(String fechaDesde, String fechaHasta);

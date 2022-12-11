@@ -36,7 +36,6 @@ export class ModeloComponent {
   registerForm = this.fb.group({
     id: [0],
     nombreModelo: ['', Validators.required],
-    //idMarca: ['', Validators.required],
     marca: this.fb.group({
       id: [0],
       nombreMarca: [''],
@@ -91,17 +90,17 @@ export class ModeloComponent {
 
 
   register() {
-    this.service.alta(this.registerForm.value).subscribe((data) => {
-      sweetalert.success();
-      this.dataService.object = data;
-      console.log('Registro realizado con éxito');
-      this.onNoClick();
+    this.service.alta(this.registerForm.value).subscribe((id) => {
+      this.service.consultaPorId(id).subscribe((data) => {
+        sweetalert.success();
+        this.dataService.object = data;
+        this.onNoClick();
+      })
     });
   }
 
   consultarMarcas(): void {
     this.service1.consulta().subscribe((r: IGenerica[]) => {
-      console.log(r);
       this.lista = r;
       this.filterItems = r;
     });
@@ -116,7 +115,6 @@ export class ModeloComponent {
   marca!: IMarca;
 
   displayMarca(id: number) {
-    console.log(id);
     this.registerForm.value.marca.id = id;
     if (!id) return '';
 

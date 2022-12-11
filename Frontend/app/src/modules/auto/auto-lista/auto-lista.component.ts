@@ -67,7 +67,7 @@ export class AutoListaComponent implements OnInit {
     const dialogRef = this.dialog.open(AutoComponent, {
       width: '450px',
     });
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(() => {
       if (this.dataService.object != null) {
         this.lista = this.lista.filter((element) => element.id != id);
         this.lista.push(this.dataService.object);
@@ -85,7 +85,7 @@ export class AutoListaComponent implements OnInit {
     const dialogRef = this.dialog.open(VentaComponent, {
       width: '750px',
     });
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(() => {
       if (this.dataService.object != null) {
         this.lista = this.lista.filter((element) => element.id != id);
         this.dataSource = new MatTableDataSource(this.lista);
@@ -98,10 +98,10 @@ export class AutoListaComponent implements OnInit {
   }
 
   eliminar(id: number) {
+    window.confirm("¿SEGURO DESEA ELIMINAR?")
     this.service.baja(id).subscribe((r) => {
       if (r) {
         //Si el back me devuelve un true.
-        window.confirm("SEGURO ")
         this.lista = this.lista.filter((element) => element.id != id);
         this.dataSource = new MatTableDataSource(this.lista);
         this.configTable();

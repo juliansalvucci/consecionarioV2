@@ -40,16 +40,15 @@ public class VentaController
     }
 
     @PostMapping()
-    public Boolean guardar(@RequestBody Venta venta)
+    public Long guardar(@RequestBody Venta venta)
     {       
         try
         {
-            service.guardar(venta);
-            return true;
+            return service.guardar(venta);
         }
         catch(Exception ex)
         {
-            return false;
+            return null;
         }
     }
  

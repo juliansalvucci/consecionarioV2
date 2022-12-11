@@ -11,7 +11,7 @@ import { sweetalert } from 'src/utils/utils';
   templateUrl: './rango.component.html',
   styleUrls: ['./rango.component.css']
 })
-export class RangoComponent  {
+export class RangoComponent {
 
   filterItems!: IGenerica[];
   lista!: IGenerica[];
@@ -57,11 +57,12 @@ export class RangoComponent  {
   }
 
   register() {
-    console.log(this.registerForm.value);
-    this.service.alta(this.registerForm.value).subscribe((data) => {
-      sweetalert.success();
-      this.dataService.object = data;
-      this.onNoClick();
+    this.service.alta(this.registerForm.value).subscribe((id) => {
+      this.service.consultaPorId(id).subscribe((data) => {
+        sweetalert.success();
+        this.dataService.object = data;
+        this.onNoClick();
+      })
     });
   }
 
@@ -71,4 +72,4 @@ export class RangoComponent  {
 
 }
 
-export interface IGenerica extends IRango{}
+export interface IGenerica extends IRango { }

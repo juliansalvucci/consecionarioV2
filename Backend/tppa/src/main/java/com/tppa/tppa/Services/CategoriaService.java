@@ -20,9 +20,10 @@ public class CategoriaService
         return (ArrayList<Categoria>) repository.findAll();
     }
 
-    public void guardar(Categoria categoria)
+    public Long guardar(Categoria categoria)
     {
-        repository.save(categoria);
+        var categoriaId = repository.save(categoria);
+        return categoriaId.getId();
     }
 
     public Optional<Categoria> obtenerPorId(Long id)

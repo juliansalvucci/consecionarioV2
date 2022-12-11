@@ -98,7 +98,6 @@ export class VentaComponent {
 
   autocompletar() {
     this.service.consultaPorId(this.dataService.id).subscribe((r) => {
-      console.log(r);
       this.registerForm.patchValue({
         id: r.id,
         precio: r.precio,
@@ -109,7 +108,6 @@ export class VentaComponent {
         idPais: r.pais.id,
       });
     });
-    console.log(this.registerForm.value)
   }
 
   jsonUser!: IVendedor;
@@ -127,12 +125,11 @@ export class VentaComponent {
     this.registerForm.value.empleado.id = this.jsonUser.id;
   }
 
-  async register() {
+  register() {
     this.getVendedor();
     this.setFormValues();
 
-    console.log(this.registerForm.value);
-    await this.service4.alta(this.registerForm.value).subscribe((data) => {
+    this.service4.alta(this.registerForm.value).subscribe((data) => {
       sweetalert.success();
       this.dataService.object = data;
       this.onNoClick();
@@ -141,7 +138,6 @@ export class VentaComponent {
 
   consultarModelos(): void {
     this.service1.consulta().subscribe((r: IGenerica[]) => {
-      console.log(r);
       this.listaModelos = r;
     });
   }
@@ -162,12 +158,10 @@ export class VentaComponent {
     if (id != null) {
       this.filterModelosAux = this.listaModelos.filter((f) => f.marca.id == id);
     }
-    console.log(this.filterModelos);
   }
 
   consultarMarcas(): void {
     this.service2.consulta().subscribe((r: IGenerica[]) => {
-      console.log(r);
       this.listaMarcas = r;
       this.filterMarcas = r;
     });
@@ -205,7 +199,6 @@ export class VentaComponent {
   consultarPaises() {
     
       this.paisService.consulta().subscribe((r: IGenerica[]) => {
-        console.log('Países', r);
         this.listaPaises = r;
         this.filterPaises = this.listaPaises;
       });
@@ -234,7 +227,6 @@ export class VentaComponent {
     let documento = this.registerForm.value.documento;
 
     this.service3.consultaPorDoumento(documento).subscribe((r) => {
-      console.log(r);
       this.registerForm.value.cliente.id = r.id;  //Establezo del id del cliente
       this.registerForm.get('nombre')?.setValue(r.nombre); //Lleno los campos visibles del formulario.
       this.registerForm.get('apellido')?.setValue(r.apellido);

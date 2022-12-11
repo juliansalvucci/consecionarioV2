@@ -38,16 +38,15 @@ public class PaisController
     }
     
     @PostMapping()
-    public Boolean guardar(@RequestBody Pais pais)
+    public Long guardar(@RequestBody Pais pais)
     {
         try
         {
-            service.guardar(pais);
-            return true;
+            return service.guardar(pais);
         }
         catch(Exception ex)
         {
-            return false;
+            return null;
         }
     }
 

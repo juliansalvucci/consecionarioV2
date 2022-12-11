@@ -43,7 +43,6 @@ export class MarcaComponent {
 
   autocompletar() {
     this.service.consultaPorId(this.dataService.id).subscribe((r) => {
-      console.log(r);
       this.registerForm.patchValue({
         id: r.id,
         nombreMarca: r.nombreMarca,
@@ -52,11 +51,12 @@ export class MarcaComponent {
   }
 
   register() {
-    console.log(this.registerForm.value);
-    this.service.alta(this.registerForm.value).subscribe((data) => {
-      sweetalert.success();
-      this.dataService.object = data;
-      this.onNoClick();
+    this.service.alta(this.registerForm.value).subscribe((id) => {
+      this.service.consultaPorId(id).subscribe((data) => {
+        sweetalert.success();
+        this.dataService.object = data;
+        this.onNoClick();
+      })
     });
   }
 

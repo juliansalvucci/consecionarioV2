@@ -39,16 +39,15 @@ public class ClienteController
     }
 
     @PostMapping()
-    public Boolean guardar(@RequestBody Cliente cliente)
+    public Long guardar(@RequestBody Cliente cliente)
     {
         try
         {
-            service.guardar(cliente);
-            return true;
+            return service.guardar(cliente);
         }
         catch(Exception ex)
         {
-            return false;
+            return null;
         }
     }
 

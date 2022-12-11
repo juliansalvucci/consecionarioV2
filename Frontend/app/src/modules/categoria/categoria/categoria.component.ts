@@ -47,10 +47,12 @@ export class CategoriaComponent {
   }
 
   register() {
-    this.service.alta(this.registerForm.value).subscribe((data) => {
-      sweetalert.success();
-      this.dataService.object = data;
-      this.onNoClick();
+    this.service.alta(this.registerForm.value).subscribe((id) => {
+      this.service.consultaPorId(id).subscribe((data) => {
+        sweetalert.success();
+        this.dataService.object = data;
+        this.onNoClick();
+      })
     });
   }
 

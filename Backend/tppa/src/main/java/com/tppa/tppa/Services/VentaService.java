@@ -14,16 +14,14 @@ import com.tppa.tppa.Models.Requests.BusquedaAvanzadaRequest;
 import com.tppa.tppa.Models.Requests.BusquedaAvanzadaV2Request;
 import com.tppa.tppa.Repositories.AutoRepositories.AutoCustomRepository;
 import com.tppa.tppa.Repositories.AutoRepositories.IAutoRepository;
-import com.tppa.tppa.Repositories.VentaRepositories.VentaCustomRepository;
+import com.tppa.tppa.Repositories.VentaRepositories.IVentaCustomRepository;
 import com.tppa.tppa.Repositories.VentaRepositories.IVentaRepository;
 
 @Service
 public class VentaService
 {
-    @Autowired
-    IVentaRepository repository;
-    @Autowired
-    VentaCustomRepository customRepository;
+    @Autowired IVentaRepository repository;
+    @Autowired IVentaCustomRepository customRepository;
     @Autowired IAutoRepository autoRepository;
     @Autowired AutoCustomRepository autoCustomRepository;
     
@@ -32,7 +30,7 @@ public class VentaService
         return (ArrayList<Venta>) repository.findAll();
     }
 
-    public void guardar(Venta venta)
+    public Long guardar(Venta venta)
     {
         Auto auto = autoCustomRepository.obtenerPorIdAuto(venta.getAuto().getId());
        
@@ -50,7 +48,8 @@ public class VentaService
         venta.setGanancia(ganancia);
         venta.setPorcentaje(porcentaje);
         
-        repository.save(venta);
+        var aux = repository.save(venta);
+        return aux.getId();
     }
 
     public Optional<Venta> obtenerPorId(Long id)

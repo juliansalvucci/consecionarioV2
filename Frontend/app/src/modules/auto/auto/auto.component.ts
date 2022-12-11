@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { IAuto } from 'src/interfaces/IAuto';
@@ -20,7 +20,7 @@ import { sweetalert } from 'src/utils/utils';
   templateUrl: './auto.component.html',
   styleUrls: ['./auto.component.css'],
 })
-export class AutoComponent implements OnInit {
+export class AutoComponent {
   filterModelos!: IGenerica[];
   filterMarcas!: IGenerica[];
   listaModelos!: IGenerica[];
@@ -48,8 +48,6 @@ export class AutoComponent implements OnInit {
     this.consultarPaises();
     this.configurarFormulario();
   }
-
-  ngOnInit(): void {}
 
   modelo!: IModelo;
 
@@ -114,33 +112,33 @@ export class AutoComponent implements OnInit {
   setFormValues() {
     this.registerForm.value.vendido = false;
     this.registerForm.value.modelo.id = this.modelo.id;
-    this.registerForm.value.modelo.nombreModelo = this.modelo.nombreModelo;
-    this.registerForm.value.modelo.marca.id = this.modelo.marca.id;
-    this.registerForm.value.modelo.marca.nombreMarca =
-      this.modelo.marca.nombreMarca;
+    //this.registerForm.value.modelo.nombreModelo = this.modelo.nombreModelo;
+    //this.registerForm.value.modelo.marca.id = this.modelo.marca.id;
+    //this.registerForm.value.modelo.marca.nombreMarca =
+      //this.modelo.marca.nombreMarca;
     this.registerForm.value.pais.id = this.pais.id;
-    this.registerForm.value.pais.nombrePais = this.pais.nombrePais;
-    this.registerForm.value.pais.categoria.id = this.pais.categoria.id;
-    this.registerForm.value.pais.categoria.nombreCategoria =
-      this.pais.categoria.nombreCategoria;
-    this.registerForm.value.pais.categoria.porcentaje =
-      this.pais.categoria.porcentaje;
+    //this.registerForm.value.pais.nombrePais = this.pais.nombrePais;
+    //this.registerForm.value.pais.categoria.id = this.pais.categoria.id;
+    //this.registerForm.value.pais.categoria.nombreCategoria =
+      //this.pais.categoria.nombreCategoria;
+    //this.registerForm.value.pais.categoria.porcentaje =
+      //this.pais.categoria.porcentaje;
   }
 
   async register() {
     this.setFormValues();
 
-    console.log(this.registerForm.value);
-    this.service.alta(this.registerForm.value).subscribe((data) => {
-      sweetalert.success();
-      this.dataService.object = data;
-      this.onNoClick();
+    this.service.alta(this.registerForm.value).subscribe((id) => {
+      this.service.consultaPorId(id).subscribe((data) => {
+        sweetalert.success();
+        this.dataService.object = data;
+        this.onNoClick();
+      })
     });
   }
 
   consultarModelos(): void {
     this.service1.consulta().subscribe((r: IGenerica[]) => {
-      console.log(r);
       this.listaModelos = r;
     });
   }
@@ -165,7 +163,6 @@ export class AutoComponent implements OnInit {
 
   consultarMarcas(): void {
     this.service2.consulta().subscribe((r: IGenerica[]) => {
-      console.log(r);
       this.listaMarcas = r;
       this.filterMarcas = r;
     });
@@ -189,7 +186,6 @@ export class AutoComponent implements OnInit {
   marca!: IMarca;
 
   displayMarcas(id: number) {
-    console.log(id);
     if (!id) return '';
 
     this.obtenerModelosPorMarca(id);

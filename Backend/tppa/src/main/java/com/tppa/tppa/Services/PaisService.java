@@ -20,9 +20,10 @@ public class PaisService
         return (ArrayList<Pais>) repository.findAll();
     }
 
-    public void guardar(Pais pais)
+    public Long guardar(Pais pais)
     {
-        repository.save(pais);
+        var aux = repository.save(pais);
+        return aux.getId();
     }
 
     public Optional<Pais> obtenerPorId(Long id)

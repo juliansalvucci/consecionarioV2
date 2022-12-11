@@ -66,11 +66,12 @@ export class PaisComponent {
 
 
   register() {
-    this.service.alta(this.registerForm.value).subscribe((data) => {
-      this.dataService.object = data;
-      console.log('Registro realizado con éxito');
-      sweetalert.success();
-      this.onNoClick();
+    this.service.alta(this.registerForm.value).subscribe((id) => {
+      this.service.consultaPorId(id).subscribe((data) => {
+        this.dataService.object = data;
+        sweetalert.success();
+        this.onNoClick();
+      })
     });
   }
 

@@ -20,9 +20,10 @@ public class ClienteService
         return (ArrayList<Cliente>) repository.findAll();
     }
 
-    public void guardar(Cliente Cliente)
+    public Long guardar(Cliente Cliente)
     {
-        repository.save(Cliente);
+        var clienteId = repository.save(Cliente);
+        return clienteId.getId();
     }
 
     public Optional<Cliente> obtenerPorId(Long id)

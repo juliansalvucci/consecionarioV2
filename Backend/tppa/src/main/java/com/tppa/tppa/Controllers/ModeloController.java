@@ -38,16 +38,15 @@ public class ModeloController
     }
 
     @PostMapping()
-    public Boolean guardar(@RequestBody Modelo modelo)
+    public Long guardar(@RequestBody Modelo modelo)
     {
         try
         {
-            service.guardar(modelo);
-            return true;
+            return service.guardar(modelo);
         }
         catch(Exception ex)
         {
-            return false;
+            return null;
         }
     }
 

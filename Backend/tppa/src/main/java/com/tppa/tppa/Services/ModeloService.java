@@ -3,6 +3,7 @@ package com.tppa.tppa.Services;
 import java.util.ArrayList;
 import java.util.Optional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +21,10 @@ public class ModeloService
         return (ArrayList<Modelo>) repository.findAll();
     }
 
-    public void guardar(Modelo modelo)
+    public Long guardar(Modelo modelo)
     {
-        repository.save(modelo);
+        var aux = repository.save(modelo);
+        return aux.getId();
     }
 
     public Optional<Modelo> obtenerPorId(Long id)

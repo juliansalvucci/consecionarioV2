@@ -32,6 +32,11 @@ export class ClienteService {
     return this.http.get(this.URL.CONSULTA);
   }
 
+  consultaPorId(id:number):Observable<any>
+  {
+    return this.http.get(this.URL.CONSULTAPORID + id);
+  }
+
   consultaPorDoumento(documento:String):Observable<any>
   {
     return this.http.get(this.URL.CONSULTAPORDOCUMENTO + documento);

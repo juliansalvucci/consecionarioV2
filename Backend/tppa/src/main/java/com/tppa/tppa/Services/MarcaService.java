@@ -20,9 +20,10 @@ public class MarcaService
         return (ArrayList<Marca>) repository.findAll();
     }
 
-    public void guardar(Marca marca)
+    public Long guardar(Marca marca)
     {
-        repository.save(marca);
+        var marcaAux = repository.save(marca);
+        return marcaAux.getId();
     }
 
     public Optional<Marca> obtenerPorId(Long id)

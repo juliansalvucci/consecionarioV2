@@ -38,16 +38,15 @@ public class MarcaController
     }
 
     @PostMapping()
-    public Boolean guardar(@RequestBody Marca marca)
+    public Long guardar(@RequestBody Marca marca)
     {
         try
         {
-            service.guardar(marca);
-            return true;
+            return service.guardar(marca);
         }
         catch(Exception ex)
         {
-            return false;
+            return null;
         }
     }
 

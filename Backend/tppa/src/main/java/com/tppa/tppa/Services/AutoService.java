@@ -23,10 +23,11 @@ public class AutoService
         return (ArrayList<Auto>) repository.findAll();
     }
 
-    public void guardar(Auto auto)
+    public Long guardar(Auto auto)
     {
         var autoAux = estrategiasCostoDefinition.calcularCosto(auto);
-        repository.save(autoAux);
+        var autoId = repository.save(autoAux);
+        return autoId.getId();
     }
 
     public Optional<Auto> obtenerPorId(Long id)

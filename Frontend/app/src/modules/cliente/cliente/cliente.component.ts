@@ -11,7 +11,9 @@ import { sweetalert } from 'src/utils/utils';
   templateUrl: './cliente.component.html',
   styleUrls: ['./cliente.component.css'],
 })
+
 export class ClienteComponent {
+
   constructor(
     public dialogRef: MatDialogRef<IPais>,
     @Inject(MAT_DIALOG_DATA) public data: IPais,
@@ -41,7 +43,6 @@ export class ClienteComponent {
     this.service
       .consultaPorDoumento(this.dataService.documento)
       .subscribe((r) => {
-        console.log(r);
         this.registerForm.patchValue({
           id: r.id,
           nombre: r.nombre,
@@ -52,10 +53,12 @@ export class ClienteComponent {
   }
 
   register() {
-    this.service.alta(this.registerForm.value).subscribe((data) => {
-      sweetalert.success();
-      this.dataService.object = data;
-      this.onNoClick();
+    this.service.alta(this.registerForm.value).subscribe((id) => {
+      this.service.consultaPorId(id).subscribe((data) => {
+        sweetalert.success();
+        this.dataService.object = data;
+        this.onNoClick();
+      })
     });
   }
 

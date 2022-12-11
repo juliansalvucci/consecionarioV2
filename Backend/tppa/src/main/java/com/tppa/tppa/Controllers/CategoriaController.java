@@ -38,16 +38,15 @@ public class CategoriaController
     }
 
     @PostMapping()
-    public Boolean guardar(@RequestBody Categoria categoria)
+    public Long guardar(@RequestBody Categoria categoria)
     {
         try
         {
-            service.guardar(categoria);
-            return true;
+            return service.guardar(categoria);
         }
         catch(Exception ex)
         {
-            return false;
+            return null;
         }
     }
 

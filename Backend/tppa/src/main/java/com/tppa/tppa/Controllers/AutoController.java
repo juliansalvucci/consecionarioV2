@@ -38,16 +38,15 @@ public class AutoController
     }
 
     @PostMapping()
-    public Boolean guardar(@RequestBody Auto auto)
+    public Long guardar(@RequestBody Auto auto)
     {    
         try 
         {
-            service.guardar(auto);
-            return true;
+            return service.guardar(auto);
         } 
         catch (Exception ex) 
         {
-            return false;
+            return null;
         }
          
     }

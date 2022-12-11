@@ -114,7 +114,6 @@ export class VentaListaComponent implements OnInit {
 
   consultar(): void {
     this.service.consulta().subscribe((r: IGenerica[]) => {
-      console.log(r);
       this.lista = r;
       this.dataSource = new MatTableDataSource(this.lista);
       this.configTable();
@@ -135,7 +134,6 @@ export class VentaListaComponent implements OnInit {
     this.service
       .busquedaAvanzada(this.registerForm.value)
       .subscribe((r: IGenerica[]) => {
-        console.log(r);
         this.lista = r;
         this.dataSource = new MatTableDataSource(this.lista);
         this.configTable();
@@ -165,7 +163,6 @@ export class VentaListaComponent implements OnInit {
 
   consultarClientes(): void {
     this.clienteService.consulta().subscribe((r: ICliente[]) => {
-      console.log(r);
       this.listaClientes = r;
       this.filterClientes = r;
     });
@@ -179,8 +176,6 @@ export class VentaListaComponent implements OnInit {
   }
 
   displayClientes(id: number) {
-    console.log(id);
-
     if (!id) return '';
 
     this.registerForm.value.idCliente = id;
@@ -201,7 +196,6 @@ export class VentaListaComponent implements OnInit {
 
   consultarVendedores(): void {
     this.vendedorService.consulta().subscribe((r: IVendedor[]) => {
-      console.log(r);
       this.listaVendedores = r;
       this.filterVendedores = r;
     });
@@ -215,12 +209,9 @@ export class VentaListaComponent implements OnInit {
 
 
   displayVendedores(id: number) {
-    console.log(id);
-
     if (!id) return '';
 
     let index = this.listaVendedores.findIndex((r) => r.id === id);
-    console.log('index', index);
 
     let nombre = this.listaVendedores[index].nombre;
     let apellido = this.listaVendedores[index].apellido;
@@ -234,7 +225,6 @@ export class VentaListaComponent implements OnInit {
 
   consultarMarcas(): void {
     this.marcaService.consulta().subscribe((r: IMarca[]) => {
-      console.log(r);
       this.listaMarcas = r;
       this.filterMarcas = r;
     });
@@ -247,8 +237,6 @@ export class VentaListaComponent implements OnInit {
   }
 
   displayMarcas(id: number) {
-    console.log(id);
-
     if (!id) return '';
 
     let index = this.listaMarcas.findIndex((r) => r.id === id);
@@ -265,7 +253,6 @@ export class VentaListaComponent implements OnInit {
 
   consultarModelos(): void {
     this.modeloService.consulta().subscribe((r: IModelo[]) => {
-      console.log(r);
       this.listaModelos = r;
       this.filterModelos = r;
     });
@@ -278,12 +265,9 @@ export class VentaListaComponent implements OnInit {
   }
 
   displayModelos(id: number) {
-    console.log(id);
-
     if (!id) return '';
 
     let index = this.listaModelos.findIndex((r) => r.id === id);
-    console.log('index', index);
 
     let nombre = this.listaModelos[index].nombreModelo;
 
@@ -297,7 +281,6 @@ export class VentaListaComponent implements OnInit {
 
   consultarCategorias(): void {
     this.categoriaService.consulta().subscribe((r: ICategoria[]) => {
-      console.log(r);
       this.listaCategorias = r;
       this.filterCategorias = r;
     });
@@ -310,12 +293,9 @@ export class VentaListaComponent implements OnInit {
   }
 
   displayCategoria(id: number) {
-    console.log(id);
-
     if (!id) return '';
 
     let index = this.listaCategorias.findIndex((r) => r.id === id);
-    console.log('index', index);
 
     let nombre = this.listaCategorias[index].nombreCategoria;
 
