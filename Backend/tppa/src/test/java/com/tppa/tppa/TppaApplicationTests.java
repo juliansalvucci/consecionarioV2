@@ -58,7 +58,7 @@ class TppaApplicationTests
 
 		var a = estrategiasCostoDefinition.calcularCosto(auto);
         
-		assertEquals(44000D, a.getCosto());
+		assertEquals(45000D, a.getCosto());
 	}
 
 	@Test
@@ -96,7 +96,7 @@ class TppaApplicationTests
 
 		var a = estrategiasCostoDefinition.calcularCosto(auto);
         
-		assertEquals(160000D, a.getCosto());
+		assertEquals(210000D, a.getCosto());
 	}
 
 	//GANANCIA
