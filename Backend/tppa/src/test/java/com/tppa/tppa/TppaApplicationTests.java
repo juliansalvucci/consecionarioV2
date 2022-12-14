@@ -144,7 +144,6 @@ class TppaApplicationTests
 	@Test
 	void testCalculoGananciaImpuestoNacionalRango2() 
 	{
-
 		Auto auto = new Auto();
 		Pais pais = new Pais();
 		Categoria categoria = new Categoria();

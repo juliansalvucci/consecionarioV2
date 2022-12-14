@@ -74,6 +74,7 @@ export class ClienteListaComponent {
   }
 
   eliminar(id: number) {
+    window.confirm("¿SEGURO DESEA ELIMINAR?")
     this.service.baja(id).subscribe((r) => {
       if (r) {
         //Si el back me devuelve un true.
