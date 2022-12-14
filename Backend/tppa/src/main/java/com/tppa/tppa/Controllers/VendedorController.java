@@ -19,7 +19,7 @@ import com.tppa.tppa.Services.EmpleadoService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200/")
-@RequestMapping("/vendedor")
+@RequestMapping("/Vendedor")
 public class VendedorController 
 {
     @Autowired

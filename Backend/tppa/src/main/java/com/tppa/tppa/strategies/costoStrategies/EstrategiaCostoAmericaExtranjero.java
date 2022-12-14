@@ -1,4 +1,5 @@
 package com.tppa.tppa.strategies.costoStrategies;
+
 import org.springframework.stereotype.Service;
 
 import com.tppa.tppa.Models.Auto;
@@ -16,10 +17,14 @@ public class EstrategiaCostoAmericaExtranjero implements IEstrategiaCosto
 
         Double costo = precio + ((precio * porcentaje) / 100);
 
-        Double ganancia = costo - precio;
+        var roundedCosto = Math.round(costo);
 
-        auto.setCosto(costo);
-        auto.setGanancia(ganancia);
+        Double ganancia =  costo - precio;
+
+        var roundedGanancia = Math.round(ganancia);
+
+        auto.setCosto(Double.valueOf(roundedCosto));
+        auto.setGanancia(Double.valueOf(roundedGanancia));
 
         return auto;
     }

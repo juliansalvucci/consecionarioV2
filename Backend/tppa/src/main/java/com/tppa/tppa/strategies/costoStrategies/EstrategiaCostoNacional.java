@@ -23,7 +23,9 @@ public class EstrategiaCostoNacional implements IEstrategiaCosto
 
         Double costo = valor + precio;
 
-        auto.setCosto(costo);
+        var roundedCosto = Math.round(costo);
+
+        auto.setCosto(Double.valueOf(roundedCosto));
         auto.setGanancia(valor);
 
         return auto;

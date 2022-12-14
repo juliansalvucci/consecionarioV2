@@ -178,8 +178,9 @@
 
             <ng-container matColumnDef="empleado">
                 <th mat-header-cell mat-sort-header *matHeaderCellDef> Vendedor </th>
-                <td mat-cell *matCellDef="let element" class="columna"> {{element.empleado?.nombre}}
-                    {{element.empleado?.apellido}} </td>
+                <td mat-cell *matCellDef="let element" class="columna"> 
+                    {{element.empleado?.apellido}} 
+                    {{element.empleado?.nombre}}  </td>
             </ng-container>
 
 
