@@ -1,6 +1,9 @@
 package com.tppa.tppa;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -39,7 +42,10 @@ class TppaApplicationTests
 		var a = estrategiasCostoDefinition.calcularCosto(auto);
         
 		assertEquals(253000D, a.getCosto());	
+		assertNotEquals(12000D, a.getCosto());
 	}
+
+	
 
 	@Test
 	void testCalculoImpuestoNacionalRango1() 
